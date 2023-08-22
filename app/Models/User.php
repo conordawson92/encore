@@ -18,7 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'userName',
+        'dateJoined',
+        'userLocation',
+        'userRating',        
+        'userPhone',
+        'paymentInfo',
         'email',
         'password',
     ];
@@ -42,4 +47,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function items(){
+        return $this->hasMany(Item::class, 'user_id');
+        //hasMany() will allow a User to use multiple listings
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class, 'reviewer_id', Review::class, 'reviewed_id');
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class, 'sender_id', Message::class, 'receiver_id');
+    }
+
+    public function notifications(){
+        return $this->hasMany(Notification::class, 'user_id');
+    }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class, 'seller_id', Transaction::class, 'buyer_id');
+    }
 }
