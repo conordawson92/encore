@@ -18,6 +18,7 @@ class UserController extends Controller
     public function store(Request $request){
         $formFields = $request->validate([
             'userName' => ['required', 'min:3'],
+            'userImage',
             'dateJoined' => ['required', 'date'],
             'userLocation' => ['required', 'min:3'],
             'userRating' => ['required', 'numeric'],        
@@ -32,8 +33,8 @@ class UserController extends Controller
 
         //make sure the image is here before saving it
         if ($request->hasFile('userImage')) {
-            //let s brake this down together
-            $formFields['userImage'] = $request->file('userImage')->store('userImages', 'public');
+
+            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
 
         //hash the password using bcrypt function that will encrypt the value
