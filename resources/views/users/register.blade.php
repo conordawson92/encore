@@ -19,7 +19,7 @@
         @enderror
     </div>
 
-    <div>
+     <div>
         <label for="userImage">
             Profile photo
         </label>
@@ -44,7 +44,7 @@
             Phone Number
         </label>
         <input type="text" name="userPhone" value="{{old('userPhone')}}"/>
-        @error('usrPhone')
+        @error('userPhone')
             <p>{{$message}}</p>
         @enderror
     </div>
@@ -78,7 +78,7 @@
     </div>
     
     <div>
-        <button>
+        <button type="submit">
             Sign Up
         </button>
     </div>

@@ -23,7 +23,7 @@
             Profile Photo
         </label>
         <input type="file" name="userImage" />
-        <img src="{{$user->userImage ? asset('storage/' . $user->userIamge):asset('images/no-image.png')}}" alt="">
+        <img src="{{$user->userImage ? asset('storage/' . $user->userIamge):asset('images/no-image.jpg')}}" alt="">
         @error('userImage')
             <p>{{$message}}</p>
         @enderror
