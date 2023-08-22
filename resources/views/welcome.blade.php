@@ -16,6 +16,21 @@
         </style>
     </head>
     <body class="antialiased">
+        <button class="hover:text-white">
+            <i class="fa-solid fa-door-closed"></i>Logout
+        </button>
+
+        <a href="/register" class="text-black hover:text-white text-xs"><i class="fa-solid fa-user-plus"></i>
+            Register</a>
+
+        <a href="/login" class="text-black hover:text-white text-xs"><i class="fa-solid fa-arrow-right-to-bracket"></i>
+            Login</a>
+            
+        <a href="/users/edit" class="hover:text-white text-xs">
+            <i class="fa-solid fa-gear"></i>
+                Edit my Profile
+        </a>
+
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
             @if (Route::has('login'))
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
