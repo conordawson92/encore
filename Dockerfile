@@ -7,6 +7,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     curl
 
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
@@ -21,6 +24,9 @@ COPY . /var/www
 
 # Install application dependencies
 RUN composer install
+
+RUN npm install
+RUN npm run build
 
 CMD php artisan serve --host=0.0.0.0 --port=8000
 
