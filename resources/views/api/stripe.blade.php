@@ -110,7 +110,7 @@
 <script type="text/javascript">
 $(function() {
     
-    var $form         = $(".require-validation");
+    var $form = $(".require-validation");
     
     $('form.require-validation').bind('submit', function(e) {
         var $form         = $(".require-validation"),

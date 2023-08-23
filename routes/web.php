@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Displaying all listings
+Route::get('/listings', [ListingController::class, 'index']);
+
+//Single listing
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 //show register form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
