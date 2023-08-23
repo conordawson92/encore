@@ -18,11 +18,9 @@ class UserController extends Controller
     public function store(Request $request){
         $formFields = $request->validate([
             'userName' => ['required', 'min:3'],
-            'dateJoined' => ['required', 'date'],
-            'userLocation' => ['required', 'min:3'],
-            'userRating' => ['required', 'numeric'],        
-            'userPhone' => ['required', 'numeric'],
-            'paymentInfo' => 'required',
+            'userLocation' => ['required', 'min:3'],  
+            'userRating'=> ['required', 'numeric'],   
+            'userPhone' => ['required', 'min:9'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
             //mixedCase - at least one uppercase and one lowercase
@@ -30,11 +28,17 @@ class UserController extends Controller
             //symbols - at least one symbol
         ]);
 
+        // Set the registration date to the current date and time
+        $formFields['dateJoined'] = now();
+
+        // Provide a value for userRating
+        $formFields['userRating'] = 3;
+
         //make sure the image is here before saving it
-        if ($request->hasFile('userImage')) {
-            //let s brake this down together
-            $formFields['userImage'] = $request->file('userImage')->store('userImages', 'public');
-        }
+         if ($request->hasFile('userImage')) {
+
+            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
+        } 
 
         //hash the password using bcrypt function that will encrypt the value
         $formFields['password'] = bcrypt($formFields['password']);
@@ -124,7 +128,7 @@ class UserController extends Controller
         $formFields['password'] = bcrypt($formFields['password']);
 
         if ($request->hasFile('userImage')) {
-            $formFields['userImage'] = $request->file('userImage')->store('userImages', 'public');
+            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
 
         //update the user
