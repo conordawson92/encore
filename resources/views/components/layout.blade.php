@@ -43,8 +43,8 @@
 <body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
     <div class="grow shrink basis-0">
         <header class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
-            <a href="/">
-                <img class="w-20" src="{{ asset('images/logo_old.svg') }}" alt="" />
+            <a class="flex justify-center items-center" href="/">
+                <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
             </a>
 
             @include('partials._search')
