@@ -6,9 +6,11 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Wishlist;
 use App\Models\Transaction;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Message;
 
 class UserController extends Controller
 {
@@ -139,7 +141,7 @@ class UserController extends Controller
         $wishlistItems = Wishlist::where('user_id', $user->id)->with('item')->get();
 
         // Load user's selling items
-        $sellingItems = $user->items;
+        $sellingItems = $user->sellerItems;
 
         // Load user's buying and selling history (transactions)
         $transactions = Transaction::where('buyerUser_id', $user->id)
@@ -147,11 +149,21 @@ class UserController extends Controller
             ->with('item')
             ->get();
 
-        // Load user's messages
-        $messages = $user->messages;
+       // Load user's buying transactions
+        $buyingTransactions = Transaction::where('buyerUser_id', $user->id)
+            ->with('item')
+            ->get();
+            
+        // Load user's messages with sender and receiver information
+        $messages = Message::where('senderUser_id', $user->id)
+            ->orWhere('receiverUser_id', $user->id)
+            ->with(['sender', 'receiver', 'item'])
+            ->get();
 
         // Load user's notifications
-        $notifications = $user->notifications;
+        $notifications = Notification::where('user_id', $user->id)
+            ->with(['sender', 'item'])
+            ->get();
 
         // Load user's reviews as reviewer and reviewed
         $reviewsGiven = Review::where('reviewer_id', $user->id)->get();
@@ -169,6 +181,27 @@ class UserController extends Controller
             'reviewsReceived'
         ));
     }
+
+    public function storeRating(Request $request, User $user) {
+        // Assuming the rating value is provided in the request
+        $newRating = $request->input('rating');
+    
+        // Update the user's rating based on the new rating value
+        $user->updateRating($newRating);
+    
+        // Create the review record and save it
+        $review = new Review([
+            'reviewer_id' => auth()->user()->id,
+            'reviewed_id' => $user->id,
+            'rating' => $newRating,
+            'comment' => $request->input('comment'),
+        ]);
+        $review->save();
+    
+        return redirect()->back()->with('message', 'Rating and review submitted.');
+    }
+
+    
 }
 
 

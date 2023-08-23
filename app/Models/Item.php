@@ -54,7 +54,7 @@ class Item extends Model
     //relationship to user model
     public function user(){
         //now for laravel, our Products belong to a User    
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'sellerUser_id');
     }
 
     // Define the relationship to the Category model using 'category_id'
@@ -73,5 +73,11 @@ class Item extends Model
         return $this->hasMany(Review::class, 'item_id');
     }
 
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'sellerUser_id');
+    }
+
+    
     
 }

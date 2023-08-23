@@ -16,9 +16,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/users/show">
-                        See Profile and history
-                    </a>
+                    <a href="{{ route('dashboard') }}">See Profile and History</a>
                 </li>
                 <li>
                     <form method="POST" action="/logout">
