@@ -35,4 +35,21 @@ class Transaction extends Model
         return $this->hasMany(Transaction::class, 'user_id');
         //hasMany() will allow a User to use multiple listings
     }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'sellerUser_id');
+    }
+
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyerUser_id');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    
 }
