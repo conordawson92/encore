@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>Laravel 10 - Stripe Payment Gateway Integration Tutorial Example - Tutsmake.com</title>

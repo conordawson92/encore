@@ -1,4 +1,4 @@
-
+<x-layout>
 <a href="/"><i></i> Back
 </a>
 <header>
@@ -42,3 +42,4 @@
         </p>
     </div>
 </form>
+</x-layout>
