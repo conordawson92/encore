@@ -78,7 +78,7 @@
     </div>
     
     <div>
-        <button type="submit">
+        <button>
             Sign Up
         </button>
     </div>
