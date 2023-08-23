@@ -1,84 +1,89 @@
-<a href="/"><i class=""></i> Back
-</a>
-<header>
-    <h2>
-        Edit profile
-    </h2>
-        <p>Edit: {{$user->email}}</p>
-</header>
+    <a href="/"> Back
+    </a>
     
-<form action="/users/{{$user->id}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-    <div>
-        <label for="userName" >Name</label>
-        <input type="text" name="userName" value="{{$user->userName}}"/>
-        @error('userName')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="userImage">
-            Profile Photo
-        </label>
-        <input type="file" name="userImage" />
-        <img src="{{$user->userImage ? asset('storage/' . $user->userIamge):asset('images/no-image.jpg')}}" alt="">
-        @error('userImage')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="dateJoined">User since: </label>
-        <p>{{$user->dateJoined}}</p>
-    </div>
-            
-    <div>
-        <label for="userLocation">Location</label>
-        <input type="text" name="userLocation"
-            placeholder="Location" value="{{$user->userLocation}}" />
-        @error('userLocation')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
+        <header class="text-center rounded-xl bg-red-500">
+            <h2 class="text-2xl font-bold uppercase mb-1">
+                Edit profile
+            </h2>
+            <p class="mb-4">Edit: {{$user->email}}</p>
+        </header>
     
-    <div>
-        <label for="userPhone" >Phone Number</label>
-        <input type="text" name="userPhone" value="{{$user->userPhone}}"/>
-        @error('userPhone')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
+        <form action="/users/{{$user->id}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-    <div>
-        <label for="email">Email</label>
-        <p>{{$user->email}}</p>
-    </div>
+            <div class="mb-6">
+                <label for="userImage" class="inline-block text-lg mb-2">
+                    Profile Photo
+                </label>
+                <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage" />
+                <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="Profile Photo">
+                @error('userImage')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
 
-    <div>
-        <label for="password" >
-            Password
-        </label>
-        <input type="password"  name="password"/>
-        @error('password')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
-
-    <div>
-        <label for="password_confirmation" >
-            Confirm Password
-        </label>
-        <input type="password" name="password_confirmation" />
-        @error('password_confirmation')
-            <p>{{$message}}</p>
-        @enderror
-    </div>
+            <div class="mb-6">
+                <label for="userName" class="inline-block text-lg mb-2 text-red-500">Name</label>
+                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userName" value="{{$user->userName}}"/>
+                @error('userName')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
             
-    <div>
-        <button type="submit">
-            Update Profile
-        </button>
-    </div>
-</form>
+            <div class="mb-6">
+                <label for="userLocation" class="inline-block text-lg mb-2 text-red-500">Location</label>
+                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userLocation"
+                    placeholder="Location" value="{{$user->userLocation}}" />
+                @error('userLocation')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+    
+            <div class="mb-6">
+                <label for="userPhone" class="inline-block text-lg mb-2 text-red-500">Phone Number</label>
+                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userPhone" value="{{$user->userPhone}}"/>
+                @error('userPhone')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="paymentInfo">Payment Method</label>
+                <select name="paymentInfo" id="paymentInfo" required>
+                    <option value="Card">Card (VISA, MasterCard, etc...)</option>
+                    <option value="PayPal">PayPal</option>
+                    <option value="GooglePay">Google Pay</option>
+                    <option value="ApplePay">Apple Pay</option>
+                </select>
+                @error('paymentInfo')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="password" class="inline-block text-lg mb-2 text-red-500">
+                    Password
+                </label>
+                <input type="password" class="border border-red-500 rounded p-2 w-full" name="password"/>
+                @error('password')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+
+            <div class="mb-6">
+                <label for="password_confirmation" class="inline-block text-lg mb-2 text-red-500">
+                    Confirm Password
+                </label>
+                <input type="password" class="border border-red-500 rounded p-2 w-full" name="password_confirmation" />
+                @error('password_confirmation')
+                    <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                @enderror
+            </div>
+            
+            <div class="mb-6">
+                <button type="submit" class="bg-black text-red-500 rounded-xl py-2 px-4 hover:bg-red-500 hover:text-black">
+                    Update Profile
+                </button>
+            </div>
+        </form>

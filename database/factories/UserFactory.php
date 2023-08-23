@@ -25,7 +25,7 @@ class UserFactory extends Factory
     {
         return [
             'userName' => $this->faker->name(),
-            'userLocation' => $this->faker->postcode(),
+            'userLocation' => $this->faker->city(),
             'dateJoined' => $this->faker->date(),
             'userRating' => $this->faker->numberBetween(1, 5),
             'userPhone' => $this->faker->phoneNumber(),
