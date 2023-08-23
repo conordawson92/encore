@@ -17,12 +17,12 @@ use App\Http\Controllers\ListingController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-
-Route::get('/', [ListingController::class, 'index']);
+//Displaying all listings
+Route::get('/listings', [ListingController::class, 'index']);
 
 //Single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
