@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.querySelector('#menu_mobile');
     const mobileMenuButton = document.querySelector('#menu_mobile_button');
-    const mobileMenuIcon = mobileMenuButton.querySelector('menu_mobile_icon');
+    const mobileMenuIcon = document.querySelector('#menu_mobile_icon');
 
     mobileMenuButton.addEventListener('click', () => {
         if (mobileMenu.classList.contains('hidden')) {
@@ -13,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuIcon.classList.remove('fa-times');
             mobileMenuIcon.classList.add('fa-bars');
         }
-    });
+    })
 });
