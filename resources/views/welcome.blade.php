@@ -27,12 +27,7 @@
                     </form>
                 </li>
             @else {{--if we are not logged in, show that content instead--}}
-                <li>
-                    <a href="/register">Register</a>
-                </li>
-                <li>
-                    <a href="/login">Login</a>
-                </li>
+
             @endauth
         </ul>
         {{--end of the exemple links to see if works--}}
