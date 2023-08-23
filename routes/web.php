@@ -34,18 +34,19 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 //show login form
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
-
 //log user in
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 
+//manage user
+Route::get('/users/manage', [UserController::class, 'manage'])->middleware('auth');
+
 //show edit user form
-Route::get('/users/edit', [UserController::class, 'manage'])->middleware('auth');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
 
-
-//update user
+//update user in db
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
+
 
 //layout
 Route::get('/layout', function () {
