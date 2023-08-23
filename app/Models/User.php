@@ -18,7 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'userName',
+        'dateJoined',
+        'userRating',
+        'userLocation',        
+        'userPhone',
+        'paymentInfo',
         'email',
         'password',
     ];
@@ -42,4 +47,56 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function items(){
+        return $this->hasMany(Item::class, 'user_id');
+        //hasMany() will allow a User to use multiple listings
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class, 'reviewer_id', Review::class, 'reviewed_id');
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class, 'sender_id', Message::class, 'receiver_id');
+    }
+
+    public function notifications(){
+        return $this->hasMany(Notification::class, 'user_id');
+    }
+
+    public function transactions(){
+        return $this->hasMany(Transaction::class, 'seller_id', Transaction::class, 'buyer_id');
+    }
+
+    public function updateRating($newRating) {
+
+        // Calculate the new rating based on received rating
+        $currentRating = $this->userRating;
+        $totalRatings = $this->reviewsReceived->count();
+    
+        // Calculate the new rating (you can adjust the formula as needed)
+        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings + 1);
+    
+        // Update the user's rating
+        $this->userRating = $newRatingValue;
+        $this->save();
+    }
+
+
+public function buyingTransactions() {
+    return $this->hasMany(Transaction::class, 'buyerUser_id')->with('item');
+}
+
+public function sellerItems()
+{
+    return $this->hasMany(Item::class, 'sellerUser_id');
+}
+
+public function wishlist()
+{
+    return $this->belongsToMany(Item::class, 'wishlists', 'user_id', 'item_id');
+}
+
+
 }
