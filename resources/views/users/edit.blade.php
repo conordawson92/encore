@@ -17,7 +17,7 @@
                     Profile Photo
                 </label>
                 <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage" />
-                <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="">
+                <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="Profile Photo">
                 @error('userImage')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror

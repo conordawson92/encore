@@ -34,6 +34,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/users/show">
+                        See Profile and history
+                    </a>
+                </li>
+                <li>
                     <form method="POST" action="/logout">
                         @csrf
                         <button>

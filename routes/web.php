@@ -47,6 +47,9 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('a
 //update user in db
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
 
+//show user profile
+Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
 
 //layout
 Route::get('/layout', function () {

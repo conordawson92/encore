@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Review;
+use App\Models\Wishlist;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
@@ -125,6 +128,46 @@ class UserController extends Controller
         $user->update($formFields);
 
         return redirect('/users/' . $user->id . '/edit')->with('message', 'Profile updated successfully');
+    }
+
+    public function dashboard()
+    {
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Load user's wishlist items
+        $wishlistItems = Wishlist::where('user_id', $user->id)->with('item')->get();
+
+        // Load user's selling items
+        $sellingItems = $user->items;
+
+        // Load user's buying and selling history (transactions)
+        $transactions = Transaction::where('buyerUser_id', $user->id)
+            ->orWhere('sellerUser_id', $user->id)
+            ->with('item')
+            ->get();
+
+        // Load user's messages
+        $messages = $user->messages;
+
+        // Load user's notifications
+        $notifications = $user->notifications;
+
+        // Load user's reviews as reviewer and reviewed
+        $reviewsGiven = Review::where('reviewer_id', $user->id)->get();
+        $reviewsReceived = Review::where('reviewed_id', $user->id)->get();
+
+        // You can now pass all this data to your dashboard view
+        return view('users.dashboard', compact(
+            'user',
+            'wishlistItems',
+            'sellingItems',
+            'transactions',
+            'messages',
+            'notifications',
+            'reviewsGiven',
+            'reviewsReceived'
+        ));
     }
 }
 
