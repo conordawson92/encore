@@ -5,7 +5,7 @@
             </h2>
             <p class="mb-4">Create an account</p>
         </header>
-    
+        <x-form-container>
         <form action="/users" method="POST" enctype="multipart/form-data">
             @csrf {{--don t forget--}}
 
@@ -51,7 +51,8 @@
 
             <div class="mb-6">
                 <label for="paymentInfo">Payment Method</label>
-                <select name="paymentInfo" id="paymentInfo" required>
+
+                <select name="paymentInfo" id="paymentInfo" required class="border border-gray-300 rounded-md p-2 w-full focus:ring focus:ring-blue-200">
                     <option value="Card">Card (VISA, MasterCard, etc...)</option>
                     <option value="PayPal">PayPal</option>
                     <option value="GooglePay">Google Pay</option>
@@ -91,7 +92,7 @@
             </div>
     
             <div class="mb-6">
-                <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
+                <button class="bg-black text-white rounded py-2 px-4 hover:bg-white hover:text-black">
                     Sign Up
                 </button>
             </div>
@@ -103,4 +104,5 @@
                 </p>
             </div>
         </form>
+        </x-form-container>
  </x-layout>
