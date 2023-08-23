@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,7 @@ Route::get('/layout', function () {
 
 //API fake store
 Route::get('/products', [ApiController::class, 'apiFakeStore']);
+
+//Stripe API checkout
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
