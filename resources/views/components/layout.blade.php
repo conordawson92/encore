@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -25,6 +24,17 @@
                         brown_logo: '#6d3114',
                         brown_logo_light: '#a04a20'
                     },
+                    keyframes: {
+                        dropMenu : {
+                            '0%': {
+                                top: '-100%'
+                            },
+                            '100%': {
+                                top: '0'
+                            }
+
+                        }
+                    }
                 },
             },
         };
@@ -53,11 +63,11 @@
                     <i class='fa-solid fa-circle-question text-2xl'></i>
                 </a>
             </div>
-            <button class="flex md:hidden w-20 justify-center items-center">
-                <i class="fa-solid fa-bars text-3xl"></i>
+            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
+                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
             </button>
         </header>
-        <hr class="border border-brown_logo_light w-11/12 mx-auto" />
+        <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
         <!-- Start of Desktop Navigation -->
         <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
             <ul class="hidden md:flex space-x-6 text-lg m-auto">
@@ -90,109 +100,108 @@
         </nav>
         <!-- End of Desktop Navigation -->
         <!-- Start of Mobile Navigation -->
-        <nav class="flex flex-col md:hidden bg-beige_logo text-brown_logo">
-            <ul>
-                <li >
-                    <a class="" href="">
+        <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col hidden md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
+            <ul class="flex flex-col gap-2 mb-5">
+                <li class="flex justify-center items-center">
+                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
                         Sell on Encore
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="flex justify-center items-center">
+                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
                         Sign In
                     </a>
                 </li>
             </ul>
-            <hr>
-            <ul>
-                <h3>
+            <ul class="flex flex-col mt-8">
+                <h3 class="ml-8 underline">
                     Categories
                 </h3>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
+                        <i class="fa-solid fa-person mr-2"></i>
                         Men
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
+                        <i class="fa-solid fa-person-dress mr-2"></i>
                         Women
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4">
+                    <a class="text-2xl font-medium w-full" href="">
+                        <i class="fa-solid fa-children mr-2"></i>
                         Kids
                     </a>
                 </li>
             </ul>
-            <hr>
-            <ul>
-                <h3>
+            <ul class="flex flex-col mt-8">
+                <h3 class="ml-8 underline">
                     Discover Encore
                 </h3>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Our Mission
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Our Platform
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Jobs
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Eco-Friendly
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Advertising
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4">
+                    <a class="text-2xl font-medium w-full" href="">
                         Contact
                     </a>
                 </li>
             </ul>
-            <hr>
-            <ul>
-                <h3>
+            <ul class="flex flex-col mt-8">
+                <h3 class="ml-8 underline">
                     Help
                 </h3>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Help Center
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Buying Guide
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                    <a class="text-2xl font-medium w-full" href="">
                         Selling Guide
                     </a>
                 </li>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4">
+                    <a class="text-2xl font-medium w-full" href="">
                         Safety
                     </a>
                 </li>
             </ul>
-            <hr>
-            <ul>
-                <h3>
+            <ul class="flex flex-col mt-8">
+                <h3 class="ml-8 underline">
                     Community
                 </h3>
-                <li>
-                    <a href="">
+                <li class="hover:bg-beige_logo_hover flex p-4">
+                    <a class="text-2xl font-medium w-full" href="">
                         Forum
                     </a>
                 </li>
@@ -337,5 +346,6 @@
             </ul>
         </div>
     </footer>
+    <script src="{{ asset('js/menu_mobile.js') }}"></script>
 </body>
 </html>
