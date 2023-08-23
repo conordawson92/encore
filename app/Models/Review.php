@@ -30,5 +30,20 @@ class Review extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+    public function sender()
+     {
+         return $this->belongsTo(User::class, 'reviewerUser_id');
+     }
+ 
+     public function receiver()
+     {
+         return $this->belongsTo(User::class, 'reviewedUser_id');
+     }
+ 
+     public function item()
+     {
+         return $this->belongsTo(Item::class);
+     }
    
 }

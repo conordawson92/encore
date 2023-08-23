@@ -1,7 +1,7 @@
-    <a href="/"> Back
+<x-layout>
+<a href="/"> Back
     </a>
-    
-        <header class="text-center rounded-xl bg-red-500">
+        <header class="text-center rounded-xl">
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Edit profile
             </h2>
@@ -87,3 +87,4 @@
                 </button>
             </div>
         </form>
+</x-layout>

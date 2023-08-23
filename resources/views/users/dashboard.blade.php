@@ -1,61 +1,134 @@
-<a href="/"> Back
-</a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <!-- Include any necessary CSS or other head elements -->
+</head>
+<body>
+    <h1>Welcome to Your Profile and History, {{ $user->userName }}!</h1>
 
-    <header class="text-center rounded-xl bg-red-500">
-        <h2 class="text-2xl font-bold uppercase mb-1">
-            Private Profile and History
-        </h2>
-    </header>
+    <h2>Your Profile</h2>
+    <img src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
+    <p>Email: {{ $user->email }}</p>
+    <p>Name: {{ $user->userName }}</p>
+    <p>You joined us in {{$user->dateJoined}}</p>
+    <p>Location: {{ $user->userLocation }}</p>
+    <p>Phone: {{ $user->userPhone }}</p>
+    <p>Based on your history, you have a rate of: {{$user->userRating}}</p>
+    <p>Your payment preference is: {{$user->paymentInfo}}</p>
 
-        <h3>Profile informations</h3>
-        <div class="mb-6">
-            <label for="userImage" class="inline-block text-lg mb-2">
-                Profile Photo:
-            </label>
-            <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="Profile Image">
+    <h2>Your Selling Items</h2>
+    @foreach ($user->sellerItems as $item)
+        <div>
+            <h3>{{ $item->itemName }}</h3>
+            <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->itemName }} Image">
+            <p>Description: {{ $item->description }}</p>
+            <p>Price: {{ $item->price }}</p>
+            <p>Size: {{ $item->size }}</p>
+            <p>Brand: {{ $item->brand }}</p>
+            <p>Condition: {{$item->condition}}</p>
+            <p>Status: {{$item->status}}</p>
+            <p>Date was posted: {{$item->dateListed}}</p>
+            <p>Quantity available: {{$item->quantity}}</p>
         </div>
+    @endforeach
 
-        <div class="mb-6">
-            <label for="userName" class="inline-block text-lg mb-2 text-red-500">Name:</label>
-            <p>{{$user->userName}}</p>
-        </div>
-        
-        <div class="mb-6">
-            <label for="userLocation" class="inline-block text-lg mb-2 text-red-500">Location:</label>
-            <p>{{$user->userLocation}}</p>
-        </div>
+    <h2>Your Wishlist</h2>
+@if ($user->wishlist)
+    @foreach ($user->wishlist as $item)
+        <p>{{ $item->itemName }}</p>
+        <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->itemName }} Image">
+        <p>Description: {{ $item->description }}</p>
+        <p>Price: {{ $item->price }}</p>
+        <p>Size: {{ $item->size }}</p>
+        <p>Brand: {{ $item->brand }}</p>
+        <p>Condition: {{$item->condition}}</p>
+        <p>Status: {{$item->status}}</p>
+        <p>Date was posted: {{$item->dateListed}}</p>
+        <p>Quantity available: {{$item->quantity}}</p>
+        @endforeach
+        @else
+            <p>Your wishlist is empty.</p>
+        @endif
 
-        <div class="mb-6">
-            <label for="userPhone" class="inline-block text-lg mb-2 text-red-500">Phone Number</label>
-            <p>{{$user->userPhone}}</p>
-        </div>
+    <h2>Your Buying Transactions</h2>
+    @foreach ($buyingTransactions as $transaction)
+        <p>Item bought: {{ $transaction->item_id->itemName }}</p>
+        <p>Seller: {{$transaction->item->seller->userName}}</p>
+        <p>Date of purchase: {{$transaction->datePurchase}}</p>
+        <p>Payment Details: {{$transaction->paymentDetails}}</p>
+        <p>Shipment Details: {{$transaction->shippingDetails}}</p>
+    @endforeach
 
-        <div class="mb-6">
-            <label for="paymentInfo">Payment Method:</label>
-            <p>{{$user->paymentInfo}}</p>
-        </div>
+    <h2>Your Selling Transactions</h2>
+    @foreach ($sellingTransactions as $transaction)
+        <p>Item sold: {{ $transaction->item->itemName }}</p>
+        <p>Buyer: {{ $transaction->buyer->userName }}</p>
+        <p>Date of sale: {{ $transaction->datePurchase }}</p>
+        <p>Payment Details: {{ $transaction->paymentDetails }}</p>
+        <p>Shipment Details: {{ $transaction->shippingDetails }}</p>
+    @endforeach
 
-        <hr>
+    <h2>Your Sent Reviews</h2>
+    @foreach ($user->reviews as $review)
+        @if ($review->reviewer_id == $user->id)
+            <div>
+                <p>Item: {{ $review->item_id }}</p>
+                <p>User Reviewed {{$review->receiver->userName}}</p>
+                <p>Comment: {{$review->comment}}</p>
+                <p>Rating Gived: {{$review->rating}}</p>
+                <p>Date: {{$review->dateReview}}</p>
+            </div>
+        @endif
+    @endforeach
 
-        <h3>My selling items:</h3>    
-        <table class="w-full table-auto rounded-sm">
-            <tbody>
-                @unless ($items->isEmpty())
-                    @foreach ($items as $item)
-                        <tr class="border-gray-300">
-                            <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
-                                <a href="/items/{{$item->id}}">
-                                    {{$item->itemName}}
-                                </a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
-                    <tr class="border-grey-300">
-                        <td class="px-4 py8 border-t border-b border-grey-300 text-lg">
-                            <p class="text-center">No Items found</p>
-                        </td>
-                    </tr>
-                @endunless                
-            </tbody>
-        </table>
+    <h2>Your Received Reviews</h2>
+    @foreach ($user->reviews as $review)
+        @if ($review->reviewed_id == $user->id)
+            <div>
+                <p>Item: {{ $review->item_id }}</p>
+                <p>Reviewer User: {{$review->sender->userName}}</p>
+                <p>Comment: {{$review->comment}}</p>
+                <p>Rating Received: {{$review->rating}}</p>
+                <p>Date: {{$review->dateReview}}</p>
+            </div>
+        @endif
+    @endforeach
+
+    <h2>Your Received Messages</h2>
+    @foreach ($user->messages as $message)
+        @if ($message->receiverUser_id == $user->id)
+            <div>
+                <p>Sender: {{$message->sender->userName}}</p>
+                <p>Date: {{$message->dateSent}}</p>
+                <p>Item: {{ $message->item_id }}</p>
+                <p>Message: {{$message->content}}</p>
+                <p>Status: {{$message->status}}</p>
+            </div>
+        @endif
+    @endforeach
+
+    <h2>Your Send Messages</h2>
+    @foreach ($user->messages as $message)
+        @if ($message->senderUser_id == $user->id)
+            <div>
+                <p>Receiver: {{$message->receiver->userName}}</p>
+                <p>Date: {{$message->dateSent}}</p>
+                <p>Item: {{ $message->item_id }}</p>
+                <p>Message: {{$message->content}}</p>
+                <p>Status: {{$message->status}}</p>
+            </div>
+        @endif
+    @endforeach
+
+    <h2>Your Notifications</h2>
+    @foreach ($user->notifications as $notification)
+        <p>Notification type: {{ $notification->typeNotification_id }}</p>
+        <p>Received from: {{$notification->user_id}}</p>
+        <p>Message: {{$notification->content}}</p>
+        <p>Date: {{$notification->dateSent}}</p>
+        <p>Status: {{$notification->status}}</p>
+    @endforeach
+    
+</body>
+</html>

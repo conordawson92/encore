@@ -4,147 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Encore | Vintage Store</title>
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script>
         tailwind.config = {
             theme: {
+                fontFamily: {
+                    abel: ['Abel', 'sans-serif'],
+                },
                 extend: {
                     colors: {
-                        test: '#ff0000'
-                        test2: '#00ff00'
-                        test3: '#0000ff'
+                        // colorName: 'colorValue',
+                        orange_logo: '#f5804d',
+                        beige_logo: '#fff4e0',
+                        beige_logo_hover: '#e6d2b1',
+                        brown_logo: '#6d3114',
+                        brown_logo_light: '#a04a20'
                     },
+                    keyframes: {
+                        dropMenu : {
+                            '0%': {
+                                top: '-100%'
+                            },
+                            '100%': {
+                                top: '0'
+                            }
+
+                        }
+                    }
                 },
             },
         };
     </script>
 </head>
-<body>
-    <header class="flex justify-between gap-4 bg-green-300 p-2">
-        <a href="/">
-            <img class="w-18" src="{{ asset('images/logo_test.svg') }}" alt="" />
-        </a>
-        <form action="" class="hidden md:flex gap-4">
-            <input class="border border-gray-400 rounded py-1 px-2 my-3" type="text" placeholder="Search..." />
-            <button type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
+<body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
+    <div class="grow shrink basis-0">
+        <header class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
+            <a class="flex justify-center items-center" href="/">
+                <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
+            </a>
+
+            @include('partials._search')
+            
+            <div class="hidden md:flex gap-4 justify-center items-center">
+                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo" href="/register">
+                    Sign Up
+                </a>
+                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo" href="/login">
+                    Sign In
+                </a>
+                <a href="">
+                    <i class='fa-solid fa-circle-question text-2xl'></i>
+                </a>
+            </div>
+            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
+                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
             </button>
-        </form>
-        <div class="hidden md:flex gap-4 justify-center items-center">
-            <a href="/login">
-                Sign Up | Sign In
-            </a>
-            <a href="">
-                <i class='fa-solid fa-circle-question '></i>
-            </a>
-        </div>
-        <button class="flex md:hidden w-20 justify-center items-center">
-            <i class="fa-solid fa-bars text-3xl"></i>
-        </button>
-    </header>
-    <nav class="flex justify-between items-center bg-blue-300">
-        <ul class="hidden md:flex space-x-6 text-lg m-auto p-2">
-            <li>
-                <a href="/men">Men</a>
-            </li>
-            <li>
-                <a href="/women">Women</a>
-            </li>
-            <li>
-                <a href="/kids">Kids</a>
-            </li>
-            <li>
-                <a href="/about">Our Mission</a>
-            </li>
-            <li>
-                <a href="/platform">Our Platform</a>
-            </li>
-        </ul>
-    </nav>
-    <main>
-    </main>
-    <footer class="fixed bottom-0 w-full bg-red-300 block p-2 md:flex">
-        <div class="p-2 flex flex-col gap-3">
-            <div class="flex flex-col gap-2">
-                <h3 class="text-xl">
+        </header>
+        <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
+
+        @include('partials._nav')
+        
+        <main class="bg-white pt-4">
+              {{$slot}}
+        </main>
+    </div>
+    <footer class="mt-auto w-full bg-orange_logo block p-2 flex flex-col">
+        <div class="p-2 flex flex-col gap-3 md:flex-row md:justify-between md:justify-evenly text-center md:text-left">
+            <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-semibold">
                     Encore
                 </h3>
-                <ul> 
+                <ul class="flex flex-col gap-2"> 
                     <li>
-                        <a href="/about">
+                        <a class="hover:underline" href="/about">
                             About
                         </a>
                     </li>
                     <li>
-                        <a href="/jobs">
+                        <a class="hover:underline" href="/jobs">
                             Jobs
                         </a>
                     </li>
                     <li>
-                        <a href="/ecology">
+                        <a class="hover:underline" href="/ecology">
                             Eco-friendly
                         </a>
                     </li>
                     <li>
-                        <a href="/advertising">
+                        <a class="hover:underline" href="/advertising">
                             Advertising
                         </a>
                     </li>
                     <li>
-                        <a href="/contact">
+                        <a class="hover:underline" href="/contact">
                             Contact
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="flex flex-col gap-2">
-                <h3 class="text-xl">
+            <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-semibold">
                     Help
                 </h3>
-                <ul>
+                <ul class="flex flex-col gap-2">
                     <li>
-                        <a href="/help_center">
+                        <a class="hover:underline" href="/help_center">
                             Help Center
                         </a>    
                     </li>
                     <li>
-                        <a href="/help_center#buying">
+                        <a class="hover:underline" href="/help_center#buying">
                             Buying Guide
                         </a>
                     </li>
                     <li>
-                        <a href="/help_center#selling">
+                        <a class="hover:underline" href="/help_center#selling">
                             Selling Guide
                         </a>
                     </li>
                     <li>
-                        <a href="/safety">
+                        <a class="hover:underline" href="/safety">
                             Safety
                         </a>
                     </li>
                 </ul>
             </div>
-            <div class="flex flex-col gap-2">
-                <h3 class="text-xl">
+            <div class="flex flex-col gap-3">
+                <h3 class="text-xl font-semibold">
                     Community
                 </h3>
-                <ul>
+                <ul class="flex flex-col gap-2">
                     <li>
-                        <a href="/forum">
+                        <a class="hover:underline" href="/forum">
                             Forum
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <hr>
-        <div class="p-2 my-4">
-            <ul class="flex justify-center gap-8">
+        <hr class="my-4 border-gray-800">
+        <div class="p-2">
+            <ul class="flex justify-center gap-8 flex-wrap">
                 <li>
                     <a href="">
                         <i class="fa-brands fa-square-facebook text-3xl"></i>
@@ -167,11 +171,13 @@
                 </li>
             </ul>
         </div>
-        <hr>
+        <hr class="my-4 border-gray-800">
         <div class="p-2">
-            <ul class="flex justify-center gap-4">
+            <ul class="flex justify-center gap-4 flex-wrap">
                 <li>
-                    <a class="hover:underline" href="">Privacy Policy</a>
+                    <a class="hover:underline" href="">
+                        Privacy Policy
+                    </a>
                 </li>
                 <li>
                     <a class="hover:underline" href="">
@@ -196,5 +202,6 @@
             </ul>
         </div>
     </footer>
+    <script src="{{ asset('js/menu_mobile.js') }}"></script>
 </body>
 </html>
