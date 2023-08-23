@@ -46,12 +46,9 @@
             <a href="/">
                 <img class="w-20" src="{{ asset('images/logo_old.svg') }}" alt="" />
             </a>
-            <form action="" class="hidden md:flex gap-4 border border-gray-400 rounded w-200 px-4 bg-white h-11 w-1/2 justify-between mt-4">
-                <input class="focus:outline-none w-full" type="text" placeholder="Search..." />
-                <button type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+
+            @include('partials._search')
+            
             <div class="hidden md:flex gap-4 justify-center items-center">
                 <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo" href="/register">
                     Sign Up
@@ -68,146 +65,9 @@
             </button>
         </header>
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
-        <!-- Start of Desktop Navigation -->
-        <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
-            <ul class="hidden md:flex space-x-6 text-lg m-auto">
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/men">
-                        Men
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/women">
-                        Women
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/kids">
-                        Kids
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/about">
-                        Our Mission
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/platform">
-                        Our Platform
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- End of Desktop Navigation -->
-        <!-- Start of Mobile Navigation -->
-        <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col hidden md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
-            <ul class="flex flex-col gap-2 mb-5">
-                <li class="flex justify-center items-center">
-                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                        Sell on Encore
-                    </a>
-                </li>
-                <li class="flex justify-center items-center">
-                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                        Sign In
-                    </a>
-                </li>
-            </ul>
-            <ul class="flex flex-col mt-8">
-                <h3 class="ml-8 underline">
-                    Categories
-                </h3>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        <i class="fa-solid fa-person mr-2"></i>
-                        Men
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        <i class="fa-solid fa-person-dress mr-2"></i>
-                        Women
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4">
-                    <a class="text-2xl font-medium w-full" href="">
-                        <i class="fa-solid fa-children mr-2"></i>
-                        Kids
-                    </a>
-                </li>
-            </ul>
-            <ul class="flex flex-col mt-8">
-                <h3 class="ml-8 underline">
-                    Discover Encore
-                </h3>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Our Mission
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Our Platform
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Jobs
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Eco-Friendly
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Advertising
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Contact
-                    </a>
-                </li>
-            </ul>
-            <ul class="flex flex-col mt-8">
-                <h3 class="ml-8 underline">
-                    Help
-                </h3>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Help Center
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Buying Guide
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Selling Guide
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover flex p-4">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Safety
-                    </a>
-                </li>
-            </ul>
-            <ul class="flex flex-col mt-8">
-                <h3 class="ml-8 underline">
-                    Community
-                </h3>
-                <li class="hover:bg-beige_logo_hover flex p-4">
-                    <a class="text-2xl font-medium w-full" href="">
-                        Forum
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- End of Mobile Navigation -->
+
+        @include('partials._nav')
+        
         <main class="bg-white pt-4">
             <div>
                 <p>
@@ -216,8 +76,8 @@
             </div>
         </main>
     </div>
-    <footer class="mt-auto w-full bg-orange_logo block p-2">
-        <div class="p-2 flex flex-col gap-3 md:flex-row md:justify-between md:justify-evenly">
+    <footer class="mt-auto w-full bg-orange_logo block p-2 flex flex-col">
+        <div class="p-2 flex flex-col gap-3 md:flex-row md:justify-between md:justify-evenly text-center md:text-left">
             <div class="flex flex-col gap-3">
                 <h3 class="text-xl font-semibold">
                     Encore
