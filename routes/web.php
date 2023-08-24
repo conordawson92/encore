@@ -6,6 +6,8 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
 use App\Models\ParentCategory;
+use App\Http\Controllers\AdminController;
+
 
 
 Route::get('/', function () {
@@ -57,6 +59,41 @@ Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist']
 
 //remove item from wishlist
 Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
+
+
+
+//ADMIN
+//show admin personnel dashboard
+Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+//show list of managements
+Route::get('/adminUser/admin', [AdminController::class, 'adminFunctionsPage'])->middleware('auth')->name('admin');
+
+//show users management
+Route::get('/adminUser/users', [AdminController::class, 'manageUsersPage'])->middleware('auth')->name('users');
+
+//show a selectioned user
+Route::get('/adminUser/users/{user}', [AdminController::class, 'viewUser'])->middleware('auth')->name('admin.users.view');
+
+//cancelling transactions
+Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::class, 'cancelTransaction'])
+    ->middleware('auth')
+    ->name('transactions.cancel');
+
+//edit a selectioned user
+Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
+    ->middleware('auth')
+    ->name('users.edit');
+    
+// Update user
+Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
+->middleware('auth')
+->name('users.update');
+
+//ban an specific user
+Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+    ->middleware('auth')
+    ->name('users.banUser');
 
 
 
