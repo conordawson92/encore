@@ -5,6 +5,8 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ParentCategoryController;
+use App\Models\ParentCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,8 @@ Route::get('/listings', [ListingController::class, 'index']);
 
 //Single listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+
 
 
 //USERS
@@ -72,6 +76,7 @@ Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWi
 Route::get('/layout', function () {
     return view('components/layout');
 });
+
 
 //API fake store
 Route::get('/products', [ApiController::class, 'apiFakeStore']);
