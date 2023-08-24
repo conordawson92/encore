@@ -8,37 +8,8 @@
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                fontFamily: {
-                    abel: ['Abel', 'sans-serif'],
-                },
-                extend: {
-                    colors: {
-                        // colorName: 'colorValue',
-                        orange_logo: '#f5804d',
-                        beige_logo: '#fff4e0',
-                        beige_logo_hover: '#e6d2b1',
-                        brown_logo: '#6d3114',
-                        brown_logo_light: '#a04a20'
-                    },
-                    keyframes: {
-                        dropMenu : {
-                            '0%': {
-                                top: '-100%'
-                            },
-                            '100%': {
-                                top: '0'
-                            }
-
-                        }
-                    }
-                },
-            },
-        };
-    </script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
 </head>
 <body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
     <div class="grow shrink basis-0">
@@ -50,10 +21,10 @@
             @include('partials._search')
             
             <div class="hidden md:flex gap-4 justify-center items-center">
-                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo" href="/register">
+                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
                     Sign Up
                 </a>
-                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo" href="/login">
+                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
                     Sign In
                 </a>
                 <a href="">
@@ -67,12 +38,13 @@
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 
         @include('partials._nav')
+        @yield('content')
         
         <main class="bg-white pt-4">
               {{$slot}}
         </main>
     </div>
-    <footer class="mt-auto w-full bg-orange_logo block p-2 flex flex-col">
+    <footer class="mt-auto w-full bg-orange_logo_light block p-2 flex flex-col">
         <div class="p-2 flex flex-col gap-3 md:flex-row md:justify-between md:justify-evenly text-center md:text-left">
             <div class="flex flex-col gap-3">
                 <h3 class="text-xl font-semibold">
@@ -202,6 +174,5 @@
             </ul>
         </div>
     </footer>
-    <script src="{{ asset('js/menu_mobile.js') }}"></script>
 </body>
 </html>

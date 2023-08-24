@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Http\Request;
+use App\Models\ParentCategory;
 
 class ListingController extends Controller
 {
@@ -12,8 +13,7 @@ class ListingController extends Controller
         
         return view('listings.index', [
 
-            'listings' => Item::all()
-            
+            'listings' => Item::latest()->filter(request(['tag', 'search'])),
         ]);
     }
 
@@ -23,6 +23,21 @@ class ListingController extends Controller
             'listing' => $listing
         ]);
     }
+
+    //show Items By Parent Category
+    public function showItemsByParentCategory($parentCategoryId)
+    {
+        $parentCategory = ParentCategory::findOrFail($parentCategoryId);
+        $items = Item::whereHas('category', function ($query) use ($parentCategoryId) {
+            $query->where('parentCategory_id', $parentCategoryId);
+        })->get();
+
+        return view('listings.index', [
+            'listings' => $items
+        ]);
+    }
+
+
 
 
 }

@@ -28,13 +28,7 @@ class Wishlist extends Model
      */
 
     //relationship to user model
-    public function user(){
-        //now for laravel, our Products belong to a User    
+    public function user(){    
         return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function items()
-    {
-        return $this->hasMany(Item::class, 'wishlist_id');
-    }
+    }    
 }
