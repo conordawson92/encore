@@ -38,7 +38,6 @@
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 
         @include('partials._nav')
-        @yield('content')
         
         <main class="bg-white pt-4">
               {{$slot}}
