@@ -15,6 +15,12 @@ Route::get('/', function () {
 //Displaying all listings(products)
 Route::get('/listings', [ListingController::class, 'index']);
 
+//Searchbar Filter
+Route::get('/listings/search', [ListingController::class, 'search'])->name('listings.search');
+
+//Tags Filter
+Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->name('listings.filterByTag');
+
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
@@ -66,4 +72,4 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
-//Searchbar Filter
+
