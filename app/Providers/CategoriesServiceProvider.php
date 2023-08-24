@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\ParentCategory;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +25,8 @@ class CategoriesServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $parentCategories = ParentCategory::with('categories')->get();
             $view->with('parentCategories', $parentCategories);
+            $categories = Category::with('items')->get();
+            $view->with('categories', $categories);
         });
     }
 }

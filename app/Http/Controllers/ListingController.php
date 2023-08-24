@@ -13,7 +13,7 @@ class ListingController extends Controller
         
         return view('listings.index', [
 
-            'listings' => Item::latest()->filter(request(['tag', 'search'])),
+            'listings' => Item::all(),
         ]);
     }
 
@@ -37,7 +37,30 @@ class ListingController extends Controller
         ]);
     }
 
+        public function search(Request $request)
+    {
+        $query = $request->input('query');
+        
+        $listings = Item::where('ItemName', 'LIKE', '%' . $query . '%')
+                        ->orWhere('description', 'LIKE', '%' . $query . '%')
+                        ->orWhere('price', 'LIKE', '%' . $query . '%')
+                        ->orWhere('size', 'LIKE', '%' . $query . '%')
+                        ->orWhere('brand', 'LIKE', '%' . $query . '%')
+                        ->get();
 
+        return view('listings.index', [
+            'listings' => $listings
+        ]);
+    }
+
+    public function filterByTag($tag)
+    {
+        $listings = Item::where('tags', 'LIKE', '%' . $tag . '%')->get();
+        
+        return view('listings.index', [
+            'listings' => $listings
+        ]);
+    }
 
 
 }

@@ -1,15 +1,17 @@
-<!--html diaply for the users complete dashboard with all the informations, history, messages, etc...-->
+<!--html diaply for the admin complete dashboard with all the informations, history, messages, etc...and the manage options link-->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>User Profile</title>
+    <title>Admin Profile</title>
 </head>
 <body>
     <a href="/"> Back
     </a>
-    <h1>Welcome to Your Profile and History, {{ $user->userName }}!</h1>
+    <h1>Welcome to your profile Page, {{ $user->userName }}!</h1>
 
-    <!--the users profile informations-->
+    <p>Go to the admnistrator page <a href="/adminUser/admin">here</a></p>
+
+    <!--the admin profile informations-->
     <h2>Your Profile</h2>
     <img src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
     <p>Email: {{ $user->email }}</p>
@@ -20,28 +22,24 @@
     <p>Based on your history, you have a rate of: {{$user->userRating}}</p>
     <p>Your payment preference is: {{$user->paymentInfo}}</p>
 
-    <!--all the users selling items-->
+    <!--all the admin selling items-->
     <h2>Your Items</h2>
-    @if ($user->sellerItems->count() > 0)
-        @foreach ($user->sellerItems as $item)
-            <div>
-                <h4>{{ $item->ItemName }}</h4>
-                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                <p>Description: {{ $item->description }}</p>
-                <p>Price: {{ $item->price }}</p>
-                <p>Size: {{ $item->size }}</p>
-                <p>Brand: {{ $item->brand }}</p>
-                <p>Condition: {{$item->condition}}</p>
-                <p>Status: {{$item->status}}</p>
-                <p>Date was posted: {{$item->dateListed}}</p>
-                <p>Quantity available: {{$item->quantity}}</p>
-            </div>
-        @endforeach
-    @else
-        <p>You don't have any items</p>
-    @endif
+    @foreach ($user->sellerItems as $item)
+        <div>
+            <h4>{{ $item->ItemName }}</h4>
+            <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+            <p>Description: {{ $item->description }}</p>
+            <p>Price: {{ $item->price }}</p>
+            <p>Size: {{ $item->size }}</p>
+            <p>Brand: {{ $item->brand }}</p>
+            <p>Condition: {{$item->condition}}</p>
+            <p>Status: {{$item->status}}</p>
+            <p>Date was posted: {{$item->dateListed}}</p>
+            <p>Quantity available: {{$item->quantity}}</p>
+        </div>
+    @endforeach
 
-    <!--the items in the users wishlist-->
+    <!--the items in the admin wishlist-->
     <h2>Your Wishlist</h2>
     @if ($user->wishlist->count() > 0)
         @foreach ($user->wishlist as $item)
@@ -62,7 +60,7 @@
         <p>Your wishlist is empty.</p>
     @endif
 
-    <!--all the items bought for the user logged in with the transaction history-->
+    <!--all the items bought for the admin logged in with the transaction history-->
     <h2>Your Buying Transactions</h2>
     @if ($buyingTransactions->count() > 0)
         <table>
@@ -78,7 +76,7 @@
         <p>No buying transactions found.</p>
     @endif
 
-    <!--all the items sell for the user logged in with the transaction history-->
+    <!--all the items sell for the admin logged in with the transaction history-->
     <h2>Your Selling Transactions</h2>
     @if ($sellingTransactions->count() > 0)
         <table>
@@ -94,7 +92,7 @@
         <p>No selling transactions found.</p>
     @endif
 
-    <!--all the reviews made by the user logged in-->
+    <!--all the reviews made by the admin logged in-->
     <h2>Your Reviews</h2>
     <h3>Sented</h3>
     @if ($reviewsGiven->count() > 0)
@@ -125,7 +123,7 @@
         <p>No reviews received.</p>
     @endif
 
-    <!--all the messages history-->
+    <!--all the admin messages history-->
     <h2>Your Messages</h2>
     <h3>Sented</h3>
     @if ($messagesSented->count() > 0)
@@ -156,7 +154,7 @@
         <p>No messages received.</p>
     @endif
 
-    <!--notifications history-->
+    <!--admin notifications history-->
     <h2>Your Notifications</h2>
     @if ($notifications->count() > 0)
         <table>
@@ -170,6 +168,8 @@
     @else
         <p>No notifications found.</p>
     @endif
+
+
     
 </body>
 </html>
