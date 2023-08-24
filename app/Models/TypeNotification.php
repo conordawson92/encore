@@ -9,6 +9,8 @@ class TypeNotification extends Model
 {
     use HasFactory;
 
+    //the table name is different from the laravel form default
+    protected $table = 'type-notifications';
     /**
      * The attributes that are mass assignable.
      *
@@ -24,8 +26,10 @@ class TypeNotification extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+    //type notification can have many notifications
     public function notifications()
     {
-        return $this->hasMany(Notification::class, 'typeNotification_id');
+        return $this->hasMany(Notification::class);
     }
 }
