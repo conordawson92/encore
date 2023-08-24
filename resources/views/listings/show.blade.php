@@ -34,6 +34,8 @@
                         Status: {{$listing->status}}
                     </div>
                 </div>
+                <button>Buy</button>
+                <button>Message</button>
         </x-card>
     </div>
 </x-layout>
