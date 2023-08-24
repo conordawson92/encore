@@ -107,7 +107,7 @@ const menuMobile = `
                     </li>
                 </ul>
             </nav>
-            `
+            `;
 const menuMobileContainer = document.querySelector('#menu_mobile_container');
 autoanimate(menuMobileContainer);
 let menu = false;
