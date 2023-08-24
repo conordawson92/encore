@@ -26,6 +26,8 @@ class ParentCategory extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+    //one type can have many categories
     public function categories()
     {
         return $this->hasMany(Category::class, 'parentCategory_id');

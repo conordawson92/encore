@@ -31,18 +31,28 @@ class Notification extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
+    //relationship that says this notification belongs to that type 
     public function ownedBy(TypeNotification $typeNotification)
     {
         return $this->typeNotification_id === $typeNotification->id;
     }
 
+    //relationship that says this notification belongs to that user
     public function sender()
     {
         return $this->belongsTo(User::class);
     }
 
+    //relationship that says this notification belongs to that item
     public function item()
     {
         return $this->belongsTo(Item::class);
     }
+
+    //relationship that says this notification belongs to that type and the connection between them
+    public function typeNotification()
+    {
+        return $this->belongsTo(TypeNotification::class, 'typeNotification_id');
+    }
+
 }
