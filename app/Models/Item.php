@@ -46,7 +46,11 @@ class Item extends Model
             
             foreach($keywords as $keyword){
 
-            $query-> where('tags', 'like', '%' . $keyword . '%')->orWhere ('itemName', 'like', '%' . $keyword . '%')->orWhere ('brand', 'like', '%' . $keyword . '%')->orWhere ('description', 'like', '%' . $keyword . '%')->orWhere ('price', 'like', '%' . $keyword . '%');
+            $query-> where('itemName', 'like', '%' . $keyword . '%')->orWhere 
+            ('description', 'like', '%' . $keyword . '%')->orWhere 
+            ('size', 'like', '%' . $keyword . '%')->orWhere 
+            ('price', 'like', '%' . $keyword . '%')->orWhere 
+            ('brand', 'like', '%' . $keyword . '%');
             }
         }
     }
