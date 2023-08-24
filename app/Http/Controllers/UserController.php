@@ -71,10 +71,12 @@ class UserController extends Controller
         return redirect('/')->with('message', 'You have been logged out');
     }
 
+    //log user in
     public function login(){
         return view('users.login');
     }
 
+    //authenticate the user so the log in can happen
     public function authenticate(Request $request){
         $formFields = $request->validate([
             'email' => ['required', 'email'],
@@ -132,20 +134,20 @@ class UserController extends Controller
         return redirect('/users/' . $user->id . '/edit')->with('message', 'Profile updated successfully');
     }
 
+    //dashboard for all the user informations and items/transactions/ messages/etc...
     public function dashboard()
     {
         // Get the authenticated user
         $user = auth()->user();
 
-        // Load user's wishlist items
-        $wishlistItems = Wishlist::where('user_id', $user->id)->with('item')->get();
+        // Load user's wishlist items using the wishlist relationship
+        $wishlistItems = $user->wishlist;
 
         // Load user's selling items
         $sellingItems = $user->sellerItems;
 
-        // Load user's buying and selling history (transactions)
-        $transactions = Transaction::where('buyerUser_id', $user->id)
-            ->orWhere('sellerUser_id', $user->id)
+        // Load user's selling transactions
+        $sellingTransactions = Transaction::where('sellerUser_id', $user->id)
             ->with('item')
             ->get();
 
@@ -154,36 +156,46 @@ class UserController extends Controller
             ->with('item')
             ->get();
             
-        // Load user's messages with sender and receiver information
-        $messages = Message::where('senderUser_id', $user->id)
-            ->orWhere('receiverUser_id', $user->id)
-            ->with(['sender', 'receiver', 'item'])
+        // Load user's messages with sender information
+        $messagesSented = Message::where('senderUser_id', $user->id)
+            ->with(['receiver', 'item'])
             ->get();
+
+        // Load user's messages with receiver information
+        $messagesReceived = Message::where('receiverUser_id', $user->id)
+        ->with(['sender', 'item'])
+        ->get();
 
         // Load user's notifications
         $notifications = Notification::where('user_id', $user->id)
-            ->with(['sender', 'item'])
+            ->with(['sender', 'item', 'typeNotification'])
             ->get();
 
-        // Load user's reviews as reviewer and reviewed
+        // Load user's reviews as reviewer 
         $reviewsGiven = Review::where('reviewer_id', $user->id)->get();
+
+        // Load user's reviews as reviewed 
         $reviewsReceived = Review::where('reviewed_id', $user->id)->get();
 
-        // You can now pass all this data to your dashboard view
+        // Pass all this data to the dashboard view
         return view('users.dashboard', compact(
             'user',
             'wishlistItems',
             'sellingItems',
-            'transactions',
-            'messages',
+            'sellingTransactions',
+            'buyingTransactions',
+            'messagesSented',
+            'messagesReceived',
             'notifications',
             'reviewsGiven',
             'reviewsReceived'
         ));
     }
 
-    public function storeRating(Request $request, User $user) {
-        // Assuming the rating value is provided in the request
+    //users rating
+    public function storeRating(Request $request, User $user) 
+    {
+        //rating that is given by default
         $newRating = $request->input('rating');
     
         // Update the user's rating based on the new rating value
@@ -199,9 +211,7 @@ class UserController extends Controller
         $review->save();
     
         return redirect()->back()->with('message', 'Rating and review submitted.');
-    }
-
-    
+    }    
 }
 
 

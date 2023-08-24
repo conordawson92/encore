@@ -55,9 +55,8 @@ class Item extends Model
         }
     }
 
-    //relationship to user model
+    //relationship that says this item belongs to that user(was created by)
     public function user(){
-        //now for laravel, our Products belong to a User    
         return $this->belongsTo(User::class, 'sellerUser_id');
     }
 
@@ -67,21 +66,21 @@ class Item extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    //relationship to user, the item to sell belongs to a user, if the user is deleted, all his items will be too
     public function ownedBy(User $user)
     {
         return $this->user_id === $user->id;
     }
 
+    //an item can have many reviews
     public function reviews()
     {
         return $this->hasMany(Review::class, 'item_id');
     }
 
+    //relationship with the user (dashboard)
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
-    }
-
-    
-    
+    }    
 }

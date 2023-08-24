@@ -1,12 +1,15 @@
+<!--html diaply for the users complete dashboard with all the informations, history, messages, etc...-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Profile</title>
-    <!-- Include any necessary CSS or other head elements -->
 </head>
 <body>
+    <a href="/"> Back
+    </a>
     <h1>Welcome to Your Profile and History, {{ $user->userName }}!</h1>
 
+    <!--the users profile informations-->
     <h2>Your Profile</h2>
     <img src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
     <p>Email: {{ $user->email }}</p>
@@ -17,11 +20,12 @@
     <p>Based on your history, you have a rate of: {{$user->userRating}}</p>
     <p>Your payment preference is: {{$user->paymentInfo}}</p>
 
-    <h2>Your Selling Items</h2>
+    <!--all the users selling items-->
+    <h2>Your Items</h2>
     @foreach ($user->sellerItems as $item)
         <div>
-            <h3>{{ $item->itemName }}</h3>
-            <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->itemName }} Image">
+            <h4>{{ $item->ItemName }}</h4>
+            <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
             <p>Description: {{ $item->description }}</p>
             <p>Price: {{ $item->price }}</p>
             <p>Size: {{ $item->size }}</p>
@@ -33,102 +37,135 @@
         </div>
     @endforeach
 
+    <!--the items in the users wishlist-->
     <h2>Your Wishlist</h2>
-@if ($user->wishlist)
-    @foreach ($user->wishlist as $item)
-        <p>{{ $item->itemName }}</p>
-        <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->itemName }} Image">
-        <p>Description: {{ $item->description }}</p>
-        <p>Price: {{ $item->price }}</p>
-        <p>Size: {{ $item->size }}</p>
-        <p>Brand: {{ $item->brand }}</p>
-        <p>Condition: {{$item->condition}}</p>
-        <p>Status: {{$item->status}}</p>
-        <p>Date was posted: {{$item->dateListed}}</p>
-        <p>Quantity available: {{$item->quantity}}</p>
+    @if ($user->wishlist->count() > 0)
+        @foreach ($user->wishlist as $item)
+            <div>
+                <p>{{ $item->ItemName }}</p>
+                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                <p>Description: {{ $item->description }}</p>
+                <p>Price: {{ $item->price }}</p>
+                <p>Size: {{ $item->size }}</p>
+                <p>Brand: {{ $item->brand }}</p>
+                <p>Condition: {{$item->condition}}</p>
+                <p>Status: {{$item->status}}</p>
+                <p>Date was posted: {{$item->dateListed}}</p>
+                <p>Quantity available: {{$item->quantity}}</p>
+            </div>
         @endforeach
-        @else
-            <p>Your wishlist is empty.</p>
-        @endif
+    @else
+        <p>Your wishlist is empty.</p>
+    @endif
 
+    <!--all the items bought for the user logged in with the transaction history-->
     <h2>Your Buying Transactions</h2>
-    @foreach ($buyingTransactions as $transaction)
-        <p>Item bought: {{ $transaction->item_id->itemName }}</p>
-        <p>Seller: {{$transaction->item->seller->userName}}</p>
-        <p>Date of purchase: {{$transaction->datePurchase}}</p>
-        <p>Payment Details: {{$transaction->paymentDetails}}</p>
-        <p>Shipment Details: {{$transaction->shippingDetails}}</p>
-    @endforeach
+    @if ($buyingTransactions->count() > 0)
+        <table>
+            @foreach ($buyingTransactions as $transaction)
+                <p>Item: {{ $transaction->item->ItemName }}</p>
+                <p>Seller: {{ $transaction->item->seller->userName }}</p>
+                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
+                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
+                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No buying transactions found.</p>
+    @endif
 
+    <!--all the items sell for the user logged in with the transaction history-->
     <h2>Your Selling Transactions</h2>
-    @foreach ($sellingTransactions as $transaction)
-        <p>Item sold: {{ $transaction->item->itemName }}</p>
-        <p>Buyer: {{ $transaction->buyer->userName }}</p>
-        <p>Date of sale: {{ $transaction->datePurchase }}</p>
-        <p>Payment Details: {{ $transaction->paymentDetails }}</p>
-        <p>Shipment Details: {{ $transaction->shippingDetails }}</p>
-    @endforeach
+    @if ($sellingTransactions->count() > 0)
+        <table>
+            @foreach ($sellingTransactions as $transaction)
+                <p>Item: {{ $transaction->item->ItemName }}</p>
+                <p>Buyer: {{ $transaction->item->seller->userName }}</p>
+                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
+                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
+                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No selling transactions found.</p>
+    @endif
 
-    <h2>Your Sent Reviews</h2>
-    @foreach ($user->reviews as $review)
-        @if ($review->reviewer_id == $user->id)
-            <div>
-                <p>Item: {{ $review->item_id }}</p>
-                <p>User Reviewed {{$review->receiver->userName}}</p>
-                <p>Comment: {{$review->comment}}</p>
-                <p>Rating Gived: {{$review->rating}}</p>
-                <p>Date: {{$review->dateReview}}</p>
-            </div>
-        @endif
-    @endforeach
+    <!--all the reviews made by the user logged in-->
+    <h2>Your Reviews</h2>
+    <h3>Sented</h3>
+    @if ($reviewsGiven->count() > 0)
+        <table>
+            @foreach ($reviewsGiven as $review)
+                <p>Seller: {{ $review->item->seller->userName }}</p>
+                <p>Item: {{ $review->item->ItemName }}</p>
+                <p>Date of Purchase: {{ $review->dateReview }}</p>
+                <p>Comment: {{ $review->comment }}</p>
+                <p>Rating: {{ $review->rating }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No reviews sented.</p>
+    @endif
+    <h3>Received</h3>
+    @if ($reviewsReceived->count() > 0)
+        <table>
+            @foreach ($reviewsReceived as $review)
+                <p>Buyer: {{ $review->item->seller->userName }}</p>
+                <p>Item: {{ $review->item->ItemName }}</p>
+                <p>Date of Purchase: {{ $review->dateReview }}</p>
+                <p>Comment: {{ $review->comment }}</p>
+                <p>Rating: {{ $review->rating }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No reviews received.</p>
+    @endif
 
-    <h2>Your Received Reviews</h2>
-    @foreach ($user->reviews as $review)
-        @if ($review->reviewed_id == $user->id)
-            <div>
-                <p>Item: {{ $review->item_id }}</p>
-                <p>Reviewer User: {{$review->sender->userName}}</p>
-                <p>Comment: {{$review->comment}}</p>
-                <p>Rating Received: {{$review->rating}}</p>
-                <p>Date: {{$review->dateReview}}</p>
-            </div>
-        @endif
-    @endforeach
+    <!--all the messages history-->
+    <h2>Your Messages</h2>
+    <h3>Sented</h3>
+    @if ($messagesSented->count() > 0)
+        <table>
+            @foreach ($messagesSented as $message)
+                <p>Receiver: {{ $message->receiver->userName }}</p>
+                <p>Item: {{ $message->item->ItemName }}</p>
+                <p>Date: {{ $message->dateSent }}</p>
+                <p>Message: {{ $message->content }}</p>
+                <p>Status: {{ $message->status }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No messages sented.</p>
+    @endif
+    <h3>Received</h3>
+    @if ($messagesReceived->count() > 0)
+        <table>
+            @foreach ($messagesSented as $message)
+                <p>Sender: {{ $message->sender->userName }}</p>
+                <p>Item: {{ $message->item->ItemName }}</p>
+                <p>Date: {{ $message->dateSent }}</p>
+                <p>Message: {{ $message->content }}</p>
+                <p>Status: {{ $message->status }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No messages received.</p>
+    @endif
 
-    <h2>Your Received Messages</h2>
-    @foreach ($user->messages as $message)
-        @if ($message->receiverUser_id == $user->id)
-            <div>
-                <p>Sender: {{$message->sender->userName}}</p>
-                <p>Date: {{$message->dateSent}}</p>
-                <p>Item: {{ $message->item_id }}</p>
-                <p>Message: {{$message->content}}</p>
-                <p>Status: {{$message->status}}</p>
-            </div>
-        @endif
-    @endforeach
-
-    <h2>Your Send Messages</h2>
-    @foreach ($user->messages as $message)
-        @if ($message->senderUser_id == $user->id)
-            <div>
-                <p>Receiver: {{$message->receiver->userName}}</p>
-                <p>Date: {{$message->dateSent}}</p>
-                <p>Item: {{ $message->item_id }}</p>
-                <p>Message: {{$message->content}}</p>
-                <p>Status: {{$message->status}}</p>
-            </div>
-        @endif
-    @endforeach
-
+    <!--notifications history-->
     <h2>Your Notifications</h2>
-    @foreach ($user->notifications as $notification)
-        <p>Notification type: {{ $notification->typeNotification_id }}</p>
-        <p>Received from: {{$notification->user_id}}</p>
-        <p>Message: {{$notification->content}}</p>
-        <p>Date: {{$notification->dateSent}}</p>
-        <p>Status: {{$notification->status}}</p>
-    @endforeach
+    @if ($notifications->count() > 0)
+        <table>
+            @foreach ($notifications as $notification)
+                <p>Notification: {{ optional($notification->typeNotification)->typeNotificationName }}</p>
+                <p>Date: {{ $notification->dateSent }}</p>
+                <p>Content: {{ $notification->content }}</p>
+                <p>Status: {{ $notification->status }}</p>
+            @endforeach
+        </table>
+    @else
+        <p>No notifications found.</p>
+    @endif
     
 </body>
 </html>
