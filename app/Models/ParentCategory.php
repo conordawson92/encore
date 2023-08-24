@@ -9,6 +9,8 @@ class ParentCategory extends Model
 {
     use HasFactory;
 
+    protected $table = 'parent-categories';
+
     /**
      * The attributes that are mass assignable.
      *
