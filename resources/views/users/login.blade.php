@@ -1,44 +1,46 @@
+<x-layout>
+<header class="text-center">
+            <h2 class="text-2xl font-bold uppercase mb-1">
+            Login
+            </h2>
+            <p class="mb-4">Login to your account</p>
+        </header>
+<x-form-container>   
+<form action="/users/authenticate" method="POST" class="space-y-6">
+    @csrf 
 
-<a href="/"><i></i> Back
-</a>
-<header>
-    <h2>
-        Login
-    </h2>
-    <p>Login to your account</p>
-</header>
-    
-<form action="/users/authenticate" method="POST">
-    @csrf {{--don t forget--}}
-            
-    <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" value="{{old('email')}}"/>
+    <!-- Email -->
+    <div class="mb-6">
+        <label for="email" class="inline-block text-lg mb-2">Email</label>
+        <input type="email" name="email" class="border border-gray-200 rounded p-2 w-full" value="{{old('email')}}"/>
         @error('email')
-            <p>{{$message}}</p>
+            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
         @enderror
     </div>
     
-    <div>
-        <label for="password" >
-            Password
-        </label>
-        <input type="password" name="password" value="{{old('password')}}"/>
+    <!-- Password -->
+    <div class="mb-6">
+        <label for="password" class="inline-block text-lg mb-2">Password</label>
+        <input type="password" name="password" class="border border-gray-200 rounded p-2 w-full" value="{{old('password')}}"/>
         @error('password')
-            <p>{{$message}}</p>
+            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
         @enderror
     </div>
     
-    <div>
-        <button>
+    <!-- Button -->
+    <div class="mb-6">
+        <button class="bg-black text-white rounded py-2 px-4 hover:bg-white hover:text-black">
             Sign In
         </button>
     </div>
     
-    <div>
+    <!-- Register Link -->
+    <div class="mt-8">
         <p>
             Do not have an account?
-            <a href="/register">Register</a>
+            <a href="/register" class="text-laravel">Register</a>
         </p>
     </div>
 </form>
+</x-form-container>
+</x-layout>

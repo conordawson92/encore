@@ -35,4 +35,14 @@ class Notification extends Model
     {
         return $this->typeNotification_id === $typeNotification->id;
     }
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
 }

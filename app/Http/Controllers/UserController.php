@@ -3,24 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Review;
+use App\Models\Wishlist;
+use App\Models\Transaction;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Message;
 
 class UserController extends Controller
 {
-    //show the register user form
+
+    //show the register user form page
     public function create(){
         return view('users.register');
     }
 
-    //store the new user created in the db
+    //store our infos in the db
     public function store(Request $request){
         $formFields = $request->validate([
             'userName' => ['required', 'min:3'],
-            'userLocation' => ['required', 'min:3'],  
-            'userRating'=> ['required', 'numeric'],   
+            'userLocation' => ['required', 'min:3'],
             'userPhone' => ['required', 'min:9'],
+            'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
             //mixedCase - at least one uppercase and one lowercase
@@ -28,20 +34,19 @@ class UserController extends Controller
             //symbols - at least one symbol
         ]);
 
-        // Set the registration date to the current date and time
+        //make sure the image is here before saving it
+        if ($request->hasFile('userImage')) {
+            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
+        }
+
+        //hash the password
+        $formFields['password'] = bcrypt($formFields['password']);
+
+        //afect the now() date 
         $formFields['dateJoined'] = now();
 
-        // Provide a value for userRating
+        //afect the users rating in 3 to begin, then it will increase/ decrease with other users reviews
         $formFields['userRating'] = 3;
-
-        //make sure the image is here before saving it
-         if ($request->hasFile('userImage')) {
-
-            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
-        } 
-
-        //hash the password using bcrypt function that will encrypt the value
-        $formFields['password'] = bcrypt($formFields['password']);
 
         //create the new user
         $user=User::create($formFields);
@@ -55,8 +60,7 @@ class UserController extends Controller
     }
 
     //Logout user
-    public function logout(Request $request)
-    {
+    public function logout(Request $request){
         //log user out
         auth()->logout();
 
@@ -67,15 +71,11 @@ class UserController extends Controller
         return redirect('/')->with('message', 'You have been logged out');
     }
 
-    //login method
-    public function login()
-    {
+    public function login(){
         return view('users.login');
     }
 
-    //authenticate method, it sees if the fields are valide
-    public function authenticate(Request $request)
-    {
+    public function authenticate(Request $request){
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
@@ -94,7 +94,6 @@ class UserController extends Controller
         //go back to login form with error message for 'email' field
         //withErrors() allows to pass an error message instead of a flash message
         return back()->withErrors(['email' => 'Invalid credencials...']);
-        //we do not write the exact error message to prevent people spamming random emails to find out which ones are used
     }
 
     //manage user for edit profile
@@ -113,28 +112,96 @@ class UserController extends Controller
     //update the new data in the db
     public function update(Request $request, User $user)
     {
-
         $formFields = $request->validate([
             'userName' => ['required', 'min:3'],
-            'dateJoined' => ['required', 'date'],
             'userLocation' => ['required', 'min:3'],
-            'userRating' => ['required', 'numeric'],        
-            'userPhone' => ['required', 'numeric'],
-            'paymentInfo' => 'required',
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'userPhone' => ['required', 'min:9'],
+            'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
             'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
         ]);
-
-        $formFields['password'] = bcrypt($formFields['password']);
 
         if ($request->hasFile('userImage')) {
             $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
+
+        $formFields['password'] = bcrypt($formFields['password']);
 
         //update the user
         $user->update($formFields);
 
         return redirect('/users/' . $user->id . '/edit')->with('message', 'Profile updated successfully');
     }
+
+    public function dashboard()
+    {
+        // Get the authenticated user
+        $user = auth()->user();
+
+        // Load user's wishlist items
+        $wishlistItems = Wishlist::where('user_id', $user->id)->with('item')->get();
+
+        // Load user's selling items
+        $sellingItems = $user->sellerItems;
+
+        // Load user's buying and selling history (transactions)
+        $transactions = Transaction::where('buyerUser_id', $user->id)
+            ->orWhere('sellerUser_id', $user->id)
+            ->with('item')
+            ->get();
+
+       // Load user's buying transactions
+        $buyingTransactions = Transaction::where('buyerUser_id', $user->id)
+            ->with('item')
+            ->get();
+            
+        // Load user's messages with sender and receiver information
+        $messages = Message::where('senderUser_id', $user->id)
+            ->orWhere('receiverUser_id', $user->id)
+            ->with(['sender', 'receiver', 'item'])
+            ->get();
+
+        // Load user's notifications
+        $notifications = Notification::where('user_id', $user->id)
+            ->with(['sender', 'item'])
+            ->get();
+
+        // Load user's reviews as reviewer and reviewed
+        $reviewsGiven = Review::where('reviewer_id', $user->id)->get();
+        $reviewsReceived = Review::where('reviewed_id', $user->id)->get();
+
+        // You can now pass all this data to your dashboard view
+        return view('users.dashboard', compact(
+            'user',
+            'wishlistItems',
+            'sellingItems',
+            'transactions',
+            'messages',
+            'notifications',
+            'reviewsGiven',
+            'reviewsReceived'
+        ));
+    }
+
+    public function storeRating(Request $request, User $user) {
+        // Assuming the rating value is provided in the request
+        $newRating = $request->input('rating');
+    
+        // Update the user's rating based on the new rating value
+        $user->updateRating($newRating);
+    
+        // Create the review record and save it
+        $review = new Review([
+            'reviewer_id' => auth()->user()->id,
+            'reviewed_id' => $user->id,
+            'rating' => $newRating,
+            'comment' => $request->input('comment'),
+        ]);
+        $review->save();
+    
+        return redirect()->back()->with('message', 'Rating and review submitted.');
+    }
+
+    
 }
+
 
