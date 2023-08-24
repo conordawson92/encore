@@ -30,4 +30,19 @@ class Message extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     public function sender()
+     {
+         return $this->belongsTo(User::class, 'senderUser_id');
+     }
+ 
+     public function receiver()
+     {
+         return $this->belongsTo(User::class, 'receiverUser_id');
+     }
+ 
+     public function item()
+     {
+         return $this->belongsTo(Item::class);
+     }
 }
