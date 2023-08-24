@@ -31,18 +31,26 @@ class Message extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-     public function sender()
-     {
-         return $this->belongsTo(User::class, 'senderUser_id');
-     }
+    //relationship that says this message belongs to that user(was created by)
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'senderUser_id');
+    }
  
-     public function receiver()
-     {
-         return $this->belongsTo(User::class, 'receiverUser_id');
-     }
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'senderUser_id');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(User::class, 'receiverUser_id');
+    }
  
-     public function item()
-     {
-         return $this->belongsTo(Item::class);
-     }
+    //relationship that says this message belongs to that item
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
 }

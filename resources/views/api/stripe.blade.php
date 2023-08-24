@@ -1,13 +1,20 @@
 
 <html>
 <head>
-    <title>Laravel 10 - Stripe Payment Gateway Integration Tutorial Example - Tutsmake.com</title>
+    <title>Checkout Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style type="text/css">
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
         .panel-title {
-        display: inline;
-        font-weight: bold;
+            display: inline;
+            font-weight: bold;
         }
         .display-table {
             display: table;
@@ -26,22 +33,22 @@
    
 <div class="container">
    
-    <h1>Stripe Payment API</h1>
-   
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
                 <div class="panel-heading display-table" >
                     <div class="row display-tr" >
                         <h3 class="panel-title display-td" >Payment Details</h3>
+                        <div class="display-td" >                            
+                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                        </div>
                     </div>                    
                 </div>
                 <div class="panel-body">
-                    
-                    {{-- GREEN CARD APPEAR AFTER PAYMENT - CHANGE TO TIMER TO DISAPPEAR --}}
+   
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <a href="/stripe" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>{{ Session::get('success') }}</p>
                         </div>
                     @endif
@@ -59,7 +66,7 @@
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label> <input
-                                    class='form-control' size='20' type='text'>
+                                    class='form-control' size='4' type='text'>
                             </div>
                         </div>
    
@@ -67,7 +74,7 @@
                             <div class='col-xs-12 form-group card required'>
                                 <label class='control-label'>Card Number</label> <input
                                     autocomplete='off' class='form-control card-number' size='20'
-                                    type='text' placeholder="ex: 4242424242424242">
+                                    type='text'>
                             </div>
                         </div>
    
@@ -88,10 +95,17 @@
                                     type='text'>
                             </div>
                         </div>
-                        
+   
+                        <div class='form-row row'>
+                            <div class='col-md-12 error form-group hide'>
+                                <div class='alert-danger alert'>Please correct the errors and try
+                                    again.</div>
+                            </div>
+                        </div>
+   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now (€100)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
                             </div>
                         </div>
                            
@@ -113,13 +127,13 @@ $(function() {
     var $form = $(".require-validation");
     
     $('form.require-validation').bind('submit', function(e) {
-        var $form         = $(".require-validation"),
+        var $form = $(".require-validation"),
         inputSelector = ['input[type=email]', 'input[type=password]',
                          'input[type=text]', 'input[type=file]',
                          'textarea'].join(', '),
-        $inputs       = $form.find('.required').find(inputSelector),
+        $inputs = $form.find('.required').find(inputSelector),
         $errorMessage = $form.find('div.error'),
-        valid         = true;
+        valid = true;
         $errorMessage.addClass('hide');
    
         $('.has-error').removeClass('has-error');
@@ -143,9 +157,9 @@ $(function() {
           }, stripeResponseHandler);
         }
    
-  });
+    });
    
-  function stripeResponseHandler(status, response) {
+    function stripeResponseHandler(status, response) {
         if (response.error) {
             $('.error')
                 .removeClass('hide')
@@ -164,3 +178,12 @@ $(function() {
 });
 </script>
 </html>
+    
+
+
+
+
+
+
+
+

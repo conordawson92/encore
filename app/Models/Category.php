@@ -26,11 +26,14 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+     //relationship with the items table (one category can have more than 1 item)
     public function items()
     {
         return $this->hasMany(Item::class, 'category_id');
     }
 
+    //relationship with the parents category table (the category belongs to the parent, if the parent category is deleted, all the categories from that parent are deleted as well)
     public function ownedBy(ParentCategory $parentCategory)
     {
         return $this->parentCategory_id === $parentCategory->id;

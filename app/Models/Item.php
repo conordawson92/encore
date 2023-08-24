@@ -39,21 +39,10 @@ class Item extends Model
             //'%' .$filters['tag'] . '%' is the criteria for the "like" operation
         }
 
-        if($filters['search'] ?? false) {
-
-            //make an array of keywords to search for
-            $keywords = explode(' ', $filters['search']);
-            
-            foreach($keywords as $keyword){
-
-            $query-> where('tags', 'like', '%' . $keyword . '%')->orWhere ('itemName', 'like', '%' . $keyword . '%')->orWhere ('brand', 'like', '%' . $keyword . '%')->orWhere ('description', 'like', '%' . $keyword . '%')->orWhere ('price', 'like', '%' . $keyword . '%');
-            }
-        }
     }
 
-    //relationship to user model
+    //relationship that says this item belongs to that user(was created by)
     public function user(){
-        //now for laravel, our Products belong to a User    
         return $this->belongsTo(User::class, 'sellerUser_id');
     }
 
@@ -63,21 +52,21 @@ class Item extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    //relationship to user, the item to sell belongs to a user, if the user is deleted, all his items will be too
     public function ownedBy(User $user)
     {
         return $this->user_id === $user->id;
     }
 
+    //an item can have many reviews
     public function reviews()
     {
         return $this->hasMany(Review::class, 'item_id');
     }
 
+    //relationship with the user (dashboard)
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
-    }
-
-    
-    
+    }    
 }

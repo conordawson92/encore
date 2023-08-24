@@ -47,7 +47,12 @@ class WishlistController extends Controller
     //method to clear all the items from the wishlist
     public function clearWishlist()
     {
-        
+        $user = auth()->user();
+
+        // Detach all items from the user's wishlist
+        $user->wishlist()->detach();
+
+        return redirect()->back()->with('message', 'Wishlist cleared successfully.');
     }
 
 }
