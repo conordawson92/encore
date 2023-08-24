@@ -1,14 +1,13 @@
 <x-layout>
-<a href="/"> Back
-    </a>
+
         <header class="text-center rounded-xl">
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Edit profile
             </h2>
-            <p class="mb-4">Edit: {{$user->email}}</p>
+            <p class="mb-4"> {{$user->userName}}</p>
         </header>
-    
-        <form action="/users/{{$user->id}}" method="POST" enctype="multipart/form-data">
+        <x-form-container> 
+        <form action="/users/{{$user->id}}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 
@@ -24,16 +23,16 @@
             </div>
 
             <div class="mb-6">
-                <label for="userName" class="inline-block text-lg mb-2 text-red-500">Name</label>
-                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userName" value="{{$user->userName}}"/>
+                <label for="userName" class="inline-block text-lg mb-2">Name</label>
+                <input type="text" class="border rounded p-2 w-full" name="userName" value="{{$user->userName}}"/>
                 @error('userName')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
             
             <div class="mb-6">
-                <label for="userLocation" class="inline-block text-lg mb-2 text-red-500">Location</label>
-                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userLocation"
+                <label for="userLocation" class="inline-block text-lg mb-2">Location</label>
+                <input type="text" class="border rounded p-2 w-full" name="userLocation"
                     placeholder="Location" value="{{$user->userLocation}}" />
                 @error('userLocation')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -41,8 +40,8 @@
             </div>
     
             <div class="mb-6">
-                <label for="userPhone" class="inline-block text-lg mb-2 text-red-500">Phone Number</label>
-                <input type="text" class="border border-red-500 rounded p-2 w-full" name="userPhone" value="{{$user->userPhone}}"/>
+                <label for="userPhone" class="inline-block text-lg mb-2">Phone Number</label>
+                <input type="text" class="border rounded p-2 w-full" name="userPhone" value="{{$user->userPhone}}"/>
                 @error('userPhone')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
@@ -62,29 +61,30 @@
             </div>
 
             <div class="mb-6">
-                <label for="password" class="inline-block text-lg mb-2 text-red-500">
+                <label for="password" class="inline-block text-lg mb-2">
                     Password
                 </label>
-                <input type="password" class="border border-red-500 rounded p-2 w-full" name="password"/>
+                <input type="password" class="border rounded p-2 w-full" name="password"/>
                 @error('password')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
 
             <div class="mb-6">
-                <label for="password_confirmation" class="inline-block text-lg mb-2 text-red-500">
+                <label for="password_confirmation" class="inline-block text-lg mb-2">
                     Confirm Password
                 </label>
-                <input type="password" class="border border-red-500 rounded p-2 w-full" name="password_confirmation" />
+                <input type="password" class="border rounded p-2 w-full" name="password_confirmation" />
                 @error('password_confirmation')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
             
             <div class="mb-6">
-                <button type="submit" class="bg-black text-red-500 rounded-xl py-2 px-4 hover:bg-red-500 hover:text-black">
-                    Update Profile
-                </button>
-            </div>
+    <button type="submit" class="bg-black text-white rounded-xl py-2 px-4 hover:bg-white hover:text-black transition duration-300">
+        Update Profile
+    </button>
+</div>
         </form>
+        </x-form-container>
 </x-layout>
