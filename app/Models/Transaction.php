@@ -31,11 +31,13 @@ class Transaction extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
-     public function transactions(){
+    //a user can have many transactions
+    public function transactions()
+    {
         return $this->hasMany(Transaction::class, 'user_id');
-        //hasMany() will allow a User to use multiple listings
     }
 
+    //relationship that says this transactions belongs to this users
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
@@ -46,6 +48,7 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'buyerUser_id');
     }
 
+    //relationship that says this transaction belongs to that uitem
     public function item()
     {
         return $this->belongsTo(Item::class);
