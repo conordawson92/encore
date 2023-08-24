@@ -18,9 +18,6 @@ Route::get('/listings', [ListingController::class, 'index']);
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
-
-
-
 //USERS
 //show register form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
@@ -50,7 +47,6 @@ Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth
 //show user profile
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
-
 //WISHLIST
 //add item to wishlist
 Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist'])->middleware('auth');
@@ -58,19 +54,16 @@ Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist']
 //remove item from wishlist
 Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
 
-
-
 //layout
-
 Route::get('/layout', function () {
     return view('components/layout');
 });
-
 
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
-//Searchbar filter
-Route::get('/search', [ListingController::class, 'search'])->name('search');
+//show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
+//Searchbar Filter

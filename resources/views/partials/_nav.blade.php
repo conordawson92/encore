@@ -3,7 +3,7 @@
             <ul class="hidden md:flex space-x-6 text-lg m-auto">
                 @foreach ($parentCategories as $parentCategory)
                     <li class="hover:bg-beige_logo_hover p-2">
-                        <a class="text-2xl" href="/{{ $parentCategory->parentcategoryName }}">
+                        <a class="text-2xl" href="{{ route('showItemsByParentCategory', $parentCategory->id) }}">
                             {{ $parentCategory->parentcategoryName }}
                         </a>
                     </li>
