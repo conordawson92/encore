@@ -66,3 +66,7 @@ Route::get('/layout', function () {
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+
+//Searchbar filter
+Route::get('/search', [ListingController::class, 'search'])->name('search');
+
