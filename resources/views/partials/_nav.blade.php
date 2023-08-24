@@ -1,21 +1,13 @@
         <!-- Start of Desktop Navigation -->
         <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
             <ul class="hidden md:flex space-x-6 text-lg m-auto">
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/men">
-                        Men
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/women">
-                        Women
-                    </a>
-                </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/kids">
-                        Kids
-                    </a>
-                </li>
+                @foreach ($parentCategories as $parentCategory)
+                    <li class="hover:bg-beige_logo_hover p-2">
+                        <a class="text-2xl" href="/{{ $parentCategory->parentcategoryName }}">
+                            {{ $parentCategory->parentcategoryName }}
+                        </a>
+                    </li>
+                @endforeach
                 <li class="hover:bg-beige_logo_hover p-2">
                     <a class="text-2xl" href="/about">
                         Our Mission

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ParentCategoryController;
+use App\Models\ParentCategory;
 
 
 Route::get('/', function () {
@@ -15,6 +17,8 @@ Route::get('/listings', [ListingController::class, 'index']);
 
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+
 
 
 //USERS
