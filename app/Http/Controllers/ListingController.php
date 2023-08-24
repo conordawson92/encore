@@ -13,7 +13,7 @@ class ListingController extends Controller
         return view('listings.index', [
 
             'listings' => Item::all()
-            
+            // ->filter(request(['tag', 'search']))
         ]);
     }
 
@@ -23,6 +23,16 @@ class ListingController extends Controller
             'listing' => $listing
         ]);
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+    $listings = Item::where('ItemName', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%")
+                    ->get();
+
+    return view('listings.index', compact('listings'));
+}
 
 
 }
