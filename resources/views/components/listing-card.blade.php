@@ -17,7 +17,7 @@
             <div class="text-xl font-bold mb-4">
                 Brand: {{ $listing->description }}</div>
 
-            {{-- <x-listing-tags :tagsCsv="$listing->tags" /> --}}
+            {{-- <x-listing-tags :tagsCsv="$listing->tags" />  --}}
         </div>
     </div>
 </x-card>

@@ -39,20 +39,6 @@ class Item extends Model
             //'%' .$filters['tag'] . '%' is the criteria for the "like" operation
         }
 
-        if($filters['search'] ?? false) {
-
-            //make an array of keywords to search for
-            $keywords = explode(' ', $filters['search']);
-            
-            foreach($keywords as $keyword){
-
-            $query-> where('itemName', 'like', '%' . $keyword . '%')->orWhere 
-            ('description', 'like', '%' . $keyword . '%')->orWhere 
-            ('size', 'like', '%' . $keyword . '%')->orWhere 
-            ('price', 'like', '%' . $keyword . '%')->orWhere 
-            ('brand', 'like', '%' . $keyword . '%');
-            }
-        }
     }
 
     //relationship that says this item belongs to that user(was created by)
