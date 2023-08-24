@@ -6,6 +6,8 @@ use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
 use App\Models\ParentCategory;
+use App\Http\Controllers\AdminController;
+
 
 
 Route::get('/', function () {
@@ -15,11 +17,14 @@ Route::get('/', function () {
 //Displaying all listings(products)
 Route::get('/listings', [ListingController::class, 'index']);
 
+//Searchbar Filter
+Route::get('/listings/search', [ListingController::class, 'search'])->name('listings.search');
+
+//Tags Filter
+Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->name('listings.filterByTag');
+
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
-
-
-
 
 //USERS
 //show register form
@@ -50,7 +55,6 @@ Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth
 //show user profile
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
-
 //WISHLIST
 //add item to wishlist
 Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist'])->middleware('auth');
@@ -60,17 +64,51 @@ Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWi
 
 
 
-//layout
+//ADMIN
+//show admin personnel dashboard
+Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 
+//show list of managements
+Route::get('/adminUser/admin', [AdminController::class, 'adminFunctionsPage'])->middleware('auth')->name('admin');
+
+//show users management
+Route::get('/adminUser/users', [AdminController::class, 'manageUsersPage'])->middleware('auth')->name('users');
+
+//show a selectioned user
+Route::get('/adminUser/users/{user}', [AdminController::class, 'viewUser'])->middleware('auth')->name('admin.users.view');
+
+//cancelling transactions
+Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::class, 'cancelTransaction'])
+    ->middleware('auth')
+    ->name('transactions.cancel');
+
+//edit a selectioned user
+Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
+    ->middleware('auth')
+    ->name('users.edit');
+    
+// Update user
+Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
+->middleware('auth')
+->name('users.update');
+
+//ban an specific user
+Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+    ->middleware('auth')
+    ->name('users.banUser');
+
+
+
+//layout
 Route::get('/layout', function () {
     return view('components/layout');
 });
-
 
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
-//Searchbar filter
-Route::get('/search', [ListingController::class, 'search'])->name('search');
+//show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
 
