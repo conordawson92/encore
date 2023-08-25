@@ -8,9 +8,10 @@
         </div>
 
         <!-- Right side for Registration Form -->
-        <div class="w-full customLg:w-1/2 h-full bg-white flex items-center justify-center">
-            <div class="space-y-6">
-                <header class="text-center customLg:text-left">
+        <div class="w-full customLg:w-1/2 bg-white flex items-center justify-center">
+            
+            <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
+                <header class="text-center customLg:text-left mb-8">
                     <h2 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
                         Sign Up
                     </h2>
