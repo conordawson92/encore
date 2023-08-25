@@ -33,5 +33,5 @@ for (let i = 0; i < menuDrops.length; i++) {
 
     menuDrop.addEventListener('mouseleave', () => {
         subMenus[i].innerHTML = '';
-    })
+    }) 
 }

@@ -14,14 +14,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//LISTINGS
-// Displaying all listings(products)
-Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
+//Displaying all listings(products)
+Route::get('/listings', [ListingController::class, 'index']);
 
-// Search and tag filter combined
-Route::get('/listings/search', [ListingController::class, 'index'])->name('listings.search');
+//Searchbar Filter
+Route::get('/listings/search', [ListingController::class, 'search'])->name('listings.search');
 
-// Single listing(product)
+//Tags Filter
+Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->name('listings.filterByTag');
+
+//Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Items By Parent Category
@@ -108,6 +110,7 @@ Route::get('/layout', function () {
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
-
+//show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
 
