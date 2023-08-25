@@ -1,17 +1,17 @@
 <?php
 
+use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-use App\Models\ParentCategory;
 use App\Http\Controllers\AdminController;
 
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 //Displaying all listings(products)
@@ -25,6 +25,12 @@ Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->n
 
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+// Show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
+// Show Items By Category
+Route::get('/category/{category_name}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
 
 //USERS
 //show register form
@@ -63,7 +69,6 @@ Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist']
 Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
 
 
-
 //ADMIN
 //show admin personnel dashboard
 Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');
@@ -82,7 +87,7 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
     ->middleware('auth')
     ->name('transactions.cancel');
 
-//edit a selectioned user
+//edit a selected user
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
     ->name('users.edit');
@@ -139,5 +144,3 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
-
-
