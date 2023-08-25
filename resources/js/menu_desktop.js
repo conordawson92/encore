@@ -6,7 +6,7 @@ function getHTMTCategories({categories}) {
         ${categories.map(category => {
             return `
                 <li class="flex items-center justify-center hover:bg-beige_logo_hover w-full p-2">
-                    <a href="/listings/${category.category_name}">
+                    <a href="/${category.id}">
                         ${category.category_name}
                     </a>
                 </li>
@@ -33,5 +33,5 @@ for (let i = 0; i < menuDrops.length; i++) {
 
     menuDrop.addEventListener('mouseleave', () => {
         subMenus[i].innerHTML = '';
-    })
+    }) 
 }
