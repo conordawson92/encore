@@ -19,7 +19,7 @@ class MessagesTableSeeder extends Seeder
                 'id' => 3,
                 'senderUser_id' => 1,
                 'receiverUser_id' => 2,
-                'item_id' => 1,
+                'item_id' => 5,
                 'dateSent' => '2023-08-21',
                 'content' => 'Hi! Is the iPhone still available?',
                 'status' => 'unread',

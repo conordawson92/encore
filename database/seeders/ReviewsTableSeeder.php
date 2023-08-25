@@ -24,7 +24,7 @@ class ReviewsTableSeeder extends Seeder
                 'rating' => 5,
                 'comment' => 'Great seller, fast shipping!',
                 'dateReview' => '2023-08-22',
-                'item_id' => 1,
+                'item_id' => 4,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

@@ -21,7 +21,7 @@ class TransactionsTableSeeder extends Seeder
                 'id' => 1,
                 'buyerUser_id' => 2,
                 'sellerUser_id' => 1,
-                'item_id' => 1,
+                'item_id' => 3,
                 'status' => 'rejected',
                 'datePurchase' => '2023-08-23',
                 'paymentDetails' => 'VISA xxxx-xxxx-xxxx-1234',

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log; // Import the Log facade
 
 class ItemsTableSeeder extends Seeder
 {
-    
+
     /**
      * Run the database seeds.
      *
@@ -39,6 +39,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 2,
                 'ItemName' => 'Boys Shirt',
@@ -58,6 +60,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 3,
                 'ItemName' => 'Boys Shoes',
@@ -77,6 +81,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 4,
                 'ItemName' => 'Boys T-shirt',
@@ -96,6 +102,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 5,
                 'ItemName' => 'Boys Pants',
@@ -115,6 +123,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 6,
                 'ItemName' => 'Girls Accessories',
@@ -134,6 +144,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 7,
                 'ItemName' => 'Girls Shoes',
@@ -153,6 +165,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 8,
                 'ItemName' => 'Girls T-shirt',
@@ -172,6 +186,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 9,
                 'ItemName' => 'Girls Dress',
@@ -191,6 +207,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 10,
                 'ItemName' => 'Girls Pants',
@@ -210,6 +228,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 11,
                 'ItemName' => 'Women Accessory',
@@ -229,6 +249,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 12,
                 'ItemName' => 'Women Bag',
@@ -248,6 +270,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 13,
                 'ItemName' => 'Women Jacket',
@@ -267,6 +291,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 14,
                 'ItemName' => 'Women Jeans',
@@ -286,6 +312,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 15,
                 'ItemName' => 'Women Jewelry',
@@ -305,6 +333,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 16,
                 'ItemName' => 'Women Shirt',
@@ -324,6 +354,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 17,
                 'ItemName' => 'Women Shoes',
@@ -343,6 +375,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 18,
                 'ItemName' => 'Women T-shirt',
@@ -362,6 +396,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 19,
                 'ItemName' => 'Women Dress',
@@ -381,6 +417,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 20,
                 'ItemName' => 'Women Skirt',
@@ -400,6 +438,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 21,
                 'ItemName' => 'Men Accessories',
@@ -419,6 +459,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 22,
                 'ItemName' => 'Men Bag',
@@ -438,6 +480,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 23,
                 'ItemName' => 'Men Hoodie',
@@ -457,6 +501,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 24,
                 'ItemName' => 'Men Jacket',
@@ -476,6 +522,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 25,
                 'ItemName' => 'Men Jeans',
@@ -495,6 +543,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 26,
                 'ItemName' => 'Men Jewelry',
@@ -514,6 +564,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 27,
                 'ItemName' => 'Men Shirt',
@@ -533,6 +585,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 28,
                 'ItemName' => 'Men Shoes',
@@ -552,6 +606,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 29,
                 'ItemName' => 'Men T-shirt',
@@ -571,6 +627,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 30,
                 'ItemName' => 'Men Bag',
@@ -590,6 +648,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 31,
                 'ItemName' => 'Men Jacket',
@@ -609,6 +669,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 32,
                 'ItemName' => 'Men Jeans',
@@ -628,6 +690,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 33,
                 'ItemName' => 'Men Shoes',
@@ -647,6 +711,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 34,
                 'ItemName' => 'Men T-shirt',
@@ -666,6 +732,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 35,
                 'ItemName' => 'Women Accessory',
@@ -685,6 +753,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 36,
                 'ItemName' => 'Women Bag',
@@ -704,6 +774,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 37,
                 'ItemName' => 'Women Dress',
@@ -723,6 +795,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 38,
                 'ItemName' => 'Women Jeans',
@@ -742,6 +816,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 39,
                 'ItemName' => 'Women Jewelry',
@@ -761,6 +837,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 40,
                 'ItemName' => 'Women Jewelry',
@@ -780,6 +858,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 41,
                 'ItemName' => 'Women T-shirt',
@@ -799,6 +879,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 42,
                 'ItemName' => 'Boys Shirt',
@@ -818,6 +900,8 @@ class ItemsTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+        );
+        DB::table('items')->insert(
             [
                 'id' => 43,
                 'ItemName' => 'Girls Pants',

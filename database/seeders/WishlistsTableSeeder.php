@@ -27,7 +27,7 @@ class WishlistsTableSeeder extends Seeder
             [
                 'id' => 2,
                 'user_id' => 2,
-                'item_id' => 1,
+                'item_id' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
