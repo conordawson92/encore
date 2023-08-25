@@ -18,10 +18,7 @@ Route::get('/', function () {
 Route::get('/listings', [ListingController::class, 'index']);
 
 //Searchbar Filter
-Route::get('/listings/search', [ListingController::class, 'search'])->name('listings.search');
-
-//Tags Filter
-Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->name('listings.filterByTag');
+Route::get('/listings/search', [ListingController::class, 'index'])->name('listings.search');
 
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
@@ -30,7 +27,7 @@ Route::get('/listings/{listing}', [ListingController::class, 'show']);
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
 // Show Items By Category
-Route::get('/category/{category_name}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
+Route::get('/category/{categoryID}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
 
 //USERS
 //show register form
