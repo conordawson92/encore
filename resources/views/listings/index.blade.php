@@ -10,7 +10,8 @@
         @endforeach
     </div>
 
-    <div class="mt-6 p-4">
-        {{$listings->appends(['search' => request('search'), 'tag' => request('tag')])->links()}}
-    </div>
+    {{-- <div class="mt-6 p-4">
+        {{$listings->links()}}
+    </div> --}}
+
 </x-layout>

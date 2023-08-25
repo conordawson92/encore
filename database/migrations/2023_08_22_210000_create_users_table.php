@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('dateJoined');
             $table->string('userLocation');
             $table->integer('userRating');
+            $table->boolean('banUser');
             $table->string('userPhone');
             $table->string('paymentInfo');
             $table->string('email')->unique();

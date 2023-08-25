@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('buyerUser_id')->constrained('users');
             $table->foreignId('sellerUser_id')->constrained('users');
-            $table->foreignId('item_id')->constrained('items');
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->date('datePurchase');  
             $table->string('paymentDetails');            
             $table->string('shippingDetails');          

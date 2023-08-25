@@ -1,27 +1,29 @@
 <?php
 
+use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-use App\Models\ParentCategory;
 use App\Http\Controllers\AdminController;
 
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
-//LISTINGS
-// Displaying all listings(products)
-Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
+//Displaying all listings(products)
+Route::get('/listings', [ListingController::class, 'index']);
 
-// Search and tag filter combined
-Route::get('/listings/search', [ListingController::class, 'index'])->name('listings.search');
+//Searchbar Filter
+Route::get('/listings/search', [ListingController::class, 'search'])->name('listings.search');
 
-// Single listing(product)
+//Tags Filter
+Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->name('listings.filterByTag');
+
+//Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Items By Parent Category
@@ -95,11 +97,40 @@ Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
 ->middleware('auth')
 ->name('users.update');
 
-//ban an specific user
-Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+//ban a user
+Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
     ->middleware('auth')
     ->name('users.banUser');
 
+//have the active and banned users
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('users.index');
+
+//show the users list
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('adminUser.users');
+
+
+//restore a banned user
+Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreUser'])
+    ->middleware('auth')
+    ->name('users.restore');
+
+//list items 
+Route::get('/adminUser/items', [AdminController::class, 'manageItems'])->middleware('auth')->name('items.manage');
+
+//editing items
+Route::get('/adminUser/items/{item}/edit', [AdminController::class, 'editItem'])
+    ->middleware('auth')
+    ->name('items.edit');
+
+//delete an item
+Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
+    ->middleware('auth')
+    ->name('items.destroy');
+    
 
 
 //layout
@@ -111,6 +142,5 @@ Route::get('/layout', function () {
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
-
-
-
+//show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
