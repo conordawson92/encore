@@ -96,7 +96,7 @@
 
     <!--all the reviews made by the user logged in-->
     <h2>Your Reviews</h2>
-    <h3>Sented</h3>
+    <h3>Sent</h3>
     @if ($reviewsGiven->count() > 0)
         <table>
             @foreach ($reviewsGiven as $review)
@@ -127,7 +127,7 @@
 
     <!--all the messages history-->
     <h2>Your Messages</h2>
-    <h3>Sented</h3>
+    <h3>Sent</h3>
     @if ($messagesSented->count() > 0)
         <table>
             @foreach ($messagesSented as $message)
