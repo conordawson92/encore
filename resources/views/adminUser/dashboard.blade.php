@@ -8,7 +8,7 @@
     </head>
 
     <body>
-        <div>
+        <div class="w-[50%] mx-auto">
             <p>
                 Go to the admnistrator page 
                 <a href="/adminUser/admin">
@@ -17,52 +17,75 @@
             </p>
 
             <!--the admin profile informations-->
-            <div class="bg-pink-100 flex gap-4">
-                <div>
-                    <img class="w-40 h-40 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
+            <div class="flex gap-4 flex-col p-2 shadow-custom">
+                <div class="flex gap-4 items-center justify-between">
+                    <div class="flex gap-4 items-center">
+                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
+                        <div class="font-bold text-2xl">
+                            {{ $user->userName }}
+                            @for($i = 1; $i <= 5; $i++)
+                                @if($i <= floor($user->userRating))
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                                @elseif($i - 0.5 == $user->userRating)
+                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                @else
+                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                @endif
+                            @endfor
+                            <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center w-10 h-10 mr-6">
+                        <button>
+                            <i class="fa-solid fa-chevron-up text-2xl"></i>
+                        </button>
+                    </div>
                 </div>
-                <ul>
-                    <li class="font-bold text-2xl">
-                        {{ $user->userName }}
-                        @for($i = 1; $i <= 5; $i++)
-                            @if($i <= $user->userRating)
-                                <span class="text-yellow-500"><i class="fas fa-star"></i></span>
-                            @else
-                                <span class="text-gray-400"><i class="fas fa-star"></i></span>
-                            @endif
-                        @endfor
+            </div>
+            <div clas="details_container">
+                <ul class="bg-white shadow-custom p-2 flex flex-col gap-2">
+                    <h2 class="">User Details:</h2>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        {{ $user->email }}
                     </li>
-                    <li>{{ $user->email }}</li>
                     <li>
                         <i class="fa-solid fa-location-dot"></i>
                         {{ $user->userLocation }}
                     </li>
-                    <li>Phone: {{ $user->userPhone }}</li>
-                    <li>You joined us in {{$user->dateJoined}}</li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        {{ $user->userPhone }}
+                    </li>
+                    <li>
+                        Your favorite payment method:    
+                        {{ $user->paymentInfo }}
+                    </li>
                 </ul>                
             </div>
             <!--all the admin selling items-->
-            <h2>Your Items</h2>
-
-            @if($user->sellerItems->isEmpty())
-                    <p>You currently don't have items to sell</p>
-            @else
-            @foreach ($user->sellerItems as $item)
             <div>
-                <h4>{{ $item->ItemName }}</h4>
-                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                <p>Description: {{ $item->description }}</p>
-                <p>Price: {{ $item->price }}</p>
-                <p>Size: {{ $item->size }}</p>
-                <p>Brand: {{ $item->brand }}</p>
-                <p>Condition: {{$item->condition}}</p>
-                <p>Status: {{$item->status}}</p>
-                <p>Date was posted: {{$item->dateListed}}</p>
-                <p>Quantity available: {{$item->quantity}}</p>
-            </div>
-            @endforeach
-            @endif
+                <h2>Your Items</h2>
 
+                @if($user->sellerItems->isEmpty())
+                        <p>You currently don't have items to sell</p>
+                @else
+                @foreach ($user->sellerItems as $item)
+                <div>
+                    <h4>{{ $item->ItemName }}</h4>
+                    <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                    <p>Description: {{ $item->description }}</p>
+                    <p>Price: {{ $item->price }}</p>
+                    <p>Size: {{ $item->size }}</p>
+                    <p>Brand: {{ $item->brand }}</p>
+                    <p>Condition: {{$item->condition}}</p>
+                    <p>Status: {{$item->status}}</p>
+                    <p>Date was posted: {{$item->dateListed}}</p>
+                    <p>Quantity available: {{$item->quantity}}</p>
+                </div>
+                @endforeach
+                @endif
+            </div>
             <!--the items in the admin wishlist-->
             <h2>Your Wishlist</h2>
             @if ($user->wishlist->count() > 0)

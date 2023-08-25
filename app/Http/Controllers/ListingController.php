@@ -9,11 +9,10 @@ use App\Models\ParentCategory;
 class ListingController extends Controller
 {
     //show all listings
-    public function index(){
-        
+    public function index()
+    {
         return view('listings.index', [
-
-            'listings' => Item::all(),
+            'listings' => Item::latest()->filter(request(['search', 'tag']))->paginate(10),
         ]);
     }
 

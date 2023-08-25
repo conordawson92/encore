@@ -14,13 +14,14 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-//Displaying all listings(products)
-Route::get('/listings', [ListingController::class, 'index']);
+//LISTINGS
+// Displaying all listings(products)
+Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
 
-//Searchbar Filter
+// Search and tag filter combined
 Route::get('/listings/search', [ListingController::class, 'index'])->name('listings.search');
 
-//Single listing(product)
+// Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Items By Parent Category
@@ -119,9 +120,14 @@ Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreU
 Route::get('/adminUser/items', [AdminController::class, 'manageItems'])->middleware('auth')->name('items.manage');
 
 //editing items
-Route::get('/adminUser/items/{item}/edit', [AdminController::class, 'editItem'])
+Route::get('/adminUser/editItem/{item}', [AdminController::class, 'editItem'])
     ->middleware('auth')
     ->name('items.edit');
+
+//update the item changed in the db
+Route::put('/adminUser/editItem/{item}', [AdminController::class, 'updateItem'])
+    ->middleware('auth')
+    ->name('items.update');
 
 //delete an item
 Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
