@@ -6,12 +6,26 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Message;
+use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    protected $activeUsers;
+    protected $bannedUsers;
+    
+    //index method to show active and banned users
+    public function index()
+    {
+        $activeUsers = User::where('banUser', false)->get();
+        $bannedUsers = User::where('banUser', true)->get();
+
+        return view('adminUser.users', compact('activeUsers', 'bannedUsers'));
+    }
+
     //dashboard for all the admin informations and items/transactions/ messages/etc...
     public function dashboard()
     {
@@ -150,12 +164,95 @@ class AdminController extends Controller
         // Validate and update user information based on form inputs
         $user->update($request->all());
 
-        return redirect()->route('users')->with('message', 'User information has been updated and an email was sented to the user.');
+        return redirect()->route('adminUser.users')->with('message', 'User information has been updated and an email was sented to the user.');
     }
 
- /*    //banning a specific user method
-    public function banUser(Request $request, User $user)
+    //banning a specific user method
+    public function banUser(User $user)
     {
-        //
-    } */
+        // Update the user's banned status and put a date on
+        $user->update([
+            'banUser' => true,
+            'deleted_at' => now(), 
+        ]);
+
+        // Cancel user's pending transactions
+        $pendingTransactions = Transaction::where('buyerUser_id', $user->id)
+        ->where('status', 'pending')
+        ->get();
+        foreach ($pendingTransactions as $transaction) {
+            $transaction->update(['status' => 'rejected']);
+        }
+
+        // Loop through the user's items
+        foreach ($user->sellerItems as $item) {
+            // Update or delete items depending on the user's role
+            $item->update(['sellerUser_id' => 1]);
+        }
+        foreach ($user->buyerItems as $item) {
+            $item->update(['buyerUser_id' => 1]);
+        }
+    
+        //log the user out if they are currently logged in
+        if (Auth::check() && Auth::user()->id === $user->id) {
+            Auth::logout();
+        }
+
+        return redirect()->route('adminUser.users')->with('message', 'User has been banned and an email was sented to the user.');
+    }
+
+    //restore a banned user
+    public function restoreUser(User $user)
+    {
+        $user->update(['banUser' => false]);
+        return redirect()->route('adminUser.users')->with('message', 'User has been restored and an email was sent to the user.');
+
+    }
+
+    //see all the items from the site
+    public function manageItems()
+    {
+        // Retrieve all items
+        $items = Item::all(); 
+
+        return view('adminUser.items', compact('items'));
+    }
+
+    //edit a specific item
+    public function editItem(Item $item)
+    {
+        $parentCategories = Category::whereNull('parentCategory_id')->get();
+        $categories = Category::where('parentCategory_id', $item->category->parentCategory_id)->get();
+    
+        return view('adminUser.editItem', compact('item', 'parentCategories', 'categories'));
+
+    }
+
+    //update the changes in the db
+    public function updateItem(Request $request, Item $item)
+    {
+        $item->update([
+            'itemImage' => $request->input('itemImage'),
+            'ItemName' => $request->input('ItemName'),
+            'description' => $request->input('description'),
+            'size' => $request->input('size'),
+            'price' => $request->input('price'),
+            'brand' => $request->input('brand'),
+            'condition' => $request->input('condition'),
+            'quantity' => $request->input('quantity'),
+        ]);
+
+        return redirect()->route('items.manage')->with('message', 'Item updated successfully and email sent to the user.');
+    }
+
+    //delete (hide) an item
+    public function destroyItem(Item $item)
+    {
+        // change the status of the item to unavailable (Delete the item)
+        $item->update(['status' => 'unavailable']);
+
+        return redirect()->route('items.manage')->with('message', 'Item deleted successfully and email sented to the user.');
+    }
+
+
 }

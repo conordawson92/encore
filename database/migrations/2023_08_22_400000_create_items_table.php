@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('tags');
             $table->string('status');
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('sellerUser_id')->constrained('users');
-            $table->foreignId('buyerUser_id')->constrained('users');
+            $table->foreignId('sellerUser_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('buyerUser_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

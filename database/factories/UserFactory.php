@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'userRating' => $this->faker->numberBetween(1, 5),
             'userPhone' => $this->faker->phoneNumber(),
             'paymentInfo' => 'VISA',
+            'banUser'=> false,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // Default password is 'password'
