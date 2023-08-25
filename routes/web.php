@@ -7,11 +7,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-
+use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 //Displaying all listings(products)
@@ -102,20 +102,9 @@ Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
     ->middleware('auth')
     ->name('users.banUser');
 
-
-
-//layout
-Route::get('/layout', function () {
-    return view('components/layout');
-});
-
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
-
-
-// Homepage
-Route::get('/', [HomeController::class, 'index'])->name('Home.index');

@@ -23,7 +23,7 @@ class UserController extends Controller
     //store our infos in the db
     public function store(Request $request){
         $formFields = $request->validate([
-            'userName' => ['required', 'min:3'],
+            'userName' => ['required', 'min:3', 'max:16'],
             'userLocation' => ['required', 'min:3'],
             'userPhone' => ['required', 'min:9'],
             'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
