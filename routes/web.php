@@ -97,10 +97,46 @@ Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
 ->middleware('auth')
 ->name('users.update');
 
-//ban an specific user
-Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+//ban a user
+Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
     ->middleware('auth')
     ->name('users.banUser');
+
+//have the active and banned users
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('users.index');
+
+//show the users list
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('adminUser.users');
+
+
+//restore a banned user
+Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreUser'])
+    ->middleware('auth')
+    ->name('users.restore');
+
+//list items 
+Route::get('/adminUser/items', [AdminController::class, 'manageItems'])->middleware('auth')->name('items.manage');
+
+//editing items
+Route::get('/adminUser/items/{item}/edit', [AdminController::class, 'editItem'])
+    ->middleware('auth')
+    ->name('items.edit');
+
+//delete an item
+Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
+    ->middleware('auth')
+    ->name('items.destroy');
+    
+
+
+//layout
+Route::get('/layout', function () {
+    return view('components/layout');
+});
 
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);

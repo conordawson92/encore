@@ -66,9 +66,15 @@ class Item extends Model
         return $this->hasMany(Review::class, 'item_id');
     }
 
-    //relationship with the user (dashboard)
+    //relationship with the user
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
     }    
+
+    //relationship with the user
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyerUser_id');
+    }
 }

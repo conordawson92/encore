@@ -42,6 +42,9 @@ class UserController extends Controller
         //hash the password
         $formFields['password'] = bcrypt($formFields['password']);
 
+        //default value for the banUser
+        $formFields['banUser'] = false;
+
         //afect the now() date 
         $formFields['dateJoined'] = now();
 
@@ -187,6 +190,7 @@ class UserController extends Controller
             'messagesSented',
             'messagesReceived',
             'notifications',
+            'banUser',
             'reviewsGiven',
             'reviewsReceived'
         ));
