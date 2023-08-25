@@ -11,7 +11,6 @@
     </div>
 
     <div class="mt-6 p-4">
-        {{$listings->links()}}
+        {{$listings->appends(['search' => request('search'), 'tag' => request('tag')])->links()}}
     </div>
-
 </x-layout>
