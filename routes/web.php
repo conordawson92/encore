@@ -102,13 +102,6 @@ Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
     ->middleware('auth')
     ->name('users.banUser');
 
-
-
-//layout
-Route::get('/layout', function () {
-    return view('components/layout');
-});
-
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
