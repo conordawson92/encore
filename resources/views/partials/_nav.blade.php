@@ -1,10 +1,16 @@
-<!-- Start of Desktop Navigation -->
-<nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
-    <ul class="hidden md:flex space-x-6 text-lg m-auto relative">
-        @foreach ($parentCategories as $parentCategory)
-                <li class="relative menu_drop hover:bg-beige_logo_hover hover:border-b border-brown_logo ">
-                    <a class="flex justify-center items-center text-2xl p-2" href="/listings/{{ $parentCategory->parentcategoryName }}">
-                        {{ $parentCategory->parentcategoryName }}
+        <!-- Start of Desktop Navigation -->
+        <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
+            <ul class="hidden md:flex space-x-6 text-lg m-auto">
+                @foreach ($parentCategories as $parentCategory)
+                    <li class="hover:bg-beige_logo_hover p-2">
+                        <a class="text-2xl" href="{{ route('showItemsByParentCategory', ['parentCategory' => $parentCategory->id]) }}">
+                            {{ $parentCategory->parentcategoryName }}
+                        </a>
+                    </li>
+                @endforeach
+                <li class="hover:bg-beige_logo_hover p-2">
+                    <a class="text-2xl" href="/about">
+                        Our Mission
                     </a>
                     @if($parentCategory->categories->count())
                         <div class="sub_menu absolute top-full left-0 group-hover:flex bg-beige_logo w-full w-max shadow-2xl">
