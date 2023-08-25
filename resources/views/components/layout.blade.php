@@ -26,18 +26,31 @@
             @include('partials._search')
 
             @auth
-            <ul class="flex gap-4 justify-center items-center">
+            <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
                 <li>
-                    <h2 class="text-xl">
-                        {{--to access to logged user name, we need to use the auth() helper--}}
-                        <i class="fa-solid fa-user"></i>
-                        Welcome {{auth()->user()->userName}}
+                    <h2 class="text-xl flex items-center whitespace-nowrap">
+                        <i class="fa-solid fa-user mr-1"></i>
+                        {{ auth()->user()->userName }}
                     </h2>
                 </li>
                 <li>
-                    <a class="hover:underline" href="{{ route('dashboard') }}">
+                    <a href="">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-bell"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard') }}">
                         <i class="fa-solid fa-gear"></i>
-                        Dashboard
                     </a>
                 </li>
                 <li>
@@ -45,28 +58,28 @@
                         @csrf
                         <button class="">
                             <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout        
                         </button>
                     </form>
                 </li>
             </ul>
 
-            @else
-                <div class="hidden md:flex gap-4 justify-center items-center">
-                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
-                        Sign Up
-                    </a>
-                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
-                        Sign In
-                    </a>
-                    <a href="">
-                        <i class='fa-solid fa-circle-question text-2xl'></i>
-                    </a>
-                </div>
-                <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
-                    <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
-                </button>
+                @else
+                    <div class="hidden md:flex gap-4 justify-center items-center">
+                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
+                            Sign Up
+                        </a>
+                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
+                            Sign In
+                        </a>
+                        <a href="">
+                            <i class='fa-solid fa-circle-question text-2xl'></i>
+                        </a>
+                    </div>
             @endauth
+            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
+                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
+            </button>
+
         </header>
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 

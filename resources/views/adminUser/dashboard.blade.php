@@ -8,14 +8,25 @@
     </head>
 
     <body>
-        <a href="/"> Back
+        <a href="/">
+            <i class="fa-solid fa-house"></i>
+            Home Page
         </a>
-        <h1>Welcome to your profile Page, {{ $user->userName }}!</h1>
+        <h1>
+            Welcome to your profile Page, {{ $user->userName }}!
+        </h1>
 
-        <p>Go to the admnistrator page <a href="/adminUser/admin">here</a></p>
+        <p>
+            Go to the admnistrator page 
+            <a href="/adminUser/admin">
+                here
+            </a>
+        </p>
 
         <!--the admin profile informations-->
-        <h2>Your Profile</h2>
+        <h2>
+            Your Profile
+        </h2>
         <img src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
         <p>Email: {{ $user->email }}</p>
         <p>Name: {{ $user->userName }}</p>
@@ -27,6 +38,10 @@
 
         <!--all the admin selling items-->
         <h2>Your Items</h2>
+
+        @if($user->sellerItems->isEmpty())
+                <p>You currently don't have items to sell</p>
+        @else
         @foreach ($user->sellerItems as $item)
         <div>
             <h4>{{ $item->ItemName }}</h4>
@@ -41,6 +56,7 @@
             <p>Quantity available: {{$item->quantity}}</p>
         </div>
         @endforeach
+        @endif
 
         <!--the items in the admin wishlist-->
         <h2>Your Wishlist</h2>
