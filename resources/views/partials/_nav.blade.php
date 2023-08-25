@@ -1,9 +1,9 @@
-        <!-- Start of Desktop Navigation -->
-        <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
-            <ul class="hidden md:flex space-x-6 text-lg m-auto">
-                @foreach ($parentCategories as $parentCategory)
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="{{ route('showItemsByParentCategory', ['parentCategory' => $parentCategory->id]) }}">
+<!-- Start of Desktop Navigation -->
+<nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
+    <ul class="hidden md:flex space-x-6 text-lg m-auto relative">
+        @foreach ($parentCategories as $parentCategory)
+                <li class="relative menu_drop hover:bg-beige_logo_hover hover:border-b border-brown_logo ">
+                    <a class="flex justify-center items-center text-2xl p-2" href="/parent-category/{{ $parentCategory->id }}">
                         {{ $parentCategory->parentcategoryName }}
                     </a>
                 </li>
