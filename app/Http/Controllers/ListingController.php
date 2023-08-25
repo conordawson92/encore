@@ -36,10 +36,10 @@ class ListingController extends Controller
         ]);
     }
 
-    public function showItemsByCategory($category_name)
+    public function showItemsByCategory($categoryID)
 {
-    $items = Item::whereHas('category', function ($query) use ($category_name) {
-        $query->where('category_name', $category_name); // Assuming the column name is 'category_name'
+    $items = Item::whereHas('category', function ($query) use ($categoryID) {
+        $query->where('category_id', $categoryID);
     })->paginate(10);
 
         return view('listings.index', [
@@ -47,32 +47,10 @@ class ListingController extends Controller
         ]);
     }
 
-
-
     //filtering tags and search bar
     public function filter($query, array $filters)
     {
-        $query = $request->input('query');
-        
-        $listings = Item::where('ItemName', 'LIKE', '%' . $query . '%')
-                        ->orWhere('description', 'LIKE', '%' . $query . '%')
-                        ->orWhere('price', 'LIKE', '%' . $query . '%')
-                        ->orWhere('size', 'LIKE', '%' . $query . '%')
-                        ->orWhere('brand', 'LIKE', '%' . $query . '%')
-                        ->get();
-
-        return view('listings.index', [
-            'listings' => $listings
-        ]);
-    }
-
-    public function filterByTag($tag)
-    {
-        $listings = Item::where('tags', 'LIKE', '%' . $tag . '%')->get();
-        
-        return view('listings.index', [
-            'listings' => $listings
-        ]);
+        return $query->filter($filters);
     }
 
 
