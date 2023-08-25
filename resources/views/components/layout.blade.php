@@ -25,20 +25,48 @@
 
             @include('partials._search')
 
-            <div class="hidden md:flex gap-4 justify-center items-center">
-                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
-                    Sign Up
-                </a>
-                <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
-                    Sign In
-                </a>
-                <a href="">
-                    <i class='fa-solid fa-circle-question text-2xl'></i>
-                </a>
-            </div>
-            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
-                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
-            </button>
+            @auth
+            <ul class="flex gap-4 justify-center items-center">
+                <li>
+                    <h2 class="text-xl">
+                        {{--to access to logged user name, we need to use the auth() helper--}}
+                        <i class="fa-solid fa-user"></i>
+                        Welcome {{auth()->user()->userName}}
+                    </h2>
+                </li>
+                <li>
+                    <a class="hover:underline" href="{{ route('dashboard') }}">
+                        <i class="fa-solid fa-gear"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button class="">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            Logout        
+                        </button>
+                    </form>
+                </li>
+            </ul>
+
+            @else
+                <div class="hidden md:flex gap-4 justify-center items-center">
+                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
+                        Sign Up
+                    </a>
+                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
+                        Sign In
+                    </a>
+                    <a href="">
+                        <i class='fa-solid fa-circle-question text-2xl'></i>
+                    </a>
+                </div>
+                <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
+                    <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
+                </button>
+            @endauth
         </header>
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 
@@ -48,7 +76,7 @@
             {{$slot}}
         </main>
     </div>
-    <footer class="mt-auto w-full bg-orange_logo_light block p-2 flex flex-col">
+    <footer class="mt-auto w-full bg-orange_logo_light block p-2 flex flex-col border-brown_logo_light border-t-2">
         <div class="p-2 flex flex-col gap-3 md:flex-row md:justify-between md:justify-evenly text-center md:text-left">
             <div class="flex flex-col gap-3">
                 <h3 class="text-xl font-semibold">
@@ -122,7 +150,7 @@
                 </ul>
             </div>
         </div>
-        <hr class="my-4 border-gray-800">
+        <hr class="my-4 border-solid border border-brown_logo_light">
         <div class="p-2">
             <ul class="flex justify-center gap-8 flex-wrap">
                 <li>
@@ -147,7 +175,7 @@
                 </li>
             </ul>
         </div>
-        <hr class="my-4 border-gray-800">
+        <hr class="my-4 border-solid border border-brown_logo_light">
         <div class="p-2">
             <ul class="flex justify-center gap-4 flex-wrap">
                 <li>
