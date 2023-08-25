@@ -1,40 +1,66 @@
 <x-layout>
-    <!DOCTYPE html>
-    <html>
+    <div class="flex h-screen">
 
-    <head>
-        <title>Edit User</title>
-    </head>
+        <!-- Left side for Image -->
+        <div class="w-1/2 h-full bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
+            <!-- Embedded Image -->
+            <img src="http://encore.test/storage/images/assets/register_tv.png" alt="Description" class="object-contain w-full h-full">
+        </div>
 
-    <body>
-        <a href="{{ route('adminUser.users') }}">Back to User List</a>
-        <h1>Edit User</h1>
+        <!-- Right side for Edit Profile Form -->
+        <div class="w-full customLg:w-1/2 bg-white flex items-center justify-center">
+            <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
+                <header class="mb-8">
+                    <h2 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
+                        Edit User
+                    </h2>
+                </header>
 
-        <h2>User Information</h2>
-        <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
-            @csrf
-            @method('PUT') <!-- Use PUT method for updating -->
-            <label for="userName">Name:</label>
-            <input type="text" name="userName" value="{{ $user->userName }}" required>
-            <br>
-            <label for="userImage">Email:</label>
-            <input type="file" name="userImage" value="{{ $user->userImage }}" required>
-            <br>
-            <label for="email">Email:</label>
-            <input type="email" name="email" value="{{ $user->email }}" required>
-            <br>
-            <label for="userLocation">Location:</label>
-            <input type="text" name="userLocation" value="{{ $user->userLocation }}" required>
-            <br>
-            <label for="userPhone">User Phone:</label>
-            <input type="text" name="userPhone" value="{{ $user->userPhone }}" required>
-            <br>
-            <label for="paymentInfo">Email:</label>
-            <input type="text" name="paymentInfo" value="{{ $user->paymentInfo }}" required>
-            <br>
-            <button type="submit">Update</button>
-        </form>
-    </body>
+                <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    @csrf
+                    @method('PUT')
 
-    </html>
+                    <div class="mb-6">
+                        <label for="userName" class="inline-block text-lg mb-2">Name</label>
+                        <input type="text" class="border rounded p-2 w-full" name="userName" value="{{ $user->userName }}" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="userImage" class="inline-block text-lg mb-2">Profile Photo</label>
+                        <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage">
+                        @if($user->userImage)
+                        <img class="w-48 mt-2" src="{{ asset('storage/' . $user->userImage) }}" alt="Profile Photo">
+                        @endif
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="email" class="inline-block text-lg mb-2">Email</label>
+                        <input type="email" class="border rounded p-2 w-full" name="email" value="{{ $user->email }}" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="userLocation" class="inline-block text-lg mb-2">Location</label>
+                        <input type="text" class="border rounded p-2 w-full" name="userLocation" value="{{ $user->userLocation }}" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="userPhone" class="inline-block text-lg mb-2">Phone Number</label>
+                        <input type="text" class="border rounded p-2 w-full" name="userPhone" value="{{ $user->userPhone }}" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="paymentInfo" class="inline-block text-lg mb-2">Payment Method</label>
+                        <input type="text" class="border rounded p-2 w-full" name="paymentInfo" value="{{ $user->paymentInfo }}" required>
+                    </div>
+
+                    <div class="mb-6">
+                        <button type="submit" class="bg-orange_logo_light text-white rounded-xl py-2 px-4 hover:bg-white hover:text-black transition duration-300">
+                            Update User
+                        </button>
+                        <a href="{{ route('adminUser.users') }}" class="mb-8 text-blue-500 hover:underline">Back to User List</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </x-layout>
