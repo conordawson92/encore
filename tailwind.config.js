@@ -14,10 +14,11 @@ export default {
                 beige_logo_hover: "#e6d2b1",
                 brown_logo: "#6d3114",
                 brown_logo_light: "#a04a20",
+                mustard_logo: "#DCBC6C",
             },
             keyframes: {},
             screens: {
-              'customLg': '960px',
+                customLg: "960px",
             },
         },
     },

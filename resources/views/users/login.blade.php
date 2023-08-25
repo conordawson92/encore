@@ -1,17 +1,16 @@
 <x-layout>
 
-
     <div class="flex h-screen">
 
         <!-- Left side for Image -->
         <div class="w-1/2 h-full bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
             <!-- If you want to embed an image instead of using a background -->
-            <img src="http://encore.test/storage/images/assets/register_tv.png" alt="Description" class="">
+            <img src="http://encore.test/storage/images/assets/register_tv.png" alt="Description" class="object-contain w-full h-full">
         </div>
 
         <!-- Right side for Form -->
 
-        <div class="w-1/2 h-full bg-white flex items-center justify-center">
+        <div class="w-full  customLg:w-1/2 -full bg-white flex items-center justify-center">
             <div>
                 <header>
                     <h1 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
@@ -44,7 +43,7 @@
 
                     <!-- Button -->
                     <div class="mb-6">
-                        <button class="bg-black text-white rounded py-2 px-4 hover:bg-white hover:text-black">
+                        <button class="bg-orange_logo_light text-white rounded py-2 px-4 hover:bg-white hover:text-black">
                             Sign In
                         </button>
                     </div>

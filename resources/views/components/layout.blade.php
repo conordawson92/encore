@@ -44,7 +44,7 @@
 
         @include('partials._nav')
 
-        <main class="bg-white pt-4">
+        <main class="bg-white">
             {{$slot}}
         </main>
     </div>

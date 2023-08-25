@@ -26,6 +26,9 @@ Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->n
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
+
+
+
 //USERS
 //show register form
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
@@ -63,7 +66,6 @@ Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist']
 Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
 
 
-
 //ADMIN
 //show admin personnel dashboard
 Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');
@@ -82,7 +84,7 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
     ->middleware('auth')
     ->name('transactions.cancel');
 
-//edit a selectioned user
+//edit a selected user
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
     ->name('users.edit');
