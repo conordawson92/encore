@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
         var navMenu = @json($parentCategories);
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+
 </head>
+
 <body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
     <div class="grow shrink basis-0">
         <header class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
@@ -22,7 +24,7 @@
             </a>
 
             @include('partials._search')
-            
+
             <div class="hidden md:flex gap-4 justify-center items-center">
                 <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
                     Sign Up
@@ -41,9 +43,9 @@
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 
         @include('partials._nav')
-        
-        <main class="bg-white pt-4">
-              {{$slot}}
+
+        <main class="bg-white">
+            {{$slot}}
         </main>
     </div>
     <footer class="mt-auto w-full bg-orange_logo_light block p-2 flex flex-col">
@@ -52,7 +54,7 @@
                 <h3 class="text-xl font-semibold">
                     Encore
                 </h3>
-                <ul class="flex flex-col gap-2"> 
+                <ul class="flex flex-col gap-2">
                     <li>
                         <a class="hover:underline" href="/about">
                             About
@@ -88,7 +90,7 @@
                     <li>
                         <a class="hover:underline" href="/help_center">
                             Help Center
-                        </a>    
+                        </a>
                     </li>
                     <li>
                         <a class="hover:underline" href="/help_center#buying">
@@ -177,4 +179,5 @@
         </div>
     </footer>
 </body>
+
 </html>
