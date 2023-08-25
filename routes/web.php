@@ -28,7 +28,7 @@ Route::get('/listings/{listing}', [ListingController::class, 'show']);
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
 // Show Items By Category
-Route::get('/category/{category_name}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
+Route::get('/category/{categoryID}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
 
 //USERS
 //show register form
