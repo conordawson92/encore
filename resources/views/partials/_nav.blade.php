@@ -7,7 +7,7 @@
                 {{ $parentCategory->parentcategoryName }}
             </a>
             @if($parentCategory->categories->count())
-            <div class="sub_menu absolute top-full left-0 group-hover:flex bg-beige_logo w-full w-max shadow-2xl">
+            <div class="sub_menu absolute top-full left-0 group-hover:flex bg-beige_logo w-max shadow-2xl">
 
             </div>
             @endif
