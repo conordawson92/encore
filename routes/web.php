@@ -14,13 +14,14 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-//Displaying all listings(products)
-Route::get('/listings', [ListingController::class, 'index']);
+//LISTINGS
+// Displaying all listings(products)
+Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
 
-//Searchbar Filter
+// Search and tag filter combined
 Route::get('/listings/search', [ListingController::class, 'index'])->name('listings.search');
 
-//Single listing(product)
+// Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Items By Parent Category
