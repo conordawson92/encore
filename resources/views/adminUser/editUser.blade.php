@@ -4,7 +4,7 @@
     <title>Edit User</title>
 </head>
 <body>
-    <a href="{{ route('users') }}">Back to User List</a>
+    <a href="{{ route('adminUser.users') }}">Back to User List</a>
     <h1>Edit User</h1>
 
     <h2>User Information</h2>
