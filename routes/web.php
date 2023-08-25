@@ -26,8 +26,8 @@ Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->n
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
-
-
+// Show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
 //USERS
 //show register form
