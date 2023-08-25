@@ -1,4 +1,12 @@
 import autoanimate from '@formkit/auto-animate';
+
+const icons = [
+    'person-solid', 
+    'person-dress-solid', 
+    'child-solid', 
+    'child-dress-solid'
+]
+
 const menuMobile = `
             <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
                 <ul class="flex flex-col gap-2 mb-5">
@@ -17,24 +25,17 @@ const menuMobile = `
                     <h3 class="ml-8 underline">
                         Categories
                     </h3>
-                    <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            <i class="fa-solid fa-person mr-2"></i>
-                            Men
-                        </a>
-                    </li>
-                    <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            <i class="fa-solid fa-person-dress mr-2"></i>
-                            Women
-                        </a>
-                    </li>
-                    <li class="hover:bg-beige_logo_hover flex p-4">
-                        <a class="text-2xl font-medium w-full" href="">
-                            <i class="fa-solid fa-children mr-2"></i>
-                            Kids
-                        </a>
-                    </li>
+                    ${navMenu.map((parentCategory, index)  => {
+                        return `
+                        <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                            <a class="text-2xl font-medium w-full flex justify-left items-center" href="">
+                                <img class="w-7 h-7 mr-2" src="/images/${icons[index]}.svg" alt="">
+                                ${parentCategory.parentcategoryName}
+                            </a>
+                        </li>
+                        `
+                    }).join('')}
+                    
                 </ul>
                 <ul class="flex flex-col mt-8">
                     <h3 class="ml-8 underline">
@@ -107,7 +108,7 @@ const menuMobile = `
                     </li>
                 </ul>
             </nav>
-            `
+            `;
 const menuMobileContainer = document.querySelector('#menu_mobile_container');
 autoanimate(menuMobileContainer);
 let menu = false;

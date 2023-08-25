@@ -12,17 +12,28 @@
                     <a class="text-2xl" href="/about">
                         Our Mission
                     </a>
+                    @if($parentCategory->categories->count())
+                        <div class="sub_menu absolute top-full left-0 group-hover:flex bg-beige_logo w-full w-max shadow-2xl">
+    
+                        </div>
+                    @endif
                 </li>
-                <li class="hover:bg-beige_logo_hover p-2">
-                    <a class="text-2xl" href="/platform">
-                        Our Platform
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- End of Desktop Navigation -->
-        <!-- Start of Mobile Navigation -->
-        <div id="menu_mobile_container">
-            
-        </div>
-        <!-- End of Mobile Navigation -->
+        @endforeach
+        <li class="hover:bg-beige_logo_hover p-2">
+            <a class="text-2xl" href="/about">
+                Our Mission
+            </a>
+        </li>
+        <li class="hover:bg-beige_logo_hover p-2">
+            <a class="text-2xl" href="/platform">
+                Our Platform
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- End of Desktop Navigation -->
+<!-- Start of Mobile Navigation -->
+<div id="menu_mobile_container">
+    
+</div>
+<!-- End of Mobile Navigation -->
