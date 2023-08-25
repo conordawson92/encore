@@ -50,27 +50,7 @@ class ListingController extends Controller
     //filtering tags and search bar
     public function filter($query, array $filters)
     {
-        $query = $request->input('query');
-        
-        $listings = Item::where('ItemName', 'LIKE', '%' . $query . '%')
-                        ->orWhere('description', 'LIKE', '%' . $query . '%')
-                        ->orWhere('price', 'LIKE', '%' . $query . '%')
-                        ->orWhere('size', 'LIKE', '%' . $query . '%')
-                        ->orWhere('brand', 'LIKE', '%' . $query . '%')
-                        ->get();
-
-        return view('listings.index', [
-            'listings' => $listings
-        ]);
-    }
-
-    public function filterByTag($tag)
-    {
-        $listings = Item::where('tags', 'LIKE', '%' . $tag . '%')->get();
-        
-        return view('listings.index', [
-            'listings' => $listings
-        ]);
+        return $query->filter($filters);
     }
 
 
