@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-use App\Models\ParentCategory;
 
 
 Route::get('/', function () {
@@ -73,3 +74,5 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
 
+// Homepage
+Route::get('/', [HomeController::class, 'index'])->name('Home.index');
