@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('senderUser_id')->constrained('users');
             $table->foreignId('receiverUser_id')->constrained('users');
-            $table->foreignId('item_id')->constrained('items');
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->date('dateSent');
             $table->longText('content');
             $table->string('status');

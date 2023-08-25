@@ -25,19 +25,30 @@ class ListingController extends Controller
     }
 
     //show Items By Parent Category
-    public function showItemsByParentCategory($parentCategoryId)
+    public function showItemsByParentCategory($parentCategory)
     {
-        $parentCategory = ParentCategory::findOrFail($parentCategoryId);
-        $items = Item::whereHas('category', function ($query) use ($parentCategoryId) {
-            $query->where('parentCategory_id', $parentCategoryId);
-        })->get();
+        $items = Item::whereHas('category', function ($query) use ($parentCategory) {
+            $query->where('parentCategory_id', $parentCategory);
+        })->paginate(10);
+
+        return view('listings.index', [
+            'listings' => $items,
+        ]);
+    }
+
+    public function showItemsByCategory($categoryID)
+{
+    $items = Item::whereHas('category', function ($query) use ($categoryID) {
+        $query->where('category_id', $categoryID);
+    })->paginate(10);
 
         return view('listings.index', [
             'listings' => $items
         ]);
     }
 
-        public function search(Request $request)
+    //filtering tags and search bar
+    public function filter($query, array $filters)
     {
         $query = $request->input('query');
         

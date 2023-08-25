@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('content');
             $table->date('dateSent');
             $table->string('status');
-            $table->foreignId('typeNotification_id')->constrained('type-notifications');
+            $table->foreignId('typeNotification_id')->constrained('type-notifications')->onDelete('cascade');
             $table->timestamps();
         });
     }

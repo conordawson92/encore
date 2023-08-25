@@ -23,7 +23,7 @@ class UserController extends Controller
     //store our infos in the db
     public function store(Request $request){
         $formFields = $request->validate([
-            'userName' => ['required', 'min:3'],
+            'userName' => ['required', 'min:3', 'max:16'],
             'userLocation' => ['required', 'min:3'],
             'userPhone' => ['required', 'min:9'],
             'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
@@ -41,6 +41,9 @@ class UserController extends Controller
 
         //hash the password
         $formFields['password'] = bcrypt($formFields['password']);
+
+        //default value for the banUser
+        $formFields['banUser'] = false;
 
         //afect the now() date 
         $formFields['dateJoined'] = now();
@@ -187,6 +190,7 @@ class UserController extends Controller
             'messagesSented',
             'messagesReceived',
             'notifications',
+            'banUser',
             'reviewsGiven',
             'reviewsReceived'
         ));

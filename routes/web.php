@@ -1,17 +1,17 @@
 <?php
 
+use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-use App\Models\ParentCategory;
 use App\Http\Controllers\AdminController;
 
 
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 //Displaying all listings(products)
@@ -28,6 +28,9 @@ Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
+// Show Items By Category
+Route::get('/category/{categoryID}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
 
 //USERS
 //show register form
@@ -94,11 +97,40 @@ Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
 ->middleware('auth')
 ->name('users.update');
 
-//ban an specific user
-Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+//ban a user
+Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
     ->middleware('auth')
     ->name('users.banUser');
 
+//have the active and banned users
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('users.index');
+
+//show the users list
+Route::get('/adminUser/users', [AdminController::class, 'index'])
+    ->middleware('auth')
+    ->name('adminUser.users');
+
+
+//restore a banned user
+Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreUser'])
+    ->middleware('auth')
+    ->name('users.restore');
+
+//list items 
+Route::get('/adminUser/items', [AdminController::class, 'manageItems'])->middleware('auth')->name('items.manage');
+
+//editing items
+Route::get('/adminUser/items/{item}/edit', [AdminController::class, 'editItem'])
+    ->middleware('auth')
+    ->name('items.edit');
+
+//delete an item
+Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
+    ->middleware('auth')
+    ->name('items.destroy');
+    
 
 
 //layout
@@ -112,5 +144,3 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
-
-
