@@ -10,13 +10,14 @@
 
         <!-- Right side for Form -->
 
-        <div class="w-full  customLg:w-1/2 -full bg-white flex items-center justify-center">
-            <div>
-                <header>
+        <div class="w-full customLg:w-1/2 bg-white flex items-center justify-center">
+
+            <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
+                <header class="mb-8">
                     <h1 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
                         Log in
                     </h1>
-                    <p class="mb-4">Login to your account</p>
+                    <p>Login to your account</p>
                 </header>
 
 
