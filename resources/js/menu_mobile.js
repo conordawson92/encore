@@ -1,5 +1,6 @@
 import autoanimate from '@formkit/auto-animate';
 
+
 const icons = [
     'person-solid', 
     'person-dress-solid', 
@@ -10,16 +11,35 @@ const icons = [
 const menuMobile = `
             <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
                 <ul class="flex flex-col gap-2 mb-5">
+                    ${userAuth ? `
                     <li class="flex justify-center items-center">
                         <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                            Sell on Encore
+                            <img class="w-8 h-8 mr-2" src="/storage/${userAuth.userImage}" alt="">
+                            ${userAuth.userName}                       
                         </a>
                     </li>
                     <li class="flex justify-center items-center">
-                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                            Sign In
-                        </a>
+                    <form method="POST" action="/logout">
+                            <input type="hidden" name="_token" value="${csrfToken}">
+                            <button class="">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </button>
+                        </form>
                     </li>
+
+                    
+                    
+                    `: `<li class="flex justify-center items-center">
+                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
+                        Sell on Encore
+                    </a>
+                </li>
+                <li class="flex justify-center items-center">
+                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
+                        Sign In
+                    </a>
+                </li>`}
+                    
                 </ul>
                 <ul class="flex flex-col mt-8">
                     <h3 class="ml-8 underline">
