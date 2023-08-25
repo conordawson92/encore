@@ -11,7 +11,7 @@ use App\Http\Controllers\AdminController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 //Displaying all listings(products)
@@ -108,7 +108,3 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
-
-
-// Homepage
-Route::get('/', [HomeController::class, 'index'])->name('Home.index');
