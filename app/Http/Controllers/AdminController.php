@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Message;
+use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\Notification;
 use Illuminate\Http\Request;
@@ -208,24 +209,49 @@ class AdminController extends Controller
 
     }
 
+    //see all the items from the site
     public function manageItems()
     {
-        $items = Item::all(); // Retrieve all items
+        // Retrieve all items
+        $items = Item::all(); 
 
         return view('adminUser.items', compact('items'));
     }
 
+    //edit a specific item
     public function editItem(Item $item)
     {
-        return view('admin.editItem', compact('item'));
+        $parentCategories = Category::whereNull('parentCategory_id')->get();
+        $categories = Category::where('parentCategory_id', $item->category->parentCategory_id)->get();
+    
+        return view('adminUser.editItem', compact('item', 'parentCategories', 'categories'));
+
     }
 
+    //update the changes in the db
+    public function updateItem(Request $request, Item $item)
+    {
+        $item->update([
+            'itemImage' => $request->input('itemImage'),
+            'ItemName' => $request->input('ItemName'),
+            'description' => $request->input('description'),
+            'size' => $request->input('size'),
+            'price' => $request->input('price'),
+            'brand' => $request->input('brand'),
+            'condition' => $request->input('condition'),
+            'quantity' => $request->input('quantity'),
+        ]);
+
+        return redirect()->route('items.manage')->with('message', 'Item updated successfully and email sent to the user.');
+    }
+
+    //delete (hide) an item
     public function destroyItem(Item $item)
     {
-        // Delete the item
-        $item->delete();
+        // change the status of the item to unavailable (Delete the item)
+        $item->update(['status' => 'unavailable']);
 
-        return redirect()->route('items.index')->with('message', 'Item deleted successfully and email sented to the user.');
+        return redirect()->route('items.manage')->with('message', 'Item deleted successfully and email sented to the user.');
     }
 
 

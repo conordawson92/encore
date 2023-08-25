@@ -11,6 +11,8 @@
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Size</th>
+            <th>Quantity</th>
             <th>Brand</th>
             <th>Seller</th>
             <th>Actions</th>
@@ -24,10 +26,12 @@
                     <td>{{ $item->ItemName }}</td>
                     <td>{{ $item->description }}</td>
                     <td>{{ $item->price }}</td>
+                    <td>{{ $item->size }}</td>
+                    <td>{{ $item->quantity }}</td>
                     <td>{{ $item->brand }}</td>
                     <td>{{ $item->seller->userName }}</td>
                     <td>
-                        <a href="/adminUser/items/{{ $item->id }}/edit">Edit</a>
+                        <a href="{{ route('items.edit', ['item' => $item->id]) }}">Edit</a>
                         <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')

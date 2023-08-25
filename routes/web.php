@@ -122,9 +122,14 @@ Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreU
 Route::get('/adminUser/items', [AdminController::class, 'manageItems'])->middleware('auth')->name('items.manage');
 
 //editing items
-Route::get('/adminUser/items/{item}/edit', [AdminController::class, 'editItem'])
+Route::get('/adminUser/editItem/{item}', [AdminController::class, 'editItem'])
     ->middleware('auth')
     ->name('items.edit');
+
+//update the item changed in the db
+Route::put('/adminUser/editItem/{item}', [AdminController::class, 'updateItem'])
+    ->middleware('auth')
+    ->name('items.update');
 
 //delete an item
 Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
