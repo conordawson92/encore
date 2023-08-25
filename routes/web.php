@@ -9,6 +9,7 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,6 +25,12 @@ Route::get('/listings/tags/{tag}', [ListingController::class, 'filterByTag'])->n
 
 //Single listing(product)
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+// Show Items By Parent Category
+Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
+// Show Items By Category
+Route::get('/category/{category_name}', [ListingController::class, 'showItemsByCategory'])->name('showItemsByCategory');
 
 //USERS
 //show register form
@@ -60,6 +67,42 @@ Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist']
 
 //remove item from wishlist
 Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
+
+
+//ADMIN
+//show admin personnel dashboard
+Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+//show list of managements
+Route::get('/adminUser/admin', [AdminController::class, 'adminFunctionsPage'])->middleware('auth')->name('admin');
+
+//show users management
+Route::get('/adminUser/users', [AdminController::class, 'manageUsersPage'])->middleware('auth')->name('users');
+
+//show a selectioned user
+Route::get('/adminUser/users/{user}', [AdminController::class, 'viewUser'])->middleware('auth')->name('admin.users.view');
+
+//cancelling transactions
+Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::class, 'cancelTransaction'])
+    ->middleware('auth')
+    ->name('transactions.cancel');
+
+//edit a selected user
+Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
+    ->middleware('auth')
+    ->name('users.edit');
+    
+// Update user
+Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
+->middleware('auth')
+->name('users.update');
+
+//ban an specific user
+Route::delete('/adminUser/users/{user}', [AdminController::class, 'banUser'])
+    ->middleware('auth')
+    ->name('users.banUser');
+
+
 
 //layout
 Route::get('/layout', function () {

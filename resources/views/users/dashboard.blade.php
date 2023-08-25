@@ -22,20 +22,24 @@
 
     <!--all the users selling items-->
     <h2>Your Items</h2>
-    @foreach ($user->sellerItems as $item)
-        <div>
-            <h4>{{ $item->ItemName }}</h4>
-            <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-            <p>Description: {{ $item->description }}</p>
-            <p>Price: {{ $item->price }}</p>
-            <p>Size: {{ $item->size }}</p>
-            <p>Brand: {{ $item->brand }}</p>
-            <p>Condition: {{$item->condition}}</p>
-            <p>Status: {{$item->status}}</p>
-            <p>Date was posted: {{$item->dateListed}}</p>
-            <p>Quantity available: {{$item->quantity}}</p>
-        </div>
-    @endforeach
+    @if ($user->sellerItems->count() > 0)
+        @foreach ($user->sellerItems as $item)
+            <div>
+                <h4>{{ $item->ItemName }}</h4>
+                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                <p>Description: {{ $item->description }}</p>
+                <p>Price: {{ $item->price }}</p>
+                <p>Size: {{ $item->size }}</p>
+                <p>Brand: {{ $item->brand }}</p>
+                <p>Condition: {{$item->condition}}</p>
+                <p>Status: {{$item->status}}</p>
+                <p>Date was posted: {{$item->dateListed}}</p>
+                <p>Quantity available: {{$item->quantity}}</p>
+            </div>
+        @endforeach
+    @else
+        <p>You don't have any items</p>
+    @endif
 
     <!--the items in the users wishlist-->
     <h2>Your Wishlist</h2>
@@ -92,7 +96,7 @@
 
     <!--all the reviews made by the user logged in-->
     <h2>Your Reviews</h2>
-    <h3>Sented</h3>
+    <h3>Sent</h3>
     @if ($reviewsGiven->count() > 0)
         <table>
             @foreach ($reviewsGiven as $review)
@@ -123,7 +127,7 @@
 
     <!--all the messages history-->
     <h2>Your Messages</h2>
-    <h3>Sented</h3>
+    <h3>Sent</h3>
     @if ($messagesSented->count() > 0)
         <table>
             @foreach ($messagesSented as $message)

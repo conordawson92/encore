@@ -18,6 +18,7 @@ class Transaction extends Model
         'buyerUser_id',
         'sellerUser_id',
         'item_id',
+        'status',
         'datePurchase',
         'paymentDetails',
         'shippingDetails',
