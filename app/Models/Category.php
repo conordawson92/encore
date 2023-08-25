@@ -14,6 +14,9 @@ class Category extends Model
      *
      * @var array
      */
+
+     protected $table = 'categories'; 
+
     protected $fillable = [
         'categoryName',
         'parentCategory_id',
@@ -32,6 +35,7 @@ class Category extends Model
     {
         return $this->hasMany(Item::class, 'category_id');
     }
+    
 
     //relationship with the parents category table (the category belongs to the parent, if the parent category is deleted, all the categories from that parent are deleted as well)
     public function ownedBy(ParentCategory $parentCategory)
