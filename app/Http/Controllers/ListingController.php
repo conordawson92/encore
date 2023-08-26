@@ -11,7 +11,7 @@ class ListingController extends Controller
     //show all listings
     public function index()
     {
-        $query = Item::query();
+        $query = Item::where('status', 'available');
 
         $query = $this->applySorting($query);
 
@@ -31,7 +31,7 @@ class ListingController extends Controller
     //show Items By Parent Category
     public function showItemsByParentCategory($parentCategory)
     {
-        $query = Item::whereHas('category', function ($query) use ($parentCategory) {
+        $query = Item::where('status', 'available')->whereHas('category', function ($query) use ($parentCategory) {
             $query->where('parentCategory_id', $parentCategory);
         });
 
@@ -44,7 +44,7 @@ class ListingController extends Controller
 
     public function showItemsByCategory($categoryID)
     {
-        $query = Item::whereHas('category', function ($query) use ($categoryID) {
+        $query = Item::where('status', 'available')->whereHas('category', function ($query) use ($categoryID) {
             $query->where('category_id', $categoryID);
         });
 
