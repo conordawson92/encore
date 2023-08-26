@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->date('datePurchase');  
             $table->string('paymentDetails');            
-            $table->string('shippingDetails');          
+            $table->string('shippingDetails');
+            $table->string('status')->nullable();        
             $table->timestamps();
         });
     }
