@@ -14,6 +14,7 @@
         var navMenu = @json($parentCategories);
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <title>Encore</title>
 </head>
 
