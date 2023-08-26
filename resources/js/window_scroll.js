@@ -34,3 +34,15 @@ svg.onclick = (e) => {
   `;
 };
 
+window.addEventListener('resize', function() {
+    const scrollTopButton = document.getElementById('backToTop');
+    
+    if (window.innerWidth <= 768) { // Assuming 768px as the mobile breakpoint
+        scrollTopButton.style.display = 'none';
+    } else {
+        scrollTopButton.style.display = 'block';
+    }
+});
+
+// Trigger the function initially to set the correct state
+window.dispatchEvent(new Event('resize'));

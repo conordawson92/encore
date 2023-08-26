@@ -13,7 +13,7 @@
     <script>
         var navMenu = @json($parentCategories);
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js' , 'resources/css/svg.css'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
     <title>Encore</title>
 </head>
 
@@ -238,7 +238,7 @@
                     </g>
                 </svg>
             </button>
-            
+
     </footer>
 </body>
 
