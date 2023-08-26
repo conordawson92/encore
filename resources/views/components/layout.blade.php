@@ -241,6 +241,11 @@
             </button>
 
     </footer>
+
+    <div id="loadingSpinner" class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-50 z-50 hidden">
+        <div class="border-t-4 border-transparent rounded-full w-16 h-16 border-brown_logo animate-spin"></div>
+    </div>
+        
 </body>
 
 </html>
