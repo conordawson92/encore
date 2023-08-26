@@ -76,6 +76,33 @@
                         </a>
                     </div>
             @endauth
+            @auth
+            @csrf
+             <ul class="flex gap-6 justify-right items-center md:hidden">
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-heart text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-bell text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard') }}">
+                        <i class="fa-solid fa-gear text-2xl"></i>
+                    </a>
+                </li>
+             </ul>
+            @endauth
+                    
+
             <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
                 <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
             </button>

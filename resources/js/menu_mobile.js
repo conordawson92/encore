@@ -12,34 +12,36 @@ const menuMobile = `
             <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
                 <ul class="flex flex-col gap-2 mb-5">
                     ${userAuth ? `
+
+                    <li class="flex justify-between items-center p-4 mx-4">
+                        <div class="flex justify-center items-center">
+                            <a class="flex justify-center items-center" href="/adminUser/dashboard">
+                                <img class="w-12 h-12 mr-2 rounded-full" src="/storage/${userAuth.userImage}" alt="">
+                                <h3 class="font-bold text-2xl">
+                                    ${userAuth.userName}
+                                </h3>
+                            </a>
+                        </div>                      
+                        <form method="POST" action="/logout">
+                            <input type="hidden" name="_token" value="${csrfToken}">
+                            <button class="text-2xl">
+                                <i class="fa-solid fa-right-from-bracket text-2xl"></i>
+                                Logout
+                            </button>
+                        </form>
+                    </li>                    
+                    
+                    `: `
                     <li class="flex justify-center items-center">
-                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                            <img class="w-8 h-8 mr-2" src="/storage/${userAuth.userImage}" alt="">
-                            ${userAuth.userName}                       
+                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="/register">
+                            Sign Up
                         </a>
                     </li>
                     <li class="flex justify-center items-center">
-                    <form method="POST" action="/logout">
-                            <input type="hidden" name="_token" value="${csrfToken}">
-                            <button class="">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </button>
-                        </form>
-                    </li>
-
-                    
-                    
-                    `: `<li class="flex justify-center items-center">
-                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                        Sell on Encore
-                    </a>
-                </li>
-                <li class="flex justify-center items-center">
-                    <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                        Sign In
-                    </a>
-                </li>`}
-                    
+                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="/login">
+                            Sign In
+                        </a>
+                    </li>`}
                 </ul>
                 <ul class="flex flex-col mt-8">
                     <h3 class="ml-8 underline">
@@ -47,8 +49,8 @@ const menuMobile = `
                     </h3>
                     ${navMenu.map((parentCategory, index)  => {
                         return `
-                        <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                            <a class="text-2xl font-medium w-full flex justify-left items-center" href="">
+                        <li class="hover:bg-beige_logo_hover flex border-solid border-gray-400 border-b">
+                            <a class="p-4 text-2xl font-medium w-full h-full flex justify-left items-center" href="">
                                 <img class="w-7 h-7 mr-2" src="/images/${icons[index]}.svg" alt="">
                                 ${parentCategory.parentcategoryName}
                             </a>
