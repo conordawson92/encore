@@ -23,7 +23,7 @@
                 <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
             </a>
 
-            @include('partials._search')
+            @include('partials._search_desktop')
 
             @auth
             <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
@@ -101,12 +101,15 @@
                 </li>
              </ul>
             @endauth
-                    
-
-            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
-                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
-            </button>
-
+            @include('partials._search_mobile')
+            <div class="flex md:hidden gap-6 m-2">
+                <button id="show-search" class="">
+                    <i class="fa-solid fa-magnifying-glass text-3xl"></i>
+                </button>
+                <button id="menu_mobile_button" class="">
+                    <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
+                </button>
+            </div>
         </header>
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 

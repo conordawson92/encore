@@ -136,9 +136,15 @@ Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem']
     
 
 
-//layout
-Route::get('/layout', function () {
-    return view('components/layout');
+//our mission
+Route::get('/our-mission', function () {
+    return view('components/our_mission');
+});
+
+
+// our platform
+Route::get('/our-platform', function () {
+    return view('components/our_platform');
 });
 
 //Stripe API checkout
