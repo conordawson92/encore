@@ -29,35 +29,35 @@
             <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
                 <li>
                     <h2 class="text-xl flex items-center whitespace-nowrap">
-                        <i class="fa-solid fa-user mr-1"></i>
+                        <i class="fa-solid fa-user mr-1 text-2xl"></i>
                         {{ auth()->user()->userName }}
                     </h2>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <i class="fa-regular fa-bell"></i>
+                        <i class="fa-regular fa-bell text-2xl"></i>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('dashboard') }}">
-                        <i class="fa-solid fa-gear"></i>
+                        <i class="fa-solid fa-gear text-2xl"></i>
                     </a>
                 </li>
                 <li>
                     <form method="POST" action="/logout">
                         @csrf
                         <button class="">
-                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <i class="fa-solid fa-right-from-bracket text-2xl"></i>
                         </button>
                     </form>
                 </li>
