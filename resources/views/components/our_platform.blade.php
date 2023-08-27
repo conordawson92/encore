@@ -44,7 +44,7 @@
             <!-- Step 7 -->
             <li class="mb-6">
                 <h2 class="text-xl font-semibold mb-2">7. Keep Exploring!</h2>
-                <p>Whether you’re decluttering your wardrobe or hunting for unique finds, our platform constantly evolves with new listings. Keep coming back to discover more treasures and contribute to sustainable fashion.</p>
+                <p>Whether you're decluttering your wardrobe or hunting for unique finds, our platform constantly evolves with new listings. Keep coming back to discover more treasures and contribute to sustainable fashion.</p>
             </li>
         </ol>
     

@@ -10,7 +10,7 @@
 
             <div class="bg-blue-100 p-4 rounded shadow">
                 <h2 class="text-xl font-semibold mb-3">💰 Wallet-Friendly Choices</h2>
-                <p>Dive into a world where fashion meets affordability. Second-hand doesn’t mean second-best. Find premium brands and quality pieces at a fraction of the original price, giving your wardrobe a makeover without breaking the bank.</p>
+                <p>Dive into a world where fashion meets affordability. Second-hand doesn't mean second-best. Find premium brands and quality pieces at a fraction of the original price, giving your wardrobe a makeover without breaking the bank.</p>
             </div>
 
             <div class="bg-yellow-100 p-4 rounded shadow">
@@ -20,7 +20,7 @@
 
             <div class="bg-purple-100 p-4 rounded shadow">
                 <h2 class="text-xl font-semibold mb-3">🔍 Unique Finds</h2>
-                <p>Stand out in a crowd with pieces that aren’t just off the rack. Vintage treasures, discontinued designs, and rare finds await. Your style becomes a unique tapestry of stories and memories.</p>
+                <p>Stand out in a crowd with pieces that aren't just off the rack. Vintage treasures, discontinued designs, and rare finds await. Your style becomes a unique tapestry of stories and memories.</p>
             </div>
 
             <div class="bg-red-100 p-4 rounded shadow">
@@ -30,7 +30,7 @@
 
             <div class="bg-indigo-100 p-4 rounded shadow">
                 <h2 class="text-xl font-semibold mb-3">🌱 Foster Mindful Consumption</h2>
-                <p>In the age of fast fashion, our platform encourages users to think about longevity and the life-cycle of their clothes. It’s not just about buying—it's about understanding the value and essence of each item.</p>
+                <p>In the age of fast fashion, our platform encourages users to think about longevity and the life-cycle of their clothes. It's not just about buying—it's about understanding the value and essence of each item.</p>
             </div>
 
             <div class="bg-pink-100 p-4 rounded shadow">
