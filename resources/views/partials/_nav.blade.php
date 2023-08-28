@@ -14,12 +14,12 @@
                 </li>
         @endforeach
         <li class="hover:bg-beige_logo_hover p-2">
-            <a class="text-2xl" href="/our-mission">
-                Our Mission
+            <a class="text-2xl" href="/about">
+                About us
             </a>
         </li>
         <li class="hover:bg-beige_logo_hover p-2">
-            <a class="text-2xl" href="/our-platform">
+            <a class="text-2xl" href="/platform">
                 Our Platform
             </a>
         </li>
