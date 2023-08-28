@@ -52,6 +52,11 @@ class ItemController extends Controller
     //store the new item
     public function storeItem(Request $request)
     {
+        // Validate the request data including the image size
+        $request->validate([
+            'itemImage' => 'image|max:2048', // Limiting to 2MB
+        
+        ]);
         // Set the seller ID on the request object
         $request['sellerUser_id'] = auth()->id();
 
