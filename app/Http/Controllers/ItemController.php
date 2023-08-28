@@ -52,13 +52,18 @@ class ItemController extends Controller
     //store the new item
     public function storeItem(Request $request)
     {
+        // Set the seller ID on the request object
+        $request['sellerUser_id'] = auth()->id();
+
+        // Create the item
         $item = Item::create($request->all());
+
         $parentCategory = ParentCategory::find($request->input('parentCategory_id'));
         $category = Category::find($request->input('category_id'));
+        Log::info("Authenticated User ID: " . auth()->id());
 
-        //make sure the image is here before saving it
+        // Make sure the image is here before saving it
         if ($request->hasFile('itemImage')) {
-
             $path = "images/{$parentCategory->parentcategoryName}/{$category->category_name}";
             $imagePath = $request->file('itemImage')->store($path, 'public');
 
@@ -67,11 +72,7 @@ class ItemController extends Controller
             $item->save();
         }
 
-        $request['sellerUser_id'] = auth()->id();
-        //this will add the logged in user_ to the new item
-
         // Redirect the user after successful item creation
-
         return redirect('/adminUser/dashboard')->with('success', 'Item added successfully.');
     }
 }
