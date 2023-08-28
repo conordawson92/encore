@@ -1,4 +1,5 @@
 <!--html diaply for the admin complete dashboard with all the informations, history, messages, etc...and the manage options link-->
+
 <x-layout>
     <!DOCTYPE html>
     <html>
@@ -64,32 +65,11 @@
                 </ul>                
             </div>
             <!--all the admin selling items-->
-            {{-- <div>
-                <h2>Your Items</h2>
 
-                @if($user->sellerItems->isEmpty())
-                        <p>You currently don't have items to sell</p>
-                @else
-                @foreach ($user->sellerItems as $item)
-                <div>
-                    <h4>{{ $item->ItemName }}</h4>
-                    <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                    <p>Description: {{ $item->description }}</p>
-                    <p>Price: {{ $item->price }}</p>
-                    <p>Size: {{ $item->size }}</p>
-                    <p>Brand: {{ $item->brand }}</p>
-                    <p>Condition: {{$item->condition}}</p>
-                    <p>Status: {{$item->status}}</p>
-                    <p>Date was posted: {{$item->dateListed}}</p>
-                    <p>Quantity available: {{$item->quantity}}</p>
-                </div>
-                @endforeach
-                @endif
-            </div> --}}
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Items</h2>
             
-                @if($user->sellerItems->isEmpty())
+                {{-- @if($user->sellerItems->isEmpty())
                     <p class="text-gray-600">You currently don't have items to sell</p>
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -110,28 +90,31 @@
                         </div>
                         @endforeach
                     </div>
+                @endif --}}
+                @if($user->sellerItems->isEmpty())
+                    <p class="text-gray-600">You currently don't have items to sell</p>
+                @else
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach ($user->sellerItems as $item)
+                        <a href="/listings/{{$item->id}}" class="block border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
+                            <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                <p class="text-gray-600">Status: {{$item->status}}</p>
+                                <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
+                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
                 @endif
             </div>
             <!--the items in the admin wishlist-->
-            {{-- <h2>Your Wishlist</h2>
-            @if ($user->wishlist->count() > 0)
-            @foreach ($user->wishlist as $item)
-            <div>
-                <p>{{ $item->ItemName }}</p>
-                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                <p>Description: {{ $item->description }}</p>
-                <p>Price: {{ $item->price }}</p>
-                <p>Size: {{ $item->size }}</p>
-                <p>Brand: {{ $item->brand }}</p>
-                <p>Condition: {{$item->condition}}</p>
-                <p>Status: {{$item->status}}</p>
-                <p>Date was posted: {{$item->dateListed}}</p>
-                <p>Quantity available: {{$item->quantity}}</p>
-            </div>
-            @endforeach
-            @else
-            <p>Your wishlist is empty.</p>
-            @endif --}}
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
             
@@ -158,21 +141,8 @@
                     <p class="text-gray-600">Your wishlist is empty.</p>
                 @endif
             </div>
+
             <!--all the items bought for the admin logged in with the transaction history-->
-            {{-- <h2>Your Buying Transactions</h2>
-            @if ($buyingTransactions->count() > 0)
-            <table>
-                @foreach ($buyingTransactions as $transaction)
-                <p>Item: {{ $transaction->item->ItemName }}</p>
-                <p>Seller: {{ $transaction->item->seller->userName }}</p>
-                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
-                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
-                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No buying transactions found.</p>
-            @endif --}}
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Buying Transactions</h2>
             
@@ -205,21 +175,7 @@
             </div>
 
             <!--all the items sell for the admin logged in with the transaction history-->
-            {{-- <h2>Your Selling Transactions</h2>
-            @if ($sellingTransactions->count() > 0)
-            <table>
-                @foreach ($sellingTransactions as $transaction)
-                <p>Item: {{ $transaction->item->ItemName }}</p>
-                <p>Buyer: {{ $transaction->item->seller->userName }}</p>
-                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
-                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
-                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No selling transactions found.</p>
-            @endif --}}
-
+           
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Selling Transactions</h2>
             
@@ -252,35 +208,6 @@
             </div>
 
             <!--all the reviews made by the admin logged in-->
-            {{-- <h2>Your Reviews</h2>
-            <h3>Sent</h3>
-            @if ($reviewsGiven->count() > 0)
-            <table>
-                @foreach ($reviewsGiven as $review)
-                <p>Seller: {{ $review->item->seller->userName }}</p>
-                <p>Item: {{ $review->item->ItemName }}</p>
-                <p>Date of Purchase: {{ $review->dateReview }}</p>
-                <p>Comment: {{ $review->comment }}</p>
-                <p>Rating: {{ $review->rating }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No reviews sent.</p>
-            @endif
-            <h3>Received</h3>
-            @if ($reviewsReceived->count() > 0)
-            <table>
-                @foreach ($reviewsReceived as $review)
-                <p>Buyer: {{ $review->item->seller->userName }}</p>
-                <p>Item: {{ $review->item->ItemName }}</p>
-                <p>Date of Purchase: {{ $review->dateReview }}</p>
-                <p>Comment: {{ $review->comment }}</p>
-                <p>Rating: {{ $review->rating }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No reviews received.</p>
-            @endif --}}
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Reviews</h2>
             
@@ -327,7 +254,7 @@
                         <tbody>
                             @foreach ($reviewsReceived as $review)
                             <tr>
-                                <td class="py-2 px-4 border-b">{{ $review->item->buyer->userName }}</td> <!-- Adjusted to show the buyer's username -->
+                                <td class="py-2 px-4 border-b">{{ $review->item->buyer->userName }}</td>
                                 <td class="py-2 px-4 border-b">{{ $review->item->ItemName }}</td>
                                 <td class="py-2 px-4 border-b">{{ $review->dateReview }}</td>
                                 <td class="py-2 px-4 border-b">{{ $review->comment }}</td>
@@ -342,36 +269,6 @@
             </div>
 
             <!--all the admin messages history-->
-            {{-- <h2>Your Messages</h2>
-            <h3>Sent</h3>
-            @if ($messagesSented->count() > 0)
-            <table>
-                @foreach ($messagesSented as $message)
-                <p>Receiver: {{ $message->receiver->userName }}</p>
-                <p>Item: {{ $message->item->ItemName }}</p>
-                <p>Date: {{ $message->dateSent }}</p>
-                <p>Message: {{ $message->content }}</p>
-                <p>Status: {{ $message->status }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No messages sent.</p>
-            @endif
-            <h3>Received</h3>
-            @if ($messagesReceived->count() > 0)
-            <table>
-                @foreach ($messagesSented as $message)
-                <p>Sender: {{ $message->sender->userName }}</p>
-                <p>Item: {{ $message->item->ItemName }}</p>
-                <p>Date: {{ $message->dateSent }}</p>
-                <p>Message: {{ $message->content }}</p>
-                <p>Status: {{ $message->status }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No messages received.</p>
-            @endif --}}
-
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Messages</h2>
             
@@ -433,19 +330,6 @@
             </div>
 
             <!--admin notifications history-->
-            {{-- <h2>Your Notifications</h2>
-            @if ($notifications->count() > 0)
-            <table>
-                @foreach ($notifications as $notification)
-                <p>Notification: {{ optional($notification->typeNotification)->typeNotificationName }}</p>
-                <p>Date: {{ $notification->dateSent }}</p>
-                <p>Content: {{ $notification->content }}</p>
-                <p>Status: {{ $notification->status }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No notifications found.</p>
-            @endif --}}
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Notifications</h2>
             
