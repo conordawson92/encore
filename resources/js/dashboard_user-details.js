@@ -37,13 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
             detailsContainer.innerHTML = userDetails;
             userDetailsButtonIcon.classList.remove("fa-chevron-up");
             userDetailsButtonIcon.classList.add("fa-chevron-down");
-            // shadowProfile.classList.remove("shadow-custom");
 
         } else {
             detailsContainer.innerHTML = "";
             userDetailsButtonIcon.classList.remove("fa-chevron-down");
             userDetailsButtonIcon.classList.add("fa-chevron-up");
-            // shadowProfile.classList.add("shadow-custom");
         }
         details = !details;
     });
