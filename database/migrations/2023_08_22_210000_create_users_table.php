@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('userImage')->nullable();
             $table->string('dateJoined');
             $table->string('userLocation');
-            $table->integer('userRating');
+            $table->decimal('userRating', 2, 1)->default(0);
             $table->boolean('banUser');
             $table->string('userPhone');
             $table->string('paymentInfo');
