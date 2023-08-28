@@ -1,5 +1,6 @@
 import autoanimate from "@formkit/auto-animate";
 
+
 const icons = [
     "person-solid",
     "person-dress-solid",
@@ -10,16 +11,37 @@ const icons = [
 const menuMobile = `
             <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
                 <ul class="flex flex-col gap-2 mb-5">
+                    ${userAuth ? `
+
+                    <li class="flex justify-between items-center p-4 mx-4">
+                        <div class="flex justify-center items-center">
+                            <a class="flex justify-center items-center" href="/adminUser/dashboard">
+                                <img class="w-12 h-12 mr-2 rounded-full" src="/storage/${userAuth.userImage}" alt="">
+                                <h3 class="font-bold text-2xl">
+                                    ${userAuth.userName}
+                                </h3>
+                            </a>
+                        </div>                      
+                        <form method="POST" action="/logout">
+                            <input type="hidden" name="_token" value="${csrfToken}">
+                            <button class="text-2xl">
+                                <i class="fa-solid fa-right-from-bracket text-2xl"></i>
+                                Logout
+                            </button>
+                        </form>
+                    </li>                    
+                    
+                    `: `
                     <li class="flex justify-center items-center">
-                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
-                            Sell on Encore
+                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="/register">
+                            Sign Up
                         </a>
                     </li>
                     <li class="flex justify-center items-center">
-                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="">
+                        <a class="w-10/12 border-solid border-brown_logo border-2 text-center font-bold py-3 hover:bg-beige_logo_hover" href="/login">
                             Sign In
                         </a>
-                    </li>
+                    </li>`}
                 </ul>
                 <ul class="flex flex-col mt-8">
                     <h3 class="ml-8 underline">

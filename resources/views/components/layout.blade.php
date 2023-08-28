@@ -12,6 +12,8 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     <script>
         var navMenu = @json($parentCategories);
+        var userAuth = @json($userAuth);
+        var csrfToken = @json(csrf_token());
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
@@ -26,63 +28,91 @@
                 <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
             </a>
 
-            @include('partials._search')
+            @include('partials._search_desktop')
 
             @auth
-                <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
-                    <li>
-                        <h2 class="text-xl flex items-center whitespace-nowrap">
-                            <i class="fa-solid fa-user mr-1"></i>
-                            {{ auth()->user()->userName }}
-                        </h2>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa-regular fa-heart"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa-regular fa-bell"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('dashboard') }}">
-                            <i class="fa-solid fa-gear"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <form method="POST" action="/logout">
-                            @csrf
-                            <button class="">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-            @else
-                <div class="hidden md:flex gap-4 justify-center items-center">
-                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap"
-                        href="/register">
-                        Sign Up
+            <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
+                <li>
+                    <h2 class="text-xl flex items-center whitespace-nowrap">
+                        <i class="fa-solid fa-user mr-1 text-2xl"></i>
+                        {{ auth()->user()->userName }}
+                    </h2>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
                     </a>
-                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
-                        Sign In
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
                     <a href="">
-                        <i class='fa-solid fa-circle-question text-2xl'></i>
+                        <i class="fa-regular fa-bell text-2xl"></i>
                     </a>
-                </div>
-            @endauth
-            <button id="menu_mobile_button" class="flex md:hidden w-20 justify-center items-center">
-                <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
-            </button>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard') }}">
+                        <i class="fa-solid fa-gear text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button class="">
+                            <i class="fa-solid fa-right-from-bracket text-2xl"></i>
+                        </button>
+                    </form>
+                </li>
+            </ul>
 
+                @else
+                    <div class="hidden md:flex gap-4 justify-center items-center">
+                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
+                            Sign Up
+                        </a>
+                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
+                            Sign In
+                        </a>
+                        <a href="">
+                            <i class='fa-solid fa-circle-question text-2xl'></i>
+                        </a>
+                    </div>
+            @endauth
+            @auth
+            @csrf
+             <ul class="flex gap-6 justify-right items-center md:hidden">
+                <li>
+                    <a href="">
+                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-heart text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa-regular fa-bell text-2xl"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('dashboard') }}">
+                        <i class="fa-solid fa-gear text-2xl"></i>
+                    </a>
+                </li>
+             </ul>
+            @endauth
+            @include('partials._search_mobile')
+            <div class="flex md:hidden gap-6 m-2">
+                <button id="show-search" class="">
+                    <i class="fa-solid fa-magnifying-glass text-3xl"></i>
+                </button>
+                <button id="menu_mobile_button" class="">
+                    <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
+                </button>
+            </div>
         </header>
         <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
 
