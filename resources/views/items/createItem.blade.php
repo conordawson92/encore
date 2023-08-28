@@ -1,62 +1,62 @@
-<a href="/adminUser/dashboard">Back to Dashboard</a>
+<x-layout>
+    <a href="/adminUser/dashboard">Back to Dashboard</a>
 
-<form action="{{ route('items.storeItem') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-
-    <label for="itemImage">Item Image</label>
-    <input type="file" id="itemImage" name="itemImage">
-    <br>
-
-    <label for="ItemName">Item Name</label>
-    <input type="text" id="ItemName" name="ItemName" required>
-    <br>
-
-    <label for="description">Item Description</label>
-    <input type="text" id="description" name="description" required>
-    <br>
-
-    <label for="price">Item Price</label>
-    <input type="text" id="price" name="price" required>
-    <br>
-
-    <label for="size">Item Size</label>
-    <input type="text" id="size" name="size" required>
-    <br>
-
-    <label for="brand">Item Brand</label>
-    <input type="text" id="brand" name="brand" required>
-    <br>
-
-    <label for="tags">Tags</label>
-    <input type="text" id="tags" name="tags" required>
-    <br>
-
-    <label for="condition">Item Condition</label>
-    <input type="text" id="condition" name="condition" required>
-    <br>
-
-    <label for="quantity">Items Quantity</label>
-    <input type="text" id="quantity" name="quantity"  required>
-    <br>
-
-    <label for="parentCategory_id">Main Category</label>
-    <select id="parentCategory" name="parentCategory_id">
-        @foreach ($parentCategories as $parentCategory)
+    <form action="{{ route('items.storeItem') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="ItemName">Item Name:</label>
+        <input type="text" name="ItemName" required>
+        <br>
+        <label for="itemImage">Item Image:</label>
+        <input type="file" name="itemImage">
+        <br>
+        <label for="description">Description:</label>
+        <textarea name="description" required></textarea>
+        <br>
+        <label for="size">Size:</label>
+        <input type="text" name="size" required>
+        <br>
+        <label for="price">Price:</label>
+        <input type="text" name="price" required>
+        <br>
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" required>
+        <br>
+        <label for="condition">Condition:</label>
+        <select name="condition" required>
+            <option value="new">New</option>
+            <option value="used">Used</option>
+            <option value="very used">Very Used</option>
+        </select>
+        <br>
+        <label for="tags">Tags:</label>
+        <input type="text" name="tags" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+        <br>
+        <label for="parentCategory_id">Main Category</label>
+        <select id="parentCategory" name="parentCategory_id">
+            @foreach ($parentCategories as $parentCategory)
             <option value="{{ $parentCategory->id }}">
-                {{ $parentCategory->parentcategoryName }} 
+                {{ $parentCategory->parentcategoryName }}
             </option>
-        @endforeach
-    </select>
-
-    <label for="category_id">Category</label>
-    <select id="category" name="category_id">
-        @foreach ($categories as $category)
-            <option value="{{ $category->id }}">
+            @endforeach
+        </select>
+        <br>
+        <label for="category_id">Category</label>
+        <select id="category" name="category_id">
+            @foreach ($categories as $category)
+            <option value="{{ $category->id }}" data-parent="{{ $category->parentCategory_id }}">
                 {{ $category->category_name }}
             </option>
-        @endforeach
-    </select>
-    <br>
+            @endforeach
+        </select>
+        <br>
 
-    <button type="submit">Add Item</button>
-</form>
+        <button type="submit">Add Item</button>
+
+    </form>
+
+
+
+</x-layout>

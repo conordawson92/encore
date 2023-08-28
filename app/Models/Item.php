@@ -24,7 +24,8 @@ class Item extends Model
         'status',
         'category_id',
         'sellerUser_id',
-        'buyerUser_id'
+        'buyerUser_id',
+        'itemImage' 
     ];
 
     public function scopeFilter($query, array $filters)
