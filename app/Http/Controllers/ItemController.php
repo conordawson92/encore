@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Log;
+
 
 class ItemController extends Controller
 {
@@ -36,97 +39,63 @@ class ItemController extends Controller
         return view('categories.show', compact('category', 'items'));
     }
 
-    //show item creation form
-    public function create(){
-        $categories = Category::all();
-        return view('items.create', compact('categories'));
+    //create new item method
+    public function createItem()
+    {
+        return view('items.createItem');
     }
 
-    //store in the database the new item
-    public function store(Request $request){
-
-        $formFields = $request->validate([
-            //here we will add what rules we want for our fields
-            'itemName' => ['required','min:3'],
-            'itemImage' => 'required',
+    //store the new item
+    public function storeItem(Request $request)
+    {
+        Log::info('Received request in storeItem method');
+        Log::info('Validating form data');
+        // Validate the form data
+        $validatedData = $request->validate([
+            'ItemName' => ['required','min:3'],
             'description' => ['required', 'min:5'],
             'size' => 'required',
             'price' => 'required',
             'brand'=> 'required',
-            'condition'=> 'required',
-            'dateListed' => ['required', 'date'],
+            'condition'=> 'required', 
+            //Rule::in(['new', 'used', 'very used'])],
             'tags' => 'required',
             'quantity' => 'required',
-            'status' => 'required',
             'category_id' => 'required',
-            'sellerUser_id'=> 'required',
-            'buyerUser_id'
         ]);
 
         //make sure the image is here before saving it
         if ($request->hasFile('itemImage')) {
-            //let s brake this down together
-            $formFields['itemImage'] = $request->file('itemImage')->store('ItemImages', 'public');
-            //$ formFields['itemImage'] >> this will add a 'image' key to our array of data from the form
-            //$request->file('itemImage') >> retrieve the image file that has been uploaded (could be any file really)
-            //store('itemImages', 'public') > the file will be stored in public/itemImages/ , instead of just public
+            $validatedData['itemImage'] = $request->file('itemImage')->store('images', 'public');
         }
 
-        $formFields['user_id']=auth()->id();
-        //this will add the logged in user_ to the new listing
+        $validatedData['sellerUser_id']=auth()->id();
+        //this will add the logged in user_ to the new item
 
-        Item::create($formFields);
+        // value for the date
+        $validatedData['dateListed'] = now();
 
-        //if one of this failed, it will show the error
-        //when completed go to homepage
-        return redirect('/')->with('message', 'Item create successfully');
-    }
+        //default value for the status
+        $validatedData['status'] = 'available';
 
+        $validatedData['buyerUser_id'] = 1;
 
-    //show edit items form
-    public function edit(Item $item){
-        $categories = Category::all();
-        return view('items.edit', ['item'=> $item, 'categories' => $categories]);
-    }
+        Log::info('Form data validated');
 
-    //method to update the item in the db with the new informations
-    public function update(Request $request, Item $item){
-        $formFields = $request->validate([
-            'itemName' => ['required','min:3'],
-            'description' => ['required', 'min:5'],
-            'size' => 'required',
-            'price' => 'required',
-            'brand'=> 'required',
-            'condition'=> 'required',
-            'dateListed' => ['required', 'date'],
-            'tags' => 'required',
-            'quantity' => 'required',
-            'status' => 'required',
-            'category_id' => 'required',
-            'sellerUse_id'=> 'required',
-            'buyerUser_id',
-        ]);
-
-        if ($request->hasFile('itemImage')) {
-            $formFields['logo'] = $request->file('itemImage')->store('itemImages', 'public');
+        try {
+            Log::info('Creating new item');
+            $item= new Item($validatedData);
+            $item->save();
+            Log::info('Item created successfully');
+        } catch (\Exception $e) {
+            Log::error('Error creating item: ' . $e->getMessage());
+            // Redirect the user with an error message
+            return redirect('/adminUser/dashboard')->with('error', 'Failed to create item.');
         }
 
-        //update() changes the data in the table for us
-        $item->update($formFields);
-
-        return redirect('/items/' . $item->id)->with('message', 'Item updated successfully');
-    }
-
-    //method to delete a item
-    public function destroy(Item $item){
-        $item->delete();
-        return redirect('/')->with('message', 'Item deleted succefully');
-    }
-
-    //manage items list (show all the user items he can edit or delete)
-    public function manage(){
-        return view('items.manage', ['items' => auth()->user()->items()->get()]);
-        //'items' will contain all items created by the logged in user
+        // Redirect the user after successful item creation
+        Log::info('Item added successfully');
+        return redirect('/adminUser/dashboard')->with('success', 'Item added successfully.');
     }
 
 }

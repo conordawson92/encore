@@ -39,7 +39,7 @@
                     </h2>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('cart.cart') }}">
                         <span>
                             
                         </span>
@@ -88,7 +88,7 @@
             @csrf
              <ul class="flex gap-6 justify-right items-center md:hidden">
                 <li>
-                    <a href="">
+                    <a href="{{ route('cart.cart') }}">
                         <i class="fa-solid fa-cart-shopping text-2xl"></i>
                     </a>
                 </li>

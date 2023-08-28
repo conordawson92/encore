@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\Message;
 use App\Models\Wishlist;
 use App\Models\Transaction;
 use App\Models\Notification;
 use Illuminate\Http\Request;
+use App\Models\ParentCategory;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
-use App\Models\Message;
 
 class UserController extends Controller
 {
@@ -49,6 +51,9 @@ class UserController extends Controller
 
         //default value for the banUser
         $formFields['banUser'] = false;
+
+        //default value to new users
+        $formFields['role'] = 'basic_user';
 
         //afect the now() date 
         $formFields['dateJoined'] = now();

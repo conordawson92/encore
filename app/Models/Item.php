@@ -78,4 +78,8 @@ class Item extends Model
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
     }
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyerUser_id');
+    }
 }

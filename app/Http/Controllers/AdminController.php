@@ -221,11 +221,27 @@ class AdminController extends Controller
     //edit a specific item
     public function editItem(Item $item)
     {
-        $parentCategories = Category::whereNull('parentCategory_id')->get();
-        $categories = Category::where('parentCategory_id', $item->category->parentCategory_id)->get();
-    
-        return view('adminUser.editItem', compact('item', 'parentCategories', 'categories'));
+        $categories = Category::all();
+        $possibleConditions = ['new', 'used', 'very used'];
 
+        // Generate the $categoryMap
+        $categoryMap = [];
+        foreach ($categories as $category) {
+            if (!isset($categoryMap[$category->parentCategory_id])) {
+                $categoryMap[$category->parentCategory_id] = [];
+            }
+            $categoryMap[$category->parentCategory_id][] = [
+                'id' => $category->id,
+                'category_name' => $category->category_name,
+            ];
+        }
+        
+        return view('adminUser.editItem', [
+            'item' => $item,
+            'possibleConditions' => $possibleConditions,
+            'categories' => $categories,
+            'categoryMap' => $categoryMap, // Pass the category map to the view
+        ]);
     }
 
     //update the changes in the db
