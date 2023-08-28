@@ -1,4 +1,3 @@
-
 <html>
 <head>
     <title>Checkout Page</title>
@@ -48,7 +47,7 @@
    
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
-                            <a href="/stripe" class="close" data-dismiss="alert" aria-label="close">×</a>
+                            <a href="/adminUser/dashboard" class="close" data-dismiss="alert" aria-label="close">×</a>
                             <p>{{ Session::get('success') }}</p>
                         </div>
                     @endif
@@ -62,6 +61,11 @@
                             data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                             id="payment-form">
                         @csrf
+
+                        <input type="hidden" name="total_amount" value="{{ $totalAmount }}">
+                        @foreach($cartItems as $cartItem)
+                            <input type="hidden" name="cart_items[]" value="{{ $cartItem->id }}">
+                        @endforeach
    
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
@@ -81,7 +85,7 @@
                         <div class='form-row row'>
                             <div class='col-xs-12 col-md-4 form-group cvc required'>
                                 <label class='control-label'>CVC</label> <input autocomplete='off'
-                                    class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                    class='form-control card-cvc' placeholder='ex. 123' size='4'
                                     type='text'>
                             </div>
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
@@ -93,13 +97,6 @@
                                 <label class='control-label'>Expiration Year</label> <input
                                     class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                     type='text'>
-                            </div>
-                        </div>
-   
-                        <div class='form-row row'>
-                            <div class='col-md-12 error form-group hide'>
-                                <div class='alert-danger alert'>Please correct the errors and try
-                                    again.</div>
                             </div>
                         </div>
    
@@ -178,12 +175,3 @@ $(function() {
 });
 </script>
 </html>
-    
-
-
-
-
-
-
-
-

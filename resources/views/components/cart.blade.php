@@ -1,6 +1,6 @@
 <x-layout>
     <div class="mx-4">
-        <x-card class="p-10 bg-black">
+        <x-card class="p-10 bg-white">
             <h2 class="text-2xl mb-4 text-center">Your Cart</h2>
             @if($cartItems->isEmpty())
                 <p class="text-center">Your cart is empty.</p>
@@ -54,6 +54,11 @@
                 </table>
                 <div class="mt-4 text-center">
                     <a href="{{ route('listings.index') }}" class="text-blue-500 hover:underline">Continue Shopping</a>
+                </div>
+                <div class="text-center mt-6">
+                    <a href="{{ route('stripe.checkout') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                        Pay
+                    </a>
                 </div>
             @endif
         </x-card>

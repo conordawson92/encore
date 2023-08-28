@@ -28,10 +28,12 @@
                         <div class="text-lg my-4">Quantity: {{$listing->quantity}}</div>
                         <div class="text-lg my-4">Status: {{$listing->status}}</div>
                     </div>
-                    
-                    <div class="w-full flex justify-center sm:justify-start mt-auto mb-4 sm:mb-0">
-                        <button class="bg-orange-500 text-white w-32 h-10 rounded ml-0 sm:ml-8">Add to Cart</button> 
-                        <button class="bg-green-500 text-white ml-4 w-32 h-10 rounded">Buy</button>
+                    <div class="mt-auto flex justify-end md:mr-8">
+                        <form action="{{ route('cart.add', $listing) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-orange-500 text-white w-32 h-10 rounded">Add to Cart</button>
+                        </form>
+                        <a href="{{ route('stripe.checkout') }}" class="bg-green-500 text-white ml-4 w-32 h-10 rounded">Buy</a>
                     </div>
                 </div>
             </div>
