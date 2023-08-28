@@ -59,11 +59,12 @@ class ItemController extends Controller
         //make sure the image is here before saving it
         if ($request->hasFile('itemImage')) {
 
-            $path = "{$parentCategory->parentcategoryName}/{$category->category_name}";
+            $path = "images/{$parentCategory->parentcategoryName}/{$category->category_name}";
+            $imagePath = $request->file('itemImage')->store($path, 'public');
 
-            $imagePath = $request->file('itemImage')->store($path, 'images');
-
-            $request->merge(['itemImage' => $imagePath]);
+            // Prefix the stored path with /storage/
+            $item->itemImage = '/storage/' . $imagePath;
+            $item->save();
         }
 
         $request['sellerUser_id'] = auth()->id();
