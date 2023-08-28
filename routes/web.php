@@ -2,6 +2,7 @@
 
 use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PlatformController;
 
 
 Route::get('/', function () {
@@ -105,11 +108,11 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
     ->name('users.edit');
-    
+
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
-->middleware('auth')
-->name('users.update');
+    ->middleware('auth')
+    ->name('users.update');
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
@@ -178,7 +181,7 @@ Route::get('/adminUser/transactions', [TransactionController::class, 'index'])
 Route::patch('/adminUser/transactions/{transaction}/cancel', [TransactionController::class, 'cancelTransaction'])
     ->middleware('auth')
     ->name('transactions.cancel');
-    
+
 
 
 //our mission
@@ -198,3 +201,19 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
+// About us page
+Route::get('/about', [AboutController::class, 'index']);
+
+// Platform - Contact us
+Route::get('/platform', [PlatformController::class, 'index']);
+//SHOPPING CART
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.cart');
+    // Add items to the cart
+    Route::post('/cart/add/{item}', [CartController::class, 'addToCart'])->name('cart.add');
+    // Update cart item quantity
+    Route::patch('/cart/update/{cart}', [CartController::class, 'updateCartItem'])->name('cart.update');
+    // Remove item from the cart
+    Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+});
