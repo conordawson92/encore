@@ -21,8 +21,9 @@ export default {
                 customLg: "960px",
             },
             boxShadow: {
-                'custom': '0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 1px -2px rgba(0, 0, 0, 0.12)'
-              },
+                'custom': '0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 1px -2px rgba(0, 0, 0, 0.12)',
+                'custom-xl': '0 12px 15px -5px rgba(0, 0, 0, 0.25), 0 6px 7px 0 rgba(0, 0, 0, 0.2), 0 3px 3px -2px rgba(0, 0, 0, 0.15)'
+            },
         },
     },
     plugins: [],
