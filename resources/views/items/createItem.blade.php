@@ -25,6 +25,10 @@
             </div>
 
             <div>
+                <label for="brand" class="block text-brown_logo font-medium">Brand:</label>
+                <input type="text" name="brand" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+            </div>
+            <div>
                 <label for="size" class="block text-brown_logo font-medium">Size:</label>
                 <input type="text" name="size" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
             </div>
