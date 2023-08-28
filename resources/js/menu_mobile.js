@@ -139,7 +139,6 @@ let menu = false;
 document.addEventListener("DOMContentLoaded", () => {
     const mobileMenuButton = document.querySelector("#menu_mobile_button");
     const mobileMenuIcon = document.querySelector("#menu_mobile_icon");
-
     mobileMenuButton.addEventListener("click", () => {
         if (!menu) {
             menuMobileContainer.innerHTML = menuMobile;

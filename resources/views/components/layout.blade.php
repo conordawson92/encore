@@ -40,6 +40,9 @@
                 </li>
                 <li>
                     <a href="{{ route('cart.cart') }}">
+                        <span>
+                            
+                        </span>
                         <i class="fa-solid fa-cart-shopping text-2xl"></i>
                     </a>
                 </li>
