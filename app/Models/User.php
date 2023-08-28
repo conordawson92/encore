@@ -115,5 +115,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Item::class, 'wishlists', 'user_id', 'item_id');
     }
 
-
+    //method admin
+    public function isAdmin()
+    {
+        //check if the user is an admin
+        return $this->admin === 1;
+    }
 }

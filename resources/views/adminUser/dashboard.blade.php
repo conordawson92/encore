@@ -10,12 +10,16 @@
 
     <body>
         <div class="w-[50%] mx-auto">
-            <p>
-                Go to the admnistrator page 
-                <a href="/adminUser/admin">
-                    here
-                </a>
-            </p>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <p>
+                        Go to the admnistrator page 
+                        <a href="/adminUser/admin">
+                            here
+                        </a>
+                    </p>
+                @endif
+            @endauth
 
             <!--the admin profile informations-->
             <div class="flex gap-4 flex-col p-2 shadow-custom">
@@ -65,6 +69,14 @@
                 </ul>                
             </div>
             <!--all the admin selling items-->
+<<<<<<< Updated upstream
+=======
+            <div>
+
+                <a href="{{ route('items.createItem') }}">Add New Item</a>
+
+                <h2>Your Items</h2>
+>>>>>>> Stashed changes
 
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Items</h2>
@@ -94,6 +106,7 @@
                 @if($user->sellerItems->isEmpty())
                     <p class="text-gray-600">You currently don't have items to sell</p>
                 @else
+<<<<<<< Updated upstream
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($user->sellerItems as $item)
                         <a href="/listings/{{$item->id}}" class="block border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
@@ -112,6 +125,27 @@
                         </a>
                         @endforeach
                     </div>
+=======
+                @foreach ($user->sellerItems as $item)
+                <div>
+                    <h4>{{ $item->ItemName }}</h4>
+                    <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                    <p>Description: {{ $item->description }}</p>
+                    <p>Price: {{ $item->price }}</p>
+                    <p>Size: {{ $item->size }}</p>
+                    <p>Brand: {{ $item->brand }}</p>
+                    <p>Condition: {{$item->condition}}</p>
+                    <p>Status: {{$item->status}}</p>
+                    <p>Date was posted: {{$item->dateListed}}</p>
+                    <p>Quantity available: {{$item->quantity}}</p>
+                    <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+                @endforeach
+>>>>>>> Stashed changes
                 @endif
             </div>
             <!--the items in the admin wishlist-->
