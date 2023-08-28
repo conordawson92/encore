@@ -1,7 +1,18 @@
 <x-layout>
+
     <div class="max-w-md mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl">
         <a href="/adminUser/dashboard" class="py-1 px-2 border-2 border-brown_logo hover:bg-beige_logo_hover inline-block mb-6 text-brown_logo transition-all">Back to Dashboard</a>
 
+        <!-- Display validation errors if they exist -->
+        @if ($errors->any())
+        <div style="color: red; margin-bottom: 10px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <form action="{{ route('items.storeItem') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
             <div>
