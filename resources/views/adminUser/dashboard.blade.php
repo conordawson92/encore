@@ -8,8 +8,8 @@
         <title>Admin Profile</title>
     </head>
 
-    <body>
-        <div class="w-[50%] mx-auto">
+    <body >
+        <div class="w-[65%] mx-auto">
             @auth
             @if(auth()->user()->role === 'admin')
             <p>
@@ -22,7 +22,7 @@
             @endauth
 
             <!--the admin profile informations-->
-            <div class="flex gap-4 flex-col p-2 shadow-custom">
+            <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
                 <div class="flex gap-4 items-center justify-between">
                     <div class="flex gap-4 items-center">
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
@@ -40,122 +40,99 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-center w-10 h-10 mr-6">
-                        <button>
-                            <i class="fa-solid fa-chevron-up text-2xl"></i>
+                        <button id="user_details_button">
+                            <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl"></i>
                         </button>
                     </div>
                 </div>
             </div>
-            <div clas="details_container">
-                <ul class="bg-white shadow-custom p-2 flex flex-col gap-2">
-                    <h2 class="">User Details:</h2>
-                    <li>
-                        <i class="fa-solid fa-envelope"></i>
-                        {{ $user->email }}
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-location-dot"></i>
-                        {{ $user->userLocation }}
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-phone"></i>
-                        {{ $user->userPhone }}
-                    </li>
-                    <li>
-                        Your favorite payment method:
-                        {{ $user->paymentInfo }}
-                    </li>
-                </ul>
+            <div id="details_container">
+                
             </div>
             <!--all the admin selling items-->
-            <<<<<<< Updated upstream=======<div>
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">Your Items</h2>
 
-                <a href="{{ route('items.createItem') }}">Add New Item</a>
-
-                <h2>Your Items</h2>
-                >>>>>>> Stashed changes
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-bold mb-4">Your Items</h2>
-
-                    {{-- @if($user->sellerItems->isEmpty())
+                @if($user->sellerItems->isEmpty())
                     <p class="text-gray-600">You currently don't have items to sell</p>
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($user->sellerItems as $item)
-                        <div class="border rounded-lg overflow-hidden shadow-lg">
-                            <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                    <div class="p-4">
-                        <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                        <p class="text-gray-600">Description: {{ $item->description }}</p>
-                        <p class="text-gray-600">Price: {{ $item->price }}</p>
-                        <p class="text-gray-600">Size: {{ $item->size }}</p>
-                        <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                        <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                        <p class="text-gray-600">Status: {{$item->status}}</p>
-                        <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
-                        <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                        <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105">
+                            <!-- Delete Button -->
+                            <form action="" method="POST" class="absolute bottom-2 right-3 z-10">
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800">
+                                    <i class="far fa-trash-can"></i>
+                                </button>
+                            </form>
+            
+                            <a href="/listings/{{$item->id}}" class="block">
+                                <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                                <div class="p-4">
+                                    <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                    <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                    <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                    <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                    <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                    <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                    <p class="text-gray-600">Status: {{$item->status}}</p>
+                                    <p class="text-gray-600">Created on: {{$item->dateListed}}</p>
+                                    <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                                </div>
+                            </a>
+                        </div>
+                        @endforeach
+                        <a href="{{ route('items.createItem') }}">
+                            <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105 cursor-pointer">
+                                <div class="flex items-center justify-center w-full h-48 bg-gray-200">
+                                    <i class="fas fa-plus text-3xl"></i> <!-- You might need a different icon class based on the icon library you're using -->
+                                </div>
+                                <div class="p-4 text-center">
+                                    <h4 class="text-lg font-semibold mb-2">Add Item</h4>
+                                    <p class="text-gray-600">Click to add a new item to your listings</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                @endforeach
-        </div>
-        @endif --}}
-        @if($user->sellerItems->isEmpty())
-        <p class="text-gray-600">You currently don't have items to sell</p>
-        @else
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($user->sellerItems as $item)
-            <a href="/listings/{{$item->id}}" class="block border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
-                <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                <div class="p-4">
-                    <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                    <p class="text-gray-600">Description: {{ $item->description }}</p>
-                    <p class="text-gray-600">Price: {{ $item->price }}</p>
-                    <p class="text-gray-600">Size: {{ $item->size }}</p>
-                    <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                    <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                    <p class="text-gray-600">Status: {{$item->status}}</p>
-                    <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
-                    <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                    <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                    </form>
-                </div>
-            </a>
-            @endforeach
-        </div>
-        @endif
-        </div>
-        <!--the items in the admin wishlist-->
-        <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-
-            @if ($user->wishlist->count() > 0)
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($user->wishlist as $item)
-                <div class="border rounded-lg overflow-hidden shadow-lg">
-                    <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                    <div class="p-4">
-                        <p class="text-lg font-semibold mb-2">{{ $item->ItemName }}</p>
-                        <p class="text-gray-600">Description: {{ $item->description }}</p>
-                        <p class="text-gray-600">Price: {{ $item->price }}</p>
-                        <p class="text-gray-600">Size: {{ $item->size }}</p>
-                        <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                        <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                        <p class="text-gray-600">Status: {{$item->status}}</p>
-                        <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
-                        <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                    </div>
-                </div>
-                @endforeach
+                @endif
             </div>
-            @else
-            <p class="text-gray-600">Your wishlist is empty.</p>
-            @endif
-        </div>
+            <!--the items in the admin wishlist-->
+
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
+            
+                @if ($user->wishlist->count() > 0)
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach ($user->wishlist as $item)
+                        <div class="border overflow-hidden shadow-custom relative">
+                            <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+            
+                            <!-- Delete Button -->
+                            <form action="" method="POST" class="absolute bottom-2 right-3">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800">
+                                    <i class="far fa-trash-can"></i>
+                                </button>
+                            </form>
+            
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-gray-600">Your wishlist is empty.</p>
+                @endif
+            </div>
 
         <!--all the items bought for the admin logged in with the transaction history-->
         <div class="p-6">
