@@ -5,20 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script>
         var navMenu = @json($parentCategories);
         var userAuth = @json($userAuth);
         var csrfToken = @json(csrf_token());
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    <title>Encore</title>
 </head>
 
 <body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
     <div class="grow shrink basis-0">
-        <header class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
+        <header
+            class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
             <a class="flex justify-center items-center" href="/">
                 <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
             </a>
@@ -42,8 +47,6 @@
                     <a href="">
                         <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
-                </li>
-                <li>
                     <a href="">
                         <i class="fa-regular fa-bell text-2xl"></i>
                     </a>
@@ -116,7 +119,7 @@
         @include('partials._nav')
 
         <main class="bg-white">
-            {{$slot}}
+            {{ $slot }}
         </main>
     </div>
     <footer class="mt-auto w-full bg-orange_logo_light block p-2 flex flex-col border-brown_logo_light border-t-2">
@@ -248,7 +251,31 @@
                 </li>
             </ul>
         </div>
+
+        <body>
+
+            <button id="backToTop" class="fixed bottom-0 right-0 transform translate-x-6">
+                <svg width="120" height="100" viewBox="0 0 120 100" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);">>
+                    <g id="triangles">
+                        <g id="darkGroup">
+                            <path id="dark2" opacity="0.7"
+                                d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
+                            <path id="dark1" opacity="0.7"
+                                d="M66 46.268C67.3333 47.0378 67.3333 48.9623 66 49.7321L31.5 69.6506C30.1667 70.4204 28.5 69.4582 28.5 67.9186V28.0814C28.5 26.5418 30.1667 25.5796 31.5 26.3494L66 46.268Z" />
+                        </g>
+                        <path id="light1" opacity="0.7"
+                            d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
+                    </g>
+                </svg>
+            </button>
+
     </footer>
+
+    <div id="loadingSpinner" class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-50 z-50 hidden">
+        <div class="border-t-4 border-transparent rounded-full w-16 h-16 border-brown_logo animate-spin"></div>
+    </div>
+        
 </body>
 
 </html>

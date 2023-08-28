@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $table = 'items'; 
+    protected $table = 'items';
 
     protected $fillable = [
         'ItemName',
@@ -27,7 +27,8 @@ class Item extends Model
         'buyerUser_id'
     ];
 
-    public function scopeFilter($query, array $filters){
+    public function scopeFilter($query, array $filters)
+    {
         //array $filters: all the filters to add in the query
 
         //$filters['tag'] represents the value we got from the ListingsController
@@ -44,10 +45,13 @@ class Item extends Model
                     ->orWhere('brand', 'LIKE', '%' . $filters['search'] . '%');
             });
         }
+
+        return $query;
     }
 
     //relationship that says this item belongs to that user(was created by)
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'sellerUser_id');
     }
 
@@ -73,5 +77,5 @@ class Item extends Model
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
-    }    
+    }
 }

@@ -1,12 +1,12 @@
-import autoanimate from '@formkit/auto-animate';
+import autoanimate from "@formkit/auto-animate";
 
 
 const icons = [
-    'person-solid', 
-    'person-dress-solid', 
-    'child-solid', 
-    'child-dress-solid'
-]
+    "person-solid",
+    "person-dress-solid",
+    "child-solid",
+    "child-dress-solid",
+];
 
 const menuMobile = `
             <nav id="menu_mobile" class="w-full shadow-md animate-dropMenu flex flex-col md:hidden bg-beige_logo text-brown_logo pb-4 pt-2">
@@ -47,16 +47,18 @@ const menuMobile = `
                     <h3 class="ml-8 underline">
                         Categories
                     </h3>
-                    ${navMenu.map((parentCategory, index)  => {
-                        return `
-                        <li class="hover:bg-beige_logo_hover flex border-solid border-gray-400 border-b">
-                            <a class="p-4 text-2xl font-medium w-full h-full flex justify-left items-center" href="">
+                    ${navMenu
+                        .map((parentCategory, index) => {
+                            return `
+                        <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                            <a class="text-2xl font-medium w-full flex justify-left items-center" href="/parent-category/${parentCategory.id}">
                                 <img class="w-7 h-7 mr-2" src="/images/${icons[index]}.svg" alt="">
                                 ${parentCategory.parentcategoryName}
                             </a>
                         </li>
-                        `
-                    }).join('')}
+                        `;
+                        })
+                        .join("")}
                     
                 </ul>
                 <ul class="flex flex-col mt-8">
@@ -131,23 +133,23 @@ const menuMobile = `
                 </ul>
             </nav>
             `;
-const menuMobileContainer = document.querySelector('#menu_mobile_container');
+const menuMobileContainer = document.querySelector("#menu_mobile_container");
 autoanimate(menuMobileContainer);
 let menu = false;
-document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.querySelector('#menu_mobile_button');
-    const mobileMenuIcon = document.querySelector('#menu_mobile_icon');
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuButton = document.querySelector("#menu_mobile_button");
+    const mobileMenuIcon = document.querySelector("#menu_mobile_icon");
 
-    mobileMenuButton.addEventListener('click', () => {
+    mobileMenuButton.addEventListener("click", () => {
         if (!menu) {
             menuMobileContainer.innerHTML = menuMobile;
-            mobileMenuIcon.classList.remove('fa-bars');
-            mobileMenuIcon.classList.add('fa-times');
+            mobileMenuIcon.classList.remove("fa-bars");
+            mobileMenuIcon.classList.add("fa-times");
         } else {
-            menuMobileContainer.innerHTML = '';
-            mobileMenuIcon.classList.remove('fa-times');
-            mobileMenuIcon.classList.add('fa-bars');
+            menuMobileContainer.innerHTML = "";
+            mobileMenuIcon.classList.remove("fa-times");
+            mobileMenuIcon.classList.add("fa-bars");
         }
         menu = !menu;
-    })
+    });
 });
