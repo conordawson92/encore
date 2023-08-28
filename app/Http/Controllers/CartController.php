@@ -51,4 +51,17 @@ public function removeFromCart(Cart $cart)
     $cart->delete();
     return redirect()->back()->with('success', 'Item removed from cart.');
 }
+
+
+public function checkout()
+{
+    $user = auth()->user();
+    $cartItems = Cart::where('user_id', $user->id)->with('item')->get();
+    $totalAmount = $cartItems->sum(function ($cartItem) {
+        return $cartItem->quantity * $cartItem->item->price;
+    });
+
+    return view('api.stripe', compact('cartItems', 'totalAmount'));
+}
+
 }

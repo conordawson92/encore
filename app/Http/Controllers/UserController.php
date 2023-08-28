@@ -121,38 +121,6 @@ class UserController extends Controller
         return view('users.edit', ['user' => $user]);
     }
 
-    //edit form
-    public function edit(User $user)
-    {
-        return view('users.edit', ['user' => $user]);
-    }
-
-    //update the new data in the db
-    public function update(Request $request, User $user)
-    {
-        $formFields = $request->validate([
-            'userName' => ['required', 'min:3'],
-            'userLocation' => ['required', 'min:3'],
-            'userPhone' => ['required', 'min:9'],
-            'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
-            'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
-        ]);
-
-        $formFields = $request->validate([
-            'userImage' => ['image', 'max:2048'], // Limiting to 2MB
-        ]);
-        if ($request->hasFile('userImage')) {
-            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
-        }
-
-        $formFields['password'] = bcrypt($formFields['password']);
-
-        //update the user
-        $user->update($formFields);
-
-        return redirect('/users/' . $user->id . '/edit')->with('message', 'Profile updated successfully');
-    }
-
     //dashboard for all the user informations and items/transactions/ messages/etc...
     public function dashboard()
     {
