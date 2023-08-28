@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
@@ -112,11 +111,11 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
     ->name('users.edit');
-    
+
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
-->middleware('auth')
-->name('users.update');
+    ->middleware('auth')
+    ->name('users.update');
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
@@ -185,7 +184,7 @@ Route::get('/adminUser/transactions', [TransactionController::class, 'index'])
 Route::patch('/adminUser/transactions/{transaction}/cancel', [TransactionController::class, 'cancelTransaction'])
     ->middleware('auth')
     ->name('transactions.cancel');
-    
+
 
 
 //our mission
@@ -221,5 +220,3 @@ Route::middleware('auth')->group(function () {
     // Remove item from the cart
     Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
-
-
