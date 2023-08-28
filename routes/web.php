@@ -11,6 +11,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PlatformController;
 
 Route::get('/', function () {
     return view('home.index');
@@ -201,3 +203,9 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
+
+// About us page
+Route::get('/about', [AboutController::class, 'index']);
+
+// Platform - Contact us
+Route::get('/platform', [PlatformController::class, 'index']);
