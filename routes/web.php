@@ -12,8 +12,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PlatformController;
+
 
 Route::get('/', function () {
     return view('home.index');
@@ -55,17 +57,8 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 //manage user
 Route::get('/users/manage', [UserController::class, 'manage'])->middleware('auth');
 
-//show edit user form
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
-
-//update user in db
-Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
-
 //show user profile
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
-
-
-//PROBLEM
 
 //show new item form
 Route::get('/items/createItem', [ItemController::class, 'createItem'])
@@ -83,10 +76,14 @@ Route::post('/items/storeItem', [ItemController::class, 'storeItem'])
 
 //WISHLIST
 //add item to wishlist
-Route::post('/wishlist/add/{item}', [WishlistController::class, 'addToWishlist'])->middleware('auth');
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->middleware('auth');
 
 //remove item from wishlist
-Route::post('/wishlist/remove/{item}', [WishlistController::class, 'removeFromWishlist'])->middleware('auth');
+Route::delete('/wishlist/remove/{itemId}', [WishlistController::class, 'remove'])
+    ->name('wishlist.remove');
+
+
+
 
 
 //ADMIN
@@ -111,11 +108,11 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
     ->name('users.edit');
-    
+
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
-->middleware('auth')
-->name('users.update');
+    ->middleware('auth')
+    ->name('users.update');
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
@@ -184,7 +181,7 @@ Route::get('/adminUser/transactions', [TransactionController::class, 'index'])
 Route::patch('/adminUser/transactions/{transaction}/cancel', [TransactionController::class, 'cancelTransaction'])
     ->middleware('auth')
     ->name('transactions.cancel');
-    
+
 
 
 //our mission
@@ -223,5 +220,3 @@ Route::middleware('auth')->group(function () {
     // Remove item from the cart
     Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
-
-
