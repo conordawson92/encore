@@ -8,8 +8,8 @@
             <div class="flex flex-col sm:flex-row items-stretch"> 
                 
                 <!-- Responsive mobile -->
-                <div class="w-full md:w-1/2 flex justify-center cursor-pointer" onclick="showImage()">
-                <div class="flex justify-center w-78 sm:w-1/2 lg:w-3/4"> 
+
+                <div class="flex justify-center w-78 sm:w-1/2 lg:w-3/4 cursor-pointer" onclick="showImage()"> 
                     <img class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
                 </div>
     
@@ -66,8 +66,9 @@
     <a href="/listings" class="inline-block text-black ml-4 mb-4">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
+      <!-- Image Overlay Structure -->
     <div id="imageOverlay" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden opacity-0 transition-opacity duration-300" onclick="hideImage()">
         <img id="enlargedImage" class="max-w-4/5 max-h-4/5" src="" alt="{{ $listing->ItemName }}">
     </div>
-    <!-- Image Overlay Structure -->
+  
 </x-layout>
