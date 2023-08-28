@@ -6,7 +6,7 @@
             @csrf
             <div>
                 <label for="ItemName" class="block text-brown_logo font-medium">Item Name:</label>
-                <input type="text" name="ItemName" required class="mt-1 w-full p-2 border border-2 border-brown_logo">
+                <input type="text" name="ItemName" required class="mt-1 w-full p-2 border-2 border-brown_logo">
             </div>
 
             <div>
@@ -16,29 +16,30 @@
 
             <div>
                 <label for="description" class="block text-brown_logo font-medium">Description:</label>
-                <textarea name="description" required class="mt-1 w-full p-2 border border-2 border-brown_logo"></textarea>
+                <textarea name="description" required class="mt-1 w-full p-2 border-2 border-brown_logo"></textarea>
             </div>
 
-            <label for="price" class="block text-brown_logo font-medium bg-">Price:</label>
-            <input type="text" name="price" class="mt-1" required>
-            <!-- ... [Repeat the above pattern for each input field] ... -->
+            <div>
+                <label for="price" class="block text-brown_logo font-medium">Price:</label>
+                <input type="text" name="price" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+            </div>
 
             <div>
                 <label for="condition" class="block text-brown_logo font-medium">Condition:</label>
-                <select name="condition" required class="mt-1 w-full p-2 border border-2 border-brown_logo">
+                <select name="condition" required class="mt-1 w-full p-2 border-2 border-brown_logo">
                     <option value="new">New</option>
                     <option value="used">Used</option>
                     <option value="very used">Very Used</option>
                 </select>
             </div>
             <label class="block text-brown_logo font-medium" for="tags">Tags:</label>
-            <input class="mt-1 w-full p-2 border border-2 border-brown_logo" type="text" name="tags" required>
+            <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="text" name="tags" required>
             <br>
             <label class="block text-brown_logo font-medium" for="quantity">Quantity:</label>
-            <input class="mt-1 w-full p-2 border border-2 border-brown_logo" type="number" name="quantity" required>
+            <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="number" name="quantity" required>
             <br>
             <label class="block text-brown_logo font-medium" for="parentCategory_id">Main Category</label>
-            <select class="mt-1 w-full p-2 border border-2 border-brown_logo" id="parentCategory" name="parentCategory_id">
+            <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="parentCategory" name="parentCategory_id">
                 @foreach ($parentCategories as $parentCategory)
                 <option value="{{ $parentCategory->id }}">
                     {{ $parentCategory->parentcategoryName }}
@@ -47,7 +48,7 @@
             </select>
             <br>
             <label class="block text-brown_logo font-medium" for="category_id">Category</label>
-            <select class="mt-1 w-full p-2 border border-2 border-brown_logo" id="category" name="category_id">
+            <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="category" name="category_id">
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}" data-parent="{{ $category->parentCategory_id }}">
                     {{ $category->category_name }}
