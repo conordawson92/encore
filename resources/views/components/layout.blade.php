@@ -40,6 +40,9 @@
                 </li>
                 <li>
                     <a href="">
+                        <span>
+                            
+                        </span>
                         <i class="fa-solid fa-cart-shopping text-2xl"></i>
                     </a>
                 </li>
@@ -47,6 +50,8 @@
                     <a href="">
                         <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
+                </li>
+                <li>
                     <a href="">
                         <i class="fa-regular fa-bell text-2xl"></i>
                     </a>
