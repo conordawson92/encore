@@ -16,12 +16,14 @@ class UserController extends Controller
 {
 
     //show the register user form page
-    public function create(){
+    public function create()
+    {
         return view('users.register');
     }
 
     //store our infos in the db
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $formFields = $request->validate([
             'userName' => ['required', 'min:3', 'max:16'],
             'userLocation' => ['required', 'min:3'],
@@ -35,6 +37,9 @@ class UserController extends Controller
         ]);
 
         //make sure the image is here before saving it
+        $formFields = $request->validate([
+            'userImage' => ['image', 'max:2048'], // Limiting to 2MB
+        ]);
         if ($request->hasFile('userImage')) {
             $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
@@ -52,10 +57,10 @@ class UserController extends Controller
         $formFields['userRating'] = 3;
 
         //create the new user
-        $user=User::create($formFields);
+        $user = User::create($formFields);
 
         //using auth() helper handles all the login/logout process for us
-        auth()->login($user); 
+        auth()->login($user);
         //so the user that just finished the register form do not have to login again, he will stay in his account right after the register
 
         //when the user is created and logged in, we'll show them the homepage so they can start navigate the website
@@ -63,7 +68,8 @@ class UserController extends Controller
     }
 
     //Logout user
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         //log user out
         auth()->logout();
 
@@ -75,12 +81,14 @@ class UserController extends Controller
     }
 
     //log user in
-    public function login(){
+    public function login()
+    {
         return view('users.login');
     }
 
     //authenticate the user so the log in can happen
-    public function authenticate(Request $request){
+    public function authenticate(Request $request)
+    {
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
@@ -88,7 +96,7 @@ class UserController extends Controller
 
         //attempt() tries to match the content of $formFields to a user in the table
         //if it found a matching user, it will log in automatically
-        if(auth()->attempt($formFields)){
+        if (auth()->attempt($formFields)) {
             //generate a new session (to store the logged user data)
             $request->session()->regenerate();
 
@@ -105,13 +113,13 @@ class UserController extends Controller
     public function manage()
     {
         $user = auth()->user();
-        return view('users.edit', ['user'=> $user]);
+        return view('users.edit', ['user' => $user]);
     }
- 
+
     //edit form
     public function edit(User $user)
     {
-        return view('users.edit', ['user'=> $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     //update the new data in the db
@@ -125,6 +133,9 @@ class UserController extends Controller
             'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
         ]);
 
+        $formFields = $request->validate([
+            'userImage' => ['image', 'max:2048'], // Limiting to 2MB
+        ]);
         if ($request->hasFile('userImage')) {
             $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
@@ -154,11 +165,11 @@ class UserController extends Controller
             ->with('item')
             ->get();
 
-       // Load user's buying transactions
+        // Load user's buying transactions
         $buyingTransactions = Transaction::where('buyerUser_id', $user->id)
             ->with('item')
             ->get();
-            
+
         // Load user's messages with sender information
         $messagesSented = Message::where('senderUser_id', $user->id)
             ->with(['receiver', 'item'])
@@ -166,8 +177,8 @@ class UserController extends Controller
 
         // Load user's messages with receiver information
         $messagesReceived = Message::where('receiverUser_id', $user->id)
-        ->with(['sender', 'item'])
-        ->get();
+            ->with(['sender', 'item'])
+            ->get();
 
         // Load user's notifications
         $notifications = Notification::where('user_id', $user->id)
@@ -197,14 +208,14 @@ class UserController extends Controller
     }
 
     //users rating
-    public function storeRating(Request $request, User $user) 
+    public function storeRating(Request $request, User $user)
     {
         //rating that is given by default
         $newRating = $request->input('rating');
-    
+
         // Update the user's rating based on the new rating value
         $user->updateRating($newRating);
-    
+
         // Create the review record and save it
         $review = new Review([
             'reviewer_id' => auth()->user()->id,
@@ -213,9 +224,7 @@ class UserController extends Controller
             'comment' => $request->input('comment'),
         ]);
         $review->save();
-    
+
         return redirect()->back()->with('message', 'Rating and review submitted.');
-    }    
+    }
 }
-
-
