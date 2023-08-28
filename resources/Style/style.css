@@ -1,0 +1,50 @@
+/* Imported fonts from Google Fonts, including the "Limelight" and "Roboto" fonts with various font weights */
+@import url("https://fonts.googleapis.com/css2?family=Limelight&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+/* Remove default CSS styles for all HTML elements */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* Define custom CSS variables (or "CSS custom properties") for the project */
+:root {
+  --dark-color: #635bff;
+  --light-color: #80e9ff;
+}
+/* Add a pointer cursor to all HTML `svg` elements */
+svg {
+  cursor: pointer;
+}
+/* Set the fill color for any SVG elements with the ID "darkGroup" to the value of the `--dark-color` variable */
+#darkGroup {
+  fill: var(--dark-color);
+}
+/* Set the fill color for any SVG element with the ID "light1" to the value of the `--light-color` variable */
+#light1 {
+  fill: var(--light-color);
+}
+/* Add a transition effect to any SVG elements with the IDs "dark1", "light1", or "dark2" when a change happens.
+   The transition should be 1 second and ease in/out. */
+#dark1, #light1, #dark2 {
+  transition: all 1s ease;
+}
+/* Move the SVG element with the ID "dark2" with a 100% negative translation on the X-axis (to move it off the screen) */
+#dark2 {
+  transform: translateX(-100%);
+}
+/* When hovering over the SVG element, move the element with the ID "light1" to 13% positive translation on the X-axis,
+   which will make it move to the right. */
+svg:hover #light1 {
+  transform: translateX(13%);
+}
+/* When hovering over the SVG element, move the elements with the IDs "dark1" to 40% positive translation on the X-axis,
+   which will move it to the right and simultaneously decrease the opacity to 0. */
+svg:hover #dark1 {
+  transform: translateX(40%);
+  opacity: 0;
+}
+/* When hovering over the SVG element, move the element with the ID "dark2" to 0% positive translation on the X-axis,
+   which will make it move onto the screen. */
+svg:hover #dark2 {
+  transform: translateX(0%);
+}

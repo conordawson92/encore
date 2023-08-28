@@ -1,5 +1,11 @@
 <x-layout>
-    <div class="container mx-auto">
+    <div class="mb-4">
+        Sort by: 
+        <a href="?sort=priceAsc">Price (Low to High)</a> | 
+        <a href="?sort=priceDesc">Price (High to Low)</a> | 
+        <a href="?sort=newest">Newest</a> | 
+        <a href="?sort=oldest">Oldest</a>
+    </div>
 
         <!-- Listing Grid -->
         <div class="flex justify-center">
@@ -15,5 +21,9 @@
                 @endforeach
             </div>
         </div>
+    </div>
+
+    <div class="mt-6 p-4">
+        {{$listings->appends(['search' => request('search'), 'tag' => request('tag'), 'sort' => request('sort')])->links()}}
     </div>
 </x-layout>

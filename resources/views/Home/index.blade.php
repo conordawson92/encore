@@ -1,4 +1,3 @@
-
 <x-layout>
 
  <!-- Main Content -->
@@ -43,8 +42,8 @@
       <img src="/images/Homepage/pexels-airam-datoon-9158467.jpg" alt="Description" class="w-full h-full object-cover">
       <a href="/parent-category/2" class="absolute bottom-2 left-[50%] transform-[-50%,0] bg-orange-500 text-white py-2 px-5 text-lg">Women</a>
     </div>
-  </div>
-  <!-- End Section Men/Women -->
+    </div>
+    <!-- End Section Men/Women -->
 
   <!-- Best Sellers -->
   <div class="container mx-auto my-10 text-green-600">

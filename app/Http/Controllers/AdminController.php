@@ -155,7 +155,14 @@ class AdminController extends Controller
     //edit user
     public function editUser(User $user)
     {
-        return view('adminUser.editUser', compact('user'));
+        // Check if the logged-in user is an admin or the user is editing their own info
+        if (auth()->user()->role === 'admin' || auth()->user()->id === $user->id) {
+            // Load the edit view with the user's information
+            return view('users.edit', compact('user'));
+        } else {
+            // Redirect with an error message
+            return redirect()->route('dashboard')->with('error', 'You are not authorized to edit this user.');
+        }
     }
 
     //update the new informations in the database
@@ -221,11 +228,27 @@ class AdminController extends Controller
     //edit a specific item
     public function editItem(Item $item)
     {
-        $parentCategories = Category::whereNull('parentCategory_id')->get();
-        $categories = Category::where('parentCategory_id', $item->category->parentCategory_id)->get();
-    
-        return view('adminUser.editItem', compact('item', 'parentCategories', 'categories'));
+        $categories = Category::all();
+        $possibleConditions = ['new', 'used', 'very used'];
 
+        // Generate the $categoryMap
+        $categoryMap = [];
+        foreach ($categories as $category) {
+            if (!isset($categoryMap[$category->parentCategory_id])) {
+                $categoryMap[$category->parentCategory_id] = [];
+            }
+            $categoryMap[$category->parentCategory_id][] = [
+                'id' => $category->id,
+                'category_name' => $category->category_name,
+            ];
+        }
+        
+        return view('adminUser.editItem', [
+            'item' => $item,
+            'possibleConditions' => $possibleConditions,
+            'categories' => $categories,
+            'categoryMap' => $categoryMap, // Pass the category map to the view
+        ]);
     }
 
     //update the changes in the db
@@ -251,8 +274,8 @@ class AdminController extends Controller
         // change the status of the item to unavailable (Delete the item)
         $item->update(['status' => 'unavailable']);
 
-        return redirect()->route('items.manage')->with('message', 'Item deleted successfully and email sented to the user.');
-    }
+        return redirect()->back()->with('message', 'Item deleted successfully.');
+}
 
 
 }

@@ -9,16 +9,20 @@ use App\Models\ParentCategory;
 class ListingController extends Controller
 {
     //show all listings
-    public function index(){
-        
-        return view('listings.index', [
+    public function index()
+    {
+        $query = Item::where('status', 'available');
 
-            'listings' => Item::all(),
+        $query = $this->applySorting($query);
+
+        return view('listings.index', [
+            'listings' => $query->filter(request(['search', 'tag']))->paginate(10),
         ]);
     }
 
     //show a single listing
-    public function show(Item $listing){
+    public function show(Item $listing)
+    {
         return view('listings.show', [
             'listing' => $listing
         ]);
@@ -27,24 +31,48 @@ class ListingController extends Controller
     //show Items By Parent Category
     public function showItemsByParentCategory($parentCategory)
     {
-        $items = Item::whereHas('category', function ($query) use ($parentCategory) {
+        $query = Item::where('status', 'available')->whereHas('category', function ($query) use ($parentCategory) {
             $query->where('parentCategory_id', $parentCategory);
-        })->paginate(10);
+        });
+
+        $query = $this->applySorting($query);
 
         return view('listings.index', [
-            'listings' => $items,
+            'listings' => $query->paginate(10),
         ]);
     }
 
     public function showItemsByCategory($categoryID)
-{
-    $items = Item::whereHas('category', function ($query) use ($categoryID) {
-        $query->where('category_id', $categoryID);
-    })->paginate(10);
+    {
+        $query = Item::where('status', 'available')->whereHas('category', function ($query) use ($categoryID) {
+            $query->where('category_id', $categoryID);
+        });
+
+        $query = $this->applySorting($query);
 
         return view('listings.index', [
-            'listings' => $items
+            'listings' => $query->paginate(10),
         ]);
+    }
+
+    // Private method to handle sorting logic
+    private function applySorting($query)
+    {
+        $sort = request('sort');
+
+        if ($sort == 'priceAsc') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort == 'priceDesc') {
+            $query->orderBy('price', 'desc');
+        } elseif ($sort == 'newest') {
+            $query->orderBy('dateListed', 'desc');
+        } elseif ($sort == 'oldest') {
+            $query->orderBy('dateListed', 'asc');
+        } else {
+            $query->latest();  // Default sort
+        }
+
+        return $query;
     }
 
     //filtering tags and search bar
@@ -52,6 +80,4 @@ class ListingController extends Controller
     {
         return $query->filter($filters);
     }
-
-
 }
