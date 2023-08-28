@@ -32,7 +32,13 @@
     <br>
 
     <label for="condition">Item Condition</label>
-    <input type="text" id="condition" name="condition" value="{{ $item->condition }}" required>
+    <select id="condition" name="condition" required>
+        @foreach ($possibleConditions as $enumValue)
+            <option value="{{ $enumValue }}" {{ $enumValue === $item->condition ? 'selected' : '' }}>
+                {{ $enumValue }}
+            </option>
+        @endforeach
+    </select>
     <br>
 
     <label for="quantity">Items Quantity</label>
@@ -51,14 +57,44 @@
 
     <label for="category">Category</label>
     <select id="category" name="category">
-        @foreach ($categories as $category)
-            <option value="{{ $category->id }}"
-                {{ $category->id === $item->category_id ? 'selected' : '' }}>
-                {{ $category->category_name }}
-            </option>
-        @endforeach
+        <!-- This option will be dynamically populated using JavaScript -->
     </select>
     <br>
 
     <button type="submit">Update Item</button>
 </form>
+
+<script>
+    // Get references to the select elements
+    const parentCategorySelect = document.getElementById('parentCategory');
+    const categorySelect = document.getElementById('category');
+
+    // A map of parent category IDs to their corresponding categories
+    const categoryMap = {!! json_encode($categoryMap) !!};
+
+    // Update the category options based on the selected parent category
+    parentCategorySelect.addEventListener('change', function () {
+        const selectedCategoryId = parentCategorySelect.value;
+        const categoryOptions = categoryMap[selectedCategoryId] || [];
+
+        categorySelect.innerHTML = ''; // Clear existing options
+
+        categoryOptions.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option.id;
+            optionElement.textContent = option.category_name;
+            categorySelect.appendChild(optionElement);
+        });
+    });
+
+    // Initialize the category options based on the default selected parent category
+    const initialParentCategoryId = parentCategorySelect.value;
+    const initialCategoryOptions = categoryMap[initialParentCategoryId] || [];
+
+    initialCategoryOptions.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.id;
+        optionElement.textContent = option.category_name;
+        categorySelect.appendChild(optionElement);
+    });
+</script>

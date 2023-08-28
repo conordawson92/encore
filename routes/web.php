@@ -9,7 +9,12 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PlatformController;
 
 Route::get('/', function () {
     return view('home.index');
@@ -59,6 +64,23 @@ Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth
 
 //show user profile
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+
+//PROBLEM
+
+//show new item form
+Route::get('/items/createItem', [ItemController::class, 'createItem'])
+    ->middleware('auth')
+    ->name('items.createItem');
+
+//store the new item in the db
+Route::post('/items/storeItem', [ItemController::class, 'storeItem'])
+    ->middleware('auth')
+    ->name('items.storeItem');
+
+
+
+
 
 //WISHLIST
 //add item to wishlist
@@ -111,7 +133,6 @@ Route::get('/adminUser/users', [AdminController::class, 'index'])
     ->middleware('auth')
     ->name('adminUser.users');
 
-
 //restore a banned user
 Route::put('/adminUser/users/{user}/restore', [AdminController::class, 'restoreUser'])
     ->middleware('auth')
@@ -134,6 +155,36 @@ Route::put('/adminUser/editItem/{item}', [AdminController::class, 'updateItem'])
 Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
     ->middleware('auth')
     ->name('items.destroy');
+
+//list all reviews
+Route::get('/adminUser/reviews', [ReviewController::class, 'index'])
+    ->middleware('auth')
+    ->name('reviews.index');
+
+//edit the review
+Route::get('/adminUser/reviews/{review}/edit', [ReviewController::class, 'edit'])
+    ->middleware('auth')
+    ->name('reviews.edit');
+
+//update the modify review in the db
+Route::put('/adminUser/reviews/{review}', [ReviewController::class, 'update'])
+    ->middleware('auth')
+    ->name('reviews.update');
+
+//delete the review
+Route::delete('/adminUser/reviews/{review}', [ReviewController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('reviews.destroy');
+
+//see all transactions
+Route::get('/adminUser/transactions', [TransactionController::class, 'index'])
+    ->middleware('auth')
+    ->name('transactions.index');
+
+//cancel pending transactions
+Route::patch('/adminUser/transactions/{transaction}/cancel', [TransactionController::class, 'cancelTransaction'])
+    ->middleware('auth')
+    ->name('transactions.cancel');
     
 
 
@@ -155,6 +206,11 @@ Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.pos
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
 
+// About us page
+Route::get('/about', [AboutController::class, 'index']);
+
+// Platform - Contact us
+Route::get('/platform', [PlatformController::class, 'index']);
 //SHOPPING CART
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.cart');
