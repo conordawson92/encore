@@ -1,8 +1,6 @@
 <x-layout>
     <a href="{{ route('admin') }}">Back to Admin functions</a>
 
-    <h1>Manage Items</h1>
-
 <!-- Display Available Items -->
 <h2>Available Items</h2>
 <table>

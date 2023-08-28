@@ -1,4 +1,5 @@
 <!--html diaply for the admin complete dashboard with all the informations, history, messages, etc...and the manage options link-->
+
 <x-layout>
     <!DOCTYPE html>
     <html>
@@ -9,12 +10,16 @@
 
     <body>
         <div class="w-[50%] mx-auto">
+            @auth
+            @if(auth()->user()->role === 'admin')
             <p>
-                Go to the admnistrator page 
+                Go to the admnistrator page
                 <a href="/adminUser/admin">
                     here
                 </a>
             </p>
+            @endif
+            @endauth
 
             <!--the admin profile informations-->
             <div class="flex gap-4 flex-col p-2 shadow-custom">
@@ -23,16 +28,15 @@
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
                         <div class="font-bold text-2xl">
                             {{ $user->userName }}
-                            @for($i = 1; $i <= 5; $i++)
-                                @if($i <= floor($user->userRating))
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                            @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
+                                <span class="text-yellow-500"><i class="fas fa-star"></i></span>
                                 @elseif($i - 0.5 == $user->userRating)
-                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
                                 @else
-                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                <span class="text-gray-400"><i class="fas fa-star"></i></span>
                                 @endif
-                            @endfor
-                            <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
+                                @endfor
+                                <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
                     <div class="flex items-center justify-center w-10 h-10 mr-6">
@@ -58,423 +62,319 @@
                         {{ $user->userPhone }}
                     </li>
                     <li>
-                        Your favorite payment method:    
+                        Your favorite payment method:
                         {{ $user->paymentInfo }}
                     </li>
-                </ul>                
+                </ul>
             </div>
             <!--all the admin selling items-->
-            {{-- <div>
-                <h2>Your Items</h2>
+            <<<<<<< Updated upstream=======<div>
 
-                @if($user->sellerItems->isEmpty())
-                        <p>You currently don't have items to sell</p>
-                @else
-                @foreach ($user->sellerItems as $item)
-                <div>
-                    <h4>{{ $item->ItemName }}</h4>
-                    <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                    <p>Description: {{ $item->description }}</p>
-                    <p>Price: {{ $item->price }}</p>
-                    <p>Size: {{ $item->size }}</p>
-                    <p>Brand: {{ $item->brand }}</p>
-                    <p>Condition: {{$item->condition}}</p>
-                    <p>Status: {{$item->status}}</p>
-                    <p>Date was posted: {{$item->dateListed}}</p>
-                    <p>Quantity available: {{$item->quantity}}</p>
-                </div>
-                @endforeach
-                @endif
-            </div> --}}
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Items</h2>
-            
-                @if($user->sellerItems->isEmpty())
+                <a href="{{ route('items.createItem') }}">Add New Item</a>
+
+                <h2>Your Items</h2>
+                >>>>>>> Stashed changes
+
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-4">Your Items</h2>
+
+                    {{-- @if($user->sellerItems->isEmpty())
                     <p class="text-gray-600">You currently don't have items to sell</p>
                 @else
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach ($user->sellerItems as $item)
                         <div class="border rounded-lg overflow-hidden shadow-lg">
                             <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                            <div class="p-4">
-                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                                <p class="text-gray-600">Description: {{ $item->description }}</p>
-                                <p class="text-gray-600">Price: {{ $item->price }}</p>
-                                <p class="text-gray-600">Size: {{ $item->size }}</p>
-                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                                <p class="text-gray-600">Status: {{$item->status}}</p>
-                                <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
-                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                            </div>
-                        </div>
-                        @endforeach
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                        <p class="text-gray-600">Description: {{ $item->description }}</p>
+                        <p class="text-gray-600">Price: {{ $item->price }}</p>
+                        <p class="text-gray-600">Size: {{ $item->size }}</p>
+                        <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                        <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                        <p class="text-gray-600">Status: {{$item->status}}</p>
+                        <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
+                        <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
                     </div>
-                @endif
-            </div>
-            <!--the items in the admin wishlist-->
-            {{-- <h2>Your Wishlist</h2>
-            @if ($user->wishlist->count() > 0)
-            @foreach ($user->wishlist as $item)
-            <div>
-                <p>{{ $item->ItemName }}</p>
-                <img src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                <p>Description: {{ $item->description }}</p>
-                <p>Price: {{ $item->price }}</p>
-                <p>Size: {{ $item->size }}</p>
-                <p>Brand: {{ $item->brand }}</p>
-                <p>Condition: {{$item->condition}}</p>
-                <p>Status: {{$item->status}}</p>
-                <p>Date was posted: {{$item->dateListed}}</p>
-                <p>Quantity available: {{$item->quantity}}</p>
-            </div>
+                </div>
+                @endforeach
+        </div>
+        @endif --}}
+        @if($user->sellerItems->isEmpty())
+        <p class="text-gray-600">You currently don't have items to sell</p>
+        @else
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach ($user->sellerItems as $item)
+            <a href="/listings/{{$item->id}}" class="block border rounded-lg overflow-hidden shadow-lg transition-transform transform hover:scale-105">
+                <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                <div class="p-4">
+                    <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                    <p class="text-gray-600">Description: {{ $item->description }}</p>
+                    <p class="text-gray-600">Price: {{ $item->price }}</p>
+                    <p class="text-gray-600">Size: {{ $item->size }}</p>
+                    <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                    <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                    <p class="text-gray-600">Status: {{$item->status}}</p>
+                    <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
+                    <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                    <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </a>
             @endforeach
-            @else
-            <p>Your wishlist is empty.</p>
-            @endif --}}
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-            
-                @if ($user->wishlist->count() > 0)
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach ($user->wishlist as $item)
-                        <div class="border rounded-lg overflow-hidden shadow-lg">
-                            <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
-                            <div class="p-4">
-                                <p class="text-lg font-semibold mb-2">{{ $item->ItemName }}</p>
-                                <p class="text-gray-600">Description: {{ $item->description }}</p>
-                                <p class="text-gray-600">Price: {{ $item->price }}</p>
-                                <p class="text-gray-600">Size: {{ $item->size }}</p>
-                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                                <p class="text-gray-600">Status: {{$item->status}}</p>
-                                <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
-                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                            </div>
-                        </div>
-                        @endforeach
+        </div>
+        @endif
+        </div>
+        <!--the items in the admin wishlist-->
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
+
+            @if ($user->wishlist->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @foreach ($user->wishlist as $item)
+                <div class="border rounded-lg overflow-hidden shadow-lg">
+                    <img class="w-full h-48 object-cover" src="{{ asset('storage/' . $item->itemImage) }}" alt="{{ $item->ItemName }} Image">
+                    <div class="p-4">
+                        <p class="text-lg font-semibold mb-2">{{ $item->ItemName }}</p>
+                        <p class="text-gray-600">Description: {{ $item->description }}</p>
+                        <p class="text-gray-600">Price: {{ $item->price }}</p>
+                        <p class="text-gray-600">Size: {{ $item->size }}</p>
+                        <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                        <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                        <p class="text-gray-600">Status: {{$item->status}}</p>
+                        <p class="text-gray-600">Date was posted: {{$item->dateListed}}</p>
+                        <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
                     </div>
-                @else
-                    <p class="text-gray-600">Your wishlist is empty.</p>
-                @endif
+                </div>
+                @endforeach
             </div>
-            <!--all the items bought for the admin logged in with the transaction history-->
-            {{-- <h2>Your Buying Transactions</h2>
+            @else
+            <p class="text-gray-600">Your wishlist is empty.</p>
+            @endif
+        </div>
+
+        <!--all the items bought for the admin logged in with the transaction history-->
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Buying Transactions</h2>
+
             @if ($buyingTransactions->count() > 0)
-            <table>
-                @foreach ($buyingTransactions as $transaction)
-                <p>Item: {{ $transaction->item->ItemName }}</p>
-                <p>Seller: {{ $transaction->item->seller->userName }}</p>
-                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
-                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
-                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Seller</th>
+                        <th class="py-2 px-4 border-b text-left">Date of Purchase</th>
+                        <th class="py-2 px-4 border-b text-left">Payment Details</th>
+                        <th class="py-2 px-4 border-b text-left">Shipment Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($buyingTransactions as $transaction)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $transaction->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->item->seller->userName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->datePurchase }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->paymentDetails }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->shippingDetails }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No buying transactions found.</p>
-            @endif --}}
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Buying Transactions</h2>
-            
-                @if ($buyingTransactions->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Seller</th>
-                                <th class="py-2 px-4 border-b text-left">Date of Purchase</th>
-                                <th class="py-2 px-4 border-b text-left">Payment Details</th>
-                                <th class="py-2 px-4 border-b text-left">Shipment Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($buyingTransactions as $transaction)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $transaction->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->item->seller->userName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->datePurchase }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->paymentDetails }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->shippingDetails }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600">No buying transactions found.</p>
-                @endif
-            </div>
+            <p class="text-gray-600">No buying transactions found.</p>
+            @endif
+        </div>
 
-            <!--all the items sell for the admin logged in with the transaction history-->
-            {{-- <h2>Your Selling Transactions</h2>
+        <!--all the items sell for the admin logged in with the transaction history-->
+
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Selling Transactions</h2>
+
             @if ($sellingTransactions->count() > 0)
-            <table>
-                @foreach ($sellingTransactions as $transaction)
-                <p>Item: {{ $transaction->item->ItemName }}</p>
-                <p>Buyer: {{ $transaction->item->seller->userName }}</p>
-                <p>Date of Purchase: {{ $transaction->datePurchase }}</p>
-                <p>Payment Details: {{ $transaction->paymentDetails }}</p>
-                <p>Shipment Details {{ $transaction->shippingDetails }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Buyer</th>
+                        <th class="py-2 px-4 border-b text-left">Date of Purchase</th>
+                        <th class="py-2 px-4 border-b text-left">Payment Details</th>
+                        <th class="py-2 px-4 border-b text-left">Shipment Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($sellingTransactions as $transaction)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $transaction->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->item->buyer->userName }}</td> <!-- Note the change from seller to buyer here -->
+                        <td class="py-2 px-4 border-b">{{ $transaction->datePurchase }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->paymentDetails }}</td>
+                        <td class="py-2 px-4 border-b">{{ $transaction->shippingDetails }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No selling transactions found.</p>
-            @endif --}}
+            <p class="text-gray-600">No selling transactions found.</p>
+            @endif
+        </div>
 
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Selling Transactions</h2>
-            
-                @if ($sellingTransactions->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Buyer</th>
-                                <th class="py-2 px-4 border-b text-left">Date of Purchase</th>
-                                <th class="py-2 px-4 border-b text-left">Payment Details</th>
-                                <th class="py-2 px-4 border-b text-left">Shipment Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($sellingTransactions as $transaction)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $transaction->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->item->buyer->userName }}</td> <!-- Note the change from seller to buyer here -->
-                                <td class="py-2 px-4 border-b">{{ $transaction->datePurchase }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->paymentDetails }}</td>
-                                <td class="py-2 px-4 border-b">{{ $transaction->shippingDetails }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600">No selling transactions found.</p>
-                @endif
-            </div>
+        <!--all the reviews made by the admin logged in-->
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Reviews</h2>
 
-            <!--all the reviews made by the admin logged in-->
-            {{-- <h2>Your Reviews</h2>
-            <h3>Sent</h3>
+            <h3 class="text-xl font-semibold mt-6">Sent</h3>
             @if ($reviewsGiven->count() > 0)
-            <table>
-                @foreach ($reviewsGiven as $review)
-                <p>Seller: {{ $review->item->seller->userName }}</p>
-                <p>Item: {{ $review->item->ItemName }}</p>
-                <p>Date of Purchase: {{ $review->dateReview }}</p>
-                <p>Comment: {{ $review->comment }}</p>
-                <p>Rating: {{ $review->rating }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Seller</th>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Date of Review</th>
+                        <th class="py-2 px-4 border-b text-left">Comment</th>
+                        <th class="py-2 px-4 border-b text-left">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reviewsGiven as $review)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $review->item->seller->userName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->dateReview }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->comment }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->rating }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No reviews sent.</p>
+            <p class="text-gray-600 mt-2">No reviews sent.</p>
             @endif
-            <h3>Received</h3>
+
+            <h3 class="text-xl font-semibold mt-6">Received</h3>
             @if ($reviewsReceived->count() > 0)
-            <table>
-                @foreach ($reviewsReceived as $review)
-                <p>Buyer: {{ $review->item->seller->userName }}</p>
-                <p>Item: {{ $review->item->ItemName }}</p>
-                <p>Date of Purchase: {{ $review->dateReview }}</p>
-                <p>Comment: {{ $review->comment }}</p>
-                <p>Rating: {{ $review->rating }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Buyer</th>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Date of Review</th>
+                        <th class="py-2 px-4 border-b text-left">Comment</th>
+                        <th class="py-2 px-4 border-b text-left">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($reviewsReceived as $review)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $review->item->buyer->userName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->dateReview }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->comment }}</td>
+                        <td class="py-2 px-4 border-b">{{ $review->rating }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No reviews received.</p>
-            @endif --}}
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Reviews</h2>
-            
-                <h3 class="text-xl font-semibold mt-6">Sent</h3>
-                @if ($reviewsGiven->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Seller</th>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Date of Review</th>
-                                <th class="py-2 px-4 border-b text-left">Comment</th>
-                                <th class="py-2 px-4 border-b text-left">Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($reviewsGiven as $review)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $review->item->seller->userName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->dateReview }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->comment }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->rating }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600 mt-2">No reviews sent.</p>
-                @endif
-            
-                <h3 class="text-xl font-semibold mt-6">Received</h3>
-                @if ($reviewsReceived->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Buyer</th>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Date of Review</th>
-                                <th class="py-2 px-4 border-b text-left">Comment</th>
-                                <th class="py-2 px-4 border-b text-left">Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($reviewsReceived as $review)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $review->item->buyer->userName }}</td> <!-- Adjusted to show the buyer's username -->
-                                <td class="py-2 px-4 border-b">{{ $review->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->dateReview }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->comment }}</td>
-                                <td class="py-2 px-4 border-b">{{ $review->rating }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600 mt-2">No reviews received.</p>
-                @endif
-            </div>
-
-            <!--all the admin messages history-->
-            {{-- <h2>Your Messages</h2>
-            <h3>Sent</h3>
-            @if ($messagesSented->count() > 0)
-            <table>
-                @foreach ($messagesSented as $message)
-                <p>Receiver: {{ $message->receiver->userName }}</p>
-                <p>Item: {{ $message->item->ItemName }}</p>
-                <p>Date: {{ $message->dateSent }}</p>
-                <p>Message: {{ $message->content }}</p>
-                <p>Status: {{ $message->status }}</p>
-                @endforeach
-            </table>
-            @else
-            <p>No messages sent.</p>
+            <p class="text-gray-600 mt-2">No reviews received.</p>
             @endif
-            <h3>Received</h3>
+        </div>
+
+        <!--all the admin messages history-->
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Messages</h2>
+
+            <h3 class="text-xl font-semibold mt-6">Sent</h3>
+            @if ($messagesSented->count() > 0)
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Receiver</th>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Date</th>
+                        <th class="py-2 px-4 border-b text-left">Message</th>
+                        <th class="py-2 px-4 border-b text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($messagesSented as $message)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $message->receiver->userName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->dateSent }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->content }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->status }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @else
+            <p class="text-gray-600 mt-2">No messages sent.</p>
+            @endif
+
+            <h3 class="text-xl font-semibold mt-6">Received</h3>
             @if ($messagesReceived->count() > 0)
-            <table>
-                @foreach ($messagesSented as $message)
-                <p>Sender: {{ $message->sender->userName }}</p>
-                <p>Item: {{ $message->item->ItemName }}</p>
-                <p>Date: {{ $message->dateSent }}</p>
-                <p>Message: {{ $message->content }}</p>
-                <p>Status: {{ $message->status }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Sender</th>
+                        <th class="py-2 px-4 border-b text-left">Item</th>
+                        <th class="py-2 px-4 border-b text-left">Date</th>
+                        <th class="py-2 px-4 border-b text-left">Message</th>
+                        <th class="py-2 px-4 border-b text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($messagesReceived as $message) <!-- I've adjusted the loop variable -->
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ $message->sender->userName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->item->ItemName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->dateSent }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->content }}</td>
+                        <td class="py-2 px-4 border-b">{{ $message->status }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No messages received.</p>
-            @endif --}}
+            <p class="text-gray-600 mt-2">No messages received.</p>
+            @endif
+        </div>
 
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Messages</h2>
-            
-                <h3 class="text-xl font-semibold mt-6">Sent</h3>
-                @if ($messagesSented->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Receiver</th>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Date</th>
-                                <th class="py-2 px-4 border-b text-left">Message</th>
-                                <th class="py-2 px-4 border-b text-left">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($messagesSented as $message)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $message->receiver->userName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->dateSent }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->content }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->status }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600 mt-2">No messages sent.</p>
-                @endif
-            
-                <h3 class="text-xl font-semibold mt-6">Received</h3>
-                @if ($messagesReceived->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Sender</th>
-                                <th class="py-2 px-4 border-b text-left">Item</th>
-                                <th class="py-2 px-4 border-b text-left">Date</th>
-                                <th class="py-2 px-4 border-b text-left">Message</th>
-                                <th class="py-2 px-4 border-b text-left">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($messagesReceived as $message) <!-- I've adjusted the loop variable -->
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ $message->sender->userName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->item->ItemName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->dateSent }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->content }}</td>
-                                <td class="py-2 px-4 border-b">{{ $message->status }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600 mt-2">No messages received.</p>
-                @endif
-            </div>
+        <!--admin notifications history-->
+        <div class="p-6">
+            <h2 class="text-2xl font-bold mb-4">Your Notifications</h2>
 
-            <!--admin notifications history-->
-            {{-- <h2>Your Notifications</h2>
             @if ($notifications->count() > 0)
-            <table>
-                @foreach ($notifications as $notification)
-                <p>Notification: {{ optional($notification->typeNotification)->typeNotificationName }}</p>
-                <p>Date: {{ $notification->dateSent }}</p>
-                <p>Content: {{ $notification->content }}</p>
-                <p>Status: {{ $notification->status }}</p>
-                @endforeach
+            <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="py-2 px-4 border-b text-left">Notification Type</th>
+                        <th class="py-2 px-4 border-b text-left">Date</th>
+                        <th class="py-2 px-4 border-b text-left">Content</th>
+                        <th class="py-2 px-4 border-b text-left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($notifications as $notification)
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ optional($notification->typeNotification)->typeNotificationName }}</td>
+                        <td class="py-2 px-4 border-b">{{ $notification->dateSent }}</td>
+                        <td class="py-2 px-4 border-b">{{ $notification->content }}</td>
+                        <td class="py-2 px-4 border-b">{{ $notification->status }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
             @else
-            <p>No notifications found.</p>
-            @endif --}}
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Notifications</h2>
-            
-                @if ($notifications->count() > 0)
-                    <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-2 px-4 border-b text-left">Notification Type</th>
-                                <th class="py-2 px-4 border-b text-left">Date</th>
-                                <th class="py-2 px-4 border-b text-left">Content</th>
-                                <th class="py-2 px-4 border-b text-left">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($notifications as $notification)
-                            <tr>
-                                <td class="py-2 px-4 border-b">{{ optional($notification->typeNotification)->typeNotificationName }}</td>
-                                <td class="py-2 px-4 border-b">{{ $notification->dateSent }}</td>
-                                <td class="py-2 px-4 border-b">{{ $notification->content }}</td>
-                                <td class="py-2 px-4 border-b">{{ $notification->status }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p class="text-gray-600 mt-2">No notifications found.</p>
-                @endif
-            </div>
+            <p class="text-gray-600 mt-2">No notifications found.</p>
+            @endif
+        </div>
         </div>
     </body>
-</html>
+
+    </html>
 </x-layout>
