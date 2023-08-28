@@ -39,7 +39,13 @@
                 <div class="text-lg my-4">
                     Status: {{ $listing->status }}
                 </div>
-                <button>Buy</button>
+                
+                <!-- Add to Cart Form -->
+                <form action="{{ route('cart.add', ['item' => $listing->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+                </form>
+
                 <button>Message</button>
             </div>
         </x-card>
