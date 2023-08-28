@@ -123,7 +123,7 @@
 
         @include('partials._nav')
 
-        <main class="bg-white">
+        <main class="bg-white p-2">
             {{ $slot }}
         </main>
     </div>
