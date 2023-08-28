@@ -54,7 +54,17 @@
                 <h2 class="text-2xl font-bold mb-4">Your Items</h2>
 
                 @if($user->sellerItems->where('status', 'available')->isEmpty())
-                <p class="text-gray-600">You currently don't have items to sell</p>
+                <a href="{{ route('items.createItem') }}">
+                    <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105 cursor-pointer">
+                        <div class="flex items-center justify-center w-full h-48 bg-gray-200">
+                            <i class="fas fa-plus text-3xl"></i> <!-- You might need a different icon class based on the icon library you're using -->
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="text-lg font-semibold mb-2">Add Item</h4>
+                            <p class="text-gray-600">Click to add a new item to your listings</p>
+                        </div>
+                    </div>
+                </a>
                 @else
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($user->sellerItems as $item)
