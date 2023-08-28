@@ -19,6 +19,9 @@ const userDetails = `
                         Your favorite payment method:    
                         ${ userAuth.paymentInfo }
                     </li>
+                    <li>
+                        <a href="/adminUser/users/${userAuth.id}/edit">Edit my Informations</a>
+                    </li>
                 </ul>
                 `;
 
@@ -28,7 +31,6 @@ let details = false;
 document.addEventListener("DOMContentLoaded", () => {
     const userDetailsButton = document.querySelector('#user_details_button');
     const userDetailsButtonIcon = document.querySelector('#user_details_button_icon');
-    const shadowProfile = document.querySelector('#profile');
 
     userDetailsButton.addEventListener("click", () => {
         if (!details) {

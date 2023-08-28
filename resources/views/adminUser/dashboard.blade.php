@@ -37,7 +37,6 @@
                                 @endif
                                 @endfor
                                 <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
-                                <a href="{{ route('users.edit', ['user' => auth()->user()]) }}">Edit my Informations</a>
                         </div>
                     </div>
                     <div class="flex items-center justify-center w-10 h-10 mr-6">
