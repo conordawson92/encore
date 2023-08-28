@@ -35,12 +35,12 @@ class Review extends Model
     //relationship that says this review belongs to this users
     public function sender()
     {
-        return $this->belongsTo(User::class, 'reviewerUser_id');
+        return $this->belongsTo(User::class, 'reviewer_id');
     }
  
     public function receiver()
     {
-        return $this->belongsTo(User::class, 'reviewedUser_id');
+        return $this->belongsTo(User::class, 'reviewed_id');
     }
  
     //relationship that says this review belongs to that item

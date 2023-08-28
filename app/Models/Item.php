@@ -9,7 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $table = 'items'; 
+    protected $table = 'items';
 
     protected $fillable = [
         'ItemName',
@@ -27,24 +27,31 @@ class Item extends Model
         'buyerUser_id'
     ];
 
-    public function scopeFilter($query, array $filters){
+    public function scopeFilter($query, array $filters)
+    {
         //array $filters: all the filters to add in the query
 
-        //$filters['tag'] represents the value we got from the ProductController
-        if($filters['tag'] ?? false )
-        {
-            //let s prepare our SQL query
+        //$filters['tag'] represents the value we got from the ListingsController
+        if ($filters['tag'] ?? false) {
             $query->where('tags', 'like', '%' . $filters['tag'] . '%');
-            // where() will build the sql query for us
-            //'tags' is the name of the column to use
-            //'like' is the operation to use
-            //'%' .$filters['tag'] . '%' is the criteria for the "like" operation
         }
 
+        if ($filters['search'] ?? false) {
+            $query->where(function ($query) use ($filters) {
+                $query->where('ItemName', 'LIKE', '%' . $filters['search'] . '%')
+                    ->orWhere('description', 'LIKE', '%' . $filters['search'] . '%')
+                    ->orWhere('price', 'LIKE', '%' . $filters['search'] . '%')
+                    ->orWhere('size', 'LIKE', '%' . $filters['search'] . '%')
+                    ->orWhere('brand', 'LIKE', '%' . $filters['search'] . '%');
+            });
+        }
+
+        return $query;
     }
 
     //relationship that says this item belongs to that user(was created by)
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'sellerUser_id');
     }
 
@@ -66,13 +73,11 @@ class Item extends Model
         return $this->hasMany(Review::class, 'item_id');
     }
 
-    //relationship with the user
+    //relationship with the user (dashboard)
     public function seller()
     {
         return $this->belongsTo(User::class, 'sellerUser_id');
-    }    
-
-    //relationship with the user
+    }
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyerUser_id');
