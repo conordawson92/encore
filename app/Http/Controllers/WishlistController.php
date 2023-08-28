@@ -32,17 +32,25 @@ class WishlistController extends Controller
     }
 
     //method to remove an item from the wishlist
-    public function removeFromWishlist(Request $request, Item $item)
+    // WishlistController.php
+    public function remove($itemId)
     {
         $user = auth()->user();
 
-        // Check if the item is in the user's wishlist
-        if ($user->wishlist->contains($item)) {
-            $user->wishlist()->detach($item);
+        // Find the item in the user's wishlist
+        $item = $user->wishlist->find($itemId);
+
+        if (!$item) {
+            return redirect()->back()->with('error', 'Item not found in wishlist.');
         }
 
-        return redirect()->back()->with('message', 'Item removed from wishlist successfully.');
+        // Remove the item from the wishlist
+        $user->wishlist()->detach($item);
+
+        return redirect()->back()->with('success', 'Item removed from wishlist.');
     }
+
+        
 
     //method to clear all the items from the wishlist
     public function clearWishlist()
