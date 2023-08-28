@@ -18,7 +18,14 @@
             <div class="text-xl font-bold mb-4">
                 Brand: {{ $listing->description }}</div>
 
-            <x-listing-tags :tagsCsv="$listing->tags" /> 
+            <x-listing-tags :tagsCsv="$listing->tags" />
+                <form action="{{ route('cart.add', $listing->id) }}" method="post">
+                    @csrf
+                    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                        Add to Cart
+                    </button>
+                </form>
+                
         </div>
     </div>
 </x-card>

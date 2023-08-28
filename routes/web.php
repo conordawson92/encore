@@ -2,8 +2,10 @@
 
 use App\Models\ParentCategory;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ParentCategoryController;
@@ -209,3 +211,15 @@ Route::get('/about', [AboutController::class, 'index']);
 
 // Platform - Contact us
 Route::get('/platform', [PlatformController::class, 'index']);
+//SHOPPING CART
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.cart');
+    // Add items to the cart
+    Route::post('/cart/add/{item}', [CartController::class, 'addToCart'])->name('cart.add');
+    // Update cart item quantity
+    Route::patch('/cart/update/{cart}', [CartController::class, 'updateCartItem'])->name('cart.update');
+    // Remove item from the cart
+    Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+});
+
+
