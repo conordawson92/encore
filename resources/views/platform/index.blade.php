@@ -64,12 +64,13 @@
       <img src="./images/Contact_us/pexels-karolina-grabowska-4210850.jpg" alt="Image 1" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
     <div class="w-full md:w-1/2 text-left pl-6">
-      <h2 class="text-5xl py-6">ENCORE EXCHANGE</h2>
-      <p>
-        Every piece of clothing has a footprint, from the water and pesticides used in growing cotton, to the energy consumed in manufacturing 
-        and shipping. By choosing second-hand, you are actively reducing the demand for new production, 
-        decreasing your carbon footprint, and ensuring fewer items end up in landfills. It's a sustainable choice 
-        for the planet.
+      <h2 class="text-4xl py-6">WE SHOULD ALL TAKE CARE OF OUR HOME</h2>
+      <p class="text-2xl">
+        By choosing to buy or sell on <span class="italic font-bold">Encore</span>, you're making a conscious decision to reduce your 
+        environmental footprint. The fashion industry is one of the largest contributors to pollution, with countless garments ending up in 
+        landfills each year. By giving clothing a second life, not only are you preventing waste, but you're also reducing the demand for new 
+        clothing production. This in turn means less water usage, fewer chemicals released from dyes, and a significant reduction in carbon 
+        emissions. Every item you purchase or sell is a step towards a more sustainable planet.
     </p>
     </div>
   </div>
@@ -80,12 +81,13 @@
       <img src="./images/Contact_us/pexels-cottonbro-studio-6069552.jpg" alt="Image 2" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
     <div class="w-full md:w-1/2 text-left pr-6">
-      <h2 class="text-5xl py-6">CLOTHES FROM CLOTHES</h2>
-      <p>
-        By buying and selling on our platform, you're not just participating in commerce—you're actively supporting a circular economy. 
-        This means we're moving away from the traditional "buy, use, dispose" model and towards an approach that values reuse and repurposing.
-        Dive into a world where fashion meets affordability. Second-hand doesn't mean second-best. Find premium brands and quality pieces at 
-        a fraction of the original price, giving your wardrobe a makeover without breaking the bank.
+      <h2 class="text-4xl py-6">EVERYONE WINS IN A CIRCULAR ECONOMY</h2>
+      <p class="text-2xl">
+        Economically, <span class="italic font-bold">Encore</span> offers dual advantages. For buyers, you get the opportunity to acquire high-quality clothing 
+        at a fraction of the original price, allowing for a refreshed wardrobe without breaking the bank. For sellers, it's an 
+        opportunity to declutter, renew space, and earn from items that are no longer in use. Rather than letting unused garments 
+        gather dust, they can be turned into extra cash. The cycle of buying and selling not only promotes a circular economy but 
+        also ensures that fashion remains affordable and accessible to everyone.
     </p>
     </div>
   </div>
@@ -96,8 +98,12 @@
       <img src="./images/Contact_us/pexels-karolina-grabowska-4210850.jpg" alt="Image 3" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
     <div class="w-full md:w-1/2 text-left pl-6">
-      <h2 class="text-5xl py-6">ANOTHER ENCORE EXCHANGE</h2>
-      <p>Description</p>
+      <h2 class="text-4xl py-6">SHOW YOURSELF THE WAY YOU WANT</h2>
+      <p class="text-2xl">
+        Unlike fast fashion outlets, <span class="italic font-bold">Encore</span> offers a diverse array of unique pieces that often aren't 
+        found in mainstream stores. This allows buyers to curate a distinctive personal style. Additionally, we pride ourselves on 
+        quality assurance.
+      </p>
     </div>
   </div>
 
