@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -59,6 +59,16 @@
                             </span>
                             <i class="fa-solid fa-cart-shopping text-2xl"></i>
                         </a>
+                        {{-- <a href="">
+                            <span class="relative">
+                                @if(auth()->user()->cartCount() > 0)
+                                <span class="absolute top-0 right-0 px-2 py-1 bg-red-500 text-white rounded-full text-sm">
+                                    {{ auth()->user()->cartCount() }}
+                                </span>
+                                @endif
+                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                            </span>
+                        </a> --}}
                     </li>
                     <li>
                         <a href="{{ route('dashboard') }}">
@@ -76,9 +86,9 @@
                         </a>
                     </li>
                     <li>
-                        <form method="POST" action="/logout">
+                        <form method="POST" action="/logout" class="m-0">
                             @csrf
-                            <button class="">
+                            <button type="submit" name="logout" title="Logout" class="">
                                 <i class="fa-solid fa-right-from-bracket text-2xl"></i>
                             </button>
                         </form>
@@ -105,6 +115,16 @@
                         <a href="{{ route('cart.cart') }}">
                             <i class="fa-solid fa-cart-shopping text-2xl"></i>
                         </a>
+                        {{-- <a href="">
+                            <span class="relative">
+                                @if(auth()->user()->cartCount() > 0)
+                                <span class="absolute top-0 right-0 px-2 py-1 bg-red-500 text-white rounded-full text-sm">
+                                    {{ auth()->user()->cartCount() }}
+                                </span>
+                                @endif
+                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                            </span>
+                        </a> --}}
                     </li>
                     <li>
                         <a href="{{ route('wishlistDashboard') }}">
@@ -149,27 +169,27 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/about">
-                            About
+                        <a class="hover:underline" href="/platform">
+                            Our Platform
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/jobs">
-                            Jobs
-                        </a>
-                    </li>
-                    <li>
-                        <a class="hover:underline" href="/ecology">
+                        <a class="hover:underline" href="/platform#eco-friendly">
                             Eco-friendly
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/advertising">
-                            Advertising
+                        <a class="hover:underline" href="/platform#circular-economy">
+                            Circular Economy
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/contact">
+                        <a class="hover:underline" href="/platform#express-yourself">
+                            Express Yourself
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="/platform#contact-us">
                             Contact
                         </a>
                     </li>
@@ -261,11 +281,6 @@
                 <li>
                     <a class="hover:underline" href="">
                         Terms & Conditions
-                    </a>
-                </li>
-                <li>
-                    <a class="hover:underline" href="">
-                        Our Platform
                     </a>
                 </li>
             </ul>

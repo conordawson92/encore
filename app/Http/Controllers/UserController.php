@@ -143,7 +143,7 @@ class UserController extends Controller
             ->get();
 
         // Load user's messages with sender information
-        $messagesSented = Message::where('senderUser_id', $user->id)
+        $messagesSent = Message::where('senderUser_id', $user->id)
             ->with(['receiver', 'item'])
             ->get();
 
@@ -170,7 +170,7 @@ class UserController extends Controller
             'sellingItems',
             'sellingTransactions',
             'buyingTransactions',
-            'messagesSented',
+            'messagesSent',
             'messagesReceived',
             'notifications',
             'banUser',
@@ -218,5 +218,17 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('dashboard')->with('message', 'Profile updated successfully.');
+    }
+    public function showProfile($user_id) {
+        $user = User::findOrFail($user_id);
+    
+
+        $sellingItems = $user->sellerItems;
+        $reviewsReceived = Review::where('reviewed_id', $user->id)->get();
+        return view('users.profile', compact(
+            'user',
+            'sellingItems',
+            'reviewsReceived'
+        ));
     }
 }

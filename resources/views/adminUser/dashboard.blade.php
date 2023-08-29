@@ -49,12 +49,12 @@
             <!--all the admin selling items-->
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Items For Sale</h2>
-
+            
                 @if($user->sellerItems->where('status', 'available')->isEmpty())
                 <a href="{{ route('items.createItem') }}">
                     <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105 cursor-pointer">
                         <div class="flex items-center justify-center w-full h-48 bg-gray-200">
-                            <i class="fas fa-plus text-3xl"></i> <!-- You might need a different icon class based on the icon library you're using -->
+                            <i class="fas fa-plus text-3xl"></i> <!-- Icon class based on the icon library you're using -->
                         </div>
                         <div class="p-4 text-center">
                             <h4 class="text-lg font-semibold mb-2">Add Item</h4>
@@ -66,7 +66,6 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($user->sellerItems as $item)
                     @if($item->status === 'available')
-
                     <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105">
                         <!-- Delete Button -->
                         <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3 z-10">
@@ -76,13 +75,16 @@
                                 <i class="far fa-trash-can"></i>
                             </button>
                         </form>
-
-                        <a href="/listings/{{$item->id}}" class="block">
-                            <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+            
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
                             <div class="p-4">
                                 <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
                                 <p class="text-gray-600">Description: {{ $item->description }}</p>
-                                <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}€</p>
                                 <p class="text-gray-600">Size: {{ $item->size }}</p>
                                 <p class="text-gray-600">Brand: {{ $item->brand }}</p>
                                 <p class="text-gray-600">Condition: {{$item->condition}}</p>
@@ -97,7 +99,7 @@
                     <a href="{{ route('items.createItem') }}">
                         <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105 cursor-pointer">
                             <div class="flex items-center justify-center w-full h-48 bg-gray-200">
-                                <i class="fas fa-plus text-3xl"></i> <!-- You might need a different icon class based on the icon library you're using -->
+                                <i class="fas fa-plus text-3xl"></i> <!-- Icon class based on the icon library you're using -->
                             </div>
                             <div class="p-4 text-center">
                                 <h4 class="text-lg font-semibold mb-2">Add Item</h4>
@@ -112,38 +114,43 @@
 
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-
+            
                 @if ($user->wishlist->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($user->wishlist as $item)
-                    <div class="border overflow-hidden shadow-custom relative">
-                        <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
-
-            <!-- Delete Button -->
-            <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-600 hover:text-red-800">
-                    <i class="far fa-trash-can"></i>
-                </button>
-            </form>
-
-            <div class="p-4">
-                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                <p class="text-gray-600">Description: {{ $item->description }}</p>
-                <p class="text-gray-600">Price: {{ $item->price }}</p>
-                <p class="text-gray-600">Size: {{ $item->size }}</p>
-                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                    <div class="border overflow-hidden shadow-custom relative group">
+            
+                        <!-- Using a pseudo-element for the blurred background. This is achieved by using group-hover utility with inline styles -->
+                        <div class="absolute inset-0 bg-center bg-no-repeat bg-cover filter blur-lg" style="background-image: url({{$item->itemImage ? asset($item->itemImage) : asset('images/no-image.png')}});"></div>
+                        
+                        <!-- Foreground Image -->
+                        <img class="w-full h-48 object-contain" src="{{$item->itemImage ? asset($item->itemImage) : asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                        
+                        <!-- Delete Button -->
+                        <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3 z-10">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:text-red-800">
+                                <i class="far fa-trash-can"></i>
+                            </button>
+                        </form>
+            
+                        <div class="p-4 relative z-10"> <!-- Set position to relative and a z-index higher than the image -->
+                            <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                            <p class="text-gray-600">Description: {{ $item->description }}</p>
+                            <p class="text-gray-600">Price: {{ $item->price }}</p>
+                            <p class="text-gray-600">Size: {{ $item->size }}</p>
+                            <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                            <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                            <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                @else
+                <p class="text-gray-600">Your wishlist is empty.</p>
+                @endif
             </div>
-        </div>
-        @endforeach
-        </div>
-        @else
-        <p class="text-gray-600">Your wishlist is empty.</p>
-        @endif
-        </div>
         <div class="p-6">
             <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 
@@ -170,7 +177,7 @@
                         <div class="p-4">
                             <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
                             <p class="text-gray-600">Description: {{ $item->description }}</p>
-                            <p class="text-gray-600">Price: {{ $item->price }}</p>
+                            <p class="text-gray-600">Price: {{ $item->price }}€</p>
                             <p class="text-gray-600">Size: {{ $item->size }}</p>
                             <p class="text-gray-600">Brand: {{ $item->brand }}</p>
                             <p class="text-gray-600">Condition: {{$item->condition}}</p>
@@ -344,7 +351,7 @@
             <h2 class="text-2xl font-bold mb-4">Your Messages</h2>
 
             <h3 class="text-xl font-semibold mt-6">Sent</h3>
-            @if ($messagesSented->count() > 0)
+            @if ($messagesSent->count() > 0)
             <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
                 <thead class="bg-gray-200">
                     <tr>
@@ -356,7 +363,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($messagesSented as $message)
+                    @foreach ($messagesSent as $message)
                     <tr>
                         <td class="py-2 px-4 border-b">{{ $message->receiver->userName }}</td>
                         <td class="py-2 px-4 border-b">{{ $message->item->ItemName }}</td>

@@ -6,8 +6,9 @@
 @props(['listing'])
 <div class="w-full">
     <!-- Image -->
-    <div class="relative w-full h-96">
-        <img src="{{$listing->itemImage ? asset('' . $listing->itemImage): asset('images/no-image.png')}}" class="w-full h-full object-cover" alt="...">
+    <div class="relative w-full h-96 overflow-hidden">
+        <img src="{{$listing->itemImage ? asset('' . $listing->itemImage): asset('images/no-image.png')}}" class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" alt="{{ $listing->ItemName }} Background Image">
+        <img src="{{$listing->itemImage ? asset('' . $listing->itemImage): asset('images/no-image.png')}}" class="absolute top-0 left-0 w-full h-full object-contain" alt="{{ $listing->ItemName }} Image">
     </div>
 
     <!-- Information -->

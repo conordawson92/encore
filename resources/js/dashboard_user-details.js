@@ -26,23 +26,27 @@ const userDetails = `
                 `;
 
 const detailsContainer = document.querySelector('#details_container');
-autoanimate(detailsContainer);
-let details = false;
-document.addEventListener("DOMContentLoaded", () => {
-    const userDetailsButton = document.querySelector('#user_details_button');
-    const userDetailsButtonIcon = document.querySelector('#user_details_button_icon');
 
-    userDetailsButton.addEventListener("click", () => {
-        if (!details) {
-            detailsContainer.innerHTML = userDetails;
-            userDetailsButtonIcon.classList.remove("fa-chevron-up");
-            userDetailsButtonIcon.classList.add("fa-chevron-down");
+if (detailsContainer) {
+    autoanimate(detailsContainer);
+    let details = false;
+        document.addEventListener("DOMContentLoaded", () => {
+        const userDetailsButton = document.querySelector('#user_details_button');
+        const userDetailsButtonIcon = document.querySelector('#user_details_button_icon');
 
-        } else {
-            detailsContainer.innerHTML = "";
-            userDetailsButtonIcon.classList.remove("fa-chevron-down");
-            userDetailsButtonIcon.classList.add("fa-chevron-up");
-        }
-        details = !details;
+        userDetailsButton.addEventListener("click", () => {
+            if (!details) {
+                detailsContainer.innerHTML = userDetails;
+                userDetailsButtonIcon.classList.remove("fa-chevron-up");
+                userDetailsButtonIcon.classList.add("fa-chevron-down");
+
+            } else {
+                detailsContainer.innerHTML = "";
+                userDetailsButtonIcon.classList.remove("fa-chevron-down");
+                userDetailsButtonIcon.classList.add("fa-chevron-up");
+            }
+            details = !details;
+        });
     });
-});
+}
+
