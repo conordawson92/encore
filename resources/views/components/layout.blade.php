@@ -15,7 +15,7 @@
         var userAuth = @json($userAuth);
         var csrfToken = @json(csrf_token());
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
+    @vite(['resources/css/app.css', 'resources/css/svg.css'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <title>Encore</title>
     <style>
@@ -133,7 +133,7 @@
 
         @include('partials._nav')
 
-        <main class="bg-white">
+        <main class="">
             {{ $slot }}
         </main>
     </div>
@@ -290,7 +290,7 @@
     <div id="loadingSpinner" class="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-50 z-50 hidden">
         <div class="border-t-4 border-transparent rounded-full w-16 h-16 border-brown_logo animate-spin"></div>
     </div>
-        
+    @vite('resources/js/app.js')
 </body>
 
 </html>
