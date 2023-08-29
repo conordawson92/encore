@@ -18,30 +18,48 @@
             <div>
                 <label for="ItemName" class="block text-brown_logo font-medium">Item Name:</label>
                 <input type="text" name="ItemName" required class="mt-1 w-full p-2 border-2 border-brown_logo">
+                @error('ItemName')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label for="itemImage" class="block text-brown_logo font-medium bg-">Item Image:</label>
                 <input type="file" name="itemImage" class="mt-1">
+                @error('itemImage')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label for="description" class="block text-brown_logo font-medium">Description:</label>
                 <textarea name="description" required class="mt-1 w-full p-2 border-2 border-brown_logo"></textarea>
+                @error('description')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label for="price" class="block text-brown_logo font-medium">Price:</label>
                 <input type="text" name="price" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+                @error('price')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label for="brand" class="block text-brown_logo font-medium">Brand:</label>
                 <input type="text" name="brand" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+                @error('brand')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
             <div>
                 <label for="size" class="block text-brown_logo font-medium">Size:</label>
                 <input type="text" name="size" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+                @error('size')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
             <div>
                 <label for="condition" class="block text-brown_logo font-medium">Condition:</label>
@@ -50,12 +68,21 @@
                     <option value="used">Used</option>
                     <option value="very used">Very Used</option>
                 </select>
+                @error('condition')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
             <label class="block text-brown_logo font-medium" for="tags">Tags:</label>
             <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="text" name="tags" required>
+            @error('tags')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
             <br>
             <label class="block text-brown_logo font-medium" for="quantity">Quantity:</label>
             <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="number" name="quantity" required>
+            @error('quantity')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
             <br>
             <label class="block text-brown_logo font-medium" for="parentCategory_id">Main Category</label>
             <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="parentCategory" name="parentCategory_id">
@@ -65,6 +92,9 @@
                 </option>
                 @endforeach
             </select>
+            @error('parentCategory_id')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
             <br>
             <label class="block text-brown_logo font-medium" for="category_id">Category</label>
             <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="category" name="category_id">
@@ -74,6 +104,9 @@
                 </option>
                 @endforeach
             </select>
+            @error('category_id')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
 
             <div>
                 <button type="submit" class="uppercase font-bold w-full text-brown_logo p-2 border-2 border-brown_logo hover:bg-beige_logo_hover focus:outline-none transition:all">

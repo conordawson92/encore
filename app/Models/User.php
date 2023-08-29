@@ -23,12 +23,13 @@ class User extends Authenticatable
         'userName',
         'dateJoined',
         'userRating',
-        'userLocation',        
+        'userLocation',
         'userPhone',
         'paymentInfo',
         'email',
         'banUser',
         'password',
+        'userImage',
     ];
 
     /**
@@ -52,48 +53,55 @@ class User extends Authenticatable
     ];
 
     //a user can have many items
-    public function items(){
+    public function items()
+    {
         return $this->hasMany(Item::class, 'user_id');
         //hasMany() will allow a User to use multiple listings
     }
 
     //a user can have many reviews
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany(Review::class, 'reviewer_id', Review::class, 'reviewed_id');
     }
 
     //a user can have many messages
-    public function messages(){
+    public function messages()
+    {
         return $this->hasMany(Message::class, 'sender_id', Message::class, 'receiver_id');
     }
 
     //a user can have many notifications
-    public function notifications(){
+    public function notifications()
+    {
         return $this->hasMany(Notification::class, 'user_id');
     }
 
     //a user can have many notifications
-    public function transactions(){
+    public function transactions()
+    {
         return $this->hasMany(Transaction::class, 'seller_id', Transaction::class, 'buyer_id');
     }
 
     //to update the users rating after reviews
-    public function updateRating($newRating) {
+    public function updateRating($newRating)
+    {
 
         // Calculate the new rating based on received rating
         $currentRating = $this->userRating;
         $totalRatings = $this->reviewsReceived->count();
-    
+
         // Calculate the new rating (you can adjust the formula as needed)
-        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings + 1);
-    
+        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings);
+
         // Update the user's rating
         $this->userRating = $newRatingValue;
         $this->save();
     }
 
     //a user can have many buying transactions 
-    public function buyingTransactions() {
+    public function buyingTransactions()
+    {
         return $this->hasMany(Transaction::class, 'buyerUser_id')->with('item');
     }
 
