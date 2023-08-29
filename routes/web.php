@@ -15,6 +15,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PlatformController;
+use Illuminate\Support\Facades\Session;
+
 
 
 Route::get('/', function () {

@@ -47,7 +47,7 @@ class WishlistController extends Controller
         // Remove the item from the wishlist
         $user->wishlist()->detach($item);
 
-        return redirect()->back()->with('success', 'Item removed from wishlist.');
+        return redirect()->back()->with('message', 'Item removed from wishlist.');
     }
 
         
