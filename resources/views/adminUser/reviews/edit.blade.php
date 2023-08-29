@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Edit Review</title>
-</head>
+    <head>
+        <title>Encore | Edit Review</title>
+    </head>
 <body>
     <a href="/adminUser/reviews">Back to all Reviews</a>
 

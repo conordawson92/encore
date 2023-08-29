@@ -1,3 +1,6 @@
+<head>
+  <title>Encore | Contact Us</title>
+</head>
 
 <x-layout>
 

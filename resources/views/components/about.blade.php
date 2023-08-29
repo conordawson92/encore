@@ -1,3 +1,7 @@
+<head>
+  <title>Encore | About Us</title>
+</head>
+
 
 <x-layout>
 

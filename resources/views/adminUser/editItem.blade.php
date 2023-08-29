@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Edit Item</title>
+</head>
+
 <x-layout>
     <a href="/adminUser/items">Back to Items List</a>
 

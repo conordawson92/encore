@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Cart</title>
+</head>
+
+
 <x-layout>
     <div class="mx-4">
         <x-card class="p-10 bg-white">

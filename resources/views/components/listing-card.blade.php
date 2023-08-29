@@ -1,4 +1,7 @@
 {{--Convert the list to an array--}}
+<head>
+    <title>Encore | Item</title>
+</head>
 
 @props(['listing'])
 <x-card>
