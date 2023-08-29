@@ -28,14 +28,16 @@
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
                         <div class="font-bold text-2xl">
                             {{ $user->userName }}
-                            @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
-                                <span class="text-yellow-500"><i class="fas fa-star"></i></span>
-                                @elseif($i - 0.5 == $user->userRating)
-                                <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
-                                @else
-                                <span class="text-gray-400"><i class="fas fa-star"></i></span>
-                                @endif
+                            <div>
+                                @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                                    @elseif($i - 0.5 == $user->userRating)
+                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                    @else
+                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
                                 @endfor
+                            </div>
                                 <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
@@ -80,8 +82,11 @@
                             </button>
                         </form>
 
-                        <a href="/listings/{{$item->id}}" class="block">
-                            <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
                             <div class="p-4">
                                 <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
                                 <p class="text-gray-600">Description: {{ $item->description }}</p>
@@ -113,7 +118,7 @@
             </div>
             <!--the items in the admin wishlist-->
 
-            <div class="p-6">
+            {{-- <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 
                 @if ($user->wishlist->count() > 0)
@@ -141,6 +146,47 @@
                             <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
                         </div>
                     </div>
+                    @endforeach
+                </div>
+                @else
+                <p class="text-gray-600">Your wishlist is empty.</p>
+                @endif
+            </div> --}}
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
+            
+                @if ($user->wishlist->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach ($user->wishlist as $item)
+                    @if($item->status === 'available')
+                    <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105">
+                        
+                        <!-- Delete Button -->
+                        <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3 z-10">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:text-red-800">
+                                <i class="far fa-trash-can"></i>
+                            </button>
+                        </form>
+            
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                            </div>
+                        </a>
+                    </div>
+                    @endif
                     @endforeach
                 </div>
                 @else
