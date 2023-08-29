@@ -12,6 +12,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\ParentCategory;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -26,6 +27,7 @@ class UserController extends Controller
     //store our infos in the db
     public function store(Request $request)
     {
+
         // First validation for main fields
         $mainFields = $request->validate([
             'userName' => ['required', 'min:3', 'max:16'],
@@ -41,29 +43,26 @@ class UserController extends Controller
             'userImage' => ['image', 'max:2048'], // Limiting to 2MB
         ]);
 
-        // Checking and storing the image if it's there
-        if ($request->hasFile('userImage')) {
-            $imageFields['userImage'] = $request->file('userImage')->store('images', 'public');
-        }
-
-        // Merging the two validations
-        $formFields = array_merge($mainFields, $imageFields);
-
         // Hashing the password
-        $formFields['password'] = bcrypt($formFields['password']);
+        $mainFields['password'] = bcrypt($mainFields['password']);
 
         // Setting default values for the new user
-        $formFields['banUser'] = false;
-        $formFields['role'] = 'basic_user';
-        $formFields['dateJoined'] = now();
-        $formFields['userRating'] = 3;
+        $mainFields['banUser'] = false;
+        $mainFields['role'] = 'basic_user';
+        $mainFields['dateJoined'] = now();
 
-        // Creating the new user
-        $user = User::create($formFields);
+        // Create the user with the main fields
+        $user = User::create($mainFields);
+
+        // If the image is present, save it and update the user record with its path
+        if ($request->hasFile('userImage')) {
+            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $user->userImage = $path;
+            $user->save();
+        }
 
         // Log the user in
         auth()->login($user);
-
         // Redirecting to the homepage
         return redirect('/')->with('message', 'User created and logged in');
     }
@@ -195,5 +194,46 @@ class UserController extends Controller
         $review->save();
 
         return redirect()->back()->with('message', 'Rating and review submitted.');
+    }
+
+    //edit the logged in form
+    public function edit()
+    {
+        $user = auth()->user();
+        return view('users.edit', compact('user'));
+    }
+
+    //update a logged in user infos in the db
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'userName' => 'required|string|max:255',
+            'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'userLocation' => 'required|string|max:255',
+            'userPhone' => 'required|string|max:255',
+            'paymentInfo' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if ($request->hasFile('userImage')) {
+            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $userImage = $request->file('userImage')->store($path, 'public');
+            $user->userImage = $userImage;
+        }
+
+        $user->userName = $request->userName;
+        $user->userLocation = $request->userLocation;
+        $user->userPhone = $request->userPhone;
+        $user->paymentInfo = $request->paymentInfo;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->with('message', 'Profile updated successfully.');
     }
 }

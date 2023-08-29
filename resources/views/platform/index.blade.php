@@ -3,6 +3,53 @@
 
   <div class="container mx-auto mt-10">
 
+    <div class="flex flex-col md:flex-row mt-5 space-y-4 md:space-y-0 md:space-x-4">
+      <!-- Image -->
+      <div class="flex-1">
+        <img src="./images/Contact_us/Encore manifest.png" alt="Image" class="w-full h-auto">
+      </div>
+
+      <!-- Form -->
+      <div class="flex-1">
+        <form>
+          <div class="mb-3">
+            <label for="name" class="block text-sm font-medium text-gray-600">First Name</label>
+            <input type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded-md">
+            @error('name')
+              <p class="text-red-500">{{ $message }}</p>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+            <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
+            @error('email')
+              <p class="text-red-500">{{ $message }}</p>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label for="subject" class="block text-sm font-medium text-gray-600">Subject</label>
+            <select id="subject" name="subject" class="mt-1 p-2 w-full border rounded-md">
+              <option value="">--Select Subject--</option>
+              <option value="Project">I'd like to start a project</option>
+              <option value="Question">I'd like to ask a question</option>
+              <option value="Other">I'd like to make a proposal</option>
+            </select>
+            @error('subject')
+              <p class="text-red-500">{{ $message }}</p>
+            @enderror
+          </div>
+          <div class="mb-3">
+            <label for="message" class="block text-sm font-medium text-gray-600">Message</label>
+            <textarea id="message" name="message" rows="8" class="mt-1 p-2 w-full border rounded-md"></textarea>
+            @error('message')
+              <p class="text-red-500">{{ $message }}</p>
+            @enderror
+          </div>
+          <button type="submit" class="bg-blue-500 text-white p-2 rounded">Send Us</button>
+        </form>
+      </div>
+    </div>
+
     <!-- More content: "The Future is Now" -->
     <div class="my-5 text-center text-4xl mt-16">
       <h1 class="text-8xl font-oglnf text-green-700">The Future is Now</h1>

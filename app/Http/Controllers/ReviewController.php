@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Models\Review;
+use App\models\Item;
+use App\Models\Transaction;
 
 class ReviewController extends Controller
 {
@@ -35,5 +37,51 @@ class ReviewController extends Controller
     {
         $review->delete();
         return redirect()->route('reviews.index')->with('message', 'Review deleted successfully and email sent to both users.');
+    }
+
+    //add a review 
+    public function create($item)
+    {
+        $item = Item::find($item); // Assuming you're using an Item model
+        return view('adminUser.reviews.addReview', compact('item'));
+    }
+    
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'item_id' => 'required|integer',
+            'comment' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        // Retrieve the transaction to get the sellerUser_ID and buyerUser_ID
+        $transaction = Transaction::where('item_id', $validatedData['item_id'])->first();
+
+        if (!$transaction) {
+            return redirect()->back()->withErrors(['error' => 'No transaction found for the item.']);
+        }
+
+        // Check if the authenticated user is the buyer or seller
+        if (auth()->id() == $transaction->buyerUser_id) {
+            $reviewed_id = $transaction->sellerUser_id;
+        } else if (auth()->id() == $transaction->sellerUser_id) {
+            $reviewed_id = $transaction->buyerUser_id;
+        } else {
+            // Handle cases where the authenticated user is neither the buyer nor the seller
+            return redirect()->back()->withErrors(['error' => 'Unauthorized review attempt.']);
+        }
+
+        Review::create([
+            'item_id' => $validatedData['item_id'],
+            'comment' => $validatedData['comment'],
+            'rating' => $validatedData['rating'],
+            'reviewer_id' => auth()->id(),
+            'reviewed_id' => $reviewed_id,
+            'dateReview' => now(),
+        ]);
+
+         
+        return redirect()->route('dashboard')->with('message', 'Review added successfully!');
     }
 }

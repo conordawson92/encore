@@ -10,26 +10,44 @@
 
         <label for="itemImage">Item Image</label>
         <input type="file" id="itemImage" name="itemImage" value="{{ $item->itemImage }}">
+        @error('itemImage')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="ItemName">Item Name</label>
         <input type="text" id="ItemName" name="ItemName" value="{{ $item->ItemName }}" required>
+        @error('ItemName')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="description">Item Description</label>
         <input type="text" id="description" name="description" value="{{ $item->description }}" required>
+        @error('description')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="price">Item Price</label>
         <input type="text" id="price" name="price" value="{{ $item->price }}" required>
+        @error('price')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="size">Item Size</label>
         <input type="text" id="size" name="size" value="{{ $item->size }}" required>
+        @error('size')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="brand">Item Brand</label>
         <input type="text" id="brand" name="brand" value="{{ $item->brand }}" required>
+        @error('brand')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="condition">Item Condition</label>
@@ -40,12 +58,18 @@
             </option>
             @endforeach
         </select>
+        @error('condition')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <label for="quantity">Items Quantity</label>
         <input type="text" id="quantity" name="quantity" value="{{ $item->quantity }}" required>
+        @error('quantity')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
-
+        
         <label for="parentCategory">Main Category</label>
         <select id="parentCategory" name="parentCategory">
             @foreach ($parentCategories as $parentCategory)
@@ -54,11 +78,17 @@
             </option>
             @endforeach
         </select>
+        @error('parentCategory')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
 
         <label for="category">Category</label>
         <select id="category" name="category">
             <!-- This option will be dynamically populated using JavaScript -->
         </select>
+        @error('category')
+            <p class="text-red-500">{{ $message }}</p>
+        @enderror
         <br>
 
         <button type="submit">Update Item</button>

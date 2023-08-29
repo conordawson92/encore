@@ -34,6 +34,9 @@
             <div>
                 <label for="description" class="block text-brown_logo font-medium">Description:</label>
                 <textarea name="description" required class="mt-1 w-full p-2 border-2 border-brown_logo"></textarea>
+                @error('description')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="flex justify-between">
@@ -92,6 +95,10 @@
                 </div>
                 
             </div>
+            @error('category_id')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
+
             <div>
                 <button type="submit" class="uppercase font-bold w-full text-brown_logo p-2 border-2 border-brown_logo hover:bg-beige_logo_hover focus:outline-none transition:all">
                     Add Item
