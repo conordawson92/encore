@@ -20,9 +20,9 @@
             <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
                 <header class="mb-8">
                     <h1 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
-                        Sign in
+                        Sign In
                     </h1>
-                    <p>Sign in your account</p>
+                  
                 </header>
 
 
