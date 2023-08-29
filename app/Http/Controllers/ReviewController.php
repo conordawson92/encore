@@ -29,7 +29,7 @@ class ReviewController extends Controller
     }
 
     //store the new rating given/received
-    public function store(Request $request) {
+    public function storeRating(Request $request) {
         $rating = $request->input('rating');
         $reviewedUserId = $request->input('reviewed_id');
         

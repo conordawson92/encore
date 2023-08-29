@@ -88,7 +88,7 @@ Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
 
 //REVIEWS
 //handle updating reviews
-Route::post('/submit-review', [ReviewController::class, 'store']);
+Route::post('/submit-review', [ReviewController::class, 'storeRating']);
 
 
 
