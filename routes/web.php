@@ -198,6 +198,8 @@ Route::get('/our-platform', function () {
 //Stripe API checkout
 Route::get('stripe', [StripeController::class, 'stripe']);
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+Route::get('stripe/checkout', [CartController::class, 'checkout'])->name('stripe.checkout');
+
 
 //show Items By Parent Category
 Route::get('/parent-category/{parentCategory}', [ListingController::class, 'showItemsByParentCategory'])->name('showItemsByParentCategory');
@@ -207,6 +209,7 @@ Route::get('/about', [AboutController::class, 'index']);
 
 // Platform - Contact us
 Route::get('/platform', [PlatformController::class, 'index']);
+
 //SHOPPING CART
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.cart');

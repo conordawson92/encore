@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('datePurchase');  
             $table->string('paymentDetails');            
             $table->string('shippingDetails');
-            $table->string('status')->nullable();        
+            $table->enum('status', ['rejected', 'finished', 'pending'])->nullable();       
             $table->timestamps();
         });
     }
