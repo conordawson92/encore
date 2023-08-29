@@ -1,3 +1,6 @@
+<head>
+    <title>Encore | Item</title>
+</head>
 
 
 <x-layout>

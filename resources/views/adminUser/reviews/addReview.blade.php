@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Add Review</title>
+</head>
+
 <x-layout>
 
 

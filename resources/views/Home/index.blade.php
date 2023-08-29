@@ -1,3 +1,8 @@
+<head>
+  <title>Encore | Home Page</title>
+</head>
+
+
 <x-layout>
 
  <!-- Main Content -->
