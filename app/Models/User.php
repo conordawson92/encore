@@ -78,17 +78,13 @@ class User extends Authenticatable
     }
 
     //to update the users rating after reviews
-    public function updateRating($newRating) {
-
-        // Calculate the new rating based on received rating
-        $currentRating = $this->userRating;
-        $totalRatings = $this->reviewsReceived->count();
-    
-        // Calculate the new rating (you can adjust the formula as needed)
-        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings);
-    
-        // Update the user's rating
-        $this->userRating = $newRatingValue;
+    public function updateRating() {
+        $totalReviews = $this->reviews()->count();
+        $sumRatings = $this->reviews()->sum('rating');
+        
+        $newRating = $totalReviews > 0 ? $sumRatings / $totalReviews : 0;
+        
+        $this->rating = $newRating;
         $this->save();
     }
 

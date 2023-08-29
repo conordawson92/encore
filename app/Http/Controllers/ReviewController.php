@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -20,20 +21,29 @@ class ReviewController extends Controller
         return view('adminUser.reviews.edit', compact('review'));
     }
 
-    //update the edit review
-    public function update(Request $request, Review $review)
-    {
-        $review->update([
-            'comment' => $request->input('comment'),
-        ]);
-
-        return redirect()->route('reviews.index')->with('message', 'Review updated successfully and email sent by both users.');
-    }
-
     //delete e specific review
     public function destroy(Review $review)
     {
         $review->delete();
         return redirect()->route('reviews.index')->with('message', 'Review deleted successfully and email sent to both users.');
     }
+
+    //store the new rating given/received
+    public function store(Request $request) {
+        $rating = $request->input('rating');
+        $reviewedUserId = $request->input('reviewed_id');
+        
+        $review = Review::create([
+            'reviewer_id' => auth()->user()->id,
+            'reviewed_id' => $reviewedUserId,
+            'rating' => $rating,
+        ]);
+
+        // Calculate and update the user's rating
+        $reviewedUser = User::findOrFail($reviewedUserId);
+        $reviewedUser->updateRating();
+        
+        return redirect()->back()->with('success', 'Review submitted successfully.');
+    }
+
 }
