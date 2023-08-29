@@ -152,6 +152,15 @@ Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem']
     ->middleware('auth')
     ->name('items.destroy');
 
+
+// Add a review 
+Route::get('review/add/{item}', [ReviewController::class, 'create'])->name('review.create');
+
+// Store the review in the database
+Route::post('/adminUser/reviews', [ReviewController::class, 'store'])
+    ->middleware('auth')
+    ->name('reviews.store');
+
 //list all reviews
 Route::get('/adminUser/reviews', [ReviewController::class, 'index'])
     ->middleware('auth')
@@ -220,3 +229,6 @@ Route::middleware('auth')->group(function () {
     // Remove item from the cart
     Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 });
+
+
+//
