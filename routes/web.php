@@ -219,4 +219,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cart/update/{cart}', [CartController::class, 'updateCartItem'])->name('cart.update');
     // Remove item from the cart
     Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    //Buy button
+    Route::post('/cart/add-redirect/{item}', [CartController::class, 'addToCartAndRedirect'])->name('cart.addAndRedirect');
 });
+

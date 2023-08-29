@@ -64,4 +64,12 @@ public function checkout()
     return view('api.stripe', compact('cartItems', 'totalAmount'));
 }
 
+public function addToCartAndRedirect(Item $item)
+{
+    $this->addToCart($item);
+
+    return redirect()->route('cart.cart')->with('success', 'Item added to cart.');
+}
+
+
 }
