@@ -64,7 +64,8 @@ class UserController extends Controller
         // Log the user in
         auth()->login($user);
         // Redirecting to the homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/')->with('message', 'Welcome ' . $formFields['userName']);
+
     }
 
     //Logout user
@@ -100,8 +101,11 @@ class UserController extends Controller
             //generate a new session (to store the logged user data)
             $request->session()->regenerate();
 
-            //redirect to homepage with a confirmation message
-            return redirect('/')->with('message', 'You are now logged in');
+            // Get the authenticated user's username
+            $userName = auth()->user()->userName;
+
+            // redirect to homepage with a welcome back message
+            return redirect('/')->with('message', "Welcome back $userName");
         }
 
         //go back to login form with error message for 'email' field
@@ -174,28 +178,7 @@ class UserController extends Controller
             'reviewsReceived'
         ));
     }
-
-    //users rating
-    public function storeRating(Request $request, User $user)
-    {
-        //rating that is given by default
-        $newRating = $request->input('rating');
-
-        // Update the user's rating based on the new rating value
-        $user->updateRating($newRating);
-
-        // Create the review record and save it
-        $review = new Review([
-            'reviewer_id' => auth()->user()->id,
-            'reviewed_id' => $user->id,
-            'rating' => $newRating,
-            'comment' => $request->input('comment'),
-        ]);
-        $review->save();
-
-        return redirect()->back()->with('message', 'Rating and review submitted.');
-    }
-
+    
     //edit the logged in form
     public function edit()
     {

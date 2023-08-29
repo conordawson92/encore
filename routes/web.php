@@ -15,6 +15,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PlatformController;
+use Illuminate\Support\Facades\Session;
+
 
 
 Route::get('/', function () {
@@ -85,6 +87,10 @@ Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
     ->middleware('auth')
     ->name('wishlistDashboard');
 
+
+//REVIEWS
+//handle updating reviews
+Route::post('/submit-review', [ReviewController::class, 'storeRating']);
 
 
 
