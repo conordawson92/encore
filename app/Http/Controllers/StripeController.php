@@ -1,12 +1,11 @@
 <?php
-    
 namespace App\Http\Controllers;
-    
+
 use Stripe;
 use Session;
 use App\Models\Cart;
 use Illuminate\Http\Request;
-    
+
 class StripeController extends Controller
 {
     /**
@@ -39,8 +38,10 @@ class StripeController extends Controller
          $cartItemIds = $request->input('cart_items', []);
          Cart::whereIn('id', $cartItemIds)->delete();
      
-         Session::flash('success', 'Payment successful!');
+         // Flash success message
+         Session::flash('success', 'Payment successful! Thanks for your purchase with Encore.');
      
-         return back();
+         return redirect('/adminUser/dashboard');
      }
 }
+
