@@ -46,8 +46,8 @@ class ListingController extends Controller
     {
         $query = Item::where('status', 'available')->whereHas('category', function ($query) use ($categoryID) {
             $query->where('category_id', $categoryID);
-        });
-
+        })->inRandomOrder();
+        
         $query = $this->applySorting($query);
 
         return view('listings.index', [
@@ -80,4 +80,5 @@ class ListingController extends Controller
     {
         return $query->filter($filters);
     }
+    
 }

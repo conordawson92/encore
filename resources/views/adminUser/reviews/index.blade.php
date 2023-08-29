@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Reviews Management</title>
-</head>
+    <head>
+        <title>Encore | Reviews</title>
+    </head>
 <body>
 
     <a href="{{ route('admin') }}">Back to admin functions</a>

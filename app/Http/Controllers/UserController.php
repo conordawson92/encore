@@ -178,28 +178,7 @@ class UserController extends Controller
             'reviewsReceived'
         ));
     }
-
-    //users rating
-    public function storeRating(Request $request, User $user)
-    {
-        //rating that is given by default
-        $newRating = $request->input('rating');
-
-        // Update the user's rating based on the new rating value
-        $user->updateRating($newRating);
-
-        // Create the review record and save it
-        $review = new Review([
-            'reviewer_id' => auth()->user()->id,
-            'reviewed_id' => $user->id,
-            'rating' => $newRating,
-            'comment' => $request->input('comment'),
-        ]);
-        $review->save();
-
-        return redirect()->back()->with('message', 'Rating and review submitted.');
-    }
-
+    
     //edit the logged in form
     public function edit()
     {

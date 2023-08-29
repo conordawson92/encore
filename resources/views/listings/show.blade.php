@@ -1,73 +1,93 @@
+<head>
+    <title>Encore | Item</title>
+</head>
+
+
 <x-layout>
-    <a href="/listings" class="inline-block text-black ml-4 mb-4">
-        <i class="fa-solid fa-arrow-left"></i> Back
-    </a>
 
-    <div class="mx-4">
-        <x-card class="p-10 bg-white">
-            <div class="flex flex-col sm:flex-row items-stretch">
 
-                <!-- Responsive mobile -->
+<a href="/listings" class="inline-block text-black ml-4 mb-4">
+    <i class="fa-solid fa-arrow-left"></i> Back
+</a>
 
-                <div id="thumbnail" class="flex justify-center w-78 sm:w-1/2 lg:w-3/4 cursor-pointer" onclick="showImage()">
-                    <img id="thumbnailImage" class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
+<div class="mx-4">
+    <x-card class="p-10 bg-white">
+        <div class="flex flex-col sm:flex-row items-stretch">
+
+            <!-- Responsive mobile -->
+
+            <div id="thumbnail" class="flex justify-center w-78 sm:w-1/2 lg:w-3/4 cursor-pointer" onclick="showImage()">
+                <img id="thumbnailImage" class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
+            </div>
+
+            <!-- Information -->
+            <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
+                <div class="pl-0 sm:pl-8 w-full text-left">
+                    
+                    <!-- Titolo e bottone -->
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-2xl">{{$listing->ItemName}}</h3>
+                        <button class="text-red-500 hover:text-red-800 toggle-heart">
+                            <i class="far fa-heart heart-empty"></i>
+                            <i class="fas fa-heart heart-full hidden"></i>
+                        </button>
+                    </div>
+
+                    <!-- Resto del contenuto -->
+                    <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
+                    <x-listing-tags :tagsCsv="$listing->tags" />
+                    <div class="text-lg my-4">€{{$listing->price}}</div>
+                    <div class="text-lg my-4">Size: {{$listing->size}}</div>
+                    <div class="text-lg my-4">Brand: {{$listing->brand}}</div>
+                    <div class="text-lg my-4">Condition: {{$listing->condition}}</div>
+                    <div class="text-lg my-4">Posted: {{$listing->dateListed}}</div>
+                    <div class="text-lg my-4">Quantity: {{$listing->quantity}}</div>
+                    <div class="text-lg my-4">Status: {{$listing->status}}</div>
                 </div>
-
-                <!-- Information -->
-                <div class="flex flex-col w-full sm:w-1/2 items-center sm:items-start justify-between">
-
-                    <div class="pl-0 sm:pl-8 w-full text-center sm:text-left">
-                        <h3 class="text-2xl mb-2">{{$listing->ItemName}}</h3>
-                        <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
-                        <x-listing-tags :tagsCsv="$listing->tags" />
-                        <div class="text-lg my-4">€{{$listing->price}}</div>
-                        <div class="text-lg my-4">Size: {{$listing->size}}</div>
-                        <div class="text-lg my-4">Brand: {{$listing->brand}}</div>
-                        <div class="text-lg my-4">Condition: {{$listing->condition}}</div>
-                        <div class="text-lg my-4">Posted: {{$listing->dateListed}}</div>
-                        <div class="text-lg my-4">Quantity: {{$listing->quantity}}</div>
-                        <div class="text-lg my-4">Status: {{$listing->status}}</div>
+                
+                <div class="pl-0 sm:pl-8 w-full text-left sm:text-left bg-gray-200 p-4 rounded">     
+                    <div class="bg-gray-200 p-4 rounded">
+                        <h4 class="text-lg font-semibold mb-2">Sellers</h4>
+                        <p>Content</p>
                     </div>
-                    <div class="mt-auto flex justify-end md:mr-8">
-                        <form action="{{ route('cart.add', $listing) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-orange-500 text-white w-32 h-10 rounded">Add to Cart</button>
-                        </form>
-                        <form action="{{ route('cart.addAndRedirect', $listing) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="bg-green-500 text-white ml-4 w-32 h-10 rounded">Buy</button>
-                        </form>
-                    </div>
+                </div>
+                
+                <div class="mt-4 sm:ml-auto flex justify-center sm:justify-start">
+                    <form action="{{ route('cart.add', $listing) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-orange-500 text-white w-32 h-10">Add to Cart</button>
+                    </form>
+                    <a href="{{ route('stripe.checkout') }}" class="bg-green-500 text-white ml-4 w-32 h-10 inline-block text-center leading-10 rounded">Buy</a>
                 </div>
             </div>
-        </x-card>
-    </div>
+        </div>
+    </x-card>
+</div>
 
     <!-- "Featured Products" -->
     <div class="mx-4 mt-5">
         <x-card class="p-10 bg-white">
-            <div class="flex flex-wrap">
+            <div class="flex flex-wrap justify-center"> 
                 <!-- Title -->
                 <div class="w-full text-center">
                     <h2 class="text-2xl mb-4">Featured Products</h2>
                 </div>
 
-                <!-- Image -->
-                <div class="w-full sm:w-1/3 text-center">
-                    <img class="object-cover w-full h-full" src="{{ asset('path/to/first/image') }}" alt="First Product" />
-                    <p>Product 1</p>
-                </div>
-                <div class="w-full sm:w-1/3 text-center">
-                    <img class="object-cover w-full h-full" src="{{ asset('path/to/second/image') }}" alt="Second Product" />
-                    <p>Product 2</p>
-                </div>
-                <div class="w-full sm:w-1/3 text-center">
-                    <img class="object-cover w-full h-full" src="{{ asset('path/to/third/image') }}" alt="Third Product" />
-                    <p>Product 3</p>
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center"> 
+                    @foreach($listing as $CategoryID)
+                        <div class="text-center flex flex-col items-center"> 
+                            <img class="object-cover w-full h-auto mb-2 md:max-w-md md:max-h-72" src="{{ asset($listing->itemImage) }}" alt="{{ $listing->ItemName }}" />
+                            <p class="text-base">{{ $listing->ItemName }}</p>
+                            <p class="text-sm text-gray-600">${{ $listing->price }}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </x-card>
     </div>
+
+
     <a href="/listings" class="inline-block text-black ml-4 mb-4">
         <i class="fa-solid fa-arrow-left"></i> Back
     </a>
@@ -101,3 +121,5 @@
     </script>
 
 </x-layout>
+
+
