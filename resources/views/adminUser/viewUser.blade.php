@@ -3,7 +3,7 @@
         <html>
 
         <head>
-            <title>View User</title>
+            <title>Encore | User View</title>
         </head>
 
         <body>

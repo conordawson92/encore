@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Items</title>
+</head>
+
 <x-layout>
     <a href="{{ route('admin') }}">Back to Admin functions</a>
 

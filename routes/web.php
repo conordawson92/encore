@@ -88,6 +88,10 @@ Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
     ->name('wishlistDashboard');
 
 
+//REVIEWS
+//handle updating reviews
+Route::post('/submit-review', [ReviewController::class, 'storeRating']);
+
 
 
 

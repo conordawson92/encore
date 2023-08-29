@@ -4,7 +4,7 @@
 </head>
 <x-layout>
     <body>
-        <div class="w-[80%] sm:w-[65%] mx-auto">
+        <div class="w-[65%] mx-auto">
             @auth
             @if(auth()->user()->role === 'admin')
             <p>
@@ -77,11 +77,8 @@
                             </button>
                         </form>
 
-                        <a href="/listings/{{$item->id}}" class="block relative">
-                            <div class="relative w-full h-48 overflow-hidden">
-                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
-                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
-                            </div>
+                        <a href="/listings/{{$item->id}}" class="block">
+                            <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
                             <div class="p-4">
                                 <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
                                 <p class="text-gray-600">Description: {{ $item->description }}</p>
@@ -113,7 +110,7 @@
             </div>
             <!--the items in the admin wishlist-->
 
-            {{-- <div class="p-6">
+            <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 
                 @if ($user->wishlist->count() > 0)
@@ -146,7 +143,7 @@
         @else
         <p class="text-gray-600">Your wishlist is empty.</p>
         @endif
-        </div> --}}
+        </div>
         <div class="p-6">
             <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 

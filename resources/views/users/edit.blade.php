@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Edit User</title>
+</head>
+
+
 <x-layout>
    
 

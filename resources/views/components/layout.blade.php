@@ -17,7 +17,9 @@
     </script>
     @vite(['resources/css/app.css', 'resources/css/svg.css'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
-    <title>Encore</title>
+    <title>Encore | Home Page</title>
+    
+
     <style>
         @font-face {
         font-family: 'Oglnf';

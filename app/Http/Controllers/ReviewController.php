@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Review;
 use App\models\Item;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+
 
 class ReviewController extends Controller
 {
@@ -84,4 +86,23 @@ class ReviewController extends Controller
          
         return redirect()->route('dashboard')->with('message', 'Review added successfully!');
     }
+
+    //store the new rating given/received
+    public function storeRating(Request $request) {
+        $rating = $request->input('rating');
+        $reviewedUserId = $request->input('reviewed_id');
+        
+        $review = Review::create([
+            'reviewer_id' => auth()->user()->id,
+            'reviewed_id' => $reviewedUserId,
+            'rating' => $rating,
+        ]);
+
+        // Calculate and update the user's rating
+        $reviewedUser = User::findOrFail($reviewedUserId);
+        $reviewedUser->updateRating();
+        
+        return redirect()->back()->with('success', 'Review submitted successfully.');
+    }
+
 }
