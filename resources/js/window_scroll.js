@@ -8,7 +8,7 @@ document.getElementById("backToTop").addEventListener("click", function () {
 
 // Show the button after the user has scrolled down a certain distance
 window.addEventListener("scroll", function () {
-    const scrollPosition = window.pageYOffset;
+    const scrollPosition = window.scrollY;
     const backToTopButton = document.getElementById("backToTop");
 
     if (scrollPosition > 300) {

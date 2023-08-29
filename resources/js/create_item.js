@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Script is running!");
 
     function filterCategoriesByParent() {
         var parentCategory = document.getElementById('parentCategory').value;

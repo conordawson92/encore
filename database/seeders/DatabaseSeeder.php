@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             NotificationsTableSeeder::class,
             MessagesTableSeeder::class,
             ReviewsTableSeeder::class,
+            CartsTableSeeder::class,
         ]);
         Log::info('ItemsTableSeeder completed');
     }

@@ -19,6 +19,9 @@ const userDetails = `
                         Your favorite payment method:    
                         ${ userAuth.paymentInfo }
                     </li>
+                    <li>
+                        <a href="/adminUser/users/${userAuth.id}/edit">Edit my Informations</a>
+                    </li>
                 </ul>
                 `;
 
@@ -28,20 +31,17 @@ let details = false;
 document.addEventListener("DOMContentLoaded", () => {
     const userDetailsButton = document.querySelector('#user_details_button');
     const userDetailsButtonIcon = document.querySelector('#user_details_button_icon');
-    const shadowProfile = document.querySelector('#profile');
 
     userDetailsButton.addEventListener("click", () => {
         if (!details) {
             detailsContainer.innerHTML = userDetails;
             userDetailsButtonIcon.classList.remove("fa-chevron-up");
             userDetailsButtonIcon.classList.add("fa-chevron-down");
-            // shadowProfile.classList.remove("shadow-custom");
 
         } else {
             detailsContainer.innerHTML = "";
             userDetailsButtonIcon.classList.remove("fa-chevron-down");
             userDetailsButtonIcon.classList.add("fa-chevron-up");
-            // shadowProfile.classList.add("shadow-custom");
         }
         details = !details;
     });
