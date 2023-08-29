@@ -18,6 +18,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/svg.css'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <title>Encore</title>
+    <style>
+        @font-face {
+        font-family: 'Oglnf';
+        src: url('{{ asset('fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
+        }
+        @font-face {
+        font-family: 'abel';
+        src: url('{{ asset('fonts/Abel-Regular.ttf') }}') format('truetype');
+        }
+    </style>
 </head>
 
 <body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
@@ -123,7 +133,7 @@
 
         @include('partials._nav')
 
-        <main class="bg-white p-2">
+        <main class="bg-white">
             {{ $slot }}
         </main>
     </div>

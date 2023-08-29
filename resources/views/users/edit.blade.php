@@ -1,12 +1,12 @@
 <x-layout>
-    <div class="flex h-screen">
+   
 
         <!-- Left side for Image -->
         <div class="w-1/2 h-full bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
             <!-- Embedded Image -->
             <img src="http://encore.test/storage/images/assets/register_tv.png" alt="Description" class="object-contain w-full h-full">
         </div>
-
+ <div class="flex h-screen">
         <!-- Right side for Edit Profile Form -->
         <div class="w-full customLg:w-1/2 bg-white flex items-center justify-center">
 
