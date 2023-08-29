@@ -11,12 +11,12 @@ class ListingController extends Controller
     //show all listings
     public function index()
     {
-        $query = Item::where('status', 'available');
-
-        $query = $this->applySorting($query);
-
+        $query = Item::where('status', 'available')->filter(request(['search', 'tag'])); // Filtering first.
+        
+        $query = $this->applySorting($query); // Sorting next.
+        
         return view('listings.index', [
-            'listings' => $query->filter(request(['search', 'tag']))->paginate(10),
+            'listings' => $query->paginate(10)->appends(request()->all()), // appends ensures the current request params are added.
         ]);
     }
 
