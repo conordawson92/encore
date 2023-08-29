@@ -28,7 +28,7 @@
                             <td class="p-2 border">{{ $user->dateJoined }}</td>
                             <td class="p-2 border">
                                 <a href="/adminUser/users/{{ $user->id }}" class="text-laravel hover:underline">View</a> |
-                                <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="text-laravel hover:underline">Edit</a> |
+                                <a href="{{ route('users.editUser', ['user' => $user->id]) }}" class="text-laravel hover:underline">Edit</a> |
                                 <a href="#" onclick="event.preventDefault(); if (confirm('Are you sure you want to ban this user?')) { document.getElementById('ban-form-{{ $user->id }}').submit(); }" class="text-red-600 hover:underline">Ban</a>
                                 <form id="ban-form-{{ $user->id }}" action="{{ route('users.banUser', ['user' => $user->id]) }}" method="POST" style="display: none;">
                                     @csrf

@@ -17,7 +17,7 @@
                     </h2>
                 </header>
 
-                <form action="/users/{{$user->id}}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
 
@@ -25,7 +25,7 @@
                         <label for="userName" class="inline-block text-lg mb-2">Name</label>
                         <input type="text" class="border rounded p-2 w-full" name="userName" value="{{$user->userName}}" />
                         @error('userName')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -36,7 +36,7 @@
                         <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage" />
                         <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="Profile Photo">
                         @error('userImage')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -44,7 +44,7 @@
                         <label for="userLocation" class="inline-block text-lg mb-2">Location</label>
                         <input type="text" class="border rounded p-2 w-full" name="userLocation" placeholder="Location" value="{{$user->userLocation}}" />
                         @error('userLocation')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -52,7 +52,7 @@
                         <label for="userPhone" class="inline-block text-lg mb-2">Phone Number</label>
                         <input type="text" class="border rounded p-2 w-full" name="userPhone" value="{{$user->userPhone}}" />
                         @error('userPhone')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -65,7 +65,7 @@
                             <option value="ApplePay">Apple Pay</option>
                         </select>
                         @error('paymentInfo')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -75,7 +75,7 @@
                         </label>
                         <input type="password" class="border rounded p-2 w-full" name="password" />
                         @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -85,7 +85,7 @@
                         </label>
                         <input type="password" class="border rounded p-2 w-full" name="password_confirmation" />
                         @error('password_confirmation')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 

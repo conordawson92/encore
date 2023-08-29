@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('dashboard') }}">
                         <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
                 </li>
@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('wishlistDashboard') }}">
                         <i class="fa-regular fa-heart text-2xl"></i>
                     </a>
                 </li>

@@ -27,7 +27,7 @@
                         </label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="userName" value="{{old('userName')}}" />
                         @error('userName')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -37,7 +37,7 @@
                         </label>
                         <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage" />
                         @error('userImage')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="mb-6">
@@ -46,7 +46,7 @@
                         </label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="userLocation" value="{{old('userLocation')}}" />
                         @error('userLocation')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -56,7 +56,7 @@
                         </label>
                         <input type="text" class="border border-gray-200 rounded p-2 w-full" name="userPhone" value="{{old('userPhone')}}" />
                         @error('userPhone')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -70,7 +70,7 @@
                             <option value="ApplePay">Apple Pay</option>
                         </select>
                         @error('paymentInfo')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -78,7 +78,7 @@
                         <label for="email" class="inline-block text-lg mb-2">Email</label>
                         <input type="email" class="border border-gray-200 rounded p-2 w-full" name="email" value="{{old('email')}}" />
                         @error('email')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -88,7 +88,7 @@
                         </label>
                         <input type="password" class="border border-gray-200 rounded p-2 w-full" name="password" value="{{old('password')}}" />
                         @error('password')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -98,7 +98,7 @@
                         </label>
                         <input type="password" class="border border-gray-200 rounded p-2 w-full" name="password_confirmation" />
                         @error('password_confirmation')
-                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 

@@ -12,6 +12,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\ParentCategory;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -196,4 +197,45 @@ class UserController extends Controller
 
         return redirect()->back()->with('message', 'Rating and review submitted.');
     }
+
+    //edit the logged in form
+    public function edit()
+    {
+        $user = auth()->user();
+        return view('users.edit', compact('user'));
+    }
+
+    //update a logged in user infos in the db
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'userName' => 'required|string|max:255',
+            'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'userLocation' => 'required|string|max:255',
+            'userPhone' => 'required|string|max:255',
+            'paymentInfo' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+
+        if ($request->hasFile('userImage')) {
+            $userImage = $request->file('userImage')->store('images/users', 'public');
+            $user->userImage = $userImage;
+        }
+
+        $user->userName = $request->userName;
+        $user->userLocation = $request->userLocation;
+        $user->userPhone = $request->userPhone;
+        $user->paymentInfo = $request->paymentInfo;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->with('message', 'Profile updated successfully.');
+    }
+    
 }

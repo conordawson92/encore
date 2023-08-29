@@ -45,6 +45,16 @@ Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 //create new user
 Route::post('/users', [UserController::class, 'store']);
 
+//edit user
+Route::get('/user/edit', [UserController::class, 'edit'])
+    ->middleware('auth')
+    ->name('user.edit');
+
+// Update user
+Route::put('/user/update', [UserController::class, 'update'])
+    ->middleware('auth')
+    ->name('user.update');
+
 //log user out
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
@@ -69,6 +79,11 @@ Route::get('/items/createItem', [ItemController::class, 'createItem'])
 Route::post('/items/storeItem', [ItemController::class, 'storeItem'])
     ->middleware('auth')
     ->name('items.storeItem');
+
+//navbar heart route
+Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
+    ->middleware('auth')
+    ->name('wishlistDashboard');
 
 
 
@@ -107,12 +122,12 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
 //edit a selected user
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
-    ->name('users.edit');
+    ->name('users.editUser');
 
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
     ->middleware('auth')
-    ->name('users.update');
+    ->name('users.updateUser');
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])

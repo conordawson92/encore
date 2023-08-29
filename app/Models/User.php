@@ -85,7 +85,7 @@ class User extends Authenticatable
         $totalRatings = $this->reviewsReceived->count();
     
         // Calculate the new rating (you can adjust the formula as needed)
-        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings + 1);
+        $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings);
     
         // Update the user's rating
         $this->userRating = $newRatingValue;
