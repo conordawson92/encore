@@ -25,7 +25,7 @@
                                         @csrf
                                         @method('patch')
                                         <div class="flex items-center justify-center">
-                                            <button type="submit" name="quantity" value="{{ $cartItem->quantity - 1 }}" class="px-2">
+                                            <button type="submit" name="quantity" value="{{ max(1, $cartItem->quantity - 1) }}" class="px-2">
                                                 <i class="fa-solid fa-minus"></i>
                                             </button>
                                             <span class="mx-2">{{ $cartItem->quantity }}</span>
@@ -56,9 +56,16 @@
                     <a href="{{ route('listings.index') }}" class="text-blue-500 hover:underline">Continue Shopping</a>
                 </div>
                 <div class="text-center mt-6">
-                    <a href="{{ route('stripe.checkout') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                        Pay
-                    </a>
+                    @if($cartItems->sum(function ($cartItem) { return $cartItem->item->price * $cartItem->quantity; }) > 0)
+                        <a href="{{ route('stripe.checkout') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            Pay
+                        </a>
+                    @else
+                        <!-- Cart total is 0, display a disabled button -->
+                        <button class="bg-gray-300 text-white font-bold py-2 px-4 rounded cursor-not-allowed" disabled>
+                            Pay
+                        </button>
+                    @endif
                 </div>
             @endif
         </x-card>
