@@ -1,13 +1,8 @@
 <!--html diaply for the admin complete dashboard with all the informations, history, messages, etc...and the manage options link-->
-
+<head>
+    <title>Encore | Dashboard</title>
+</head>
 <x-layout>
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <title>Admin Profile</title>
-    </head>
-
     <body>
         <div class="w-[80%] sm:w-[65%] mx-auto">
             @auth
