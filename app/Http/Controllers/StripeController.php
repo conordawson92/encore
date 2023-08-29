@@ -44,4 +44,3 @@ class StripeController extends Controller
          return redirect('/adminUser/dashboard');
      }
 }
-
