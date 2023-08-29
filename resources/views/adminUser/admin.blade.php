@@ -3,7 +3,7 @@
     <html>
 
     <head>
-        <title>Administrator Functions</title>
+        <title>Encore | Administrator</title>
     </head>
 
     <body>

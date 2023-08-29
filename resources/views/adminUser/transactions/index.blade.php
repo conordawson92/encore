@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Transactions</title>
+</head>
+
 <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
 
 <h1>Transactions</h1>

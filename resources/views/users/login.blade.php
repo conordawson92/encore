@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Sign In</title>
+</head>
+
+
 <x-layout>
 
     <div class="flex h-screen">
