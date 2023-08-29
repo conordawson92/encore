@@ -64,7 +64,7 @@ class UserController extends Controller
         // Log the user in
         auth()->login($user);
         // Redirecting to the homepage
-        return redirect('/')->with('message', 'Welcome ' . $formFields['userName']);
+        return redirect('/')->with('message', 'Welcome ' . $mainFields['userName']);
 
     }
 
