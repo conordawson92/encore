@@ -5,7 +5,7 @@
 </head>
 <body>
 
-    <a href="{{ route('admin') }}">Back to Reviews List</a>
+    <a href="{{ route('admin') }}">Back to admin functions</a>
 
     <h1>Reviews Management</h1>
 

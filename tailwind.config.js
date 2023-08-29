@@ -4,11 +4,13 @@ export default {
     theme: {
         fontFamily: {
             abel: ["Abel", "sans-serif"],
+            oglnf: ['Oglnf', 'fallback-font'],
         },
         extend: {
             colors: {
                 // colorName: 'colorValue',
                 orange_logo: "#f5804d",
+                orange_logo_hover: "#d46a42",
                 orange_logo_light: "#ff9e73",
                 beige_logo: "#fff4e0",
                 beige_logo_hover: "#e6d2b1",
