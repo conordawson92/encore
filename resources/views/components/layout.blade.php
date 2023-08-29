@@ -30,110 +30,111 @@
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen font-abel text-lg bg-beige_logo">
+<body class="flex flex-col min-h-screen font-abel text-lg">
     <x-flash-message/>
     <div class="grow shrink basis-0">
-        <header
-            class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
-            <a class="flex justify-center items-center" href="/">
-                <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
-            </a>
+        <div class="bg-beige_logo">
+            <header
+                class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
+                <a class="flex justify-center items-center" href="/">
+                    <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
+                </a>
 
-            @include('partials._search_desktop')
+                @include('partials._search_desktop')
 
-            @auth
-            <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
-                <li>
-                    <h2 class="text-xl flex items-center whitespace-nowrap">
-                        <i class="fa-solid fa-user mr-1 text-2xl"></i>
-                        {{ auth()->user()->userName }}
-                    </h2>
-                </li>
-                <li>
-                    <a href="{{ route('cart.cart') }}">
-                        <span>
-                            
-                        </span>
-                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('dashboard') }}">
-                        <i class="fa-regular fa-heart text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-regular fa-bell text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('dashboard') }}">
-                        <i class="fa-solid fa-gear text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <form method="POST" action="/logout">
-                        @csrf
-                        <button class="">
-                            <i class="fa-solid fa-right-from-bracket text-2xl"></i>
-                        </button>
-                    </form>
-                </li>
-            </ul>
-
-                @else
-                    <div class="hidden md:flex gap-4 justify-center items-center">
-                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
-                            Sign Up
+                @auth
+                <ul class="flex gap-4 justify-center items-center hidden md:flex inline">
+                    <li>
+                        <h2 class="text-xl flex items-center whitespace-nowrap">
+                            <i class="fa-solid fa-user mr-1 text-2xl"></i>
+                            {{ auth()->user()->userName }}
+                        </h2>
+                    </li>
+                    <li>
+                        <a href="{{ route('cart.cart') }}">
+                            <span>
+                                
+                            </span>
+                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
                         </a>
-                        <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
-                            Sign In
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}">
+                            <i class="fa-regular fa-heart text-2xl"></i>
                         </a>
+                    </li>
+                    <li>
                         <a href="">
-                            <i class='fa-solid fa-circle-question text-2xl'></i>
+                            <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
-                    </div>
-            @endauth
-            @auth
-            @csrf
-             <ul class="flex gap-6 justify-right items-center md:hidden">
-                <li>
-                    <a href="{{ route('cart.cart') }}">
-                        <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('wishlistDashboard') }}">
-                        <i class="fa-regular fa-heart text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <i class="fa-regular fa-bell text-2xl"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('dashboard') }}">
-                        <i class="fa-solid fa-gear text-2xl"></i>
-                    </a>
-                </li>
-             </ul>
-            @endauth
-            @include('partials._search_mobile')
-            <div class="flex md:hidden gap-6 m-2">
-                <button id="show-search" class="">
-                    <i class="fa-solid fa-magnifying-glass text-3xl"></i>
-                </button>
-                <button id="menu_mobile_button" class="">
-                    <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
-                </button>
-            </div>
-        </header>
-        <hr class="border border-brown_logo_light w-11/12 mx-auto mb-4" />
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}">
+                            <i class="fa-solid fa-gear text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <button class="">
+                                <i class="fa-solid fa-right-from-bracket text-2xl"></i>
+                            </button>
+                        </form>
+                    </li>
+                </ul>
 
-        @include('partials._nav')
+                    @else
+                        <div class="hidden md:flex gap-4 justify-center items-center">
+                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
+                                Sign Up
+                            </a>
+                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
+                                Sign In
+                            </a>
+                            <a href="">
+                                <i class='fa-solid fa-circle-question text-2xl'></i>
+                            </a>
+                        </div>
+                @endauth
+                @auth
+                @csrf
+                <ul class="flex gap-6 justify-right items-center md:hidden">
+                    <li>
+                        <a href="{{ route('cart.cart') }}">
+                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('wishlistDashboard') }}">
+                            <i class="fa-regular fa-heart text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <i class="fa-regular fa-bell text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}">
+                            <i class="fa-solid fa-gear text-2xl"></i>
+                        </a>
+                    </li>
+                </ul>
+                @endauth
+                @include('partials._search_mobile')
+                <div class="flex md:hidden gap-6 m-2">
+                    <button id="show-search" class="">
+                        <i class="fa-solid fa-magnifying-glass text-3xl"></i>
+                    </button>
+                    <button id="menu_mobile_button" class="">
+                        <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+            </header>
+            <hr class="border border-brown_logo_light w-11/12 mx-auto" />
 
+            @include('partials._nav')
+        </div>
         <main class="">
             {{ $slot }}
         </main>
