@@ -73,7 +73,7 @@
    
                         <div class="form-group card required">
                             <label class="control-label">Card Number</label>
-                            <input autocomplete="off" class="form-control card-number" size="20" type="text" name="card_number" pattern="[0-9]{16}">
+                            <input value="4242424242424242" autocomplete="off" class="form-control card-number" size="20" type="text" name="card_number" pattern="[0-9]{16}">
                         </div>
    
                         <div class="form-row row">

@@ -27,7 +27,7 @@ class ReviewController extends Controller
             'comment' => $request->input('comment'),
         ]);
 
-        return redirect()->route('reviews.index')->with('message', 'Review updated successfully and email sent by both users.');
+        return redirect()->route('reviews.index')->with('message', 'Review updated successfully and email sent to both users.');
     }
 
     //delete e specific review
