@@ -64,7 +64,8 @@ class UserController extends Controller
         // Log the user in
         auth()->login($user);
         // Redirecting to the homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/')->with('message', 'Welcome ' . $formFields['userName']);
+
     }
 
     //Logout user
@@ -100,8 +101,11 @@ class UserController extends Controller
             //generate a new session (to store the logged user data)
             $request->session()->regenerate();
 
-            //redirect to homepage with a confirmation message
-            return redirect('/')->with('message', 'You are now logged in');
+            // Get the authenticated user's username
+            $userName = auth()->user()->userName;
+
+            // redirect to homepage with a welcome back message
+            return redirect('/')->with('message', "Welcome back $userName");
         }
 
         //go back to login form with error message for 'email' field
