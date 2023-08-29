@@ -1,11 +1,5 @@
 <x-layout>
-    <div class="mb-4">
-        Sort by:
-        <a href="?search={{ request('search') }}&sort=priceAsc">Price (Low to High)</a> |
-        <a href="?search={{ request('search') }}&sort=priceDesc">Price (High to Low)</a> |
-        <a href="?search={{ request('search') }}&sort=newest">Newest</a> |
-        <a href="?search={{ request('search') }}&sort=oldest">Oldest</a>
-    </div>
+
     <div class="flex flex-col md:flex-row">
 
         <!-- Sidebar with sort filters for desktop -->
@@ -15,16 +9,16 @@
             </div>
             <div class="flex flex-wrap -m-2">
                 <div class="p-2 w-1/2 md:w-full">
-                    <a href="?sort=priceAsc" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Price (Low to High)</a>
+                    <a href="?search={{ request('search') }}&sort=priceAsc" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Price (Low to High)</a>
                 </div>
                 <div class="p-2 w-1/2 md:w-full">
-                    <a href="?sort=priceDesc" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Price (High to Low)</a>
+                    <a href="?search={{ request('search') }}&sort=priceDesc" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Price (High to Low)</a>
                 </div>
                 <div class="p-2 w-1/2 md:w-full">
-                    <a href="?sort=newest" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Newest</a>
+                    <a href="?search={{ request('search') }}&sort=newest" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Newest</a>
                 </div>
                 <div class="p-2 w-1/2 md:w-full">
-                    <a href="?sort=oldest" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Oldest</a>
+                    <a href="?search={{ request('search') }}&sort=oldest" class="block bg-orange-500 text-white rounded px-4 py-2 hover:bg-orange-600 w-full text-center">Oldest</a>
                 </div>
             </div>
         </div>
