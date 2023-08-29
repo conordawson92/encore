@@ -29,6 +29,7 @@ class User extends Authenticatable
         'email',
         'banUser',
         'password',
+        'userImage',
     ];
 
     /**
@@ -92,7 +93,7 @@ class User extends Authenticatable
 
         // Calculate the new rating (you can adjust the formula as needed)
         $newRatingValue = ($currentRating * $totalRatings + $newRating) / ($totalRatings);
-    
+
         // Update the user's rating
         $this->userRating = $newRatingValue;
         $this->save();
@@ -128,5 +129,4 @@ class User extends Authenticatable
         //check if the user is an admin
         return $this->admin === 1;
     }
-
 }
