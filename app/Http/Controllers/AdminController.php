@@ -155,14 +155,7 @@ class AdminController extends Controller
     //edit user
     public function editUser(User $user)
     {
-        // Check if the logged-in user is an admin or the user is editing their own info
-        if (auth()->user()->role === 'admin' || auth()->user()->id === $user->id) {
-            // Load the edit view with the user's information
-            return view('users.edit', compact('user'));
-        } else {
-            // Redirect with an error message
-            return redirect()->route('dashboard')->with('error', 'You are not authorized to edit this user.');
-        }
+        return view('adminUser.editUser', compact('user'));        
     }
 
     //update the new informations in the database
@@ -171,7 +164,7 @@ class AdminController extends Controller
         // Validate and update user information based on form inputs
         $user->update($request->all());
 
-        return redirect()->route('adminUser.users')->with('message', 'User information has been updated and an email was sented to the user.');
+        return redirect()->route('adminUser.users')->with('message', 'User information has been updated.');
     }
 
     //banning a specific user method
