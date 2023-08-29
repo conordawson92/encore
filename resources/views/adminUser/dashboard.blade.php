@@ -28,14 +28,16 @@
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
                         <div class="font-bold text-2xl">
                             {{ $user->userName }}
-                            @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
-                                <span class="text-yellow-500"><i class="fas fa-star"></i></span>
-                                @elseif($i - 0.5 == $user->userRating)
-                                <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
-                                @else
-                                <span class="text-gray-400"><i class="fas fa-star"></i></span>
-                                @endif
+                            <div>
+                                @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                                    @elseif($i - 0.5 == $user->userRating)
+                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                    @else
+                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
                                 @endfor
+                            </div>
                                 <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
@@ -80,8 +82,11 @@
                             </button>
                         </form>
 
-                        <a href="/listings/{{$item->id}}" class="block">
-                            <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
                             <div class="p-4">
                                 <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
                                 <p class="text-gray-600">Description: {{ $item->description }}</p>
