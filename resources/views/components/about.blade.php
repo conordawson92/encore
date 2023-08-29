@@ -34,16 +34,16 @@
       <img src="./images/About_us/Conor.png" alt="Immagine 1" class="img-hover-effect w-4/5" />
     </div>
     <div class="mx-2 lg:mx-5 text-center lg:text-left flex-none w-2/5">
-      <h2 class="text-3xl">TELMA</h2>
-      <p>Descrizione 1</p>
+      <h2 class="text-7xl font-oglnf text-green-700">TELMA</h2>
+      <p>Back-end developers' idea of a three-course meal? An appetizer, a main, and a dessert... all served in different tables.</p>
     </div>
   </div>
 
   <!-- Images right -->
   <div class="flex flex-col-reverse lg:flex-row items-center justify-center mb-4 mx-auto" style="max-width: 80%;">
     <div class="mx-2 lg:mx-5 text-center lg:text-right flex-none w-2/5">
-      <h2 class="text-3xl">CONOR</h2>
-      <p>Descrizione 2</p>
+      <h2 class="text-7xl font-oglnf text-orange_logo">CONOR</h2>
+      <p>Git users live by the mantra: 'Commit early, commit often, and may the merge conflicts be ever in your favor!'</p>
     </div>
     <div class="mx-2 lg:mx-5 flex justify-center flex-none w-2/5">
       <img src="./images/About_us/Conor.png" alt="Immagine 2" class="img-hover-effect w-4/5" />
@@ -56,16 +56,16 @@
       <img src="./images/About_us/Conor.png" alt="Immagine 3" class="img-hover-effect w-4/5" />
     </div>
     <div class="mx-2 lg:mx-5 text-center lg:text-left flex-none w-2/5">
-      <h2 class="text-3xl">LOUIS-ARTHUR</h2>
-      <p>Descrizione 3</p>
+      <h2 class="text-7xl font-oglnf text-green-700">ARTHUR</h2>
+      <p>CSS developers always look good on the outside, even if they're a mess of !important rules on the inside.</p>
     </div>
   </div>
 
   <!-- Images right -->
   <div class="flex flex-col-reverse lg:flex-row items-center justify-center mb-4 mx-auto" style="max-width: 80%;">
     <div class="mx-2 lg:mx-5 text-center lg:text-right flex-none w-2/5">
-      <h2 class="text-3xl">LUCAS</h2>
-      <p>Descrizione 4</p>
+      <h2 class="text-7xl font-oglnf text-orange_logo">LUCAS</h2>
+      <p>Ask a back-end developer about relationships; they'll probably start with 'one-to-one' and 'many-to-many'.</p>
     </div>
     <div class="mx-2 lg:mx-5 flex justify-center flex-none w-2/5">
       <img src="./images/About_us/Conor.png" alt="Immagine 4" class="img-hover-effect w-4/5" />
@@ -78,8 +78,8 @@
       <img src="./images/About_us/Conor.png" alt="Immagine 5" class="img-hover-effect w-4/5" />
     </div>
     <div class="mx-2 lg:mx-5 text-center lg:text-left flex-none w-2/5">
-      <h2 class="text-3xl">CRISTIAN</h2>
-      <p>Descrizione 5</p>
+      <h2 class="text-7xl font-oglnf text-green-700">CRISTIAN</h2>
+      <p>"Our greatest glory is not in never falling, but in rising every time we run the server." - Confucio</p>
     </div>
   </div>
 

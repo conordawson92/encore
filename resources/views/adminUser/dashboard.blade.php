@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <div class="w-[65%] mx-auto">
+        <div class="w-[80%] sm:w-[65%] mx-auto">
             @auth
             @if(auth()->user()->role === 'admin')
             <p>

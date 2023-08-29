@@ -2,7 +2,7 @@ import autoanimate from '@formkit/auto-animate';
 
 function getHTMTCategories({categories}) {
     return `
-    <ul class="grid grid-cols-2 min-w-[227px] min-h-[132px]">
+    <ul class="grid grid-cols-2 min-w-[227px] min-h-[132px] fixed z-[9999] bg-beige_logo">
         ${categories.map(category => {
             return `
                 <li class="flex items-center justify-center hover:bg-beige_logo_hover w-full p-2">
