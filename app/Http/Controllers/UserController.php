@@ -12,6 +12,7 @@ use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\ParentCategory;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -26,6 +27,7 @@ class UserController extends Controller
     //store our infos in the db
     public function store(Request $request)
     {
+
         // First validation for main fields
         $mainFields = $request->validate([
             'userName' => ['required', 'min:3', 'max:16'],
@@ -41,31 +43,29 @@ class UserController extends Controller
             'userImage' => ['image', 'max:2048'], // Limiting to 2MB
         ]);
 
-        // Checking and storing the image if it's there
-        if ($request->hasFile('userImage')) {
-            $imageFields['userImage'] = $request->file('userImage')->store('images', 'public');
-        }
-
-        // Merging the two validations
-        $formFields = array_merge($mainFields, $imageFields);
-
         // Hashing the password
-        $formFields['password'] = bcrypt($formFields['password']);
+        $mainFields['password'] = bcrypt($mainFields['password']);
 
         // Setting default values for the new user
-        $formFields['banUser'] = false;
-        $formFields['role'] = 'basic_user';
-        $formFields['dateJoined'] = now();
-        $formFields['userRating'] = 3;
+        $mainFields['banUser'] = false;
+        $mainFields['role'] = 'basic_user';
+        $mainFields['dateJoined'] = now();
 
-        // Creating the new user
-        $user = User::create($formFields);
+        // Create the user with the main fields
+        $user = User::create($mainFields);
+
+        // If the image is present, save it and update the user record with its path
+        if ($request->hasFile('userImage')) {
+            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $user->userImage = $path;
+            $user->save();
+        }
 
         // Log the user in
         auth()->login($user);
-
         // Redirecting to the homepage
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/')->with('message', 'Welcome ' . $formFields['userName']);
+
     }
 
     //Logout user
@@ -101,8 +101,11 @@ class UserController extends Controller
             //generate a new session (to store the logged user data)
             $request->session()->regenerate();
 
-            //redirect to homepage with a confirmation message
-            return redirect('/')->with('message', 'You are now logged in');
+            // Get the authenticated user's username
+            $userName = auth()->user()->userName;
+
+            // redirect to homepage with a welcome back message
+            return redirect('/')->with('message', "Welcome back $userName");
         }
 
         //go back to login form with error message for 'email' field
@@ -175,25 +178,45 @@ class UserController extends Controller
             'reviewsReceived'
         ));
     }
-
-    //users rating
-    public function storeRating(Request $request, User $user)
+    
+    //edit the logged in form
+    public function edit()
     {
-        //rating that is given by default
-        $newRating = $request->input('rating');
+        $user = auth()->user();
+        return view('users.edit', compact('user'));
+    }
 
-        // Update the user's rating based on the new rating value
-        $user->updateRating($newRating);
+    //update a logged in user infos in the db
+    public function update(Request $request)
+    {
+        $user = auth()->user();
 
-        // Create the review record and save it
-        $review = new Review([
-            'reviewer_id' => auth()->user()->id,
-            'reviewed_id' => $user->id,
-            'rating' => $newRating,
-            'comment' => $request->input('comment'),
+        $request->validate([
+            'userName' => 'required|string|max:255',
+            'userImage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'userLocation' => 'required|string|max:255',
+            'userPhone' => 'required|string|max:255',
+            'paymentInfo' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
-        $review->save();
 
-        return redirect()->back()->with('message', 'Rating and review submitted.');
+        if ($request->hasFile('userImage')) {
+            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $userImage = $request->file('userImage')->store($path, 'public');
+            $user->userImage = $userImage;
+        }
+
+        $user->userName = $request->userName;
+        $user->userLocation = $request->userLocation;
+        $user->userPhone = $request->userPhone;
+        $user->paymentInfo = $request->paymentInfo;
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->with('message', 'Profile updated successfully.');
     }
 }

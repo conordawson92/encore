@@ -37,7 +37,10 @@ class CartController extends Controller
         $cartItem->save();
     }
 
-    return redirect()->back()->with('success', 'Item added to cart.');
+    // Get the name of the added item
+    $itemName = $item->ItemName;
+
+    return redirect()->back()->with('message', "$itemName has been added to cart.");
 }
 
 public function updateCartItem(Request $request, Cart $cart)
@@ -63,5 +66,13 @@ public function checkout()
 
     return view('api.stripe', compact('cartItems', 'totalAmount'));
 }
+
+public function addToCartAndRedirect(Item $item)
+{
+    $this->addToCart($item);
+
+    return redirect()->route('cart.cart')->with('success', 'Item added to cart.');
+}
+
 
 }

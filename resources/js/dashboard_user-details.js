@@ -20,7 +20,7 @@ const userDetails = `
                         ${ userAuth.paymentInfo }
                     </li>
                     <li>
-                        <a href="/adminUser/users/${userAuth.id}/edit">Edit my Informations</a>
+                        <a href="/adminUser/users/${userAuth.id}/edit">Edit my Information</a>
                     </li>
                 </ul>
                 `;

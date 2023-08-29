@@ -16,13 +16,16 @@
                     </h2>
                 </header>
 
-                <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form action="{{ route('users.updateUser', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-6">
                         <label for="userName" class="inline-block text-lg mb-2">Name</label>
                         <input type="text" class="border rounded p-2 w-full" name="userName" value="{{ $user->userName }}" required>
+                        @error('userName')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
@@ -31,26 +34,41 @@
                         @if($user->userImage)
                         <img class="w-48 mt-2" src="{{ asset('storage/' . $user->userImage) }}" alt="Profile Photo">
                         @endif
+                        @error('userImage')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
                         <label for="email" class="inline-block text-lg mb-2">Email</label>
                         <input type="email" class="border rounded p-2 w-full" name="email" value="{{ $user->email }}" required>
+                        @error('email')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
                         <label for="userLocation" class="inline-block text-lg mb-2">Location</label>
                         <input type="text" class="border rounded p-2 w-full" name="userLocation" value="{{ $user->userLocation }}" required>
+                        @error('userLocation')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
                         <label for="userPhone" class="inline-block text-lg mb-2">Phone Number</label>
                         <input type="text" class="border rounded p-2 w-full" name="userPhone" value="{{ $user->userPhone }}" required>
+                        @error('userPhone')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">
                         <label for="paymentInfo" class="inline-block text-lg mb-2">Payment Method</label>
                         <input type="text" class="border rounded p-2 w-full" name="paymentInfo" value="{{ $user->paymentInfo }}" required>
+                        @error('paymentInfo')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-6">

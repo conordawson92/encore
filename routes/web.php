@@ -15,6 +15,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PlatformController;
+use Illuminate\Support\Facades\Session;
+
 
 
 Route::get('/', function () {
@@ -45,6 +47,16 @@ Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 //create new user
 Route::post('/users', [UserController::class, 'store']);
 
+//edit user
+Route::get('/user/edit', [UserController::class, 'edit'])
+    ->middleware('auth')
+    ->name('user.edit');
+
+// Update user
+Route::put('/user/update', [UserController::class, 'update'])
+    ->middleware('auth')
+    ->name('user.update');
+
 //log user out
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
@@ -70,6 +82,15 @@ Route::post('/items/storeItem', [ItemController::class, 'storeItem'])
     ->middleware('auth')
     ->name('items.storeItem');
 
+//navbar heart route
+Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
+    ->middleware('auth')
+    ->name('wishlistDashboard');
+
+
+//REVIEWS
+//handle updating reviews
+Route::post('/submit-review', [ReviewController::class, 'storeRating']);
 
 
 
@@ -107,12 +128,12 @@ Route::patch('/adminUser/transactions/{transaction}/cancel', [AdminController::c
 //edit a selected user
 Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
     ->middleware('auth')
-    ->name('users.edit');
+    ->name('users.editUser');
 
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
     ->middleware('auth')
-    ->name('users.update');
+    ->name('users.updateUser');
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])
@@ -151,6 +172,15 @@ Route::put('/adminUser/editItem/{item}', [AdminController::class, 'updateItem'])
 Route::delete('/adminUser/items/{item}', [AdminController::class, 'destroyItem'])
     ->middleware('auth')
     ->name('items.destroy');
+
+
+// Add a review 
+Route::get('review/add/{item}', [ReviewController::class, 'create'])->name('review.create');
+
+// Store the review in the database
+Route::post('/adminUser/reviews', [ReviewController::class, 'store'])
+    ->middleware('auth')
+    ->name('reviews.store');
 
 //list all reviews
 Route::get('/adminUser/reviews', [ReviewController::class, 'index'])
@@ -219,4 +249,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/cart/update/{cart}', [CartController::class, 'updateCartItem'])->name('cart.update');
     // Remove item from the cart
     Route::delete('/cart/remove/{cart}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    //Buy button
+    Route::post('/cart/add-redirect/{item}', [CartController::class, 'addToCartAndRedirect'])->name('cart.addAndRedirect');
 });

@@ -47,6 +47,8 @@ class ItemController extends Controller
         $parentCategories = ParentCategory::all();
         $categories = Category::all();
         return view('items.createItem', ['parentCategories' => $parentCategories, 'categories' => $categories]);
+
+
     }
 
     //store the new item
@@ -78,6 +80,6 @@ class ItemController extends Controller
         }
 
         // Redirect the user after successful item creation
-        return redirect('/adminUser/dashboard')->with('success', 'Item added successfully.');
+        return redirect('/adminUser/dashboard')->with('message', 'Item added successfully.');
     }
 }

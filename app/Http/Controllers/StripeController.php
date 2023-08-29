@@ -38,10 +38,6 @@ class StripeController extends Controller
          $cartItemIds = $request->input('cart_items', []);
          Cart::whereIn('id', $cartItemIds)->delete();
      
-         // Flash success message
-         Session::flash('success', 'Payment successful! Thanks for your purchase with Encore.');
-     
-         return redirect('/adminUser/dashboard');
+         return redirect('/adminUser/dashboard')->with('message', 'Payment done successfully!');
      }
 }
-
