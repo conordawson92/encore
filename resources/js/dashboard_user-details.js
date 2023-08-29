@@ -5,7 +5,7 @@ const userDetails = `
                     <h2 class="">User Details:</h2>
                     <li>
                         <i class="fa-solid fa-envelope"></i>
-                        ${ userAuth.email}
+                        ${userAuth.email}
                     </li>
                     <li>
                         <i class="fa-solid fa-location-dot"></i>
@@ -13,31 +13,36 @@ const userDetails = `
                     </li>
                     <li>
                         <i class="fa-solid fa-phone"></i>
-                        ${ userAuth.userPhone}
+                        ${userAuth.userPhone}
                     </li>
                     <li>
                         Your favorite payment method:    
-                        ${ userAuth.paymentInfo }
+                        ${userAuth.paymentInfo}
                     </li>
                     <li>
-                        <a href="/adminUser/users/${userAuth.id}/edit">Edit my Information</a>
+                        
+                    <a href="/adminUser/users/${userAuth.id}/edit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+    <i class="fas fa-edit mr-2"></i> Edit my Information
+</a>
+
                     </li>
                 </ul>
                 `;
 
-const detailsContainer = document.querySelector('#details_container');
+const detailsContainer = document.querySelector("#details_container");
 autoanimate(detailsContainer);
 let details = false;
 document.addEventListener("DOMContentLoaded", () => {
-    const userDetailsButton = document.querySelector('#user_details_button');
-    const userDetailsButtonIcon = document.querySelector('#user_details_button_icon');
+    const userDetailsButton = document.querySelector("#user_details_button");
+    const userDetailsButtonIcon = document.querySelector(
+        "#user_details_button_icon"
+    );
 
     userDetailsButton.addEventListener("click", () => {
         if (!details) {
             detailsContainer.innerHTML = userDetails;
             userDetailsButtonIcon.classList.remove("fa-chevron-up");
             userDetailsButtonIcon.classList.add("fa-chevron-down");
-
         } else {
             detailsContainer.innerHTML = "";
             userDetailsButtonIcon.classList.remove("fa-chevron-down");
