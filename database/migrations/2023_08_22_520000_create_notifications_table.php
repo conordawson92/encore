@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->longText('content');
             $table->date('dateSent');
-            $table->string('status');
+            $table->enum('status', ['read', 'unread']);
             $table->foreignId('typeNotification_id')->constrained('type-notifications')->onDelete('cascade');
             $table->timestamps();
         });
