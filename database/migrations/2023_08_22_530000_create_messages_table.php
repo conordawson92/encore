@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->date('dateSent');
             $table->longText('content');
-            $table->string('status');
+            $table->enum('status', ['unread', 'read']);
             $table->timestamps();
         });
     }

@@ -26,49 +26,45 @@ class UserController extends Controller
     //store our infos in the db
     public function store(Request $request)
     {
-        $formFields = $request->validate([
+        // First validation for main fields
+        $mainFields = $request->validate([
             'userName' => ['required', 'min:3', 'max:16'],
             'userLocation' => ['required', 'min:3'],
             'userPhone' => ['required', 'min:9'],
             'paymentInfo' => ['required', Rule::in(['Card', 'PayPal', 'GooglePay', 'ApplePay'])],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', Password::min(6)->mixedCase()->numbers()->symbols()]
-            //mixedCase - at least one uppercase and one lowercase
-            //numbers - at least one number
-            //symbols - at least one symbol
         ]);
 
-        //make sure the image is here before saving it
-        $formFields = $request->validate([
+        // Second validation only for image
+        $imageFields = $request->validate([
             'userImage' => ['image', 'max:2048'], // Limiting to 2MB
         ]);
+
+        // Checking and storing the image if it's there
         if ($request->hasFile('userImage')) {
-            $formFields['userImage'] = $request->file('userImage')->store('images', 'public');
+            $imageFields['userImage'] = $request->file('userImage')->store('images', 'public');
         }
 
-        //hash the password
+        // Merging the two validations
+        $formFields = array_merge($mainFields, $imageFields);
+
+        // Hashing the password
         $formFields['password'] = bcrypt($formFields['password']);
 
-        //default value for the banUser
+        // Setting default values for the new user
         $formFields['banUser'] = false;
-
-        //default value to new users
         $formFields['role'] = 'basic_user';
-
-        //afect the now() date 
         $formFields['dateJoined'] = now();
-
-        //afect the users rating in 3 to begin, then it will increase/ decrease with other users reviews
         $formFields['userRating'] = 3;
 
-        //create the new user
+        // Creating the new user
         $user = User::create($formFields);
 
-        //using auth() helper handles all the login/logout process for us
+        // Log the user in
         auth()->login($user);
-        //so the user that just finished the register form do not have to login again, he will stay in his account right after the register
 
-        //when the user is created and logged in, we'll show them the homepage so they can start navigate the website
+        // Redirecting to the homepage
         return redirect('/')->with('message', 'User created and logged in');
     }
 

@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('size');           
             $table->string('brand');
             $table->string('condition');
-            $table->string('dateListed');
+            $table->timestamp('dateListed')->useCurrent();
             $table->integer('quantity');
             $table->string('tags');
-            $table->string('status');
+            $table->enum('status', ['available', 'sold', 'unavailable'])->default('available');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('sellerUser_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('buyerUser_id')->nullable()->constrained('users')->onDelete('set null');
