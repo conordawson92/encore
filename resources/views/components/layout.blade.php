@@ -131,7 +131,7 @@
                     </button>
                 </div>
             </header>
-            <hr class="border border-brown_logo_light w-11/12 mx-auto" />
+            <hr class="border border-brown_logo_light w-11/12 mx-auto my-2" />
 
             @include('partials._nav')
         </div>
