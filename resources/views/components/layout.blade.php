@@ -21,6 +21,13 @@
     
 
     <style>
+        body::-webkit-scrollbar {
+            width: 0;  /* Remove scrollbar space */
+            background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+        body {
+            scrollbar-width: none; /* Firefox 64+ */
+        }
         @font-face {
         font-family: 'Oglnf';
         src: url('{{ asset('fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
