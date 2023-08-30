@@ -29,6 +29,7 @@ class ReviewController extends Controller
     {
         $review->update([
             'comment' => $request->input('comment'),
+            'rating' => $request->input('rating'),
         ]);
 
         return redirect()->route('reviews.index')->with('message', 'Review updated successfully and email sent to both users.');
