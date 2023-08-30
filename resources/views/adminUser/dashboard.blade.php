@@ -161,27 +161,28 @@
                         </tr>
                         @endforeach
 
-                    <a href="/listings/{{$item->id}}" class="block relative">
-                        <div class="relative w-full h-48 overflow-hidden">
-                            <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
-                            <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
-                        </div>
-                        <div class="p-4">
-                            <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                            <p class="text-gray-600">Description: {{ $item->description }}</p>
-                            <p class="text-gray-600">Price: {{ $item->price }}€</p>
-                            <p class="text-gray-600">Size: {{ $item->size }}</p>
-                            <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                            <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                            <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                        </div>
-                </div>
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}€</p>
+                                <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                            </div>
+                        </a>
+                    </div>
                 @endif
             </div>
             @else
             <p class="text-gray-600">Your wishlist is empty.</p>
             @endif
-        </div> --}}
+        </div>
 
 
 
