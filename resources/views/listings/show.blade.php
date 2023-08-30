@@ -24,16 +24,16 @@
             <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
                 <div class="pl-0 sm:pl-8 w-full text-left">
                     
-                    <!-- Titolo e bottone -->
-                    <div class="flex justify-between items-center mb-2">
+                    <!-- Title and button-->
+                    <div class="flex justify-between items-center mb-2 mt-[14px]">
                         <h3 class="text-2xl">{{$listing->ItemName}}</h3>
-                        <button class="text-red-500 hover:text-red-800 toggle-heart">
-                            <i class="far fa-heart heart-empty"></i>
-                            <i class="fas fa-heart heart-full hidden"></i>
+                        <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
+                            <i class="far fa-heart"></i>  
+                            <i class="fas fa-heart hidden"></i>  
                         </button>
                     </div>
 
-                    <!-- Resto del contenuto -->
+                    <!-- Content -->
                     <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
                     <x-listing-tags :tagsCsv="$listing->tags" />
                     <div class="text-lg my-4">€{{$listing->price}}</div>
@@ -139,6 +139,19 @@
         };
     </script>
 
+<script>
+    const heartButton = document.getElementById('heartButton');
+
+    heartButton.addEventListener('click', function() {
+        const heartEmpty = this.querySelector('.far');
+        const heartFull = this.querySelector('.fas');
+        heartEmpty.classList.toggle('hidden');
+        heartFull.classList.toggle('hidden');
+    });
+</script>
+
+
 </x-layout>
+
 
 
