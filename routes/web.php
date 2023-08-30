@@ -93,20 +93,18 @@ Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
 Route::post('/submit-review', [ReviewController::class, 'storeRating']);
 
 
-
-
 //WISHLIST
-//add item to wishlist
-Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->middleware('auth');
-
 //remove item from wishlist
 Route::delete('/wishlist/remove/{itemId}', [WishlistController::class, 'remove'])
-    ->name('wishlist.remove');
+    ->name('wishlist.remove')
+    ->middleware('auth');
 
+// Add item to wishlist
+Route::post('/wishlist/add/{itemId}', [WishlistController::class, 'addToWishlist'])
+    ->name('wishlist.add')
+    ->middleware('auth');
 
-
-
-
+    
 //ADMIN
 //show admin personnel dashboard
 Route::get('/adminUser/dashboard', [AdminController::class, 'dashboard'])->middleware('auth')->name('dashboard');

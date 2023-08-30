@@ -114,37 +114,38 @@
                 <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 
                 @if ($user->wishlist->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach ($user->wishlist as $item)
-                    <div class="border overflow-hidden shadow-custom relative">
-                        <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach ($user->wishlist as $item)
+                            <div class="border overflow-hidden shadow-custom relative">
+                                <img class="w-full h-48 object-cover" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
 
-            <!-- Delete Button -->
-            <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-600 hover:text-red-800">
-                    <i class="far fa-trash-can"></i>
-                </button>
-            </form>
+                                <!-- Delete Button -->
+                                <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-800">
+                                        <i class="far fa-trash-can"></i>
+                                    </button>
+                                </form>
 
-            <div class="p-4">
-                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                <p class="text-gray-600">Description: {{ $item->description }}</p>
-                <p class="text-gray-600">Price: {{ $item->price }}</p>
-                <p class="text-gray-600">Size: {{ $item->size }}</p>
-                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                                <div class="p-4">
+                                    <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                    <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                    <p class="text-gray-600">Price: {{ $item->price }}</p>
+                                    <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                    <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                    <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                    <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-gray-600">Your wishlist is empty.</p>
+                @endif
             </div>
-        </div>
-        @endforeach
-        </div>
-        @else
-        <p class="text-gray-600">Your wishlist is empty.</p>
-        @endif
-        </div>
-        <div class="p-6">
+            
+        {{-- <div class="p-6">
             <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
 
             @if ($user->wishlist->count() > 0)
@@ -184,7 +185,7 @@
             @else
             <p class="text-gray-600">Your wishlist is empty.</p>
             @endif
-        </div>
+        </div> --}}
 
         <!--all the items bought for the admin logged in with the transaction history-->
         <div class="p-6">
