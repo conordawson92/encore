@@ -6,7 +6,7 @@
 <x-layout>
 
     <div class="w-[60%] mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl my-2">
-        <a href="/adminUser/dashboard" class="py-1 px-2 border-2 border-brown_logo hover:bg-beige_logo_hover inline-block mb-6 text-brown_logo transition-all">Back to Dashboard</a>
+        <a href="/adminUser/dashboard" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">Back to Dashboard</a>
 
         <!-- Display validation errors if they exist -->
         @if ($errors->any())
@@ -105,7 +105,7 @@
             @enderror
 
             <div>
-                <button type="submit" class="uppercase font-bold w-full text-brown_logo p-2 border-2 border-brown_logo hover:bg-beige_logo_hover focus:outline-none transition:all">
+                <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
                     Add Item
                 </button>
             </div>
