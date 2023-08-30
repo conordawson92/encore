@@ -201,22 +201,22 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/help_center">
+                        <a class="hover:underline" href="/future">
                             Help Center
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/help_center#buying">
+                        <a class="hover:underline" href="/future">
                             Buying Guide
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/help_center#selling">
+                        <a class="hover:underline" href="/future">
                             Selling Guide
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/safety">
+                        <a class="hover:underline" href="/future">
                             Safety
                         </a>
                     </li>
@@ -228,7 +228,7 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/forum">
+                        <a class="hover:underline" href="/future">
                             Forum
                         </a>
                     </li>
@@ -239,22 +239,22 @@
         <div class="p-2">
             <ul class="flex justify-center gap-8 flex-wrap">
                 <li>
-                    <a href="">
+                    <a href="/future">
                         <i class="fa-brands fa-square-facebook text-3xl"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/future">
                         <i class="fa-brands fa-x-twitter text-3xl"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/future">
                         <i class="fa-brands fa-linkedin text-3xl"></i>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="/future">
                         <i class="fa-brands fa-instagram text-3xl"></i>
                     </a>
                 </li>
@@ -264,22 +264,22 @@
         <div class="p-2">
             <ul class="flex justify-center gap-4 flex-wrap">
                 <li>
-                    <a class="hover:underline" href="">
+                    <a class="hover:underline" href="/future">
                         Privacy Policy
                     </a>
                 </li>
                 <li>
-                    <a class="hover:underline" href="">
+                    <a class="hover:underline" href="/future">
                         Cookie Policy
                     </a>
                 </li>
                 <li>
-                    <a class="hover:underline" href="">
+                    <a class="hover:underline" href="/future">
                         Cookie Settings
                     </a>
                 </li>
                 <li>
-                    <a class="hover:underline" href="">
+                    <a class="hover:underline" href="/future">
                         Terms & Conditions
                     </a>
                 </li>

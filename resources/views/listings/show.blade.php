@@ -25,7 +25,7 @@
                 <div class="pl-0 sm:pl-8 w-full text-left">
                     
                     <!-- Title and button-->
-                    <div class="flex justify-between items-center mb-2">
+                    <div class="flex justify-between items-center mb-2 mt-[14px]">
                         <h3 class="text-2xl">{{$listing->ItemName}}</h3>
                         <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
                             <i class="far fa-heart"></i>  
