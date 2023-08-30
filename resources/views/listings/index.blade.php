@@ -4,6 +4,9 @@
 
 
 <x-layout>
+  <div class="flex justify-center">
+    <h2 class="text-8xl mb-4 font-oglnf text-green-700">SHOP</h2>
+  </div>
     <div class="flex flex-col md:flex-row">
       <!-- Sidebar  -->
       <div class="h-auto md:w-1/4 md:mr-4 mb-4 md:mb-0 p-2 bg-gray-50 relative"> 
@@ -30,7 +33,7 @@
       </div>
   
       <!-- Listing grid -->
-      <div class="flex justify-center w-full md:w-3/4">
+      <div class="flex justify-center w-full md:w-3/4 z-[-1]">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 w-full">
           @if (count($listings) == 0)
             <p>No listing found</p>

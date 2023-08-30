@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ParentCategory;
 
@@ -23,8 +24,10 @@ class ListingController extends Controller
     //show a single listing
     public function show(Item $listing)
     {
+        $listingUser = User::find($listing->sellerUser_id);
         return view('listings.show', [
-            'listing' => $listing
+            'listing' => $listing,
+            'listingUser' => $listingUser
         ]);
     }
 

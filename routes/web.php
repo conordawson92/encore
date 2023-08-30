@@ -69,8 +69,9 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 //manage user
 Route::get('/users/manage', [UserController::class, 'manage'])->middleware('auth');
 
-//show user profile
+//show user dashboard
 Route::get('/dashboard', [UserController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
 
 //show new item form
 Route::get('/items/createItem', [ItemController::class, 'createItem'])
@@ -87,10 +88,14 @@ Route::get('/wishlistDashboard', [UserController::class, 'wishlistDashboard'])
     ->middleware('auth')
     ->name('wishlistDashboard');
 
+//show user 
+Route::get('/user/{user_id}', [UserController::class, 'showProfile'])->name('users.showProfile');
+
+
 
 //REVIEWS
 //handle updating reviews
-Route::post('/submit-review', [ReviewController::class, 'storeRating']);
+Route::post('/submit-review', [ReviewController::class, '']);
 
 
 //WISHLIST
@@ -221,6 +226,11 @@ Route::get('/our-mission', function () {
 // our platform
 Route::get('/our-platform', function () {
     return view('components/our_platform');
+});
+
+// FAQ
+Route::get('/faq', function () {
+    return view('platform/faq');
 });
 
 //Stripe API checkout
