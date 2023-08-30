@@ -16,7 +16,7 @@
         <!-- Display Available Items -->
         <h2 class="text-4xl font-semibold text-orange-500 mb-8">Available Items</h2>
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border-t border-l rounded-lg">
+            <table class="min-w-full bg-white border-t border-l rounded-lg overflow-x-auto">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="border p-2 text-left">Image</th>
