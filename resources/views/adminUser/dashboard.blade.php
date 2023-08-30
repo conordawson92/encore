@@ -178,7 +178,7 @@
                                 $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
                                 @endphp
                                 @if ($transaction->status == 'finished' && !$userReview)
-                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center"">Add Review</a>
+                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center">Add Review</a>
                                 @elseif($userReview)
                                 <span class=" text-gray-600">Reviewed</span>
                                     @endif
@@ -222,7 +222,7 @@
                                 $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
                                 @endphp
                                 @if ($transaction->status == 'finished' && !$userReview)
-                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Review</a>
+                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center">Add Review</a>
                                 @elseif($userReview)
                                 <span class="text-gray-600">Reviewed</span>
                                 @endif
