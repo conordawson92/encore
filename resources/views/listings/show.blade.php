@@ -15,18 +15,7 @@
                     <img id="thumbnailImage" class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
                 </div>
 
-                <!-- Information -->
-                <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
-                    <div class="pl-0 sm:pl-8 w-full text-left">
 
-                        <!-- Title and button-->
-                        <div class="flex justify-between items-center mb-2 mt-[14px]">
-                            <h3 class="text-2xl">{{$listing->ItemName}}</h3>
-                            <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
-                                <i class="far fa-heart"></i>
-                                <i class="fas fa-heart hidden"></i>
-                            </button>
-                        </div>
 
             <!-- Information -->
             <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
