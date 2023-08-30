@@ -4,13 +4,16 @@
 
 
 <x-layout>
+
     <body>
         <!-- Wrapper -->
         <div class="p-8 space-y-6 overflow-y-auto" style="max-height: 90vh;">
 
             <!-- Back Navigation and Title -->
             <div class="flex items-center justify-between">
-                <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+                <a href="{{ route('admin') }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                    <i class="fas fa-user-cog mr-2"></i> Back to Admin Functions
+                </a>
                 <div class="flex items-center">
                     <h1 class="text-4xl font-semibold text-orange_logo ml-4">Reviews Management</h1>
                     <div class="text-3xl text-orange-500 ml-4">🛠</div>
@@ -20,7 +23,7 @@
             <!-- Reviews Section -->
             <section class="space-y-4">
                 <h3 class="text-4xl font-semibold text-orange-500 mb-8">Reviews</h3>
-                
+
                 <div class="overflow-x-auto">
                     @if ($reviews->count() > 0)
                     <table class="min-w-full bg-white border-t border-l rounded-lg">
