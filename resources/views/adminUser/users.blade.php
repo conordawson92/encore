@@ -8,7 +8,9 @@
         <!-- Back Navigation and Title -->
         <div class="flex items-center justify-between">
             <h1 class="text-4xl font-semibold text-orange_logo_light">Manage Users</h1>
-            <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+            <a href="/adminUser/admin" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                <i class="fas fa-user-cog mr-2"></i> Back to Admin Functions
+            </a>
         </div>
 
         <!-- Active Users -->
