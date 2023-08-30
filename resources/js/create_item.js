@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     function filterCategoriesByParent() {
-        var parentCategory = document.getElementById('parentCategory').value;
-        var allCategories = document.querySelectorAll('#category option');
+        var parentCategory = document.getElementById('parentCategory')?.value;
+        if (parentCategory) {
+            var allCategories = document.querySelectorAll('#category option');
         
         // Initially hide all category options
         allCategories.forEach(function(categoryOption) {
@@ -17,10 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Reset category selection
         document.getElementById('category').selectedIndex = -1;
+        }
     }
 
     // Attach the filtering to the parent category dropdown's change event
-    document.getElementById('parentCategory').addEventListener('change', filterCategoriesByParent);
+    document.getElementById('parentCategory')?.addEventListener('change', filterCategoriesByParent);
     
     // Call the function immediately to filter on page load
     filterCategoriesByParent();

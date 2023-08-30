@@ -3,6 +3,10 @@
 </head>
 
 <x-layout>
+        <!-- More content: "The Future is Now" -->
+        <div class="my-5 text-center text-4xl mt-16">
+            <h1 class="text-8xl font-oglnf text-green-700">The Future is Now</h1>
+        </div>
 
   <div class="container mx-auto mt-10">
 
@@ -11,58 +15,12 @@
       <div class="flex-1">
         <img src="./images/Contact_us/Encore manifest.png" alt="Image" class="w-full h-auto">
       </div>
-
-      <!-- Form -->
-      <div class="flex-1">
-        <form>
-          <div class="mb-3">
-            <label for="name" class="block text-sm font-medium text-gray-600">First Name</label>
-            <input type="text" id="name" name="name" class="mt-1 p-2 w-full border rounded-md">
-            @error('name')
-              <p class="text-red-500">{{ $message }}</p>
-            @enderror
-          </div>
-          <div class="mb-3">
-            <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-            <input type="email" id="email" name="email" class="mt-1 p-2 w-full border rounded-md">
-            @error('email')
-              <p class="text-red-500">{{ $message }}</p>
-            @enderror
-          </div>
-          <div class="mb-3">
-            <label for="subject" class="block text-sm font-medium text-gray-600">Subject</label>
-            <select id="subject" name="subject" class="mt-1 p-2 w-full border rounded-md">
-              <option value="">--Select Subject--</option>
-              <option value="Project">I'd like to start a project</option>
-              <option value="Question">I'd like to ask a question</option>
-              <option value="Other">I'd like to make a proposal</option>
-            </select>
-            @error('subject')
-              <p class="text-red-500">{{ $message }}</p>
-            @enderror
-          </div>
-          <div class="mb-3">
-            <label for="message" class="block text-sm font-medium text-gray-600">Message</label>
-            <textarea id="message" name="message" rows="8" class="mt-1 p-2 w-full border rounded-md"></textarea>
-            @error('message')
-              <p class="text-red-500">{{ $message }}</p>
-            @enderror
-          </div>
-          <button type="submit" class="bg-blue-500 text-white p-2 rounded">Send Us</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- More content: "The Future is Now" -->
-    <div class="my-5 text-center text-4xl mt-16">
-      <h1 class="text-8xl font-oglnf text-green-700">The Future is Now</h1>
-    </div>
-
+    
 <!-- Images and Descriptions -->
 <div class="space-y-4 md:space-y-8 my-8">
 
   <!-- Left Image and Description -->
-  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4" id="eco-friendly">
     <div class="w-full md:w-1/2">
       <img src="./images/Contact_us/pexels-karolina-grabowska-4210850.jpg" alt="Image 1" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
@@ -79,7 +37,7 @@
   </div>
 
   <!-- Right Image and Description -->
-  <div class="flex flex-col md:flex-row-reverse space-y-4 md:space-y-0 md:space-x-4">
+  <div class="flex flex-col md:flex-row-reverse space-y-4 md:space-y-0 md:space-x-4" id="circular-economy">
     <div class="w-full md:w-1/2">
       <img src="./images/Contact_us/pexels-cottonbro-studio-6069552.jpg" alt="Image 2" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
@@ -96,16 +54,18 @@
   </div>
 
   <!-- Another Left Image and Description -->
-  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4" id="express-yourself">
     <div class="w-full md:w-1/2">
       <img src="./images/Contact_us/pexels-karolina-grabowska-4210850.jpg" alt="Image 3" class="w-full h-auto transform transition-transform hover:scale-105">
     </div>
     <div class="w-full md:w-1/2 text-left pl-6">
       <h2 class="text-4xl py-6">SHOW YOURSELF THE WAY YOU WANT</h2>
       <p class="text-2xl">
-        Unlike fast fashion outlets, <span class="italic font-bold">Encore</span> offers a diverse array of unique pieces that often aren't 
-        found in mainstream stores. This allows buyers to curate a distinctive personal style. Additionally, we pride ourselves on 
-        quality assurance.
+        One of the most compelling reasons to buy from our second-hand clothing website is the opportunity it offers 
+        for unique self-expression. Unlike mainstream fast fashion outlets that produce garments en masse, leading to everyone 
+        sporting similar styles, <span class="italic font-bold">Encore</span> boasts a diverse range of distinctive pieces often not found elsewhere. This diversity 
+        allows you to curate a wardrobe that truly stands out and represents your individual taste and personality. By choosing 
+        <span class="italic font-bold">Encore</span>, you're not just purchasing clothes; you're investing in a style that is uniquely yours, setting you apart from the crowd.
       </p>
     </div>
   </div>
@@ -113,7 +73,7 @@
   <hr class="w-full md:w-11/12 m-auto border border-brown_logo">
 
 
-  <div class="my-5 text-center text-4xl">
+  <div class="my-5 text-center text-4xl"  id="contact-us">
     
     <h1 class="text-8xl font-oglnf text-green-700">Contact us</h1>
   </div>
@@ -126,7 +86,7 @@
 
 
     <!-- Form -->
-    <div class="flex-1">
+    <div class="flex-1"">
       <form>
         <div class="mb-3">
           <label for="name" class="block text-sm font-medium text-gray-600">First Name</label>

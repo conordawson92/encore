@@ -49,7 +49,7 @@ class AdminController extends Controller
             ->get();
             
         // Load user's messages with sender information
-        $messagesSented = Message::where('senderUser_id', $user->id)
+        $messagesSent = Message::where('senderUser_id', $user->id)
             ->with(['receiver', 'item'])
             ->get();
 
@@ -76,7 +76,7 @@ class AdminController extends Controller
             'sellingItems',
             'sellingTransactions',
             'buyingTransactions',
-            'messagesSented',
+            'messagesSent',
             'messagesReceived',
             'notifications',
             'reviewsGiven',

@@ -8,3 +8,4 @@ import "./create_item";
 import "./dashboard_user-details";
 import "./image_overlay";
 import "./image_preview";
+import "./heart_button";
