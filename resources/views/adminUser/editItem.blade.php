@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Edit Item</title>
+</head>
+
 <x-layout>
 
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 space-y-8">

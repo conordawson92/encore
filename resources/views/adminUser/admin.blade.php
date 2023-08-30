@@ -1,5 +1,8 @@
 <x-layout>
 
+    <head>
+        <title>Encore | Administrator</title>
+    </head>
     <div class="w-[60%] mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl my-2">
 
         <div class="mt-4 pb-5">

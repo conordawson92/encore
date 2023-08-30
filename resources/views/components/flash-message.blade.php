@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Flash Message</title>
+</head>
+
+
 {{--session() is the helper that gives access to the $_SESSION--}}
 {{--not only that but it also provides useful functions like has()--}}
 

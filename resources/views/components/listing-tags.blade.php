@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Tags</title>
+</head>
+
+
 {{--Convert the list to an array--}}
 @props(['tagsCsv'])
 

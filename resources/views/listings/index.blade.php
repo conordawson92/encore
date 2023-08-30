@@ -1,4 +1,12 @@
+<head>
+    <title>Encore | Items</title>
+</head>
+
+
 <x-layout>
+  <div class="flex justify-center">
+    <h2 class="text-8xl mb-4 font-oglnf text-green-700">SHOP</h2>
+  </div>
     <div class="flex flex-col md:flex-row">
       <!-- Sidebar  -->
       <div class="h-auto md:w-1/4 md:mr-4 mb-4 md:mb-0 p-2 bg-gray-50 relative"> 

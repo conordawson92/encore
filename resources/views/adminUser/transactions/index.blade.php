@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Transactions</title>
+</head>
+
+<a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
 <x-layout>
 
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
