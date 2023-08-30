@@ -12,7 +12,7 @@
                 <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
                 <div class="flex items-center">
                     <h1 class="text-4xl font-semibold text-orange_logo ml-4">View User</h1>
-                    <div class="text-6xl text-orange-500 ml-4">
+                    <div class="text-3xl text-orange-500 ml-4">
                         🛠 
                     </div>
                 </div>
