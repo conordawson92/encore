@@ -149,7 +149,7 @@ class AdminController extends Controller
         // Update the status of the transaction to "rejected"
         $transaction->update(['status' => 'rejected']);
 
-        return redirect()->back()->with('message', 'Transaction has been canceled and an email was sented to the user.');
+        return redirect()->back()->with('message', 'Transaction has been cancelled, an email was sent to the user.');
     }
 
     //edit user
@@ -198,14 +198,14 @@ class AdminController extends Controller
             Auth::logout();
         }
 
-        return redirect()->route('adminUser.users')->with('message', 'User has been banned and an email was sented to the user.');
+        return redirect()->route('adminUser.users')->with('message', 'User has been banned, an email was sent to the user.');
     }
 
     //restore a banned user
     public function restoreUser(User $user)
     {
         $user->update(['banUser' => false]);
-        return redirect()->route('adminUser.users')->with('message', 'User has been restored and an email was sent to the user.');
+        return redirect()->route('adminUser.users')->with('message', 'User has been restored, an email was sent to the user.');
 
     }
 
@@ -258,7 +258,7 @@ class AdminController extends Controller
             'quantity' => $request->input('quantity'),
         ]);
 
-        return redirect()->route('items.manage')->with('message', 'Item updated successfully and email sent to the user.');
+        return redirect()->route('items.manage')->with('message', 'Item updated successfully, an email was sent to the user.');
     }
 
     //delete (hide) an item
@@ -267,8 +267,8 @@ class AdminController extends Controller
         // change the status of the item to unavailable (Delete the item)
         $item->update(['status' => 'unavailable']);
 
-        return redirect()->back()->with('message', 'Item deleted successfully.');
-}
+        return redirect()->back()->with('message', 'Item deleted successfully, an email was sent to the user.');
+    }
 
 
 }
