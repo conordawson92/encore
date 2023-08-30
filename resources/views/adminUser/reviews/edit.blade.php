@@ -1,5 +1,5 @@
 <head>
-    <title>Edit Review</title>
+    <title>Encore | Edit Review</title>
 </head>
 <x-layout>
     <body>
@@ -8,7 +8,7 @@
 
             <!-- Back Navigation and Title -->
         <div class="flex items-center justify-between">
-            <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Reviews</a>
+            <a href="/adminUser/reviews" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">Back to Admin Reviews</a>
             <div class="flex items-center">
                 <h1 class="text-4xl font-semibold text-orange_logo ml-4">Manage Review</h1>
                 <div class="text-3xl text-orange-500 ml-4">

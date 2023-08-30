@@ -112,6 +112,9 @@
                 </div>
                 @endif
             </div>
+
+            <div class="border-b border-orange-300 my-4"></div>
+
             <!--the items in the admin wishlist-->
             <h2 class="text-2xl font-bold text-center py-3" id="wishlist">Your wishlist</h2>
             @if ($user->wishlist->count() > 0)
@@ -150,6 +153,8 @@
             <p class="text-gray-600">Your wishlist is empty.</p>
             @endif
 
+            <div class="border-b border-orange-300 my-4"></div>
+
             <!--all the items bought for the admin logged in with the transaction history-->
             <div class="py-3">
                 <h2 class="text-2xl font-bold text-center py-3" id="purchase-history">Purchase History</h2>
@@ -180,7 +185,7 @@
                                 $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
                                 @endphp
                                 @if ($transaction->status == 'finished' && !$userReview)
-                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center"">Add Review</a>
+                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center">Add Review</a>
                                 @elseif($userReview)
                                 <span class=" text-gray-600">Reviewed</span>
                                     @endif
@@ -224,7 +229,7 @@
                                 $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
                                 @endphp
                                 @if ($transaction->status == 'finished' && !$userReview)
-                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Review</a>
+                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center">Add Review</a>
                                 @elseif($userReview)
                                 <span class="text-gray-600">Reviewed</span>
                                 @endif
@@ -237,6 +242,9 @@
                 <p class="text-gray-600">No sales history found.</p>
                 @endif
             </div>
+
+            <div class="border-b border-orange-300 my-4"></div>
+
             <!--all the reviews made by the admin logged in-->
             <div class="py-3">
                 <h2 class="text-2xl font-bold text-center py-3" id="your-reviews">Your Reviews</h2>
@@ -295,6 +303,9 @@
                 <p class="text-gray-600 mt-2">No reviews received.</p>
                 @endif
             </div>
+
+            <div class="border-b border-orange-300 my-4"></div>
+
             <!--all the admin messages history-->
             <div class="py-3">
                 <h2 class="text-2xl font-bold text-center py-3" id="your-messages">Your Messages</h2>
@@ -354,6 +365,9 @@
                 <p class="text-gray-600 mt-2">No messages received.</p>
                 @endif
             </div>
+
+            <div class="border-b border-orange-300 my-4"></div>
+            
             <!--admin notifications history-->
             <div class="py-3">
                 <h2 class="text-2xl font-bold text-center py-3" id="your-notifications">Your Notifications</h2>

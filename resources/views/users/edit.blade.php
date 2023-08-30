@@ -13,7 +13,7 @@
         </div>
  <div class="flex h-screen">
         <!-- Right side for Edit Profile Form -->
-        <div class="w-full customLg:w-1/2 bg-white flex items-center justify-center">
+        <div class="customLg:w-1/2 bg-white flex items-center justify-center">
 
             <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
                 <header class="mb-8">
@@ -98,6 +98,7 @@
                         <button type="submit" class="bg-orange_logo_light text-white rounded-xl py-2 px-4 hover:bg-white hover:text-black transition duration-300">
                             Update Profile
                         </button>
+                        <a href="{{ route('dashboard') }}" class="text-black-500 hover:underline">Back to User List</a>
                     </div>
                 </form>
             </div>

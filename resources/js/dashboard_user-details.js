@@ -21,7 +21,7 @@ const userDetails = `
                     </li>
                     <li>
                         
-                    <a href="/adminUser/users/${userAuth.id}/edit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                    <a href="/user/edit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
     <i class="fas fa-edit mr-2"></i> Edit my Information
 </a>
 
