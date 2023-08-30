@@ -21,12 +21,14 @@
     
 
     <style>
-        body::-webkit-scrollbar {
-            width: 0;  /* Remove scrollbar space */
-            background: transparent;  /* Optional: just make scrollbar invisible */
-        }
-        body {
-            scrollbar-width: none; /* Firefox 64+ */
+        @media (min-width: 768px) {
+            body::-webkit-scrollbar {
+                width: 0;  /* Remove scrollbar space */
+                background: transparent;  /* Make scrollbar invisible */
+            }
+            html {
+                scrollbar-width: none; /* Firefox 64+ */
+            }
         }
         @font-face {
         font-family: 'Oglnf';
@@ -208,22 +210,22 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Help Center
+                        <a class="hover:underline" href="/faq#general">
+                            FAQ
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Buying Guide
+                        <a class="hover:underline" href="/faq#buyer">
+                            Buyer
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Selling Guide
+                        <a class="hover:underline" href="/faq#seller">
+                            Seller
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
+                        <a class="hover:underline" href="/faq#safety">
                             Safety
                         </a>
                     </li>
