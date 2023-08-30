@@ -1,15 +1,17 @@
 <x-layout>
     <!-- Back Navigation and Title -->
     <div class="flex items-center justify-between m-8">
-        <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+        <a href="{{ route('admin') }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+            <i class="fas fa-user-cog mr-2"></i> Back to Admin Functions
+        </a>
         <div class="flex items-center">
             <h1 class="text-4xl font-semibold text-orange_logo ml-4">View Transactions</h1>
             <div class="text-3xl text-orange-500 ml-4">
-                🛠 
+                🛠
             </div>
         </div>
     </div>
-    
+
     <div class="container mx-auto mt-10 p-8 bg-white shadow-md rounded-lg">
         <h1 class="text-4xl font-semibold text-orange-500 mb-8">Transactions</h1>
 
@@ -125,6 +127,3 @@
         @endif
     </div>
 </x-layout>
-
-
-
