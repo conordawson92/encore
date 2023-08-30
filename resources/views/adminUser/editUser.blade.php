@@ -54,6 +54,10 @@
 
                 <!-- Submit Button -->
                 <div class="w-full flex justify-between items-center mt-6">
+
+                    <a href="{{ route('adminUser.users') }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                        <i class="fas fa-user-cog mr-2"></i> Back to User List
+                    </a>
                     <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
                         Update User
                     </button>
