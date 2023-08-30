@@ -115,6 +115,10 @@ Route::post('/wishlist/add/{itemId}', [WishlistController::class, 'addToWishlist
     ->name('wishlist.add')
     ->middleware('auth');
 
+Route::post('/wishlist/{itemId}', [WishlistController::class, 'toggleWishlist'])
+    ->name('wishlist.toggle')
+    ->middleware('auth');
+
     
 //ADMIN
 //show admin personnel dashboard
