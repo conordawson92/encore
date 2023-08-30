@@ -22,20 +22,46 @@
             €{{ $listing->price }}
         </div>
         <div class="flex justify-end">
+            <!-- Moved the heart button above the form -->
+            <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
+                <i class="far fa-heart"></i>  
+                <i class="fas fa-heart hidden"></i>  
+            </button>
+
             <form action="{{ route('cart.add', $listing->id) }}" method="post">
                 @csrf
                 <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
                     Add to Cart
                 </button>
             </form>
-            
-            <button class="ml-2 text-red-500 hover:text-red-600 toggle-heart">
-                <i class="far fa-heart heart-empty"></i>
-                <i class="fas fa-heart heart-full hidden"></i>
-            </button>
+
+            {{-- <form action="{{ route('wishlist.add', $listing->id) }}" method="post">
+                @csrf
+                <button type="submit" class="ml-2 bg-blue-500 text-white py-1 px-4 rounded-none hover:bg-blue-600">
+                    Add Wishlist
+                </button>
+            </form> --}}
+
+            <form action="{{ route('wishlist.add', $listing->id) }}" method="post">
+                @csrf
+                <button type="submit" id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
+                    <i class="far fa-heart"></i>  
+                    <i class="fas fa-heart hidden"></i>  
+                </button>
+            </form>
         </div>
     </div>
 </div>
+<script>
+    const heartButton = document.getElementById('heartButton');
+
+    heartButton.addEventListener('click', function() {
+        const heartEmpty = this.querySelector('.far');
+        const heartFull = this.querySelector('.fas');
+        heartEmpty.classList.toggle('hidden');
+        heartFull.classList.toggle('hidden');
+    });
+</script>
 
     
 
