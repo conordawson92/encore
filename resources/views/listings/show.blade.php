@@ -15,19 +15,29 @@
                     <img id="thumbnailImage" class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
                 </div>
 
-                <!-- Information -->
-                <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
-                    <div class="pl-0 sm:pl-8 w-full text-left">
 
-                        <!-- Title and button-->
-                        <div class="flex justify-between items-center mb-2 mt-[14px]">
-                            <h3 class="text-2xl">{{$listing->ItemName}}</h3>
-                            <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
-                                <i class="far fa-heart"></i>
-                                <i class="fas fa-heart hidden"></i>
+
+            <!-- Information -->
+            <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
+                <div class="pl-0 sm:pl-8 w-full text-left">
+                    
+                    <!-- Title and button-->
+                    <div class="flex justify-between items-center mb-2 mt-[14px]">
+                        <h3 class="text-2xl">{{$listing->ItemName}}</h3>
+                        <form action="{{ route('wishlist.toggle', $listing) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="heart-button">
+                                @auth
+                                    @if(auth()->user()->wishlist->contains($listing))
+                                        <!-- Heart is full -->
+                                        <i class="fas fa-heart text-red-500 text-3xl"></i>
+                                    @else
+                                        <!-- Heart is empty -->
+                                        <i class="far fa-heart text-red-500 text-3xl"></i>
+                                    @endif
+                                @endauth
                             </button>
-                        </div>
-
+                        </form>
                         <!-- Content -->
                         <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
                         <x-listing-tags :tagsCsv="$listing->tags" />
@@ -39,6 +49,7 @@
                         <div class="text-lg my-4">Quantity: {{$listing->quantity}}</div>
                         <div class="text-lg my-4">Status: {{$listing->status}}</div>
                     </div>
+                    
 
                     <div class="pl-0 sm:pl-8 w-full text-left sm:text-left bg-gray-200 p-4 rounded">
                         <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
@@ -71,7 +82,10 @@
                                 @csrf
                                 <button type="submit" class="bg-orange-500 text-white w-32 h-10">Add to Cart</button>
                             </form>
-                            <a href="{{ route('stripe.checkout') }}" class="bg-green-500 text-white ml-4 w-32 h-10 inline-block text-center leading-10 rounded">Buy</a>
+                            <form action="{{ route('cart.addAndRedirect', $listing) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-green-500 text-white ml-4 w-32 h-10 inline-block text-center leading-10 rounded">Buy</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -134,16 +148,43 @@
         };
     </script>
 
-    <script>
-        const heartButton = document.getElementById('heartButton');
+<script>
+    const heartButton = document.getElementById('heartButton');
+    const itemId = {{ $listing->id }}; // Assuming this is the item's ID
 
-        heartButton.addEventListener('click', function() {
-            const heartEmpty = this.querySelector('.far');
-            const heartFull = this.querySelector('.fas');
-            heartEmpty.classList.toggle('hidden');
-            heartFull.classList.toggle('hidden');
+    @auth
+        @if(auth()->user()->wishlist->contains($listing))
+            const heartEmpty = heartButton.querySelector('.far');
+            const heartFull = heartButton.querySelector('.fas');
+            heartEmpty.classList.add('hidden');
+            heartFull.classList.remove('hidden');
+        @endif
+    @endauth
+
+    heartButton.addEventListener('click', function() {
+        const heartEmpty = this.querySelector('.far');
+        const heartFull = this.querySelector('.fas');
+        heartEmpty.classList.toggle('hidden');
+        heartFull.classList.toggle('hidden');
+
+        fetch(`/wishlist/${itemId}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message); // Display the response message
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
         });
-    </script>
+    });
+</script>
+
 
 
 </x-layout>
