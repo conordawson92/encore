@@ -1,21 +1,23 @@
 <!--html diaply for the admin complete dashboard with all the informations, history, messages, etc...and the manage options link-->
+
 <head>
     <title>Encore | Dashboard</title>
 </head>
 <x-layout>
+
     <body>
-        <div class="w-[65%] mx-auto">
+        <div class="w-[65%] mx-auto pt-2">
+
             @auth
             @if(auth()->user()->role === 'admin')
-            <p>
-                Go to the admnistrator page
-                <a href="/adminUser/admin">
-                    here
+            <div class="mt-4 pb-5">
+                <a href="/adminUser/admin" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300  items-center">
+                    <i class="fas fa-user-cog mr-2"></i> Admin Panel
                 </a>
-            </p>
+            </div>
+
             @endif
             @endauth
-
             <!--the admin profile informations-->
             <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
                 <div class="flex gap-4 items-center justify-between">
@@ -36,6 +38,8 @@
                             <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
+
+
                     <div class="flex items-center justify-center w-10 h-10 mr-6">
                         <button id="user_details_button">
                             <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl"></i>
@@ -49,7 +53,7 @@
             <!--all the admin selling items-->
             <div class="p-6">
                 <h2 class="text-2xl font-bold mb-4">Your Items For Sale</h2>
-            
+
                 @if($user->sellerItems->where('status', 'available')->isEmpty())
                 <a href="{{ route('items.createItem') }}">
                     <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105 cursor-pointer">
@@ -75,7 +79,7 @@
                                 <i class="far fa-trash-can"></i>
                             </button>
                         </form>
-            
+
                         <a href="/listings/{{$item->id}}" class="block relative">
                             <div class="relative w-full h-48 overflow-hidden">
                                 <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
@@ -110,50 +114,12 @@
                 </div>
                 @endif
             </div>
+
+
+
+
             <!--the items in the admin wishlist-->
-
-            <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-            
-                @if ($user->wishlist->count() > 0)
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    @foreach ($user->wishlist as $item)
-                    <div class="border overflow-hidden shadow-custom relative group">
-            
-                        <!-- Using a pseudo-element for the blurred background. This is achieved by using group-hover utility with inline styles -->
-                        <div class="absolute inset-0 bg-center bg-no-repeat bg-cover filter blur-lg" style="background-image: url({{$item->itemImage ? asset($item->itemImage) : asset('images/no-image.png')}});"></div>
-                        
-                        <!-- Foreground Image -->
-                        <img class="w-full h-48 object-contain" src="{{$item->itemImage ? asset($item->itemImage) : asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
-                        
-                        <!-- Delete Button -->
-                        <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3 z-10">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800">
-                                <i class="far fa-trash-can"></i>
-                            </button>
-                        </form>
-            
-                        <div class="p-4 relative z-10"> <!-- Set position to relative and a z-index higher than the image -->
-                            <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                            <p class="text-gray-600">Description: {{ $item->description }}</p>
-                            <p class="text-gray-600">Price: {{ $item->price }}</p>
-                            <p class="text-gray-600">Size: {{ $item->size }}</p>
-                            <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                            <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                            <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                @else
-                <p class="text-gray-600">Your wishlist is empty.</p>
-                @endif
-            </div>
-        <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Your Wishlist</h2>
-
+            <h2 class="text-2xl font-bold mb-4">Your wishlist</h2>
             @if ($user->wishlist->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($user->wishlist as $item)
@@ -183,7 +149,6 @@
                             <p class="text-gray-600">Condition: {{$item->condition}}</p>
                             <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
                         </div>
-                    </a>
                 </div>
                 @endif
                 @endforeach
@@ -192,6 +157,10 @@
             <p class="text-gray-600">Your wishlist is empty.</p>
             @endif
         </div>
+
+
+
+
 
         <!--all the items bought for the admin logged in with the transaction history-->
         <div class="p-6">
@@ -224,10 +193,10 @@
                             $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
                             @endphp
                             @if ($transaction->status == 'finished' && !$userReview)
-                            <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Review</a>
-                            @elseif($userReview)
-                            <span class="text-gray-600">Reviewed</span>
-                            @endif
+                            <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 flex items-center"">Add Review</a>
+                                @elseif($userReview)
+                                <span class=" text-gray-600">Reviewed</span>
+                                @endif
                         </td>
                     </tr>
                     @endforeach
@@ -345,6 +314,7 @@
             <p class="text-gray-600 mt-2">No reviews received.</p>
             @endif
         </div>
+       
 
         <!--all the admin messages history-->
         <div class="p-6">
