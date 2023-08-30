@@ -27,9 +27,7 @@
             <a href="?sort=oldest" class="block bg-orange-500 text-white rounded-none px-4 py-2 hover:bg-orange-600 w-full text-center">Oldest</a>
           </div>
         </div>
-        <!-- Div Image -->
-        <div class="absolute top-0 left-0 w-full h-full bg-[url('./images/Homepage/flash icon.png')] bg-repeat-y bg-bottom">
-        </div>
+
       </div>
   
       <!-- Listing grid -->

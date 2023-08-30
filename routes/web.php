@@ -23,6 +23,12 @@ Route::get('/', function () {
     return view('home.index');
 });
 
+// the future page
+Route::get('/future', function () {
+    return view('future');
+});
+
+
 //LISTINGS
 // Displaying all listings(products)
 Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
