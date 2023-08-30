@@ -156,7 +156,7 @@
             @else
             <p class="text-gray-600">Your wishlist is empty.</p>
             @endif
-        </div>
+        </div> --}}
 
 
 

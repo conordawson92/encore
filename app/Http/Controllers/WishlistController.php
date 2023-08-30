@@ -19,17 +19,23 @@ class WishlistController extends Controller
     }
 
     //method to add an item to the wishlist
-    public function addToWishlist(Request $request, Item $item)
-    {
-        $user = auth()->user();
+    public function addToWishlist(Request $request, $itemId)
+{
+    $user = auth()->user();
+    $item = Item::findOrFail($itemId);
 
-        // Check if the item is already in the user's wishlist
-        if (!$user->wishlist->contains($item)) {
-            $user->wishlist()->attach($item);
-        }
-
-        return redirect()->back()->with('message', 'Item added to wishlist successfully.');
+    // Check if the item is already in the user's wishlist
+    if ($user->wishlist->contains($item)) {
+        return redirect()->back()->with('message', "'{$item->ItemName}' is already in your wishlist.");
     }
+
+    $user->wishlist()->attach($item);
+
+    return redirect()->back()->with('message', "'{$item->ItemName}' added to wishlist successfully.");
+}
+
+
+    
 
     //method to remove an item from the wishlist
     // WishlistController.php
