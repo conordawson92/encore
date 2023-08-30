@@ -142,7 +142,7 @@ Route::get('/adminUser/users/{user}/edit', [AdminController::class, 'editUser'])
 // Update user
 Route::put('/adminUser/users/{user}', [AdminController::class, 'updateUser'])
     ->middleware('auth')
-    ->name('users.updateUser');
+    ->name('users.updateUser'); 
 
 //ban a user
 Route::put('/adminUser/users/{user}/banUser', [AdminController::class, 'banUser'])

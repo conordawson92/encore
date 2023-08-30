@@ -25,6 +25,6 @@ class TransactionController extends Controller
         // Update the status to 'rejected'
         $transaction->update(['status' => 'rejected']);
 
-        return redirect()->route('transactions.index')->with('message', 'Transaction canceled successfully and email sent to both users.');
+        return redirect()->route('transactions.index')->with('message', 'Transaction canceled successfully, an email was sent to both users.');
     }
 }

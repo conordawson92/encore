@@ -38,7 +38,6 @@ class WishlistController extends Controller
     
 
     //method to remove an item from the wishlist
-    // WishlistController.php
     public function remove($itemId)
     {
         $user = auth()->user();
