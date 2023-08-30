@@ -52,7 +52,7 @@
             </div>
             <!--all the admin selling items-->
             <div class="p-6">
-                <h2 class="text-2xl font-bold mb-4">Your Items For Sale</h2>
+                <h2 class="text-2xl font-bold mb-4" id="your-items">Your Items For Sale</h2>
 
                 @if($user->sellerItems->where('status', 'available')->isEmpty())
                 <a href="{{ route('items.createItem') }}">
@@ -119,7 +119,7 @@
 
 
             <!--the items in the admin wishlist-->
-            <h2 class="text-2xl font-bold mb-4">Your wishlist</h2>
+            <h2 class="text-2xl font-bold mb-4" id="wishlist">Your wishlist</h2>
             @if ($user->wishlist->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($user->wishlist as $item)
@@ -135,21 +135,22 @@
                         </button>
                     </form>
 
-                    <a href="/listings/{{$item->id}}" class="block relative">
-                        <div class="relative w-full h-48 overflow-hidden">
-                            <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
-                            <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
-                        </div>
-                        <div class="p-4">
-                            <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
-                            <p class="text-gray-600">Description: {{ $item->description }}</p>
-                            <p class="text-gray-600">Price: {{ $item->price }}€</p>
-                            <p class="text-gray-600">Size: {{ $item->size }}</p>
-                            <p class="text-gray-600">Brand: {{ $item->brand }}</p>
-                            <p class="text-gray-600">Condition: {{$item->condition}}</p>
-                            <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
-                        </div>
-                </div>
+                        <a href="/listings/{{$item->id}}" class="block relative">
+                            <div class="relative w-full h-48 overflow-hidden">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover filter blur-lg" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Background Image">
+                                <img class="absolute top-0 left-0 w-full h-full object-contain" src="{{$item->itemImage ? asset('' . $item->itemImage): asset('images/no-image.png')}}" alt="{{ $item->ItemName }} Image">
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold mb-2">{{ $item->ItemName }}</h4>
+                                <p class="text-gray-600">Description: {{ $item->description }}</p>
+                                <p class="text-gray-600">Price: {{ $item->price }}€</p>
+                                <p class="text-gray-600">Size: {{ $item->size }}</p>
+                                <p class="text-gray-600">Brand: {{ $item->brand }}</p>
+                                <p class="text-gray-600">Condition: {{$item->condition}}</p>
+                                <p class="text-gray-600">Quantity available: {{$item->quantity}}</p>
+                            </div>
+                        </a>
+                    </div>
                 @endif
                 @endforeach
             </div>
@@ -164,7 +165,7 @@
 
         <!--all the items bought for the admin logged in with the transaction history-->
         <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Purchase History</h2>
+            <h2 class="text-2xl font-bold mb-4" id="purchase-history">Purchase History</h2>
 
             @if ($buyingTransactions->count() > 0)
             <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
@@ -211,7 +212,7 @@
         <!--all the items sell for the admin logged in with the transaction history-->
 
         <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Sales History</h2>
+            <h2 class="text-2xl font-bold mb-4" id="selling-history">Sales History</h2>
 
             @if ($sellingTransactions->count() > 0)
             <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
@@ -256,7 +257,7 @@
         </div>
         <!--all the reviews made by the admin logged in-->
         <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Your Reviews</h2>
+            <h2 class="text-2xl font-bold mb-4" id="your-reviews">Your Reviews</h2>
 
             <h3 class="text-xl font-semibold mt-6">Sent</h3>
             @if ($reviewsGiven->count() > 0)
@@ -318,7 +319,7 @@
 
         <!--all the admin messages history-->
         <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Your Messages</h2>
+            <h2 class="text-2xl font-bold mb-4" id="your-messages">Your Messages</h2>
 
             <h3 class="text-xl font-semibold mt-6">Sent</h3>
             @if ($messagesSent->count() > 0)
@@ -379,7 +380,7 @@
 
         <!--admin notifications history-->
         <div class="p-6">
-            <h2 class="text-2xl font-bold mb-4">Your Notifications</h2>
+            <h2 class="text-2xl font-bold mb-4" id="your-notifications">Your Notifications</h2>
 
             @if ($notifications->count() > 0)
             <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg mt-4">
