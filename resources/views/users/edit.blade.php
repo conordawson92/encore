@@ -103,13 +103,8 @@
                         <a href="{{ route('dashboard') }}" class="text-black-500 hover:underline">Back to User List</a>
                     </div>
                 </form>
-
-
             </div>
-
         </div>
-
-
     </div>
     <!-- Left side for Image -->
 
