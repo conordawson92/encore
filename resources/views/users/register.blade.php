@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Sign up</title>
+</head>
+
+
 <x-layout>
     <div class="flex h-screen">
 
@@ -65,9 +70,6 @@
 
                         <select name="paymentInfo" id="paymentInfo" required class="border border-gray-300 rounded-md p-2 w-full focus:ring focus:ring-blue-200">
                             <option value="Card">Card (VISA, MasterCard, etc...)</option>
-                            <option value="PayPal">PayPal</option>
-                            <option value="GooglePay">Google Pay</option>
-                            <option value="ApplePay">Apple Pay</option>
                         </select>
                         @error('paymentInfo')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>

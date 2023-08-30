@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Sign In</title>
+</head>
+
+
 <x-layout>
 
     <div class="flex h-screen">
@@ -15,9 +20,9 @@
             <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
                 <header class="mb-8">
                     <h1 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
-                        Log in
+                        Sign In
                     </h1>
-                    <p>Login to your account</p>
+                  
                 </header>
 
 

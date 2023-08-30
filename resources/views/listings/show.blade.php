@@ -1,3 +1,6 @@
+<head>
+    <title>Encore | Item</title>
+</head>
 
 
 <x-layout>
@@ -43,10 +46,29 @@
                 </div>
                 
                 <div class="pl-0 sm:pl-8 w-full text-left sm:text-left bg-gray-200 p-4 rounded">     
-                    <div class="bg-gray-200 p-4 rounded">
-                        <h4 class="text-lg font-semibold mb-2">Sellers</h4>
-                        <p>Content</p>
+                    <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
+            <div class="flex gap-4 items-center justify-between">
+                <a href="/user/{{$listingUser->id}}">
+                    <div class="flex gap-4 items-center">
+                        <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $listingUser->userImage) }}" alt="{{ $listingUser->userName }}'s Profile Photo">
+                        <div class="font-bold text-2xl">
+                            {{$listingUser->userName}}
+                            <div>
+                                @for($i = 1; $i <= 5; $i++) @if($i <=floor($listingUser->userRating))
+                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                                    @elseif($i - 0.5 == $listingUser->userRating)
+                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                    @else
+                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                    @endif
+                                    @endfor
+                            </div>
+                            <p class="text-gray-400 text-sm font-normal">Member since: {{ $listingUser->created_at }}</p>
+                            <p class="text-black text-base font-normal">Location: {{ $listingUser->userLocation }}</p>
+                        </div>            
                     </div>
+                </a>
+            </div>
                 </div>
                 
                 <div class="mt-4 sm:ml-auto flex justify-center sm:justify-start">

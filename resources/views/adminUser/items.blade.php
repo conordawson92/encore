@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Items</title>
+</head>
+
 <x-layout>
     <div class="flex items-center justify-between m-8">
         <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>

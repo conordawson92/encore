@@ -1,3 +1,4 @@
+
 <!-- Start of Desktop Navigation -->
 <nav class="flex justify-between items-center bg-beige_logo text-brown_logo">
     <ul class="hidden md:flex space-x-6 text-lg m-auto relative">

@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Users</title>
+</head>
+
 <x-layout>
     <div class="p-8 space-y-6 overflow-y-auto" style="max-height: 90vh;">
 

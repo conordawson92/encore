@@ -1,4 +1,7 @@
 <x-layout>
+    <head>
+        <title>Encore | Administrator</title>
+    </head>
     <div class="bg-[encore/storage/app/public/images/aboutus.png] bg-cover bg-center backdrop-blur-md bg-fixed flex items-center justify-center h-screen">
       <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md m-4 transform hover:shadow-2xl transition-shadow duration-200 filter hover:drop-shadow-orange">
         <div class="mb-4 flex justify-between items-center">

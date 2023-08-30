@@ -1,3 +1,8 @@
+<head>
+    <title>Encore | Items</title>
+</head>
+
+
 <x-layout>
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar  -->

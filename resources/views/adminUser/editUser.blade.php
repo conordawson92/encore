@@ -1,3 +1,6 @@
+<head>
+    <title>Encore | Edit User</title>
+</head>
 
 <x-layout>
     <div class="flex overflow-y-auto h-screen bg-cover bg-center" style="background-image: url('http://encore.test/storage/images/assets/your_background_image.jpg')">        <!-- Card -->
