@@ -3,87 +3,90 @@
 </head>
 
 <x-layout>
-
-    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <div class="flex justify-between items-center mb-4">
-            <h1 class="text-4xl font-semibold text-orange_logo_light">Available Items</h2>
-            <a href="{{ route('admin') }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Admin functions
-            </a>
-
+    <div class="flex items-center justify-between m-8">
+        <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+        <div class="flex items-center">
+            <h1 class="text-4xl font-semibold text-orange_logo ml-4">View Items</h1>
+            <div class="text-6xl text-orange-500 ml-4">
+                🛠 
+            </div>
         </div>
-
+    </div>
+    <div class="container mx-auto mt-10 p-8 bg-white shadow-md overflow-auto">
         <!-- Display Available Items -->
+        <h2 class="text-2xl font-semibold text-orange-500 mb-4">Available Items</h2>
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border-b border-gray-200">
-                <thead class="bg-gray-100">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
                     <tr>
-                        <th class="py-2 px-3">Image</th>
-                        <th class="py-2 px-3">Name</th>
-                        <th class="py-2 px-3">Description</th>
-                        <th class="py-2 px-3">Price</th>
-                        <th class="py-2 px-3">Size</th>
-                        <th class="py-2 px-3">Quantity</th>
-                        <th class="py-2 px-3">Brand</th>
-                        <th class="py-2 px-3">Seller</th>
-                        <th class="py-2 px-3">Actions</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                        <th>Brand</th>
+                        <th>Seller</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($items as $item)
-                    @if ($item->status === 'available')
-                    <tr class="hover:bg-gray-100">
-                        <td class="py-2 px-3"><img src="{{ $item->itemImage }}" alt="{{ $item->ItemName }}" class="h-24 w-24 object-contain"></td>
-                        <td class="py-2 px-3">{{ $item->ItemName }}</td>
-                        <td class="py-2 px-3">{{ $item->description }}</td>
-                        <td class="py-2 px-3">{{ $item->price }}</td>
-                        <td class="py-2 px-3">{{ $item->size }}</td>
-                        <td class="py-2 px-3">{{ $item->quantity }}</td>
-                        <td class="py-2 px-3">{{ $item->brand }}</td>
-                        <td class="py-2 px-3">{{ $item->seller->userName }}</td>
-                        <td class="py-2 px-3">
-                            <a href="{{ route('items.edit', ['item' => $item->id]) }}" class="text-blue-500 hover:underline">Edit</a>
-                            <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endif
+                        @if ($item->status === 'available')
+                            <tr>
+                                <td><img src="{{ $item->itemImage }}" alt="{{ $item->ItemName }}" style="max-width: 100px; max-height: 100px;"></td>
+                                <td>{{ $item->ItemName }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->size }}</td>
+                                <td>{{ $item->quantity }}</td>
+                                <td>{{ $item->brand }}</td>
+                                <td>{{ $item->seller->userName }}</td>
+                                <td>
+                                    <a href="{{ route('items.edit', ['item' => $item->id]) }}">Edit</a>
+                                    <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
 
+        <hr class="my-8">
+
         <!-- Display Sold Items -->
-        <h2 class="text-2xl font-semibold text-brown_logo mt-8">Sold Items</h2>
-        <div class="overflow-x-auto mt-4">
-            <table class="min-w-full bg-white border-b border-gray-200">
-                <thead class="bg-gray-100">
+        <h2 class="text-2xl font-semibold text-orange-500 mb-4">Sold Items</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
                     <tr>
-                        <th class="py-2 px-3">Image</th>
-                        <th class="py-2 px-3">Name</th>
-                        <th class="py-2 px-3">Description</th>
-                        <th class="py-2 px-3">Price</th>
-                        <th class="py-2 px-3">Brand</th>
-                        <th class="py-2 px-3">Seller</th>
-                        <th class="py-2 px-3">Buyer</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Brand</th>
+                        <th>Seller</th>
+                        <th>Buyer</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($items as $item)
-                    @if ($item->status === 'sold')
-                    <tr class="hover:bg-gray-100">
-                        <td class="py-2 px-3"><img src="{{ $item->itemImage }}" alt="{{ $item->ItemName }}" class="h-24 w-24 object-contain"></td>
-                        <td class="py-2 px-3">{{ $item->ItemName }}</td>
-                        <td class="py-2 px-3">{{ $item->description }}</td>
-                        <td class="py-2 px-3">{{ $item->price }}</td>
-                        <td class="py-2 px-3">{{ $item->brand }}</td>
-                        <td class="py-2 px-3">{{ $item->seller->userName }}</td>
-                        <td class="py-2 px-3">{{ $item->buyer->userName }}</td>
-                    </tr>
-                    @endif
+                        @if ($item->status === 'sold')
+                            <tr>
+                                <td><img src="{{ $item->itemImage }}" alt="{{ $item->ItemName }}" style="max-width: 100px; max-height: 100px;"></td>
+                                <td>{{ $item->ItemName }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>{{ $item->price }}</td>
+                                <td>{{ $item->brand }}</td>
+                                <td>{{ $item->seller->userName }}</td>
+                                <td>{{ $item->buyer->userName }}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
