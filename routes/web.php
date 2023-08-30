@@ -23,6 +23,12 @@ Route::get('/', function () {
     return view('home.index');
 });
 
+// the future page
+Route::get('/future', function () {
+    return view('future');
+});
+
+
 //LISTINGS
 // Displaying all listings(products)
 Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
@@ -107,6 +113,10 @@ Route::delete('/wishlist/remove/{itemId}', [WishlistController::class, 'remove']
 // Add item to wishlist
 Route::post('/wishlist/add/{itemId}', [WishlistController::class, 'addToWishlist'])
     ->name('wishlist.add')
+    ->middleware('auth');
+
+Route::post('/wishlist/{itemId}', [WishlistController::class, 'toggleWishlist'])
+    ->name('wishlist.toggle')
     ->middleware('auth');
 
     

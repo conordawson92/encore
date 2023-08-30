@@ -1,6 +1,6 @@
-{{--Convert the list to an array--}}
-
+{{-- Convert the list to an array --}}
 @props(['listing'])
+
 <div class="w-full">
     <a href="/listings/{{$listing->id}}" class="text-black hover:text-gray-700">
         <!-- Image -->
@@ -13,17 +13,25 @@
     
     <div class="p-4">
         <h3 class="text-xl">
-            {{ $listing->ItemName }}</a>
+            {{ $listing->ItemName }}
         </h3>
         <div class="text-xl font-bold mb-4">
             €{{ $listing->price }}
         </div>
         <div class="flex justify-end">
-            <!-- Moved the heart button above the form -->
-            <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl px-4 py-2">
-                <i class="far fa-heart mt-[-14px]"></i>  
-                <i class="fas fa-heart hidden mt-[-14px]"></i>  
-            </button>
+            <!-- Use class names for heart buttons -->
+            <form action="{{ route('wishlist.toggle', $listing->id) }}" method="post">
+                @csrf
+                <button type="submit" class="heartButton text-red-500 hover:text-red-600 text-3xl px-4 py-2">
+                    @auth
+                        @if(auth()->user()->wishlist->contains($listing))
+                            <i class="fas fa-heart mt-[-14px]"></i>
+                        @else
+                            <i class="far fa-heart mt-[-14px]"></i>
+                        @endif
+                    @endauth
+                </button>
+            </form>
 
             <form action="{{ route('cart.add', $listing->id) }}" method="post">
                 @csrf
@@ -36,16 +44,36 @@
 </div>
 
 <script>
-    const heartButton = document.getElementById('heartButton');
+    const heartButtons = document.querySelectorAll('.heartButton');
 
-    heartButton.addEventListener('click', function() {
-        const heartEmpty = this.querySelector('.far');
-        const heartFull = this.querySelector('.fas');
+    heartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const heartEmpty = button.querySelector('.far');
+            const heartFull = button.querySelector('.fas');
+            heartEmpty.classList.toggle('hidden');
+            heartFull.classList.toggle('hidden');
 
-        heartEmpty.classList.toggle('hidden');
-        heartFull.classList.toggle('hidden');
+            const itemId = {{ $listing->id }};
+            fetch(`/wishlist/${itemId}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('An error occurred:', error);
+            });
+        });
     });
 </script>
+
+
 
 
 
