@@ -82,7 +82,10 @@
                                 @csrf
                                 <button type="submit" class="bg-orange-500 text-white w-32 h-10">Add to Cart</button>
                             </form>
-                            <a href="{{ route('stripe.checkout') }}" class="bg-green-500 text-white ml-4 w-32 h-10 inline-block text-center leading-10 rounded">Buy</a>
+                            <form action="{{ route('cart.addAndRedirect', $listing) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="bg-green-500 text-white ml-4 w-32 h-10 inline-block text-center leading-10 rounded">Buy</button>
+                            </form>
                         </div>
                     </div>
                 </div>
