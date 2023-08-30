@@ -9,11 +9,11 @@
             <div class="space-y-4">
                 <div>
                     <p class="font-medium text-2xl">How do I know the condition of the clothing?</p>
-                    <p class="text-xl">Each clothing item is thoroughly inspected and graded based on its condition. You can find detailed descriptions on each product page.</p>
+                    <p class="text-xl">Each clothing item should have a condition rating on the product page. The seller are asked to provide accurate photos and descriptions of the items</p>
                 </div>
                 <div>
                     <p class="font-medium text-2xl">Can I return an item if it doesn't fit?</p>
-                    <p class="text-xl">Yes, we offer a 30-day return policy for items that haven't been worn or altered. Please see our Return Policy page for details.</p>
+                    <p class="text-xl">The seller are encouraged to specify their return policy. You can also contact the seller directly if you have any questions about the return policy or other concerns.</p>
                 </div>
                 <div>
                     <p class="font-medium text-2xl">How do you determine the pricing for each item?</p>

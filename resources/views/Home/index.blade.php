@@ -56,24 +56,24 @@
     <h2 class="text-center mb-5 text-[50px]">BEST SELLERS</h2>
     <div class="flex flex-wrap justify-center">
       <!-- Left Image -->
-      <div class="relative w-[50%]">
-        <img src="{{ asset('storage/images/assets/homepage/pexels-airam-datoon-9158466.jpg') }}" alt="Big Image" class="w-full h-full object-cover">
+      <div class="relative w-[50%] p-0 m-0">
+        <img src="{{ asset('storage/images/assets/homepage/pexels-airam-datoon-9158466.jpg') }}" alt="Big Image" class="w-full h-full object-cover m-0 p-0">
         <a href="/category/12" class="absolute top-8 right-8 bg-orange-500 text-white py-2 px-5 text-lg">Jackets</a>
       </div>
       <!-- Right Images -->
-      <div class="w-[50%] flex flex-col">
-        <div class="relative mb-4">
-          <img src="{{ asset('storage/images/assets/homepage/pexels-stephanie-lima-15749010.jpg') }}" alt="Right Image 1" class="w-full h-full object-cover">
+      <div class="w-[50%] flex flex-col p-0 m-0">
+        <div class="relative mb-0 p-0">
+          <img src="{{ asset('storage/images/assets/homepage/pexels-stephanie-lima-15749010.jpg') }}" alt="Right Image 1" class="w-full h-full object-cover m-0 p-0">
           <a href="/category/2" class="absolute top-8 right-8 bg-orange-500 text-white py-2 px-5 text-lg">Bags</a>
         </div>
-        <div class="relative">
-          <img src="{{ asset('storage/images/assets/homepage/two-beautiful-girls-pastel.jpg') }}" alt="Right Image 2" class="w-full h-full object-cover">
+        <div class="relative p-0 m-0">
+          <img src="{{ asset('storage/images/assets/homepage/two-beautiful-girls-pastel.jpg') }}" alt="Right Image 2" class="w-full h-full object-cover m-0 p-0">
           <a href="/parent-category/4" class="absolute top-8 right-8 bg-orange-500 text-white py-2 px-5 text-lg">Kids</a>
         </div>
-
       </div>
     </div>
   </div>
+
   <!-- End Best Sellers -->
 
   <!-- Image Section -->
