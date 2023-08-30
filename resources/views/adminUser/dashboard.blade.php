@@ -18,31 +18,31 @@
 
             @endif
             @endauth
-            <!--the admin profile informations-->
-            <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
+
+            <!--the admin profile information-->
+            <div id="profile" class="flex gap-4 flex-col p-2 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div class="flex gap-4 items-center justify-between">
                     <div class="flex gap-4 items-center">
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
                         <div class="font-bold text-2xl">
                             {{ $user->userName }}
-                            <div>
-                                @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                            <div class="flex items-center">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= floor($user->userRating))
+                                        <span class="text-yellow-500"><i class="fas fa-star"></i></span>
                                     @elseif($i - 0.5 == $user->userRating)
-                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                        <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
                                     @else
-                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
                                     @endif
-                                    @endfor
+                                @endfor
                             </div>
                             <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
-
-
-                    <div class="flex items-center justify-center w-10 h-10 mr-6">
-                        <button id="user_details_button">
-                            <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl"></i>
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-orange-500">
+                        <button id="user_details_button" class="focus:outline-none">
+                            <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl hover:text-white"></i>
                         </button>
                     </div>
                 </div>

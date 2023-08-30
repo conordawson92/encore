@@ -20,6 +20,12 @@
             €{{ $listing->price }}
         </div>
         <div class="flex justify-end">
+            <!-- Moved the heart button above the form -->
+            <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
+                <i class="far fa-heart"></i>  
+                <i class="fas fa-heart hidden"></i>  
+            </button>
+
             <form action="{{ route('cart.add', $listing->id) }}" method="post">
                 @csrf
                 <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
