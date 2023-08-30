@@ -18,31 +18,31 @@
 
             @endif
             @endauth
-            <!--the admin profile informations-->
-            <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
+
+            <!--the admin profile information-->
+            <div id="profile" class="flex gap-4 flex-col p-2 shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <div class="flex gap-4 items-center justify-between">
                     <div class="flex gap-4 items-center">
                         <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
                         <div class="font-bold text-2xl">
                             {{ $user->userName }}
-                            <div>
-                                @for($i = 1; $i <= 5; $i++) @if($i <=floor($user->userRating))
-                                    <span class="text-yellow-500"><i class="fas fa-star"></i></span>
+                            <div class="flex items-center">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= floor($user->userRating))
+                                        <span class="text-yellow-500"><i class="fas fa-star"></i></span>
                                     @elseif($i - 0.5 == $user->userRating)
-                                    <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
+                                        <span class="text-yellow-500"><i class="fas fa-star-half-alt"></i></span>
                                     @else
-                                    <span class="text-gray-400"><i class="fas fa-star"></i></span>
+                                        <span class="text-gray-400"><i class="fas fa-star"></i></span>
                                     @endif
-                                    @endfor
+                                @endfor
                             </div>
                             <p class="text-gray-400 text-sm font-normal">Member since: {{ $user->created_at }}</p>
                         </div>
                     </div>
-
-
-                    <div class="flex items-center justify-center w-10 h-10 mr-6">
-                        <button id="user_details_button">
-                            <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl"></i>
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-orange-500">
+                        <button id="user_details_button" class="focus:outline-none">
+                            <i id="user_details_button_icon" class="fa-solid fa-chevron-up text-2xl hover:text-white"></i>
                         </button>
                     </div>
                 </div>
@@ -126,14 +126,40 @@
                 @if($item->status === 'available')
                 <div class="border overflow-hidden shadow-custom relative transition-transform transform hover:scale-105">
 
-                    <!-- Delete Button -->
-                    <form action="{{ route('wishlist.remove', ['itemId' => $item->id]) }}" method="POST" class="absolute bottom-2 right-3 z-10">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-600 hover:text-red-800">
-                            <i class="far fa-trash-can"></i>
-                        </button>
-                    </form>
+                @if ($buyingTransactions->count() > 0)
+                <table class="min-w-full bg-white border rounded-lg overflow-hidden shadow-lg">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 border-b text-left">Item</th>
+                            <th class="py-2 px-4 border-b text-left">Seller</th>
+                            <th class="py-2 px-4 border-b text-left">Date of Purchase</th>
+                            <th class="py-2 px-4 border-b text-left">Payment Details</th>
+                            <th class="py-2 px-4 border-b text-left">Shipment Details</th>
+                            <th class="py-2 px-4 border-b text-left">Status</th>
+                            <th class="py-2 px-4 border-b text-left">Review</th> <!-- New Column -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($buyingTransactions as $transaction)
+                        <tr>
+                            <td class="py-2 px-4 border-b">{{ $transaction->item->ItemName }}</td>
+                            <td class="py-2 px-4 border-b">{{ $transaction->item->seller->userName }}</td>
+                            <td class="py-2 px-4 border-b">{{ $transaction->datePurchase }}</td>
+                            <td class="py-2 px-4 border-b">{{ $transaction->paymentDetails }}</td>
+                            <td class="py-2 px-4 border-b">{{ $transaction->shippingDetails }}</td>
+                            <td class="py-2 px-4 border-b">{{ $transaction->status }}</td>
+                            <td class="py-2 px-4 border-b">
+                                @php
+                                $userReview = $transaction->item->reviews->where('user_id', auth()->id())->first();
+                                @endphp
+                                @if ($transaction->status == 'finished' && !$userReview)
+                                <a href="{{ route('review.create', ['item' => $transaction->item->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Review</a>
+                                @elseif($userReview)
+                                <span class="text-gray-600">Reviewed</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
 
                     <a href="/listings/{{$item->id}}" class="block relative">
                         <div class="relative w-full h-48 overflow-hidden">
@@ -151,7 +177,6 @@
                         </div>
                 </div>
                 @endif
-                @endforeach
             </div>
             @else
             <p class="text-gray-600">Your wishlist is empty.</p>
