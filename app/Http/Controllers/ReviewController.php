@@ -32,14 +32,14 @@ class ReviewController extends Controller
             'rating' => $request->input('rating'),
         ]);
 
-        return redirect()->route('reviews.index')->with('message', 'Review updated successfully and email sent to both users.');
+        return redirect()->route('reviews.index')->with('message', 'Review updated successfully, an email was sent to both users.');
     }
 
     //delete e specific review
     public function destroy(Review $review)
     {
         $review->delete();
-        return redirect()->route('reviews.index')->with('message', 'Review deleted successfully and email sent to both users.');
+        return redirect()->route('reviews.index')->with('message', 'Review deleted successfully, an email was sent to both users.');
     }
 
     //add a review 

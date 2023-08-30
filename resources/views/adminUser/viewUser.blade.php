@@ -31,8 +31,6 @@
                 <p><strong>Preferencial Payment:</strong> {{ $user->paymentInfo }}</p>
                 <p><strong>Rating:</strong> {{ $user->userRating }}</p>
 
-                <div class="border-b border-orange-300 my-4"></div>
-
 
                 <!--users history information-->
                 <!--ITEMS-->
@@ -81,9 +79,6 @@
                     </div>
                     @endif
                 </div>
-
-                <!-- Line Separator -->
-                <div class="border-b border-orange-300 my-4"></div>
 
                 <!-- Items for Sale Section -->
                 <div class="p-6 bg-white rounded-lg shadow-lg mb-4 overflow-auto" style="max-height: 400px;">
