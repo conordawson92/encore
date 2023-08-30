@@ -93,9 +93,15 @@
                     <input type="text" name="price" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
             </div>
-            <div class="mt-4 flex justify-center pb-5">
-                <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-900 transition-all duration-300 mt-8">Add Item</button>
-            </div> 
+            @error('category_id')
+                <p class="text-red-500">{{ $message }}</p>
+            @enderror
+
+            <div>
+                <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                    Add Item
+                </button>
+            </div>
         </form>
     </div>
 </x-layout>

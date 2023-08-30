@@ -19,26 +19,31 @@
             €{{ $listing->price }}
         </div>
         <div class="flex justify-end">
-            <!-- Use class names for heart buttons -->
-            <form action="{{ route('wishlist.toggle', $listing->id) }}" method="post">
-                @csrf
-                <button type="submit" class="heartButton text-red-500 hover:text-red-600 text-3xl px-4 py-2">
-                    @auth
-                        @if(auth()->user()->wishlist->contains($listing))
-                            <i class="fas fa-heart mt-[-14px]"></i>
-                        @else
-                            <i class="far fa-heart mt-[-14px]"></i>
-                        @endif
-                    @endauth
-                </button>
-            </form>
+            @if (!$listing->ownedBy(auth()->user()))
+                <!-- Use class names for heart buttons -->
+                <form action="{{ route('wishlist.toggle', $listing->id) }}" method="post">
+                    @csrf
+                    <button type="submit" class="heartButton text-red-500 hover:text-red-600 text-3xl px-4 py-2">
+                        @auth
+                            @if(auth()->user()->wishlist->contains($listing))
+                                <i class="fas fa-heart mt-[-14px]"></i>
+                            @else
+                                <i class="far fa-heart mt-[-14px]"></i>
+                            @endif
+                        @endauth
+                    </button>
+                </form>
 
-            <form action="{{ route('cart.add', $listing->id) }}" method="post">
-                @csrf
-                <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
-                    Add to Cart
-                </button>
-            </form>
+                <form action="{{ route('cart.add', $listing->id) }}" method="post">
+                    @csrf
+                    <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
+                        Add to Cart
+                    </button>
+                </form>
+            @else
+                <br>
+                <p class="text-xs text-red-500">This is your item</p>
+            @endif
         </div>
     </div>
 </div>

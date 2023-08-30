@@ -21,12 +21,14 @@
     
 
     <style>
-        body::-webkit-scrollbar {
-            width: 0;  /* Remove scrollbar space */
-            background: transparent;  /* Optional: just make scrollbar invisible */
-        }
-        body {
-            scrollbar-width: none; /* Firefox 64+ */
+        @media (min-width: 768px) {
+            body::-webkit-scrollbar {
+                width: 0;  /* Remove scrollbar space */
+                background: transparent;  /* Make scrollbar invisible */
+            }
+            html {
+                scrollbar-width: none; /* Firefox 64+ */
+            }
         }
         @font-face {
         font-family: 'Oglnf';
@@ -60,7 +62,7 @@
                         </h2>
                     </li>
                     <li>
-                        <a href="{{ route('cart.cart') }}">
+                        <a href="{{ route('cart.cart') }}" alt="My cart">
                             <span>
                                 
                             </span>
@@ -78,24 +80,24 @@
                         </a> --}}
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}#wishlist">
+                        <a href="{{ route('dashboard') }}#wishlist" alt="My wishlist">
                             <i class="fa-regular fa-heart text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}#your-notifications">
+                        <a href="{{ route('dashboard') }}#your-notifications" alt="My notifications">
                             <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('dashboard') }}" alt="My dashboard">
                             <i class="fa-solid fa-gear text-2xl"></i>
                         </a>
                     </li>
                     <li>
                         <form method="POST" action="/logout" class="m-0">
                             @csrf
-                            <button type="submit" name="logout" title="Logout" class="">
+                            <button type="submit" name="logout" title="Logout" class="" alt="Logout">
                                 <i class="fa-solid fa-right-from-bracket text-2xl"></i>
                             </button>
                         </form>
@@ -104,14 +106,14 @@
 
                     @else
                         <div class="hidden md:flex gap-4 justify-center items-center">
-                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
+                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register" alt="Sign Up">
                                 Sign Up
                             </a>
-                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
+                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login" alt="Sign In">
                                 Sign In
                             </a>
                             <a href="/faq">
-                                <i class='fa-solid fa-circle-question text-2xl'></i>
+                                <i class='fa-solid fa-circle-question text-2xl' alt="Faq"></i>
                             </a>
                         </div>
                 @endauth
@@ -120,7 +122,7 @@
                 <ul class="flex gap-6 justify-right items-center md:hidden">
                     <li>
                         <a href="{{ route('cart.cart') }}">
-                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
+                            <i class="fa-solid fa-cart-shopping text-2xl" alt="My cart"></i>
                         </a>
                         {{-- <a href="">
                             <span class="relative">
@@ -134,17 +136,17 @@
                         </a> --}}
                     </li>
                     <li>
-                        <a href="{{ route('wishlistDashboard') }}#wishlist">
+                        <a href="{{ route('wishlistDashboard') }}#wishlist" alt="My Wishlist">
                             <i class="fa-regular fa-heart text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{ route('dashboard') }}#your-notifications" alt="My notifications">
                             <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('dashboard') }}" alt="My dashboard">
                             <i class="fa-solid fa-gear text-2xl"></i>
                         </a>
                     </li>
@@ -152,10 +154,10 @@
                 @endauth
                 @include('partials._search_mobile')
                 <div class="flex md:hidden gap-6 m-2">
-                    <button id="show-search" class="">
+                    <button id="show-search" class="" alt="Search">
                         <i class="fa-solid fa-magnifying-glass text-3xl"></i>
                     </button>
-                    <button id="menu_mobile_button" class="">
+                    <button id="menu_mobile_button" class="" alt="Menu">
                         <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
                     </button>
                 </div>
@@ -208,22 +210,22 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Help Center
+                        <a class="hover:underline" href="/faq#general">
+                            FAQ
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Buying Guide
+                        <a class="hover:underline" href="/faq#buyer">
+                            Buyer
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Selling Guide
+                        <a class="hover:underline" href="/faq#seller">
+                            Seller
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
+                        <a class="hover:underline" href="/faq#safety">
                             Safety
                         </a>
                     </li>
