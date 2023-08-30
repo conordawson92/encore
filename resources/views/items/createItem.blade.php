@@ -5,7 +5,9 @@
 <x-layout>
 
     <div class="w-full md:w-[60%] mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl my-2">
-        <a href="/adminUser/dashboard" class="py-1 px-2 text-laravel hover:underline">Back to Dashboard</a>
+        <a href="/adminUser/dashboard" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+            <i class="fas fa-user-cog mr-2"></i> Back to dashboard
+        </a>
         <div class="flex items-center">
             <h1 class="text-4xl font-semibold text-orange_logo py-6">Add Item</h1>
         </div>
@@ -72,9 +74,9 @@
                     <label for="parentCategory_id" class="block text-lg font-medium text-gray-700">Main Category</label>
                     <select name="parentCategory_id" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                         @foreach ($parentCategories as $parentCategory)
-                            <option value="{{ $parentCategory->id }}">
-                                {{ $parentCategory->parentcategoryName }}
-                            </option>
+                        <option value="{{ $parentCategory->id }}">
+                            {{ $parentCategory->parentcategoryName }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -82,9 +84,9 @@
                     <label for="category_id" class="block text-lg font-medium text-gray-700">Category</label>
                     <select name="category_id" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" data-parent="{{ $category->parentCategory_id }}">
-                                {{ $category->category_name }}
-                            </option>
+                        <option value="{{ $category->id }}" data-parent="{{ $category->parentCategory_id }}">
+                            {{ $category->category_name }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -94,7 +96,7 @@
                 </div>
             </div>
             @error('category_id')
-                <p class="text-red-500">{{ $message }}</p>
+            <p class="text-red-500">{{ $message }}</p>
             @enderror
 
             <div>
@@ -122,9 +124,3 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 </script> --}}
-
-
-
-
-
-

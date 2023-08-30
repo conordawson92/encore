@@ -6,7 +6,7 @@
 <x-layout>
 
     <body>
-        <div class="w-full md:w-[65%] mx-auto pt-2">
+        <div class="w-full md:w-[65%] mx-auto pt-2 p-1">
             @auth
             @if(auth()->user()->role === 'admin')
             <div class="mt-4 pb-5">
@@ -45,7 +45,8 @@
             </div>
             <div id="details_container">
             </div>
-            
+
+
             <!--all the admin selling items-->
             <h2 class="text-2xl font-bold text-center py-3" id="your-items">Your Items For Sale</h2>
 
@@ -402,7 +403,5 @@
             {{ session('message') }}
         </div>
         @endif
-    </body>
-
-    </html>
+   
 </x-layout>
