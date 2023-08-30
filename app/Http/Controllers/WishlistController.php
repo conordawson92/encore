@@ -69,4 +69,27 @@ class WishlistController extends Controller
         return redirect()->back()->with('message', 'Wishlist cleared successfully.');
     }
 
+    public function toggleWishlist(Request $request, $itemId)
+{
+    $user = auth()->user();
+    $item = Item::findOrFail($itemId);
+
+    if ($user->wishlist->contains($item)) {
+        $user->wishlist()->detach($item);
+        $message = "{$item->ItemName} removed from wishlist.";
+    } else {
+        if (!$user->wishlist->contains($item)) {
+            $user->wishlist()->attach($item);
+            $message = "{$item->ItemName} added to wishlist.";
+        } else {
+            $message = "{$item->ItemName} is already in your wishlist.";
+        }
+    }
+
+    return redirect()->back()->with('message', $message);
+}
+
+
+
+
 }

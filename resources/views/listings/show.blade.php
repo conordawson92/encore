@@ -27,11 +27,22 @@
                     <!-- Title and button-->
                     <div class="flex justify-between items-center mb-2 mt-[14px]">
                         <h3 class="text-2xl">{{$listing->ItemName}}</h3>
-                        <button id="heartButton" class="text-red-500 hover:text-red-600 text-3xl mr-4">
-                            <i class="far fa-heart"></i>  
-                            <i class="fas fa-heart hidden"></i>  
-                        </button>
+                        <form action="{{ route('wishlist.toggle', $listing) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="heart-button">
+                                @auth
+                                    @if(auth()->user()->wishlist->contains($listing))
+                                        <!-- Heart is full -->
+                                        <i class="fas fa-heart text-red-500 text-3xl"></i>
+                                    @else
+                                        <!-- Heart is empty -->
+                                        <i class="far fa-heart text-red-500 text-3xl"></i>
+                                    @endif
+                                @endauth
+                            </button>
+                        </form>
                     </div>
+                    
 
                     <!-- Content -->
                     <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
@@ -141,14 +152,41 @@
 
 <script>
     const heartButton = document.getElementById('heartButton');
+    const itemId = {{ $listing->id }}; // Assuming this is the item's ID
+
+    @auth
+        @if(auth()->user()->wishlist->contains($listing))
+            const heartEmpty = heartButton.querySelector('.far');
+            const heartFull = heartButton.querySelector('.fas');
+            heartEmpty.classList.add('hidden');
+            heartFull.classList.remove('hidden');
+        @endif
+    @endauth
 
     heartButton.addEventListener('click', function() {
         const heartEmpty = this.querySelector('.far');
         const heartFull = this.querySelector('.fas');
         heartEmpty.classList.toggle('hidden');
         heartFull.classList.toggle('hidden');
+
+        fetch(`/wishlist/${itemId}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message); // Display the response message
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
     });
 </script>
+
 
 
 </x-layout>
