@@ -1,78 +1,129 @@
-<a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+<x-layout>
+    <!-- Back Navigation and Title -->
+    <div class="flex items-center justify-between m-8">
+        <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+        <div class="flex items-center">
+            <h1 class="text-4xl font-semibold text-orange_logo ml-4">View Transactions</h1>
+            <div class="text-6xl text-orange-500 ml-4">
+                🛠 
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mx-auto mt-10 p-8 bg-white shadow-md rounded-lg">
+    <h1 class="text-4xl font-semibold text-orange-500 mb-8">Transactions</h1>
 
-<h1>Transactions</h1>
+    <!-- Pending Transactions -->
+    <h3 class="text-2xl font-semibold mb-4">Pending Transactions</h3>
+    @if ($pendingTransactions->count() > 0)
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border">
+            <thead>
+                <tr>
+                    <th class="border">Item</th>
+                    <th class="border">Buyer</th>
+                    <th class="border">Seller</th>
+                    <th class="border">Date</th>
+                    <th class="border">Status</th>
+                    <th class="border">Shipping</th>
+                    <th class="border">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($pendingTransactions as $transaction)
+                <tr>
+                    <td class="border">{{ $transaction->item->ItemName }}</td>
+                    <td class="border">{{ $transaction->buyer->userName }}</td>
+                    <td class="border">{{ $transaction->seller->userName }}</td>
+                    <td class="border">{{ $transaction->datePurchase }}</td>
+                    <td class="border">{{ $transaction->status }}</td>
+                    <td class="border">{{ $transaction->shippingDetails }}</td>
+                    <td class="border">
+                        <form action="{{ route('transactions.cancel', ['transaction' => $transaction->id]) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-blue-500 hover:text-blue-700">Cancel</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @else
+    <p class="text-red-500">No pending transactions found.</p>
+    @endif
 
-<!-- Display user's pending transactions with cancel button-->
-<h3>Pending Transactions</h3>
-@if ($pendingTransactions->count() > 0)
-<table>
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Buyer</th>
-            <th>Seller</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Shipping</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($pendingTransactions as $transaction)
-        <tr>
-            <td>{{ $transaction->item->ItemName }}</td>
-            <td>{{ $transaction->buyer->userName }}</td>
-            <td>{{ $transaction->seller->userName }}</td>
-            <td>{{ $transaction->datePurchase }}</td>
-            <td>{{ $transaction->status }}</td>
-            <td>{{ $transaction->shippingDetails }}</td>
-            <td>
-                <form action="{{ route('transactions.cancel', ['transaction' => $transaction->id]) }}" method="POST">
-                    @csrf
-                    @method('PATCH') <!-- Use PATCH method for updating -->
-                    <button type="submit">Cancel</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@else
-<p>No pending transactions found.</p>
-@endif
+    <div class="border-b border-orange-300 my-4"></div>
 
-<h3>Finished Transactions</h3>
-@if ($finishedTransactions->count() > 0)
-    <table>
-        @foreach ($finishedTransactions as $transaction)
-            <tr>
-                <td>Item: {{ $transaction->item->ItemName }}</td>
-                <td>Buyer: {{ $transaction->buyer->userName }}</td>
-                <td>Seller: {{ $transaction->seller->userName }}</td>
-                <td>Date: {{ $transaction->datePurchase }}</td>
-                <td>Status: {{ $transaction->status }}</td>
-                <td>Shipping: {{ $transaction->shippingDetails }}</td>
-            </tr>
-        @endforeach
-    </table>
-@else
-    <p>No finished transactions found.</p>
-@endif
+    <!-- Finished Transactions -->
+    <h3 class="text-2xl font-semibold mb-4">Finished Transactions</h3>
+    @if ($finishedTransactions->count() > 0)
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border">
+            <thead>
+                <tr>
+                    <th class="border">Item</th>
+                    <th class="border">Buyer</th>
+                    <th class="border">Seller</th>
+                    <th class="border">Date</th>
+                    <th class="border">Status</th>
+                    <th class="border">Shipping</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($finishedTransactions as $transaction)
+                <tr>
+                    <td class="border">{{ $transaction->item->ItemName }}</td>
+                    <td class="border">{{ $transaction->buyer->userName }}</td>
+                    <td class="border">{{ $transaction->seller->userName }}</td>
+                    <td class="border">{{ $transaction->datePurchase }}</td>
+                    <td class="border">{{ $transaction->status }}</td>
+                    <td class="border">{{ $transaction->shippingDetails }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @else
+    <p class="text-red-500">No finished transactions found.</p>
+    @endif
 
-<h3>Rejected Transactions</h3>
-@if ($rejectedTransactions->count() > 0)
-    <table>
-        @foreach ($rejectedTransactions as $transaction)
-            <tr>
-                <td>Item: {{ $transaction->item->ItemName }}</td>
-                <td>Buyer: {{ $transaction->buyer->userName }}</td>
-                <td>Seller: {{ $transaction->seller->userName }}</td>
-                <td>Date: {{ $transaction->datePurchase }}</td>
-                <td>Status: {{ $transaction->status }}</td>
-                <td>Shipping: {{ $transaction->shippingDetails }}</td>
-            </tr>
-        @endforeach
-    </table>
-@else
-    <p>No rejected transactions found.</p>
-@endif
+    <div class="border-b border-orange-300 my-4"></div>
+
+     <!-- Rejected Transactions -->
+    <h3 class="text-2xl font-semibold mb-4">Rejected Transactions</h3>
+    @if ($rejectedTransactions->count() > 0)
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border">
+            <thead>
+                <tr>
+                    <th class="border">Item</th>
+                    <th class="border">Buyer</th>
+                    <th class="border">Seller</th>
+                    <th class="border">Date</th>
+                    <th class="border">Status</th>
+                    <th class="border">Shipping</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($rejectedTransactions as $transaction)
+                <tr>
+                    <td class="border">{{ $transaction->item->ItemName }}</td>
+                    <td class="border">{{ $transaction->buyer->userName }}</td>
+                    <td class="border">{{ $transaction->seller->userName }}</td>
+                    <td class="border">{{ $transaction->datePurchase }}</td>
+                    <td class="border text-red-500">{{ $transaction->status }}</td>
+                    <td class="border">{{ $transaction->shippingDetails }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    @else
+    <p class="text-red-500">No rejected transactions found.</p>
+    @endif
+        </x-layout>
+
+
+

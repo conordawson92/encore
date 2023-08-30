@@ -1,29 +1,25 @@
 <x-layout>
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <title>Administrator Functions</title>
-    </head>
-
-    <body>
-        <a href="/adminUser/dashboard">Back to Dashboard</a>
-        <h1>Admin Functions</h1>
-
-        <!-- the admin options -->
-        <a href="/adminUser/users">View All Users</a>
-        <br>
-
-        <a href="/adminUser/items">View All Items</a>
-        <br>
-
-        <a href="/adminUser/reviews">View All Reviews</a>
-        <br>
-
-        <a href="/adminUser/transactions">View All Transactions</a>
-        <br>
-
-    </body>
-
-    </html>
-</x-layout>
+    <div class="bg-[encore/storage/app/public/images/aboutus.png] bg-cover bg-center backdrop-blur-md bg-fixed flex items-center justify-center h-screen">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md m-4 transform hover:shadow-2xl transition-shadow duration-200 filter hover:drop-shadow-orange">
+        <div class="mb-4 flex justify-between items-center">
+          <a href="/adminUser/dashboard" class="text-black-500 hover:underline">Back to Dashboard</a>
+          <div class="text-6xl text-orange-500">
+            🛠
+          </div>
+        </div>
+        <h1 class="text-2xl mb-4">Admin Functions</h1>
+        <ul class="space-y-2">
+          <li class="hover:bg-orange-500 hover:text-white"><a href="/adminUser/users" class="text-black-500 hover:text-white transform hover:scale-180 transition-transform duration-200">View All Users</a></li>
+          <li class="hover:bg-orange-500 hover:text-white"><a href="/adminUser/items" class="text-black-500 hover:text-white transform hover:scale-180 transition-transform duration-200">View All Items</a></li>
+          <li class="hover:bg-orange-500 hover:text-white"><a href="/adminUser/reviews" class="text-black-500 hover:text-white transform hover:scale-180 transition-transform duration-200">View All Reviews</a></li>
+          <li class="hover:bg-orange-500 hover:text-white"><a href="/adminUser/transactions" class="text-black-500 hover:text-white transform hover:scale-180 transition-transform duration-200">View All Transactions</a></li>
+        </ul>
+      </div>
+    </div>
+  </x-layout>
+  
+  
+  
+  
+  
+  
