@@ -7,18 +7,20 @@
 
         <!-- Back Navigation and Title -->
         <div class="flex items-center justify-between">
-            <a href="/adminUser/admin" class="text-laravel hover:underline">Back to Admin Functions</a>
+            <a href="{{ route('admin') }}" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                <i class="fas fa-user-cog mr-2"></i> Back to Admin Functions
+            </a>
             <div class="flex items-center">
                 <h1 class="text-4xl font-semibold text-orange_logo ml-4">Manage Users</h1>
-                <div class="text-6xl text-orange-500 ml-4">
-                    🛠 
+                <div class="text-3xl text-orange-500 ml-4">
+                    🛠
                 </div>
             </div>
         </div>
-    
+
         <!-- Active Users -->
         <section class="space-y-4">
-            <h3 class="text-2xl font-medium">Active Users</h3>
+            <h3 class="text-4xl font-semibold text-orange-500 mb-8">Active Users</h3>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border-t border-l rounded-lg">
                     <thead class="bg-gray-100">
@@ -54,21 +56,21 @@
         <!-- Banned Users -->
         <section class="space-y-4">
             @if ($bannedUsers->count() > 0)
-            <h3 class="text-2xl font-medium">Banned Users</h3>
+            <h3 class="text-4xl font-semibold text-orange-500 mb-8">Banned Users</h3>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border-t border-l rounded-lg">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="p-2 border">Name</th>
-                            <th class="p-2 border">Email</th>
-                            <th class="p-2 border">Joined Date</th>
-                            <th class="p-2 border">Banned Date</th>
-                            <th class="p-2 border">Actions</th>
+                            <th class="p-2 border text-left">Name</th>
+                            <th class="p-2 border text-left">Email</th>
+                            <th class="p-2 border text-left">Joined Date</th>
+                            <th class="p-2 border text-left">Banned Date</th>
+                            <th class="p-2 border text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($bannedUsers as $user)
-                        <tr>
+                        <tr class="hover:bg-gray-200">
                             <td class="p-2 border">{{ $user->userName }}</td>
                             <td class="p-2 border">{{ $user->email }}</td>
                             <td class="p-2 border">{{ $user->dateJoined }}</td>
