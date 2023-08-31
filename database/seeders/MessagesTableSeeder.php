@@ -16,7 +16,7 @@ class MessagesTableSeeder extends Seeder
     {
         DB::table('messages')->insert([
             [
-                'id' => 3,
+                'id' => 1,
                 'senderUser_id' => 1,
                 'receiverUser_id' => 2,
                 'item_id' => 5,
