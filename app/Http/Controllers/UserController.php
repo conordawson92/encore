@@ -197,7 +197,7 @@ class UserController extends Controller
             'userLocation' => 'required|string|max:255',
             'userPhone' => 'required|string|max:255',
             'paymentInfo' => 'required|string|max:255',
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:6|confirmed',
         ]);
 
         if ($request->hasFile('userImage')) {

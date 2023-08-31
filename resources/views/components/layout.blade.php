@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="//unpkg.com/alpinejs" defer></script>
     <script>
         var navMenu = @json($parentCategories);
@@ -18,26 +16,38 @@
     @vite(['resources/css/app.css', 'resources/css/svg.css'])
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
     <title>Encore | Home Page</title>
-    
+
 
     <style>
-        @font-face {
-        font-family: 'Oglnf';
-        src: url('{{ asset('fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
+        @media (min-width: 768px) {
+            body::-webkit-scrollbar {
+                width: 0;
+                /* Remove scrollbar space */
+                background: transparent;
+                /* Make scrollbar invisible */
+            }
+
+            html {
+                scrollbar-width: none;
+                /* Firefox 64+ */
+            }
         }
         @font-face {
-        font-family: 'abel';
-        src: url('{{ asset('fonts/Abel-Regular.ttf') }}') format('truetype');
+            font-family: 'Oglnf';
+            src: url('{{ asset('fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
+        }
+        @font-face {
+            font-family: 'abel';
+            src: url('{{ asset('fonts/Abel-Regular.ttf') }}') format('truetype');
         }
     </style>
 </head>
 
 <body class="flex flex-col min-h-screen font-abel text-lg">
-    <x-flash-message/>
+    <x-flash-message />
     <div class="grow shrink basis-0">
         <div class="bg-beige_logo">
-            <header
-                class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
+            <header class="flex justify-between md:justify-evenly gap-4 bg-beige_logo p-2 border-bottom-solid border-bottom-2 border-gray-400 text-brown_logo">
                 <a class="flex justify-center items-center" href="/">
                     <img class="w-40" src="{{ asset('images/logo.svg') }}" alt="" />
                 </a>
@@ -53,91 +63,98 @@
                         </h2>
                     </li>
                     <li>
-                        <a href="{{ route('cart.cart') }}">
-                            <span>
-                                
-                            </span>
-                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                        </a>
-                        {{-- <a href="">
-                            <span class="relative">
-                                @if(auth()->user()->cartCount() > 0)
-                                <span class="absolute top-0 right-0 px-2 py-1 bg-red-500 text-white rounded-full text-sm">
+                        <a href="{{ route('cart.cart') }}" alt="My cart">
+                            <span class="relative inline-block">
+                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+
+                                @if(auth()->user() && auth()->user()->cartCount() > 0)
+                                <span class="absolute top-[-5px] right-[-5px] px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
                                     {{ auth()->user()->cartCount() }}
                                 </span>
                                 @endif
-                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
                             </span>
-                        </a> --}}
-                    </li>
-                    <li>
-                        <a href="{{ route('dashboard') }}#wishlist">
-                            <i class="fa-regular fa-heart text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}#your-notifications">
+                        <a href="{{ route('dashboard') }}#wishlist" alt="My wishlist">
+                            <span class="relative inline-block">
+                                <i class="fa-regular fa-heart text-2xl"></i>
+                                @if(auth()->user() && auth()->user()->wishlistCount() > 0)
+                                <span class="absolute top-[-5px] right-[-5px] px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
+                                    {{ auth()->user()->wishlistCount() }}
+                                </span>
+                                @endif
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}#your-notifications" alt="My notifications">
                             <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('dashboard') }}" alt="My dashboard">
                             <i class="fa-solid fa-gear text-2xl"></i>
                         </a>
                     </li>
                     <li>
                         <form method="POST" action="/logout" class="m-0">
                             @csrf
-                            <button type="submit" name="logout" title="Logout" class="">
+                            <button type="submit" name="logout" title="Logout" class="" alt="Logout">
                                 <i class="fa-solid fa-right-from-bracket text-2xl"></i>
                             </button>
                         </form>
                     </li>
                 </ul>
 
-                    @else
-                        <div class="hidden md:flex gap-4 justify-center items-center">
-                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register">
-                                Sign Up
-                            </a>
-                            <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login">
-                                Sign In
-                            </a>
-                            <a href="/faq">
-                                <i class='fa-solid fa-circle-question text-2xl'></i>
-                            </a>
-                        </div>
+                @else
+                <div class="hidden md:flex gap-4 justify-center items-center">
+                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/register" alt="Sign Up">
+                        Sign Up
+                    </a>
+                    <a class="border border-brown_logo rounded px-2 py-1 text-brown_logo whitespace-nowrap" href="/login" alt="Sign In">
+                        Sign In
+                    </a>
+                    <a href="/faq">
+                        <i class='fa-solid fa-circle-question text-2xl' alt="Faq"></i>
+                    </a>
+                </div>
                 @endauth
                 @auth
                 @csrf
                 <ul class="flex gap-6 justify-right items-center md:hidden">
                     <li>
-                        <a href="{{ route('cart.cart') }}">
-                            <i class="fa-solid fa-cart-shopping text-2xl"></i>
-                        </a>
-                        {{-- <a href="">
-                            <span class="relative">
-                                @if(auth()->user()->cartCount() > 0)
-                                <span class="absolute top-0 right-0 px-2 py-1 bg-red-500 text-white rounded-full text-sm">
+                        <a href="{{ route('cart.cart') }}" alt="My cart">
+                            <span class="relative inline-block">
+                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+
+                                @if(auth()->user() && auth()->user()->cartCount() > 0)
+                                <span class="absolute top-[-5px] right-[-5px] px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
                                     {{ auth()->user()->cartCount() }}
                                 </span>
                                 @endif
-                                <i class="fa-solid fa-cart-shopping text-2xl"></i>
                             </span>
-                        </a> --}}
-                    </li>
-                    <li>
-                        <a href="{{ route('wishlistDashboard') }}#wishlist">
-                            <i class="fa-regular fa-heart text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="{{ route('dashboard') }}#wishlist" alt="My wishlist">
+                            <span class="relative inline-block">
+                                <i class="fa-regular fa-heart text-2xl"></i>
+                                @if(auth()->user() && auth()->user()->wishlistCount() > 0)
+                                <span class="absolute top-[-5px] right-[-5px] px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
+                                    {{ auth()->user()->wishlistCount() }}
+                                </span>
+                                @endif
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('dashboard') }}#your-notifications" alt="My notifications">
                             <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('dashboard') }}">
+                        <a href="{{ route('dashboard') }}" alt="My dashboard">
                             <i class="fa-solid fa-gear text-2xl"></i>
                         </a>
                     </li>
@@ -145,10 +162,10 @@
                 @endauth
                 @include('partials._search_mobile')
                 <div class="flex md:hidden gap-6 m-2">
-                    <button id="show-search" class="">
+                    <button id="show-search" class="" alt="Search">
                         <i class="fa-solid fa-magnifying-glass text-3xl"></i>
                     </button>
-                    <button id="menu_mobile_button" class="">
+                    <button id="menu_mobile_button" class="" alt="Menu">
                         <i id="menu_mobile_icon" class="fa-solid fa-bars text-3xl"></i>
                     </button>
                 </div>
@@ -201,22 +218,22 @@
                 </h3>
                 <ul class="flex flex-col gap-2">
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Help Center
+                        <a class="hover:underline" href="/faq#general">
+                            FAQ
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Buying Guide
+                        <a class="hover:underline" href="/faq#buyer">
+                            Buyer
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
-                            Selling Guide
+                        <a class="hover:underline" href="/faq#seller">
+                            Seller
                         </a>
                     </li>
                     <li>
-                        <a class="hover:underline" href="/future">
+                        <a class="hover:underline" href="/faq#safety">
                             Safety
                         </a>
                     </li>
@@ -289,17 +306,13 @@
         <body>
 
             <button id="backToTop" class="fixed bottom-0 right-0 transform translate-x-6">
-                <svg width="120" height="100" viewBox="0 0 120 100" fill="none"
-                    xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);">>
+                <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);">>
                     <g id="triangles">
                         <g id="darkGroup">
-                            <path id="dark2" opacity="0.7"
-                                d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
-                            <path id="dark1" opacity="0.7"
-                                d="M66 46.268C67.3333 47.0378 67.3333 48.9623 66 49.7321L31.5 69.6506C30.1667 70.4204 28.5 69.4582 28.5 67.9186V28.0814C28.5 26.5418 30.1667 25.5796 31.5 26.3494L66 46.268Z" />
+                            <path id="dark2" opacity="0.7" d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
+                            <path id="dark1" opacity="0.7" d="M66 46.268C67.3333 47.0378 67.3333 48.9623 66 49.7321L31.5 69.6506C30.1667 70.4204 28.5 69.4582 28.5 67.9186V28.0814C28.5 26.5418 30.1667 25.5796 31.5 26.3494L66 46.268Z" />
                         </g>
-                        <path id="light1" opacity="0.7"
-                            d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
+                        <path id="light1" opacity="0.7" d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
                     </g>
                 </svg>
             </button>

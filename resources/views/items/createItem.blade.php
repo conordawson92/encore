@@ -2,11 +2,15 @@
     <title>Encore | Add Item</title>
 </head>
 
-
 <x-layout>
 
-    <div class="w-[60%] mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl my-2">
-        <a href="/adminUser/dashboard" class="py-1 px-2 border-2 border-brown_logo hover:bg-beige_logo_hover inline-block mb-6 text-brown_logo transition-all">Back to Dashboard</a>
+    <div class="w-full md:w-[60%] mx-auto p-6 bg-white border-1 border-brown_logo shadow-custom-xl my-2">
+        <a href="/adminUser/dashboard" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+            <i class="fas fa-user-cog mr-2"></i> Back to dashboard
+        </a>
+        <div class="flex items-center">
+            <h1 class="text-4xl font-semibold text-orange_logo py-6">Add Item</h1>
+        </div>
 
         <!-- Display validation errors if they exist -->
         @if ($errors->any())
@@ -18,114 +22,105 @@
             </ul>
         </div>
         @endif
+
         <form action="{{ route('items.storeItem') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
             @csrf
-            <div class="flex gap-4é">
-                <div>
-                    <label for="ItemName" class="block text-brown_logo font-medium">Item Name:</label>
-                    <input type="text" name="ItemName" required class="mt-1 w-full p-2 border-2 border-brown_logo">
+            <div class="flex flex-wrap gap-4">
+                <div class="w-full">
+                    <label for="ItemName" class="block text-lg font-medium text-gray-700">Item Name</label>
+                    <input type="text" name="ItemName" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-                <div>
-                    <label for="itemImage" class="block text-brown_logo font-medium bg-">Item Image:</label>
-                    <input type="file" name="itemImage" class="mt-1" id="itemImage" onchange="previewImage(event)">
+                <div class="w-full">
+                    <label for="itemImage" class="block text-lg font-medium text-gray-700">Item Image:</label>
+                    <input type="file" name="itemImage" class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md" id="itemImage" onchange="previewImage(event)">
                 </div>
-                <div class="mt-4">
-                    <label class="block text-brown_logo font-medium">Image Preview:</label>
-                    <img id="imagePreview" src="#" alt="Image Preview" class="hidden mt-2 w-64" />
+                <div class="w-full">
+                    <label class="block text-lg font-medium text-gray-700">Image Preview:</label>
+                    <img id="imagePreview" src="#" alt="Image Preview" class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md" />
                 </div>
             </div>
-            
-
-            <div>
-                <label for="description" class="block text-brown_logo font-medium">Description:</label>
-                <textarea name="description" required class="mt-1 w-full p-2 border-2 border-brown_logo"></textarea>
-                @error('description')
-                    <p class="text-red-500">{{ $message }}</p>
-                @enderror
+            <div class="w-full">
+                <label for="description" class="block text-lg font-medium text-gray-700 mt-12">Description:</label>
+                <textarea name="description" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md"></textarea>
             </div>
-
-            <div class="flex justify-between">
-                <div>
-                    <label for="brand" class="block text-brown_logo font-medium">Brand:</label>
-                    <input type="text" name="brand" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+            <div class="flex flex-wrap gap-4">
+                <div class="w-full">
+                    <label for="brand" class="block text-lg font-medium text-gray-700">Brand:</label>
+                    <input type="text" name="brand" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-                <div>
-                    <label for="size" class="block text-brown_logo font-medium">Size:</label>
-                    <input type="text" name="size" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+                <div class="w-full">
+                    <label for="size" class="block text-lg font-medium text-gray-700">Size:</label>
+                    <input type="text" name="size" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-                <div>
-                    <label class="block text-brown_logo font-medium" for="quantity">Quantity:</label>
-                    <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="number" name="quantity" required>
+                <div class="w-full">
+                    <label for="quantity" class="block text-lg font-medium text-gray-700">Quantity:</label>
+                    <input type="number" name="quantity" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-                <div>
-                    <label class="block text-brown_logo font-medium" for="tags">Tags:</label>
-                    <input class="mt-1 w-full p-2 border-2 border-brown_logo" type="text" name="tags" required>
+                <div class="w-full">
+                    <label for="tags" class="block text-lg font-medium text-gray-700">Tags:</label>
+                    <input type="text" name="tags" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-            
             </div>
-            <div class="flex justify-between">
-                
-                <div>
-                    <label for="condition" class="block text-brown_logo font-medium">Condition:</label>
-                    <select name="condition" required class="mt-1 w-full p-2 border-2 border-brown_logo">
+            <div class="flex flex-wrap gap-4">
+                <div class="w-full">
+                    <label for="condition" class="block text-lg font-medium text-gray-700">Condition:</label>
+                    <select name="condition" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                         <option value="new">New</option>
                         <option value="used">Used</option>
                         <option value="very used">Very Used</option>
                     </select>
                 </div>
-                <div>
-                    <label class="block text-brown_logo font-medium" for="parentCategory_id">Main Category</label>
-                    <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="parentCategory" name="parentCategory_id">
-                    @foreach ($parentCategories as $parentCategory)
+                <div class="w-full">
+                    <label for="parentCategory_id" class="block text-lg font-medium text-gray-700">Main Category</label>
+                    <select name="parentCategory_id" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
+                        @foreach ($parentCategories as $parentCategory)
                         <option value="{{ $parentCategory->id }}">
                             {{ $parentCategory->parentcategoryName }}
                         </option>
-                    @endforeach
-            </select>
+                        @endforeach
+                    </select>
                 </div>
-                <div>
-                    <label class="block text-brown_logo font-medium" for="category_id">Category</label>
-                    <select class="mt-1 w-full p-2 border-2 border-brown_logo" id="category" name="category_id">
-                    @foreach ($categories as $category)
+                <div class="w-full">
+                    <label for="category_id" class="block text-lg font-medium text-gray-700">Category</label>
+                    <select name="category_id" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
+                        @foreach ($categories as $category)
                         <option value="{{ $category->id }}" data-parent="{{ $category->parentCategory_id }}">
                             {{ $category->category_name }}
                         </option>
-                    @endforeach
-            </select>
+                        @endforeach
+                    </select>
                 </div>
-                
-                <div>
-                    <label for="price" class="block text-brown_logo font-medium">Price:</label>
-                    <input type="text" name="price" class="mt-1 w-full p-2 border-2 border-brown_logo" required>
+                <div class="w-full">
+                    <label for="price" class="block text-lg font-medium text-gray-700">Price:</label>
+                    <input type="text" name="price" required class="mt-1 w-full p-2 border-2 border-grey_logo border rounded-md">
                 </div>
-                
             </div>
             @error('category_id')
-                <p class="text-red-500">{{ $message }}</p>
+            <p class="text-red-500">{{ $message }}</p>
             @enderror
 
             <div>
-                <button type="submit" class="uppercase font-bold w-full text-brown_logo p-2 border-2 border-brown_logo hover:bg-beige_logo_hover focus:outline-none transition:all">
+                <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
                     Add Item
                 </button>
             </div>
         </form>
     </div>
-    {{-- <script>
-        function previewImage(event) {
-            console.log("function previewImage");
-            const reader = new FileReader();
-            const imageField = document.getElementById("imagePreview");
-
-            reader.onload = function() {
-                if (reader.readyState === 2) {
-                    imageField.src = reader.result;
-                    imageField.classList.remove('hidden');
-                }
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script> --}}
-
-
 </x-layout>
+
+
+
+
+
+{{-- <!-- Javascript Code -->
+<script type="text/javascript">
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('imagePreview');
+            output.src = reader.result;
+            output.classList.remove('hidden');
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script> --}}
