@@ -10,7 +10,7 @@
         </div>
     </a>
     <!-- Information -->
-    
+
     <div class="p-4">
         <h3 class="text-xl">
             {{ $listing->ItemName }}
@@ -19,31 +19,28 @@
             €{{ $listing->price }}
         </div>
         <div class="flex justify-end">
-            @if (!$listing->ownedBy(auth()->user()))
-                <!-- Use class names for heart buttons -->
-                <form action="{{ route('wishlist.toggle', $listing->id) }}" method="post">
-                    @csrf
-                    <button type="submit" class="heartButton text-red-500 hover:text-red-600 text-3xl px-4 py-2">
-                        @auth
-                            @if(auth()->user()->wishlist->contains($listing))
-                                <i class="fas fa-heart mt-[-14px]"></i>
-                            @else
-                                <i class="far fa-heart mt-[-14px]"></i>
-                            @endif
-                        @endauth
-                    </button>
-                </form>
 
-                <form action="{{ route('cart.add', $listing->id) }}" method="post">
-                    @csrf
-                    <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
-                        Add to Cart
-                    </button>
-                </form>
-            @else
-                <br>
-                <p class="text-xs text-red-500">This is your item</p>
-            @endif
+            <!-- Use class names for heart buttons -->
+            <form action="{{ route('wishlist.toggle', $listing->id) }}" method="post">
+                @csrf
+                <button type="submit" class="heartButton text-red-500 hover:text-red-600 text-3xl px-4 py-2">
+                    @auth
+                    @if(auth()->user()->wishlist->contains($listing))
+                    <i class="fas fa-heart mt-[-14px]"></i>
+                    @else
+                    <i class="far fa-heart mt-[-14px]"></i>
+                    @endif
+                    @endauth
+                </button>
+            </form>
+
+            <form action="{{ route('cart.add', $listing->id) }}" method="post">
+                @csrf
+                <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
+                    Add to Cart
+                </button>
+            </form>
+
         </div>
     </div>
 </div>
@@ -58,33 +55,26 @@
             heartEmpty.classList.toggle('hidden');
             heartFull.classList.toggle('hidden');
 
-            const itemId = {{ $listing->id }};
-            fetch(`/wishlist/${itemId}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    alert(data.message);
+            const itemId = {
+                {
+                    $listing - > id
                 }
-            })
-            .catch(error => {
-                console.error('An error occurred:', error);
-            });
+            };
+            fetch(`/wishlist/${itemId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
         });
     });
 </script>
-
-
-
-
-
-
-
-
-
-    
-

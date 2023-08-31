@@ -73,7 +73,7 @@
 
                                 @if(auth()->user() && auth()->user()->cartCount() > 0)
                                 <span class="absolute top-[-5px] right-[-5px] px-1.5 py-0.5 bg-red-500 text-white rounded-full text-xs">
-                             
+                                    {{ auth()->user()->cartCount() }}
                                 </span>
                                 @endif
                             </span>
@@ -153,7 +153,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{ route('dashboard') }}#your-notifications" alt="My notifications">
+                        <a href="{{ route('dashboard') }}#your-notifications" alt="My notifications">
                             <i class="fa-regular fa-bell text-2xl"></i>
                         </a>
                     </li>

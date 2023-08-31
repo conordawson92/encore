@@ -5,7 +5,6 @@
 <x-layout>
     <div class="flex overflow-y-auto h-screen bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('storage/images/assets/Contact_us/Encore manifest.png') }}');">
         <div class="m-auto bg-white rounded-lg shadow-lg w-full lg:w-3/4 xl:w-1/2 p-8 overflow-y-auto" style="max-height: calc(100vh - 2rem);">
-            <a href="/adminUser/users" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">Back to users list</a>
             <header class="mb-8">
                 <h2 class="text-5xl font-bold uppercase mb-1 text-orange_logo">
                     Edit User
