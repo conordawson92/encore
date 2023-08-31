@@ -35,12 +35,11 @@
 
         @font-face {
             font-family: 'Oglnf';
-            src: url('{{ asset(' fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
+            src: url('{{ asset('fonts/oldgatelaneoutline.regular.otf') }}') format('truetype');
         }
-
         @font-face {
             font-family: 'abel';
-            src: url('{{ asset(' fonts/Abel-Regular.ttf') }}') format('truetype');
+            src: url('{{ asset('fonts/Abel-Regular.ttf') }}') format('truetype');
         }
     </style>
 </head>
