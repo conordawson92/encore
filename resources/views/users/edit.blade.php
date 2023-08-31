@@ -1,21 +1,23 @@
 <head>
-    <title>Encore | Edit User</title>
+    <title>Encore | Edit Usesdgstr</title>
 </head>
 
 
 <x-layout>
-   
 
-        <!-- Left side for Image -->
-        <div class="w-1/2 h-full bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
+    <div class="flex">
+
+        <div class="w-1/2  bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
             <!-- Embedded Image -->
             <img src="http://encore.test/storage/images/assets/register_tv.png" alt="Description" class="object-contain w-full h-full">
         </div>
- <div class="flex h-screen">
-        <!-- Right side for Edit Profile Form -->
-        <div class="customLg:w-1/2 bg-white flex items-center justify-center">
 
-            <div class="flex flex-col p-8 overflow-y-auto" style="max-height: 100vh;">
+        <!-- Right side for Edit Profile Form -->
+        <div class="m-auto h-screen bg-white rounded-lg shadow-lg w-full lg:w-3/4 xl:w-1/2 p-8 overflow-y-auto flex">
+
+            <div class="flex flex-col p-8 pb-16">
+
+
                 <header class="mb-8">
                     <h2 class="text-5xl font-bold uppercase mb-1 text-orange_logo_light">
                         Manage profile
@@ -30,7 +32,7 @@
                         <label for="userName" class="inline-block text-lg mb-2">Name</label>
                         <input type="text" class="border rounded p-2 w-full" name="userName" value="{{$user->userName}}" />
                         @error('userName')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -41,7 +43,7 @@
                         <input type="file" class="border border-gray-200 rounded p-2 w-full" name="userImage" />
                         <img class="w-48 mr-6" src="{{$user->userImage ? asset('storage/' . $user->userImage):asset('images/no-image.png')}}" alt="Profile Photo">
                         @error('userImage')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -49,7 +51,7 @@
                         <label for="userLocation" class="inline-block text-lg mb-2">Location</label>
                         <input type="text" class="border rounded p-2 w-full" name="userLocation" placeholder="Location" value="{{$user->userLocation}}" />
                         @error('userLocation')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -57,7 +59,7 @@
                         <label for="userPhone" class="inline-block text-lg mb-2">Phone Number</label>
                         <input type="text" class="border rounded p-2 w-full" name="userPhone" value="{{$user->userPhone}}" />
                         @error('userPhone')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -70,7 +72,7 @@
                             <option value="ApplePay">Apple Pay</option>
                         </select>
                         @error('paymentInfo')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -80,7 +82,7 @@
                         </label>
                         <input type="password" class="border rounded p-2 w-full" name="password" />
                         @error('password')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -90,7 +92,7 @@
                         </label>
                         <input type="password" class="border rounded p-2 w-full" name="password_confirmation" />
                         @error('password_confirmation')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                         @enderror
                     </div>
 
@@ -104,4 +106,6 @@
             </div>
         </div>
     </div>
+    <!-- Left side for Image -->
+
 </x-layout>

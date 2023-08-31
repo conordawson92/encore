@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Cart;
+use App\Models\Wishlist;
 
 class User extends Authenticatable
 {
@@ -123,5 +126,16 @@ class User extends Authenticatable
     {
         //check if the user is an admin
         return $this->admin === 1;
+    }
+    public function cartCount()
+    {
+        return $this->hasMany(Cart::class)->count();
+    }
+    public function wishlists(){
+        return $this->hasMany(Wishlist::class);
+    }
+    
+    public function wishlistCount(){
+        return $this->wishlists->count();
     }
 }

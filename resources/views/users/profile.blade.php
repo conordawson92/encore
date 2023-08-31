@@ -5,7 +5,7 @@
 <x-layout>
     <div class="w-[65%] mx-auto">
         <!--the admin profile informations-->
-        <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
+        <div id="profile" class="flex gap-4 flex-col p-2 ">
             <div class="flex gap-4 items-center justify-between">
                 <div class="flex gap-4 items-center">
                     <img class="w-20 h-20 rounded-full" src="{{ asset('storage/' . $user->userImage) }}" alt="{{ $user->userName }}'s Profile Photo">
