@@ -202,7 +202,7 @@ class UserController extends Controller
 
         if ($request->hasFile('userImage')) {
             $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
-            $userImage = $request->file('userImage')->store($path, 'public');
+            $userImage = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
             $user->userImage = $userImage;
         }
 

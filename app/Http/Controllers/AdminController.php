@@ -16,7 +16,7 @@ class AdminController extends Controller
 {
     protected $activeUsers;
     protected $bannedUsers;
-    
+
     //index method to show active and banned users
     public function index()
     {
@@ -43,11 +43,11 @@ class AdminController extends Controller
             ->with('item')
             ->get();
 
-       // Load user's buying transactions
+        // Load user's buying transactions
         $buyingTransactions = Transaction::where('buyerUser_id', $user->id)
             ->with('item')
             ->get();
-            
+
         // Load user's messages with sender information
         $messagesSent = Message::where('senderUser_id', $user->id)
             ->with(['receiver', 'item'])
@@ -55,8 +55,8 @@ class AdminController extends Controller
 
         // Load user's messages with receiver information
         $messagesReceived = Message::where('receiverUser_id', $user->id)
-        ->with(['sender', 'item'])
-        ->get();
+            ->with(['sender', 'item'])
+            ->get();
 
         // Load user's notifications
         $notifications = Notification::where('user_id', $user->id)
@@ -107,20 +107,20 @@ class AdminController extends Controller
         // Load user's finished transactions
         $finishedTransactions = Transaction::where(function ($query) use ($user) {
             $query->where('buyerUser_id', $user->id)
-                  ->orWhere('sellerUser_id', $user->id);
+                ->orWhere('sellerUser_id', $user->id);
         })
-        ->whereIn('status', ['finished', 'rejected'])
-        ->with('item')
-        ->get();
+            ->whereIn('status', ['finished', 'rejected'])
+            ->with('item')
+            ->get();
 
         // Load user's pending transactions
         $pendingTransactions = Transaction::where(function ($query) use ($user) {
             $query->where('buyerUser_id', $user->id)
                 ->orWhere('sellerUser_id', $user->id);
         })
-        ->whereIn('status', ['pending'])
-        ->with('item')
-        ->get();
+            ->whereIn('status', ['pending'])
+            ->with('item')
+            ->get();
 
         // Load user's sold items
         $soldItems = Item::where('sellerUser_id', $user->id)
@@ -155,7 +155,7 @@ class AdminController extends Controller
     //edit user
     public function editUser(User $user)
     {
-        return view('adminUser.editUser', compact('user'));        
+        return view('adminUser.editUser', compact('user'));
     }
 
     //update the new informations in the database
@@ -165,6 +165,12 @@ class AdminController extends Controller
         $user->update($request->all());
 
         return redirect()->route('adminUser.users')->with('message', 'User information has been updated.');
+
+        if ($request->hasFile('userImage')) {
+            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $userImage = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $user->userImage = $userImage;
+        }
     }
 
     //banning a specific user method
@@ -173,13 +179,13 @@ class AdminController extends Controller
         // Update the user's banned status and put a date on
         $user->update([
             'banUser' => true,
-            'deleted_at' => now(), 
+            'deleted_at' => now(),
         ]);
 
         // Cancel user's pending transactions
         $pendingTransactions = Transaction::where('buyerUser_id', $user->id)
-        ->where('status', 'pending')
-        ->get();
+            ->where('status', 'pending')
+            ->get();
         foreach ($pendingTransactions as $transaction) {
             $transaction->update(['status' => 'rejected']);
         }
@@ -192,7 +198,7 @@ class AdminController extends Controller
         foreach ($user->buyerItems as $item) {
             $item->update(['buyerUser_id' => 1]);
         }
-    
+
         //log the user out if they are currently logged in
         if (Auth::check() && Auth::user()->id === $user->id) {
             Auth::logout();
@@ -206,14 +212,13 @@ class AdminController extends Controller
     {
         $user->update(['banUser' => false]);
         return redirect()->route('adminUser.users')->with('message', 'User has been restored, an email was sent to the user.');
-
     }
 
     //see all the items from the site
     public function manageItems()
     {
         // Retrieve all items
-        $items = Item::all(); 
+        $items = Item::all();
 
         return view('adminUser.items', compact('items'));
     }
@@ -235,7 +240,7 @@ class AdminController extends Controller
                 'category_name' => $category->category_name,
             ];
         }
-        
+
         return view('adminUser.editItem', [
             'item' => $item,
             'possibleConditions' => $possibleConditions,
@@ -269,6 +274,4 @@ class AdminController extends Controller
 
         return redirect()->back()->with('message', 'Item deleted successfully, an email was sent to the user.');
     }
-
-
 }
