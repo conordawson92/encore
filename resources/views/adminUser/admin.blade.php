@@ -11,7 +11,7 @@
       <div class="mb-4 flex justify-between items-center">
 
         <a href="/adminUser/dashboard" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
-          <i class="fas fa-user-cog mr-2"></i> Back to Dashboard
+          <i class="fas fa-user-cog mr-2"></i> Back to dashboard
         </a>
         <div class="text-6xl text-orange-500">
           🛠

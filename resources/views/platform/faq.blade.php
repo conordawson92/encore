@@ -2,9 +2,32 @@
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
 
         <h1 class="text-2xl font-bold mb-6">Frequently Asked Questions (FAQs)</h1>
-
+        <!-- General Section -->
+        <section id="general">
+            <h2 class="text-xl font-semibold mb-4">General:</h2>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-medium text-2xl">What is Encore?</p>
+                    <p class="text-xl">
+                        Encore is a platform that allows users to buy and sell second-hand piece of clothing.
+                        You can create an account for free and start browsing for items or sells yours. It is super
+                        easy, intuitive, and we have a team ready to help you when you need it. Feel free to contact us
+                        if you have any questions or want to make a suggestion for the platform. This is the best way for us to 
+                        improve your experience and our service 
+                    </p>
+                </div>
+                <div>
+                    <p class="font-medium text-2xl">Do you have a physical store or only online?</p>
+                    <p class="text-xl">Currently, we operate exclusively online. This allows us to offer a wider selection and better prices to our customers.</p>
+                </div>
+                <div>
+                    <p class="font-medium text-2xl">How can I contact customer service?</p>
+                    <p class="text-xl">You can reach our customer service team at [your email/contact number]. We strive to respond within 24 hours.</p>
+                </div>
+            </div>
+        </section>
         <!-- Buying Section -->
-        <section class="mb-8">
+        <section class="mb-8" id="buyer">
             <h2 class="text-xl font-semibold mb-4">Buying:</h2>
             <div class="space-y-4">
                 <div>
@@ -31,7 +54,7 @@
         </section>
 
         <!-- Selling Section -->
-        <section class="mb-8">
+        <section class="mb-8" id="seller">
             <h2 class="text-xl font-semibold mb-4">Selling:</h2>
             <div class="space-y-4">
                 <div>
@@ -75,7 +98,7 @@
         </section>
 
         <!-- Staying Safe Section -->
-        <section class="mb-8">
+        <section class="mb-8" id="safety">
             <h2 class="text-xl font-semibold mb-4">Staying Safe:</h2>
             <div class="space-y-4">
                 <div>
@@ -92,21 +115,5 @@
                 </div>
             </div>
         </section>
-
-        <!-- General Section -->
-        <section>
-            <h2 class="text-xl font-semibold mb-4">General:</h2>
-            <div class="space-y-4">
-                <div>
-                    <p class="font-medium text-2xl">Do you have a physical store or only online?</p>
-                    <p class="text-xl">Currently, we operate exclusively online. This allows us to offer a wider selection and better prices to our customers.</p>
-                </div>
-                <div>
-                    <p class="font-medium text-2xl">How can I contact customer service?</p>
-                    <p class="text-xl">You can reach our customer service team at [your email/contact number]. We strive to respond within 24 hours.</p>
-                </div>
-            </div>
-        </section>
-
     </div>
 </x-layout>

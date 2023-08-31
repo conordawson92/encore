@@ -1,3 +1,7 @@
+<head>
+    <title>Encore | Transactions Management</title>
+</head>
+
 <x-layout>
     <!-- Back Navigation and Title -->
     <div class="flex items-center justify-between m-8">
