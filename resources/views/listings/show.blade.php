@@ -10,49 +10,70 @@
             <div class="flex flex-col sm:flex-row items-stretch">
 
                 <!-- Responsive mobile -->
-
-                <div id="thumbnail" class="flex justify-center w-78 sm:w-1/2 lg:w-3/4 cursor-pointer" onclick="showImage()">
+                <div id="thumbnail" class="flex justify-center w-full sm:w-1/2 lg:w-3/4 cursor-pointer" onclick="showImage()">
                     <img id="thumbnailImage" class="object-cover h-58 sm:h-158" src="{{$listing->itemImage ? asset('' . $listing->itemImage) : asset('images/no-image.png')}}" alt="" />
                 </div>
 
+                <!-- Information -->
+                <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start py-4 sm:pl-8">
+
+                   <div class="w-full text-left border bg-gray-50 p-5 rounded-md shadow-sm">
+                     
+    <!-- Title and Heart Button -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 border-b pb-3">
+
+        <!-- Title -->
+        <h3 class="text-3xl font-semibold mb-2 sm:mb-0">{{$listing->ItemName}}</h3>
+
+        <!-- Wishlist Button -->
+        <form action="{{ route('wishlist.toggle', $listing) }}" method="POST" class="mt-2 sm:mt-0">
+            @csrf
+            <button type="submit" class="heart-button focus:outline-none">
+                @auth
+                @if(auth()->user()->wishlist->contains($listing))
+                <i class="fas fa-heart text-red-500 text-3xl"></i> <!-- Filled heart -->
+                @else
+                <i class="far fa-heart text-red-500 text-3xl"></i> <!-- Empty heart -->
+                @endif
+                @endauth
+            </button>
+        </form>
+    </div>
+
+    <!-- Description -->
+    <div class="text-xl font-medium mt-3 mb-4">{{$listing->description}}</div>
+
+    <!-- Tags -->
+    <x-listing-tags :tagsCsv="$listing->tags" />
+
+    <!-- Product Details -->
+    <div class="grid grid-cols-2 gap-4 my-4">
+        <div class="text-lg font-semibold mb-1">Price:</div>
+        <div class="text-lg">€{{$listing->price}}</div>
+
+        <div class="text-lg font-semibold mb-1">Size:</div>
+        <div class="text-lg">{{$listing->size}}</div>
+
+        <div class="text-lg font-semibold mb-1">Brand:</div>
+        <div class="text-lg">{{$listing->brand}}</div>
+
+        <div class="text-lg font-semibold mb-1">Condition:</div>
+        <div class="text-lg">{{$listing->condition}}</div>
+
+        <div class="text-lg font-semibold mb-1">Posted:</div>
+        <div class="text-lg">{{$listing->dateListed}}</div>
+
+        <div class="text-lg font-semibold mb-1">Quantity:</div>
+        <div class="text-lg">{{$listing->quantity}}</div>
+
+        <div class="text-lg font-semibold mb-1">Status:</div>
+        <div class="text-lg">{{$listing->status}}</div>
+    </div>
+</div>
 
 
-            <!-- Information -->
-            <div class="flex flex-col w-full sm:w-1/2 items-start justify-between sm:justify-start">
-                <div class="pl-0 sm:pl-8 w-full text-left">
-                    
-                    <!-- Title and button-->
-                    <div class="flex justify-between items-center mb-2 mt-[14px]">
-                        <h3 class="text-2xl">{{$listing->ItemName}}</h3>
-                        <form action="{{ route('wishlist.toggle', $listing) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="heart-button">
-                                @auth
-                                    @if(auth()->user()->wishlist->contains($listing))
-                                        <!-- Heart is full -->
-                                        <i class="fas fa-heart text-red-500 text-3xl"></i>
-                                    @else
-                                        <!-- Heart is empty -->
-                                        <i class="far fa-heart text-red-500 text-3xl"></i>
-                                    @endif
-                                @endauth
-                            </button>
-                        </form>
-                        <!-- Content -->
-                        <div class="text-xl font-bold mb-4">{{$listing->description}}</div>
-                        <x-listing-tags :tagsCsv="$listing->tags" />
-                        <div class="text-lg my-4">€{{$listing->price}}</div>
-                        <div class="text-lg my-4">Size: {{$listing->size}}</div>
-                        <div class="text-lg my-4">Brand: {{$listing->brand}}</div>
-                        <div class="text-lg my-4">Condition: {{$listing->condition}}</div>
-                        <div class="text-lg my-4">Posted: {{$listing->dateListed}}</div>
-                        <div class="text-lg my-4">Quantity: {{$listing->quantity}}</div>
-                        <div class="text-lg my-4">Status: {{$listing->status}}</div>
-                    </div>
-                    
-
-                    <div class="pl-0 sm:pl-8 w-full text-left sm:text-left bg-gray-200 p-4 rounded">
-                        <div id="profile" class="flex gap-4 flex-col p-2 shadow-custom">
+                    <div class="pl-0 sm:pl-8 w-full text-left sm:text-left p-4 rounded">
+                        <div id="profile" class="flex gap-4 flex-col p-2">
                             <div class="flex gap-4 items-center justify-between">
                                 <a href="/user/{{$listingUser->id}}">
                                     <div class="flex gap-4 items-center">
@@ -92,37 +113,14 @@
         </x-card>
     </div>
 
-    <!-- "Featured Products" -->
-    <div class="mx-4 mt-5">
-        <x-card class="p-10 bg-white">
-            <div class="flex flex-wrap justify-center">
-                <!-- Title -->
-                <div class="w-full text-center">
-                    <h2 class="text-2xl mb-4">Featured Products</h2>
-                </div>
-
-                <!-- Products Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    @foreach($listing as $CategoryID)
-                    <div class="text-center flex flex-col items-center">
-                        <img class="object-cover w-full h-auto mb-2 md:max-w-md md:max-h-72" src="{{ asset($listing->itemImage) }}" alt="{{ $listing->ItemName }}" />
-                        <p class="text-base">{{ $listing->ItemName }}</p>
-                        <p class="text-sm text-gray-600">${{ $listing->price }}</p>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </x-card>
-    </div>
 
 
-    <a href="/listings" class="inline-block text-black ml-4 mb-4">
-        <i class="fa-solid fa-arrow-left"></i> Back
-    </a>
+
     <!-- Image Overlay Structure -->
     <div id="imageOverlay" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden opacity-0 transition-opacity duration-300" onclick="hideImage()">
         <img id="enlargedImage" class="max-w-4/5 max-h-4/5" src="" alt="{{ $listing->ItemName }}">
     </div>
+
     <script>
         window.showImage = function() {
             let thumbnail = document.getElementById("thumbnailImage");
@@ -148,42 +146,42 @@
         };
     </script>
 
-<script>
-    const heartButton = document.getElementById('heartButton');
-    const itemId = {{ $listing->id }}; // Assuming this is the item's ID
+    <script>
+        const heartButton = document.getElementById('heartButton');
+        const itemId = {{ $listing->id }}; // Assuming this is the item's ID
 
-    @auth
+        @auth
         @if(auth()->user()->wishlist->contains($listing))
-            const heartEmpty = heartButton.querySelector('.far');
-            const heartFull = heartButton.querySelector('.fas');
-            heartEmpty.classList.add('hidden');
-            heartFull.classList.remove('hidden');
+        const heartEmpty = heartButton.querySelector('.far');
+        const heartFull = heartButton.querySelector('.fas');
+        heartEmpty.classList.add('hidden');
+        heartFull.classList.remove('hidden');
         @endif
-    @endauth
+        @endauth
 
-    heartButton.addEventListener('click', function() {
-        const heartEmpty = this.querySelector('.far');
-        const heartFull = this.querySelector('.fas');
-        heartEmpty.classList.toggle('hidden');
-        heartFull.classList.toggle('hidden');
+        heartButton.addEventListener('click', function() {
+            const heartEmpty = this.querySelector('.far');
+            const heartFull = this.querySelector('.fas');
+            heartEmpty.classList.toggle('hidden');
+            heartFull.classList.toggle('hidden');
 
-        fetch(`/wishlist/${itemId}`, {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message); // Display the response message
-            }
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
+            fetch(`/wishlist/${itemId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message); // Display the response message
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred:', error);
+                });
         });
-    });
-</script>
+    </script>
 
 
 

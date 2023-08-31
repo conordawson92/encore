@@ -397,11 +397,5 @@
                 <p class="text-gray-600 mt-2">No notifications found.</p>
                 @endif
             </div>
-        </div>
-        @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        @endif
-   
+        </div>   
 </x-layout>
