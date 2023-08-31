@@ -96,11 +96,11 @@
                         @enderror
                     </div>
 
-                    <div class="mb-6">
-                        <button type="submit" class="bg-orange_logo_light text-white rounded-xl py-2 px-4 hover:bg-white hover:text-black transition duration-300">
+                    <div class="mb-6 flex flex-col">
+                        <button type="submit" class="bg-orange-500 text-white py-1 px-4 rounded-none hover:bg-orange-600">
                             Update Profile
                         </button>
-                        <a href="{{ route('dashboard') }}" class="text-black-500 hover:underline">Back to User List</a>
+                        <a href="{{ route('dashboard') }}" class="text-black-500 hover:underline">Back to dashboard</a>
                     </div>
                 </form>
             </div>
