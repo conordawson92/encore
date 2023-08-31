@@ -37,8 +37,7 @@
   <!-- Images left -->
   <div class="flex flex-col md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-left" style="max-width: 80%;">
   <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-    <img src="./images/About_us/Conor.png" alt="Immagine 1" class="img-hover-effect w-9/10 md:w-4/5" />
-  </div>
+    <img src="{{ asset('/storage/images/assets/About_us/Telma cartoon.png') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
   <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
     <h2 class="text-8xl md:text-7xl font-oglnf text-green-700 md:text-left">TELMA</h2>
     <p class="text-lg md:text-base md:text-left">Back-end developers' idea of a three-course meal? An appetizer, a main, and a dessert... all served in different tables.</p>
@@ -52,15 +51,14 @@
     <p class="text-lg md:text-base">Git users live by the mantra: 'Commit early, commit often, and may the merge conflicts be ever in your favor!'</p>
   </div>
   <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-    <img src="./images/About_us/Conor.png" alt="Immagine 2" class="img-hover-effect w-9/10 md:w-4/5" />
+    <img src="{{ asset('/storage/images/assets/About_us/conor (1).png') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
   </div>
 </div>
 
 <!-- Images left -->
 <div class="flex flex-col md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-left" style="max-width: 80%;">
   <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-    <img src="./images/About_us/Conor.png" alt="Immagine 3" class="img-hover-effect w-9/10 md:w-4/5" />
-  </div>
+    <img src="{{ asset('/storage/images/assets/About_us/louis.png') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
   <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
     <h2 class="text-8xl md:text-7xl font-oglnf text-green-700 md:text-left">ARTHUR</h2>
     <p class="text-lg md:text-base md:text-left">CSS developers always look good on the outside, even if they're a mess of !important rules on the inside.</p>
@@ -69,23 +67,22 @@
 
 <!-- Images right -->
 <div class="flex flex-col-reverse md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-right" style="max-width: 80%;">
-  <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
-    <h2 class="text-8xl md:text-7xl font-oglnf text-orange_logo md:text-right">LUCAS</h2>
+  <div class="w-full md:w-1/2 ">
+  <h2 class="text-8xl md:text-7xl font-oglnf text-orange_logo md:text-right">LUCAS</h2>
     <p class="text-lg md:text-base">Ask a back-end developer about relationships; they'll probably start with 'one-to-one' and 'many-to-many'.</p>
   </div>
   <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-    <img src="./images/About_us/Conor.png" alt="Immagine 4" class="img-hover-effect w-9/10 md:w-4/5" />
+    <img src="{{ asset('/storage/images/assets/About_us/Lucas cartoon.png') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
   </div>
 </div>
 
 <!-- Images left -->
 <div class="flex flex-col md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-left" style="max-width: 80%;">
   <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-    <img src="./images/About_us/Conor.png" alt="Immagine 5" class="img-hover-effect w-9/10 md:w-4/5" />
-  </div>
+    <img src="{{ asset('/storage/images/assets/About_us/cristian cartoon.png') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
   <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
-    <h2 class="text-8xl md:text-7xl font-oglnf text-green-700 md:text-left">CRISTIAN</h2>
-    <p class="text-lg md:text-base md:text-left">"Our greatest glory is not in never falling, but in rising every time we run the server." - Confucio</p>
+    <h2 class="text-7xl md:text-7xl font-oglnf text-green-700 md:text-left">CRISTIAN</h2>
+    <p class="text-lg md:text-base md:text-left">"Our greatest glory is not in never falling, but in rising every time we run the server."</p>
   </div>
 </div>
 
