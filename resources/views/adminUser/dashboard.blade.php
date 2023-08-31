@@ -397,7 +397,5 @@
                 <p class="text-gray-600 mt-2">No notifications found.</p>
                 @endif
             </div>
-        </div>
-
-   
+        </div>   
 </x-layout>
