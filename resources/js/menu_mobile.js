@@ -66,7 +66,7 @@ const menuMobile = `
                         Discover Encore
                     </h3>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="/about-us">
+                        <a class="text-2xl font-medium w-full" href="/about">
                             About us
                         </a>
                     </li>
