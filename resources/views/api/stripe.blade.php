@@ -146,20 +146,22 @@ $(function() {
             $errorMessage.append("<p>CVC should contain exactly 3 digits</p>");
         }
 
-        if (!cardExpiryMonth.match(cardExpiryMonthPattern)) {
-            valid = false;
-            $errorMessage.append("<p>Expiry Month should contain exactly 2 digits</p>");
-        } else if (cardExpiryMonth <= new Date().getMonth() + 1) {
-            valid = false;
-            $errorMessage.append("<p>Expiry Month should be in the future</p>");
-        }
-
         if (!cardExpiryYear.match(cardExpiryYearPattern)) {
             valid = false;
             $errorMessage.append("<p>Expiry Year should contain exactly 4 digits</p>");
         } else if (cardExpiryYear < new Date().getFullYear()) {
             valid = false;
             $errorMessage.append("<p>Expiry Year should be in the future</p>");
+        } else if (cardExpiryYear == new Date().getFullYear()) {
+            if (cardExpiryMonth <= new Date().getMonth() + 1) {
+                valid = false;
+                $errorMessage.append("<p>Expiry Month should be in the future</p>");
+            }
+        }
+
+        if (!cardExpiryMonth.match(cardExpiryMonthPattern)) {
+            valid = false;
+            $errorMessage.append("<p>Expiry Month should contain exactly 2 digits</p>");
         }
 
         if (totalAmount <= 0) {
