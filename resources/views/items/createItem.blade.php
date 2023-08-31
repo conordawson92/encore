@@ -93,12 +93,12 @@
                 @error('category_id')
                 <p class="text-red-500">{{ $message }}</p>
                 @enderror
-    
-                <div>
-                    <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
-                        Add Item
-                    </button>
-                </div>
+            </div>
+            <div>
+                <button type="submit" class="bg-orange-500 text-white py-2 px-5 rounded hover:bg-orange-600 transition-all duration-300 items-center">
+                    Add Item
+                </button>
+            </div>
         </form>
     </div>
 </x-layout>
