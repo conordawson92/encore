@@ -5,7 +5,7 @@
 <x-layout class="flex-col">
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar  -->
-    <div class="h-auto w-full md:w-1/4 md:mr-4 mb-4 md:mb-0 p-2 relative" style="background-image: url('{{ asset('storage/images/assets/homepage/pattern-7258598_1920.png') }}'); background-size: cover; background-position: center;">
+    <div class="h-auto w-full md:w-1/4 md:mr-4 mb-4 md:mb-0 p-2 relative" style="background-image: url('{{ asset('storage/images/assets/homepage/unnamed.png') }}'); background-size: cover; background-position: center;">
  
       <div class="text-center mb-2 font-bold text-lg ">
         Sort by:

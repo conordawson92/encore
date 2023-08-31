@@ -36,6 +36,8 @@
                 <!--ITEMS-->
                 <!-- display users items sold-->
                 <!-- Sold Items Section -->
+                <!-- Line Separator -->
+                <div class="border-b border-orange-300 my-4"></div>
                 <div class="container mx-auto mt-10">
                     <h2 class="text-4xl font-semibold text-orange-500 mb-8">Sold Items</h2>
 
@@ -169,7 +171,8 @@
                         @endif
                     </div>
                 </div>
-
+                <!-- Line Separator -->
+                <div class="border-b border-orange-300 my-4"></div>
                 <!-- Transactions Section -->
                 <div class="my-8">
                     <h2 class="text-4xl font-semibold text-orange-500 mb-8">Transactions</h2>
