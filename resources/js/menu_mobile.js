@@ -76,22 +76,22 @@ const menuMobile = `
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            Jobs
-                        </a>
-                    </li>
-                    <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
+                        <a class="text-2xl font-medium w-full" href="/platform#eco-friendly">
                             Eco-Friendly
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            Advertising
+                        <a class="text-2xl font-medium w-full" href="/platform#circular-economy">
+                            Circular Economy
+                        </a>
+                    </li>
+                    <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
+                        <a class="text-2xl font-medium w-full" href="/platform#express-yourself">
+                            Express Yourself
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4">
-                        <a class="text-2xl font-medium w-full" href="">
+                        <a class="text-2xl font-medium w-full" href="/platform#contact-us">
                             Contact
                         </a>
                     </li>
@@ -101,22 +101,22 @@ const menuMobile = `
                         Help
                     </h3>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            Help Center
+                        <a class="text-2xl font-medium w-full" href="/faq">
+                            FAQ
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            Buying Guide
+                        <a class="text-2xl font-medium w-full" href="/faq#buyer">
+                            Buyer
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4 border-solid border-gray-400 border-b">
-                        <a class="text-2xl font-medium w-full" href="">
-                            Selling Guide
+                        <a class="text-2xl font-medium w-full" href="/faq#seller">
+                            Seller
                         </a>
                     </li>
                     <li class="hover:bg-beige_logo_hover flex p-4">
-                        <a class="text-2xl font-medium w-full" href="">
+                        <a class="text-2xl font-medium w-full" href="/faq#safety">
                             Safety
                         </a>
                     </li>
@@ -126,7 +126,7 @@ const menuMobile = `
                         Community
                     </h3>
                     <li class="hover:bg-beige_logo_hover flex p-4">
-                        <a class="text-2xl font-medium w-full" href="">
+                        <a class="text-2xl font-medium w-full" href="/future">
                             Forum
                         </a>
                     </li>
