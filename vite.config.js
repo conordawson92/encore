@@ -8,4 +8,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        https: true,
+        // If you have custom certificates, you can specify them as well:
+        // https: {
+        //     key: fs.readFileSync('/path/to/your/private.pem'),
+        //     cert: fs.readFileSync('/path/to/your/fullchain.pem'),
+        // }
+    }
 });
