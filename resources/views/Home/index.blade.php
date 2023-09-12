@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <head>
   <title>Encore | Home Page</title>
 </head>
