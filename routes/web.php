@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Session;
 
 
 Route::get('/', function () {
-    return view('home.index');
+    return view('Home.index');
 });
 
 // the future page
