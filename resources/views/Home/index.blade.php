@@ -55,7 +55,7 @@
   </div>
   <!-- Women -->
   <div class="relative flex-1 text-center">
-    <img src="{{ asset('storage/images/Assets/homepage/pexels-airam-datoon-9158467.jpg') }}" alt="Description" class="w-full h-full object-cover">
+    <img src="{{ asset('storage/images/Assets/Homepage/pexels-airam-datoon-9158467.jpg') }}" alt="Description" class="w-full h-full object-cover">
     <a href="/parent-category/2" class="absolute bottom-2 left-[50%] transform-[-50%,0] bg-orange-500 hover:bg-white active:bg-orange-700 text-white hover:text-orange-500 active:text-white py-2 px-5 md:py-4 md:px-10 text-lg md:text-2xl">
       Women
     </a>

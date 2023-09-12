@@ -11,7 +11,7 @@
   <!-- Images left -->
   <div class="flex flex-col md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-left" style="max-width: 80%;">
     <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-      <img src="{{ asset('/storage/images/assets/Contact_us/pexels-karolina-grabowska-4210850.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
+      <img src="{{ asset('/storage/images/Assets/Contact_us/pexels-karolina-grabowska-4210850.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
     <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
       <h2 class="text-4xl md:text-7xl text-green-700 md:text-left">WE SHOULD ALL TAKE CARE OF OUR HOME</h2>
       <p class="text-lg md:text-base md:text-left">            By choosing to buy or sell on <span class="italic font-bold">Encore</span>, you're making a conscious decision to reduce your 
@@ -36,14 +36,14 @@
       </p>
     </div>
     <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-      <img src="{{ asset('/storage/images/assets/Contact_us/pexels-cottonbro-studio-6069552.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
+      <img src="{{ asset('/storage/images/Assets/Contact_us/pexels-cottonbro-studio-6069552.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
     </div>
   </div>
   
 <!-- Images left -->
   <div class="flex flex-col md:flex-row items-center justify-center mb-4 mx-auto text-center md:text-left" style="max-width: 80%;">
     <div class="mx-2 lg:mx-5 flex justify-center w-full md:w-2/5">
-      <img src="{{ asset('/storage/images/assets/Contact_us/Clothes-box-1024x1024.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
+      <img src="{{ asset('/storage/images/Assets/Contact_us/Clothes-box-1024x1024.jpg') }}" alt="Description" class="img-hover-effect w-9/10 md:w-4/5"></div>
     <div class="mx-2 lg:mx-5 flex-none w-full md:w-2/5">
       <h2 class="text-4xl md:text-7xl text-green-700 md:text-left">SHOW YOURSELF THE WAY YOU WANT</h2>
       <p class="text-lg md:text-base md:text-left">           

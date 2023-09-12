@@ -9,7 +9,7 @@
         <!-- Left side for Image -->
         <div class="w-1/2 h-full bg-center bg-cover hidden customLg:flex bg-orange_logo_light">
             <!-- Embedded Image -->
-            <img src="https://encore.test/storage/images/assets/register_tv.png" alt="Description" class="object-contain w-full h-full">
+            <img src="{{ asset('/storage/images/Assets/register_tv.png') }}" alt="Description" class="object-contain w-full h-full">
         </div>
 
         <!-- Right side for Registration Form -->
