@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://vintage-encore-f453a24a0605.herokuapp.com'),
 
     'asset_url' => env('ASSET_URL'),
 
