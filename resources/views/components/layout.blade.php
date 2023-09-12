@@ -310,7 +310,7 @@
         <body>
 
             <button id="backToTop" class="fixed bottom-0 right-0 transform translate-x-6">
-                <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);">>
+                <svg width="120" height="100" viewBox="0 0 120 100" fill="none" xmlns="https://www.w3.org/2000/svg" style="transform: rotate(-90deg);">>
                     <g id="triangles">
                         <g id="darkGroup">
                             <path id="dark2" opacity="0.7" d="M51 46.268C52.3333 47.0378 52.3333 48.9623 51 49.7321L16.5 69.6506C15.1667 70.4204 13.5 69.4582 13.5 67.9186V28.0814C13.5 26.5418 15.1667 25.5796 16.5 26.3494L51 46.268Z" />
