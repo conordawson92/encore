@@ -4,7 +4,7 @@
     <title>Encore | Administrator</title>
   </head>
 
-  <div class="bg-cover bg-center backdrop-blur-md bg-fixed flex items-center justify-center h-screen" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('storage/images/assets/About_us/aboutus.png') }}'); height: 600px;">
+  <div class="bg-cover bg-center backdrop-blur-md bg-fixed flex items-center justify-center h-screen" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('storage/images/Assets/About_us/aboutus.png') }}'); height: 600px;">
 
 
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md m-4 transform hover:shadow-2xl transition-shadow duration-200 filter hover:drop-shadow-orange">
