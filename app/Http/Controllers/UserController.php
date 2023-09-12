@@ -56,7 +56,7 @@ class UserController extends Controller
 
         // If the image is present, save it and update the user record with its path
         if ($request->hasFile('userImage')) {
-            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $path = $request->file('userImage')->store('images/Assets/users/' . $user->userName, 'public');
             $user->userImage = $path;
             $user->save();
         }
@@ -201,8 +201,8 @@ class UserController extends Controller
         ]);
 
         if ($request->hasFile('userImage')) {
-            $path = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
-            $userImage = $request->file('userImage')->store('images/assets/users/' . $user->userName, 'public');
+            $path = $request->file('userImage')->store('images/Assets/users/' . $user->userName, 'public');
+            $userImage = $request->file('userImage')->store('images/Assets/users/' . $user->userName, 'public');
             $user->userImage = $userImage;
         }
 
