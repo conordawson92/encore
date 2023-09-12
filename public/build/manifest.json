@@ -1,0 +1,23 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-0205894e.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/css/svg.css": {
+    "file": "assets/svg-b38034c0.css",
+    "isEntry": true,
+    "src": "resources/css/svg.css"
+  },
+  "resources/js/app.css": {
+    "file": "assets/app-0205894e.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "css": [
+      "assets/app-0205894e.css"
+    ],
+    "file": "assets/app-a54fd6ce.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
